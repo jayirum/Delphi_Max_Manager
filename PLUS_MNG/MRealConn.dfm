@@ -2,7 +2,6 @@ inherited fmRealConn: TfmRealConn
   Tag = 2004
   Caption = #49892#49884#44036' '#51217#49549#54788#54889
   ClientWidth = 1173
-  OnShow = FormShow
   ExplicitWidth = 1189
   PixelsPerInch = 96
   TextHeight = 12
@@ -148,7 +147,6 @@ inherited fmRealConn: TfmRealConn
       Alignment = taCenter
       Caption = #47700#49884#51648#51077#47141
       AutoSize = False
-      OnClick = bsSkinLabel4Click
     end
     object RzPanel2: TRzPanel
       Left = 1
@@ -165,7 +163,7 @@ inherited fmRealConn: TfmRealConn
       TabOrder = 2
       object cbCheckAll: TbsSkinCheckRadioBox
         Left = 408
-        Top = 4
+        Top = 5
         Width = 81
         Height = 19
         HintImageIndex = 0
@@ -250,7 +248,6 @@ inherited fmRealConn: TfmRealConn
       Alignment = taCenter
       Caption = #51228#47785
       AutoSize = False
-      OnClick = bsSkinLabel3Click
     end
     object edtitle: TRzEdit
       Left = 92
@@ -267,24 +264,28 @@ inherited fmRealConn: TfmRealConn
     Width = 1173
     ExplicitWidth = 1173
     inherited btnFilter: TbsSkinSpeedButton
-      Top = 4
-      ExplicitTop = 4
+      Top = 3
+      ExplicitTop = 3
     end
     inherited btnInsert: TbsSkinSpeedButton
       Left = 203
-      Top = 4
+      Top = 3
       Visible = False
       ExplicitLeft = 203
-      ExplicitTop = 4
+      ExplicitTop = 3
     end
     inherited btnEdit: TbsSkinSpeedButton
       Visible = False
     end
     inherited btnDelete: TbsSkinSpeedButton
+      Top = 3
       Visible = False
+      ExplicitTop = 3
     end
     inherited btnPost: TbsSkinSpeedButton
+      Top = 3
       Visible = False
+      ExplicitTop = 3
     end
     inherited btnClose: TbsSkinSpeedButton
       Left = 1088
@@ -451,7 +452,7 @@ inherited fmRealConn: TfmRealConn
       TabOrder = 1
       object rgType: TbsSkinRadioGroup
         Left = 5
-        Top = 6
+        Top = 5
         Width = 113
         Height = 155
         Cursor = crHandPoint
@@ -521,8 +522,8 @@ inherited fmRealConn: TfmRealConn
     FixedColor = 15790320
     Flat = True
     ImeName = 'Microsoft IME 2010'
-    IndicatorOptions = [gioShowRecNoEh]
-    Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit, dgMultiSelect]
+    IndicatorOptions = [gioShowRowIndicatorEh, gioShowRecNoEh, gioShowRowselCheckboxesEh]
+    Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit, dgMultiSelect]
     OptionsEh = [dghFixed3D, dghHighlightFocus, dghClearSelection, dghDialogFind, dghShowRecNo, dghColumnResize, dghColumnMove, dghExtendVertLines]
     ParentCtl3D = False
     RowDetailPanel.Color = clBtnFace
@@ -542,11 +543,12 @@ inherited fmRealConn: TfmRealConn
         FieldName = 'CHECK_TF'
         Footers = <>
         KeyList.Strings = (
-          '1'
-          '0')
+          '0'
+          '1')
         Title.Alignment = taCenter
         Title.Caption = #49440#53469
         Title.Color = 16250871
+        Visible = False
         Width = 40
       end
       item
@@ -675,7 +677,7 @@ inherited fmRealConn: TfmRealConn
   end
   inherited imgBtn: TImageList
     Bitmap = {
-      494C01010D008C00F00010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C01010D008C00080110001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000004000000001002000000000000040
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -1210,104 +1212,26 @@ inherited fmRealConn: TfmRealConn
       C003807FC003C003FFFFC0FFFFFFFFFF00000000000000000000000000000000
       000000000000}
   end
+  inherited dsMain: TDataSource
+    DataSet = cdsMain
+  end
   inherited dbMain: TADOQuery
-    Active = True
     Connection = MastDB.ADOConn
     CursorType = ctStatic
     Prepared = True
     SQL.Strings = (
-      'SELECT 0 AS CHECK_TF'
-      '      ,A.ACNT_NO'
-      '      ,A.ACNT_TP'
-      '      ,A.USER_ID'
-      '      ,A.USER_NM'
-      '      ,A.ACNT_STATE'
-      '      ,A.NEGO_DUP_YN'
-      '      ,A.LOGIN_DT'
-      '      ,A.LOGIN_TM'
-      '      ,A.LOGIN_IP'
-      '      ,A.LOGIN_MAC'
-      '      ,B.USER_GRADE'
-      '      ,B.PART_CD'
-      '      ,B.SERVER_IP'
       
-        '      ,(SELECT MAX(HTS_VER) FROM LOGIN_HIS WHERE USER_ID = A.USE' +
-        'R_ID) AS HTS_VER'
-      '  FROM (SELECT DISTINCT A1.*, B1.LOGIN_MAC'
-      '          FROM ACNT_MST A1, LOGIN_HIS B1'
-      '         WHERE B1.LOGIN_DT >= dbo.FP_TRADE_DT()'
-      '           and B1.LOGIN_TP = '#39'I'#39
-      '           AND B1.APP_TP = '#39'C'#39
-      '           AND LOGIN_MAC <> '#39'RECONNECT'#39
-      '           AND A1.USER_ID = B1.USER_ID) A,'
-      '       USER_MST B'
-      ' WHERE A.USER_ID = B.USER_ID'
-      '   AND A.CONN_YN = '#39'Y'#39)
-    object dbMainCHECK_TF: TIntegerField
-      FieldName = 'CHECK_TF'
-    end
-    object dbMainACNT_NO: TStringField
-      FieldName = 'ACNT_NO'
-      FixedChar = True
-      Size = 11
-    end
-    object dbMainACNT_TP: TStringField
-      FieldName = 'ACNT_TP'
-      FixedChar = True
-      Size = 1
-    end
-    object dbMainUSER_ID: TStringField
-      FieldName = 'USER_ID'
-    end
-    object dbMainUSER_NM: TStringField
-      FieldName = 'USER_NM'
-    end
-    object dbMainACNT_STATE: TStringField
-      FieldName = 'ACNT_STATE'
-      FixedChar = True
-      Size = 1
-    end
-    object dbMainNEGO_DUP_YN: TStringField
-      FieldName = 'NEGO_DUP_YN'
-      FixedChar = True
-      Size = 1
-    end
-    object dbMainLOGIN_DT: TStringField
-      FieldName = 'LOGIN_DT'
-      FixedChar = True
-      Size = 8
-    end
-    object dbMainLOGIN_TM: TStringField
-      FieldName = 'LOGIN_TM'
-      FixedChar = True
-      Size = 12
-    end
-    object dbMainLOGIN_IP: TStringField
-      FieldName = 'LOGIN_IP'
-      Size = 15
-    end
-    object dbMainLOGIN_MAC: TStringField
-      FieldName = 'LOGIN_MAC'
-      Size = 15
-    end
-    object dbMainUSER_GRADE: TStringField
-      FieldName = 'USER_GRADE'
-      FixedChar = True
-      Size = 1
-    end
-    object dbMainPART_CD: TStringField
-      FieldName = 'PART_CD'
-      FixedChar = True
-      Size = 2
-    end
-    object dbMainSERVER_IP: TStringField
-      FieldName = 'SERVER_IP'
-      Size = 15
-    end
-    object dbMainHTS_VER: TStringField
-      FieldName = 'HTS_VER'
-      Size = 10
-    end
+        'SELECT 0 CHECK_TF,  A.ACNT_NO           ,A.ACNT_TP           ,A.' +
+        'USER_ID           ,A.USER_NM           ,A.ACNT_STATE        ,A.N' +
+        'EGO_DUP_YN       ,A.LOGIN_DT          ,A.LOGIN_TM          ,A.LO' +
+        'GIN_IP          ,A.LOGIN_MAC         ,B.USER_GRADE        ,B.PAR' +
+        'T_CD           ,B.SERVER_IP         ,(SELECT MAX(HTS_VER) FROM L' +
+        'OGIN_HIS WHERE USER_ID = A.USER_ID) AS HTS_VER   FROM (SELECT DI' +
+        'STINCT A1.*, B1.LOGIN_MAC                FROM ACNT_MST A1, LOGIN' +
+        '_HIS B1                 WHERE B1.LOGIN_DT >= dbo.FP_TRADE_DT()  ' +
+        '          AND A1.USER_ID = B1.USER_ID) A,        USER_MST B     ' +
+        '        WHERE A.USER_ID = B.USER_ID ')
+    Left = 28
   end
   inherited dbPart: TADOQuery
     Connection = MastDB.ADOConn
@@ -1315,5 +1239,97 @@ inherited fmRealConn: TfmRealConn
   end
   inherited dbPower: TADOQuery
     Connection = MastDB.ADOConn
+  end
+  object cdsMain: TClientDataSet
+    Aggregates = <>
+    FieldDefs = <
+      item
+        Name = 'CHECK_TF'
+        DataType = ftBoolean
+      end
+      item
+        Name = 'ACNT_NO'
+        Attributes = [faFixed]
+        DataType = ftString
+        Size = 11
+      end
+      item
+        Name = 'ACNT_TP'
+        Attributes = [faFixed]
+        DataType = ftString
+        Size = 1
+      end
+      item
+        Name = 'USER_ID'
+        DataType = ftString
+        Size = 20
+      end
+      item
+        Name = 'USER_NM'
+        DataType = ftString
+        Size = 20
+      end
+      item
+        Name = 'ACNT_STATE'
+        Attributes = [faFixed]
+        DataType = ftString
+        Size = 1
+      end
+      item
+        Name = 'NEGO_DUP_YN'
+        Attributes = [faFixed]
+        DataType = ftString
+        Size = 1
+      end
+      item
+        Name = 'LOGIN_DT'
+        Attributes = [faFixed]
+        DataType = ftString
+        Size = 8
+      end
+      item
+        Name = 'LOGIN_TM'
+        Attributes = [faFixed]
+        DataType = ftString
+        Size = 12
+      end
+      item
+        Name = 'LOGIN_IP'
+        DataType = ftString
+        Size = 15
+      end
+      item
+        Name = 'LOGIN_MAC'
+        DataType = ftString
+        Size = 15
+      end
+      item
+        Name = 'USER_GRADE'
+        Attributes = [faFixed]
+        DataType = ftString
+        Size = 1
+      end
+      item
+        Name = 'PART_CD'
+        Attributes = [faFixed]
+        DataType = ftString
+        Size = 2
+      end
+      item
+        Name = 'SERVER_IP'
+        DataType = ftString
+        Size = 15
+      end
+      item
+        Name = 'HTS_VER'
+        DataType = ftString
+        Size = 10
+      end>
+    IndexDefs = <>
+    Params = <>
+    StoreDefs = True
+    AfterScroll = cdsMainAfterScroll
+    Left = 64
+    Top = 400
   end
 end

@@ -32,9 +32,11 @@ object MastDB: TMastDB
   end
   object iwNotiClient: TipwIPPort
     EOL = '#10'
+    Linger = False
     LocalPort = 20200
     RemoteHost = '110.4.89.203'
     RemotePort = 20200
+    Timeout = 0
     OnConnected = iwNotiClientConnected
     OnDataIn = iwNotiClientDataIn
     OnDisconnected = iwNotiClientDisconnected

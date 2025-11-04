@@ -5,7 +5,7 @@ interface
 
 uses
   Windows, Classes, Forms, Controls, StdCtrls, ExtCtrls, SysUtils,
-  DB, DBClient, DBAccess, MemDS, Messages, ShellAPI, ADODB,
+  DB, DBClient, DBAccess, MemDS, Messages, ShellAPI, ADODB, Provider,
 // Raize, kcRaize
   RzCommon, RzLstBox, bsSkinCtrls, kcRaizeCtrl, VCL_Helper,
 // EhLib
@@ -59,16 +59,19 @@ var
   MastDB: TMastDB;
 
   _DB_Server : String;  // DB Server IP
-
+  _PAGE_QTY : integer = 30;
   procedure PartComp_Open(Comp: TComponent; sType: String; sDefault: String=''; sValue: String='');
 
   procedure Set_LoginTP(DataSet: TADOQuery; sID, sIP, sLoginTP: String);
   procedure SetADOConn(AForm:TForm);
 
 (* DB Data ===================================================================*)
-function ActiveSQL(ADOQry:TADOQuery; iFetchRows: Integer=50): integer;
-function fnSqlOpen(ADOQry: TADOQuery; sSQL:string; iFetchRows: Integer=50): String;
-function RunAsAdmin(const FileName, Params: string): TShellExecuteInfo;
+  function fnPageSQL(sSQL:string; iFrom, iTo:integer): string;
+  function fnPageSQL2(iPgNum, iPgQty: integer; sSELECT, sTABLE, sORDER: string): string;
+  function fnSqlDataAdd(isFirst: integer; ADOQry: TADOQuery; DS: TClientDataSet; sSQL:string; isCHECK_TF: boolean=False): String;
+  function ActiveSQL(ADOQry:TADOQuery; iFetchRows: Integer=50): integer;
+  function fnSqlOpen(ADOQry: TADOQuery; sSQL:string; iFetchRows: Integer=50): String;
+  function RunAsAdmin(const FileName, Params: string): TShellExecuteInfo;
 
 implementation
 
@@ -86,6 +89,129 @@ var
   sDB_DataBase : String;  // DB DataBase
   sCFG_Dir     : String;  // CFG FileName
 
+function fnPageSQL(sSQL:string; iFrom, iTo:integer): string;
+begin
+  Result := StrReplace(sSQL, 'SELECT ', 'WITH ORDERED AS ( SELECT ROW_NUMBER() OVER (ORDER BY A.USER_ID) AS ROW_NUM, ', False);
+  Result := Result + Format(' ) SELECT * FROM ORDERED WHERE ROW_NUM BETWEEN %s AND %s', [IntToStr(iFrom), IntToStr(iTo)]);
+end;
+
+function fnPageSQL2(iPgNum, iPgQty: integer; sSELECT, sTABLE, sORDER: string): string;
+begin
+  Result := Format(
+    'DECLARE @PgNum AS INT; ' +
+    'DECLARE @PgSize AS INT; ' +
+    'SET @PgNum = %s ;  ' + //가져올 페이지 번호 (예: 1페이지)
+    'SET @PgSize = %s ; ' + // 한 페이지당 행 수 (100개 단위)
+    'WITH PgData AS ( %s ' +
+    ',ROW_NUMBER() OVER ( ORDER BY %s ) AS RowNum ' +
+    '%s ) SELECT * FROM PgData ' +
+    '   WHERE RowNum BETWEEN (@PgNum - 1) * @PgSize + 1 AND @PgNum * @PgSize ' +
+    '   ORDER BY RowNum; ',
+    [IntToStr(iPgNum),
+     IntToStr(iPgQty),
+     sSELECT,
+     sORDER,
+     sTABLE ]);
+end;
+
+function fnSqlDataAdd(isFirst: integer; ADOQry: TADOQuery; DS: TClientDataSet; sSQL:string; isCHECK_TF: boolean=False): String;
+var
+  i, iCnt, iFieldCnt : integer;
+  sName: string;
+  tmpProvider: TDataSetProvider;
+  DataPacket: OleVariant;
+  RecordsFetched: Integer;
+begin
+  Result := '';
+
+  if Not _GT_Sign then Exit;
+
+  RecordsFetched := _PAGE_QTY;
+
+  if not MastDB.ADOConn.Connected then Exit;
+  ADOQry.Connection := MastDB.ADOConn;
+
+  with ADOQry do begin
+    if Active then Active := False;
+    SQL.Text := sSQL;
+    Prepared := True;
+
+    try
+      Active := True; //Open
+
+// TODO : 전체 필드를 강제로 생성하는 로직으로 수정하여 테스트해볼것
+ {     if isFirst = 0 then begin
+        if isCHECK_TF then begin
+          DS.Active := False;
+          //DS.DisableControls;
+          try
+            if DS.Fields.FindField('CHECK_TF') = nil then begin
+              with DS.FieldDefs.AddFieldDef do begin
+                Name := 'CHECK_TF';
+                DataType := ftBoolean;
+              end;
+            end;
+            DS.CreateDataSet;
+          finally
+            DS.Active := True;
+            //DS.EnableControls;
+          end;
+        end;
+      end;
+}
+      tmpProvider := TDataSetProvider.Create(nil);
+      try
+        tmpProvider.DataSet := ADOQry;
+
+        if isFirst = 0 then
+          DS.Data := tmpProvider.Data; // 필드 및 데이터가 자동 복사됨
+//        else
+//          DataPacket := tmpProvider.GetRecords(-1, RecordsFetched, 0);
+//          DS.AppendData(DataPacket, True);
+      finally
+        // 임시로 생성한 Provider를 해제합니다.
+        tmpProvider.Free;
+      end;
+
+      if isFirst = 0 then begin
+        for i:=0 to DS.Fields.Count-1 do
+          DS.Fields[i].ReadOnly := False;
+      end;
+
+      if isFirst > 0 then begin
+        iCnt := RecordCount;
+        if iCnt > 0 then begin
+          First;
+
+          DS.DisableControls;
+          DS.Open;
+
+          try
+            while not Eof do begin
+              DS.Append;
+
+              for i:=0 to Fields.Count-1 do begin // 1부터 시작하는 이유는 ROW_NUM 필드는 제외하기 위함
+                sName := Fields[i].FieldName;
+                DS.FieldByName(sName).AsVariant := ADOQry.FieldByName(sName).AsVariant;
+              end;
+              DS.Post;
+              Next;
+            end;
+          finally
+            DS.EnableControls;
+          end;
+        end;
+      end;
+    except
+      on E: Exception do begin
+        Active := False;
+        Prepared := False;
+        Result := '[' + IntToStr(E.HelpContext) + '] ' + E.Message;
+      end;
+    end;
+  end;
+end;
+
 function ActiveSQL(ADOQry:TADOQuery; iFetchRows: Integer=50): integer;
 begin
   Result := 0;
@@ -93,8 +219,8 @@ begin
   if Not _GT_Sign then Exit;
 
   if not MastDB.ADOConn.Connected then Exit;
-
   ADOQry.Connection := MastDB.ADOConn;
+
   with ADOQry do begin
     Prepared := True;
     if Active then Active := False;
@@ -139,7 +265,9 @@ begin
     //MaxRecords := iFetchRows; // TODO : 모든 조회결과를 50개만 표시?
     try
       //if UpperCase(Copy(sSQL, 1, 1)) = 'S' then begin
-      if UpperCase(Copy(SQL.Text, 1, 1)) = 'S' then begin
+      if (UpperCase(Copy(SQL.Text, 1, 1)) = 'S') or
+         (UpperCase(Copy(SQL.Text, 1, 5)) = 'WITH ')
+      then begin
         Active := True; //Open
         iCnt := RecordCount;
         if iCnt > 0 then begin
@@ -151,7 +279,7 @@ begin
       end else begin
         ExecSQL;
       end;
-      Exit;
+      //Exit;
     except
       on E: Exception do begin
         Active := False;
@@ -377,6 +505,7 @@ begin
       if not Connected then Connected := True;
    end;
 }
+
   iUserFlag      := 0;
 
   _Supervisor    := False;
@@ -401,11 +530,11 @@ end;
 
 procedure TMastDB.DataModuleDestroy(Sender: TObject);
 begin
-   if dbSQL.Active then dbSQL.Active := False;
-   if dbExec.Active then dbExec.Active := False;
-   if dbPower.Active then dbPower.Active := False;
-   if ADOSP.Active then ADOSP.Active := False;
-   if ADOConn.Connected then ADOConn.Connected := False;  
+  if dbSQL.Active then dbSQL.Active := False;
+  if dbExec.Active then dbExec.Active := False;
+  if dbPower.Active then dbPower.Active := False;
+  if ADOSP.Active then ADOSP.Active := False;
+  if ADOConn.Connected then ADOConn.Connected := False;
 end;
 
 procedure TMastDB.ServerDisConnect;
@@ -416,7 +545,9 @@ begin
   iwNotiClient.Disconnect;
 
   if fmMain.bsMsgYesNo('통보서버 상태가 불안합니다. 재접속하여 체크하시길 바랍니다.\n\n재접속하시겠습니까?') then begin
+    Application.ProcessMessages;
     Exe_Self;
+    Application.ProcessMessages;
     //ShellExecute(0, 'runas', PChar(Application.ExeName), nil, nil, SW_SHOWNORMAL);
 //    ShellExecute(fmMain.Handle, 'open', PChar(Application.ExeName),
 //                 PChar(Format('%s %s %s', ['SELF_RUN', _Login_ID, _Login_Pwd])) , nil, SW_SHOWNORMAL);
@@ -649,7 +780,7 @@ begin
 
   ADOConn.Connected := False;
 
-  MsgError('DB 네트워크 상태가 불안합니다.\n\n재접속하세요.');
+//  MsgError('DB 네트워크 상태가 불안합니다.\n\n재접속하세요.');
   Application.Terminate;
 end;
 

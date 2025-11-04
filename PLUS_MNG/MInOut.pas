@@ -15,7 +15,7 @@ uses
   DBGridEhGrouping, ToolCtrlsEh, DBGridEhToolCtrls, DynVarsEh, GridsEh,
   DBAxisGridsEh, DBGridEh,
 // User Unit
-  MBasic;
+  MBasic, DBClient;
 
 type
   TfmInOut = class(TfmBasic)
@@ -33,27 +33,6 @@ type
     btnAllOK: TbsSkinSpeedButton;
     btnAllNo: TbsSkinSpeedButton;
     cbMsg: TkcRzComboBox;
-    dbMainCHECK_TF: TIntegerField;
-    dbMainUSER_ID: TStringField;
-    dbMainRQST_TM: TStringField;
-    dbMainIO_TP: TStringField;
-    dbMainACNT_TP: TStringField;
-    dbMainACNT_NO: TStringField;
-    dbMainUSER_NM: TStringField;
-    dbMainRQST_AMT: TFloatField;
-    dbMainRSLT_TP: TStringField;
-    dbMainRSLT_AMT: TFloatField;
-    dbMainRSLT_MNG_ID: TStringField;
-    dbMainRQST_TRADE_DT: TStringField;
-    dbMainRQST_SYS_DT: TStringField;
-    dbMainRSLT_TRADE_DT: TStringField;
-    dbMainRSLT_SYS_DT: TStringField;
-    dbMainRSLT_TM: TStringField;
-    dbMainRJCT_MSG: TStringField;
-    dbMainUSER_BANK: TStringField;
-    dbMainUSER_BANK_ACNT: TStringField;
-    dbMainUSER_BANK_ACNT_NM: TStringField;
-    dbMainMNG_YN: TStringField;
     bsSkinLabel1: TbsSkinLabel;
     edAmt: TRzEdit;
     edRqstAmt: TkcRzDBEdit;
@@ -71,6 +50,7 @@ type
     edUser: TRzEdit;
     RzEdit1: TRzEdit;
     ADOSP: TADOStoredProc;
+    cdsMain: TClientDataSet;
     procedure FormCreate(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure rgTypeClick(Sender: TObject);
@@ -87,12 +67,13 @@ type
     procedure btnAllOKClick(Sender: TObject);
     procedure btnNoClick(Sender: TObject);
     procedure btnAllNoClick(Sender: TObject);
-    procedure dbMainAfterOpen(DataSet: TDataSet);
     procedure gdMainDrawColumnCell(Sender: TObject; const Rect: TRect;
       DataCol: Integer; Column: TColumnEh; State: TGridDrawState);
-    procedure gdMainTitleClick(Column: TColumnEh);
     procedure gdMainTitleBtnClick(Sender: TObject; ACol: Integer;
       Column: TColumnEh);
+    procedure cdsMainAfterScroll(DataSet: TDataSet);
+    procedure gdMainTitleClick(Column: TColumnEh);
+    procedure cdsMainAfterOpen(DataSet: TDataSet);
   private
     { Private declarations }
     function InOutProcCall(sRsltTp : String; sRebuffMsg : String = ''): Integer;
@@ -101,7 +82,7 @@ type
   public
     { Public declarations }
     procedure MainTableOpen; override;
-    procedure CheckAll(iData : Integer);
+    procedure CheckAll(TF: boolean);
     procedure InOutSendNM001(sMsg : String);
   end;
 
@@ -120,12 +101,14 @@ const
   _Rebuff   = '2';
 
 var
-  _bAllCheck: Boolean=False;
+  _PageOpenTF : boolean=False;
+  _CurrPage : integer = 0;
+  _TotCnt : integer = 0;
 
 procedure TfmInOut.btnOKClick(Sender: TObject);
 begin
   inherited;
-  if dbMain.FieldByName('USER_ID').AsString = '' then Exit;
+  if cdsMain.FieldByName('USER_ID').AsString = '' then Exit;
 
   SingleInOutProc(_Approve);
 end;
@@ -133,7 +116,8 @@ end;
 procedure TfmInOut.btnAllNoClick(Sender: TObject);
 begin
   inherited;
-  if dbMain.FieldByName('CHECK_TF').AsInteger = 0 then Exit;
+  if gdMain.SelectedRows.Count = 0 then Exit;
+  //if dbMain.FieldByName('CHECK_TF').AsInteger = 0 then Exit;
 
   if bsMsgYesNo('선택된 모든 입출금자료가 일괄 거부처리됩니다. 일괄거부 하시겠습니까?', '일괄거부') then begin
     InOutProcAll(_Rebuff, MoMsg.Text);
@@ -143,7 +127,8 @@ end;
 procedure TfmInOut.btnAllOKClick(Sender: TObject);
 begin
   inherited;
-  if dbMain.FieldByName('CHECK_TF').AsInteger = 0 then Exit;
+  if gdMain.SelectedRows.Count = 0 then Exit;
+  //if dbMain.FieldByName('CHECK_TF').AsInteger = 0 then Exit;
 
   if bsMsgYesNo('선택된 모든 입출금자료가 일괄 승인처리됩니다. 일괄승인 하시겠습니까?', '일괄승인') then begin
     InOutProcAll(_Approve);
@@ -155,7 +140,11 @@ begin
   _sMainWhere := '';
   rgType.ItemIndex := 0;
 
-  inherited;
+  cbCheckAll.Checked := False;
+  
+  _CurrPage := 0;
+  _TotCnt := 0;
+  MainTableOpen;
 end;
 
 procedure TfmInOut.btnInsertClick(Sender: TObject);
@@ -169,21 +158,10 @@ var
   sMsg : String;
 begin
   inherited;
-  if dbMain.FieldByName('USER_ID').AsString = '' then Exit;
+  if cdsMain.FieldByName('USER_ID').AsString = '' then Exit;
 
   sMsg := MoMsg.Text;
   SingleInOutProc(_Rebuff, sMsg);
-end;
-
-procedure TfmInOut.cbCheckAllClick(Sender: TObject);
-var
-  iValue : Integer;
-begin
-  inherited;
-  if cbCheckAll.Checked then iValue := 1
-                        else iValue := 0;
-
-  CheckAll(iValue);
 end;
 
 procedure TfmInOut.cbMsgChange(Sender: TObject);
@@ -192,33 +170,73 @@ begin
   MoMsg.Text := cbMsg.Text;
 end;
 
-procedure TfmInOut.CheckAll(iData : Integer);
-var
-  iKey: String;
-begin
-  with dbMain do begin
-    iKey := FieldByName('RQST_TM').asString;
-    DisableControls;
-    First;
-    while Not Eof do begin
-      Edit;
-      FieldByName('CHECK_TF').AsInteger := iData;
-      Post;
-
-      Next;
-    end;
-
-    Locate('RQST_TM', iKey, []);
-    EnableControls;
-  end;
-end;
-
-procedure TfmInOut.dbMainAfterOpen(DataSet: TDataSet);
+procedure TfmInOut.cdsMainAfterOpen(DataSet: TDataSet);
 begin
   inherited;
   with DataSet do begin
     TFloatField(FieldByName('RQST_AMT')).DisplayFormat := FORMAT_AMT;
     TFloatField(FieldByName('RSLT_AMT')).DisplayFormat := FORMAT_AMT;
+  end;
+end;
+
+procedure TfmInOut.cdsMainAfterScroll(DataSet: TDataSet);
+var
+  i : integer;
+begin
+  inherited;
+  if DataSet.Eof then begin
+    if (_TotCnt = DataSet.RecNo) then begin
+      _CurrPage := _CurrPage + 1;
+      MainTableOpen;
+    end;
+  end;
+end;
+
+procedure TfmInOut.rgTypeClick(Sender: TObject);
+begin
+  inherited;
+  if rgType.Tag = 0 then begin
+    if rgType.ItemIndex = 0 then
+      _sMainWhere := ''
+    else
+      _sMainWhere := 'IO_TP = ' + QuotedStr(rgType.Values[rgType.ItemIndex]);
+
+    _CurrPage := 0;
+    _TotCnt := 0;
+    MainTableOpen;
+  end;
+end;
+
+procedure TfmInOut.cbCheckAllClick(Sender: TObject);
+begin
+  CheckAll(cbCheckAll.Checked);
+end;
+
+procedure TfmInOut.CheckAll(TF: boolean);
+var
+  i, iCnt : integer;
+  iPos, Bookmark: TBookmark;
+  DS: TDataSet;
+begin
+  DS := cdsMain;// dbMain.DataSource.DataSet;
+
+  if Assigned(DS) and DS.Active then begin
+    Bookmark := DS.GetBookmark;
+    DS.DisableControls;
+
+    try
+      iCnt := DS.RecordCount;
+      DS.First;
+      for i:=0 to iCnt-1 do begin
+        gdMain.SelectedRows.CurrentRowSelected := cbCheckAll.Checked;
+        if i <> (iCnt-1) then // 마지막 Row에서 cdsMainAfterScroll 이벤트 발생 안되게 하기위해
+          DS.Next;
+      end;
+    finally
+      DS.GotoBookmark(Bookmark);
+      DS.FreeBookmark(Bookmark);
+      DS.EnableControls;
+    end;
   end;
 end;
 
@@ -294,23 +312,18 @@ procedure TfmInOut.gdMainTitleBtnClick(Sender: TObject; ACol: Integer;
   Column: TColumnEh);
 begin
   inherited;
-  SortData(gdMain, dbMain, ACol);
+  SortData2(gdMain, cdsMain, ACol);
 end;
 
 procedure TfmInOut.gdMainTitleClick(Column: TColumnEh);
 var
+  bBool : boolean;
   iValue: Integer;
 begin
   inherited;
   if Column = gdMain.Columns[0] then begin
-    if _bAllCheck then
-      iValue := 0
-    else
-      iValue := 1;
-
-    CheckAll(iValue);
-
-    _bAllCheck := Not _bAllCheck;
+    cbCheckAll.Checked := not cbCheckAll.Checked;
+    CheckAll(cbCheckAll.Checked);
   end;
 end;
 
@@ -319,7 +332,7 @@ var
   iRslt : Integer;
   sMsg, sIoTp  : String;
 begin
-  with dbMain do begin
+  with cdsMain do begin
     sIoTp := FieldByName('IO_TP').AsString;
 
     if sIoTp = '1' then sMsg := '입금요청';
@@ -359,29 +372,30 @@ end;
 
 procedure TfmInOut.InOutProcAll(sRsltTp: String; sRebuffMsg : String = '');
 var
-  iTCnt, iCnt, iRlst : Integer;
+  iCnt, iRlst : Integer;
+  i, loc, iTCnt : Integer;
+  DS: TDataSet;
+  Bookmark: TBookmark;
 begin
   iCnt := 0;
-  iTCnt := 0;
 
-  with dbMain do begin
-    DisableControls;
-    First;
-    while Not Eof do begin
-      Edit;
+  iTCnt := gdMain.SelectedRows.Count;
+  if iTCnt = 0 then Exit;
 
-      if FieldByName('CHECK_TF').AsInteger = 1 then begin
-        iRlst := InOutProcCall(sRsltTp, sRebuffMsg);
-        if iRlst = 0 then Inc(iCnt);
-        Inc(iTCnt);
-        Post;
-      end;
-
-      Next;
+  DS := cdsMain;
+  Bookmark := DS.GetBookmark;
+  DS.DisableControls;
+  try
+    for i:=0 to gdMain.SelectedRows.Count-1 do begin
+      DS.GoToBookmark(TBookmark(gdMain.SelectedRows[i]));
+      //loc := DS.FieldByName('ROW_NUM').AsInteger;
+      iRlst := InOutProcCall(sRsltTp, sRebuffMsg);
+      if iRlst = 0 then Inc(iCnt);
     end;
-    EnableControls;
+  finally
+    DS.EnableControls;
   end;
-  MsgInfo('총 ' + intTostr(iTCnt) + '건' + ' / ' + intTostr(iCnt) + '건 처리완료');
+  bsMsgInfo('총 ' + intTostr(iTCnt) + '건' + ' / ' + intTostr(iCnt) + '건 처리완료');
   MainTableOpen;
 end;
 
@@ -391,7 +405,7 @@ var
 //  sSql, sRslt,
   sMsg, sIoTp, sIoNm, sRlstNm : String;
 begin
-  sIoTp := dbMain.FieldByName('IO_TP').AsString;
+  sIoTp := cdsMain.FieldByName('IO_TP').AsString;
 
   if sIoTp = '1' then sIoNm := '입금요청';
   if sIoTp = '2' then sIoNm := '출금요청';
@@ -428,8 +442,8 @@ begin
 
     ProcedureName := 'PT_INOUT_PROC';
     Prepared := True;
-    Parameters.ParamByName('I_USER_ID').Value  := dbMain.FieldByName('USER_ID').AsString;
-    Parameters.ParamByName('I_TM').Value       := dbMain.FieldByName('RQST_TM').AsString;
+    Parameters.ParamByName('I_USER_ID').Value  := cdsMain.FieldByName('USER_ID').AsString;
+    Parameters.ParamByName('I_TM').Value       := cdsMain.FieldByName('RQST_TM').AsString;
     Parameters.ParamByName('I_RSLT_TP').Value  := sRsltTp;
     Parameters.ParamByName('I_RSLT_AMT').Value := TextToFloat(edAmt.Text);
     Parameters.ParamByName('I_MNG_ID').Value   := _Login_ID;
@@ -471,8 +485,8 @@ begin
   FillChar(NM001, SizeOf(NM001), ' ');
   StrToArr(NumToStr(SizeOf(NM001)),                            NM001.GT_HEADER.LENGTH);
   StrToArr('NM001',                                            NM001.GT_HEADER.PACKET_CD);
-  StrToArr(UpperCase(dbMain.FieldByName('USER_ID').AsString),  NM001.GT_HEADER.USER_ID);
-  StrToArr(dbMain.FieldByName('ACNT_TP').AsString,             NM001.GT_HEADER.ACNT_TP);
+  StrToArr(UpperCase(cdsMain.FieldByName('USER_ID').AsString),  NM001.GT_HEADER.USER_ID);
+  StrToArr(cdsMain.FieldByName('ACNT_TP').AsString,             NM001.GT_HEADER.ACNT_TP);
   StrToArr('0000',                                             NM001.GT_HEADER.ERR_CODE);
   StrToArr(NowMSecTime,                                        NM001.GT_HEADER.TM);
   StrToArr(sMsg,                                               NM001.NOTI_MSG);
@@ -484,62 +498,58 @@ end;
 
 procedure TfmInOut.MainTableOpen;
 var
+  iCnt : Integer;
   sSQL : string;
+  sSEL, sTB, sOD : string;
 begin
-  with dbMain do begin
-    try
-      Delay_Show();
+  _PageOpenTF := False;
+//  OffsetS := (_CurrPage * _PAGE_QTY) + 1;
+//  OffsetE := (_CurrPage + 1) * _PAGE_QTY;
 
-      Close;
-      sSQL := Format(
-        'SELECT 0 AS CHECK_TF     ' +
-        '      ,USER_ID           ' +
-        '      ,RQST_TM           ' +
-        '      ,IO_TP             ' +
-        '      ,ACNT_TP           ' +
-        '      ,ACNT_NO           ' +
-        '      ,USER_NM           ' +
-        '      ,RQST_AMT          ' +
-        '      ,RSLT_TP           ' +
-        '      ,RSLT_AMT          ' +
-        '      ,RSLT_MNG_ID       ' +
-        '      ,RQST_TRADE_DT     ' +
-        '      ,RQST_SYS_DT       ' +
-        '      ,RSLT_TRADE_DT     ' +
-        '      ,RSLT_SYS_DT       ' +
-        '      ,RSLT_TM           ' +
-        '      ,RJCT_MSG          ' +
-        '      ,USER_BANK         ' +
-        '      ,USER_BANK_ACNT    ' +
-        '      ,USER_BANK_ACNT_NM ' +
-        '      ,MNG_YN            ' +
-        '  FROM INOUT A           ' +
-        ' WHERE RSLT_TP = %s      ',
-        [QuotedStr('0') ]);
-      if _sMainWhere <> '' then sSQL := sSQL + ' AND ' + _sMainWhere;
-      sSQL := sSQL + ' ORDER BY RQST_TRADE_DT, RQST_TM ';
-      SQL.Text := sSQL;
+  sSEL :=
+    'SELECT USER_ID           ' +
+    '      ,RQST_TM           ' +
+    '      ,IO_TP             ' +
+    '      ,ACNT_TP           ' +
+    '      ,ACNT_NO           ' +
+    '      ,USER_NM           ' +
+    '      ,RQST_AMT          ' +
+    '      ,RSLT_TP           ' +
+    '      ,RSLT_AMT          ' +
+    '      ,RSLT_MNG_ID       ' +
+    '      ,RQST_TRADE_DT     ' +
+    '      ,RQST_SYS_DT       ' +
+    '      ,RSLT_TRADE_DT     ' +
+    '      ,RSLT_SYS_DT       ' +
+    '      ,RSLT_TM           ' +
+    '      ,RJCT_MSG          ' +
+    '      ,USER_BANK         ' +
+    '      ,USER_BANK_ACNT    ' +
+    '      ,USER_BANK_ACNT_NM ' +
+    '      ,MNG_YN            ';
 
-      Open;
-      gdMain.Columns[0].Checkboxes := RecordCount <> 0;
-      cbCheckAll.Checked := False;
-    finally
-      Delay_Hide;
-    end;
+  sTB := Format(
+    '  FROM INOUT A      ' +
+    ' WHERE RSLT_TP = %s ',
+    [QuotedStr('0') ]);
+
+  if _sMainWhere <> '' then
+    sTB := sTB + ' AND ' + _sMainWhere;
+
+  sOD := 'RQST_TRADE_DT, RQST_TM DESC ';
+
+  sSQL := fnPageSQL2(_CurrPage+1, _PAGE_QTY, sSEL, sTB, sOD);
+
+//  sSQL := fnPageSQL(sSQL, OffsetS, OffsetE);
+  try
+    Delay_Show;
+//    fnSqlDataAdd(_CurrPage, dbMain, cdsMain, sSQL);
+    fnSqlDataAdd(_CurrPage, dbMain, cdsMain, sSQL);
+    _TotCnt := _TotCnt + dbMain.RecordCount;
+  finally
+    Delay_Hide;
   end;
-end;
-
-procedure TfmInOut.rgTypeClick(Sender: TObject);
-begin
-  inherited;
-  if rgType.Tag = 0 then begin
-    if rgType.ItemIndex = 0 then
-      _sMainWhere := ''
-    else
-      _sMainWhere := 'IO_TP = ' + QuotedStr(rgType.Values[rgType.ItemIndex]);
-
-    MainTableOpen;
-  end;
+  _PageOpenTF := True;
 end;
 
 end.

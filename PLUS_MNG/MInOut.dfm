@@ -2,14 +2,17 @@ inherited fmInOut: TfmInOut
   Tag = 2001
   Caption = #51077#52636#44552#52376#47532
   ClientWidth = 1203
-  OnShow = FormShow
+  ExplicitLeft = -93
   ExplicitWidth = 1219
-  ExplicitHeight = 240
   PixelsPerInch = 96
   TextHeight = 12
   inherited pnTop: TRzPanel
     Width = 1203
     ExplicitWidth = 1203
+    inherited btnFilter: TbsSkinSpeedButton
+      Top = 3
+      ExplicitTop = 3
+    end
     inherited btnInsert: TbsSkinSpeedButton
       Left = 541
       Visible = False
@@ -17,8 +20,10 @@ inherited fmInOut: TfmInOut
     end
     inherited btnEdit: TbsSkinSpeedButton
       Left = 617
+      Top = 2
       Visible = False
       ExplicitLeft = 617
+      ExplicitTop = 2
     end
     inherited btnDelete: TbsSkinSpeedButton
       Left = 693
@@ -184,9 +189,9 @@ inherited fmInOut: TfmInOut
     FixedColor = 15790320
     Flat = True
     ImeName = 'Microsoft IME 2010'
-    IndicatorOptions = [gioShowRecNoEh]
-    Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit]
-    OptionsEh = [dghFixed3D, dghHighlightFocus, dghClearSelection, dghAutoSortMarking, dghMultiSortMarking, dghDialogFind, dghShowRecNo, dghColumnResize, dghColumnMove, dghExtendVertLines]
+    IndicatorOptions = [gioShowRowIndicatorEh, gioShowRecNoEh, gioShowRowselCheckboxesEh]
+    Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit, dgMultiSelect]
+    OptionsEh = [dghFixed3D, dghHighlightFocus, dghClearSelection, dghDialogFind, dghShowRecNo, dghColumnResize, dghColumnMove, dghExtendVertLines]
     ParentCtl3D = False
     RowDetailPanel.Color = clBtnFace
     RowHeight = 21
@@ -200,6 +205,7 @@ inherited fmInOut: TfmInOut
     Columns = <
       item
         Alignment = taCenter
+        AlwaysShowEditButton = True
         Checkboxes = True
         DynProps = <>
         EditButtons = <>
@@ -210,7 +216,7 @@ inherited fmInOut: TfmInOut
           '0')
         Title.Alignment = taCenter
         Title.Caption = #49440#53469
-        Title.Color = 16250871
+        Visible = False
         Width = 40
       end
       item
@@ -843,7 +849,7 @@ inherited fmInOut: TfmInOut
       TabOrder = 1
       object cbCheckAll: TbsSkinCheckRadioBox
         Left = 408
-        Top = 3
+        Top = 4
         Width = 81
         Height = 19
         HintImageIndex = 0
@@ -875,7 +881,7 @@ inherited fmInOut: TfmInOut
   end
   inherited imgBtn: TImageList
     Bitmap = {
-      494C01010F005400140110001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C01010F005400340110001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000004000000001002000000000000040
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -1410,112 +1416,37 @@ inherited fmInOut: TfmInOut
       C003807FC003C003FFFFC0FFFFFFFFFF00000000000000000000000000000000
       000000000000}
   end
+  inherited dsMain: TDataSource
+    DataSet = cdsMain
+  end
   inherited dbMain: TADOQuery
     Connection = MastDB.ADOConn
     CursorType = ctStatic
-    AfterOpen = dbMainAfterOpen
     SQL.Strings = (
-      
-        'SELECT 0 AS CHECK_TF           ,USER_ID                 ,RQST_TM' +
-        '                 ,IO_TP                   ,ACNT_TP              ' +
-        '   ,ACNT_NO                 ,USER_NM                 ,RQST_AMT  ' +
-        '              ,RSLT_TP                 ,RSLT_AMT                ' +
-        ',RSLT_MNG_ID             ,RQST_TRADE_DT           ,RQST_SYS_DT  ' +
-        '           ,RSLT_TRADE_DT           ,RSLT_SYS_DT             ,RS' +
-        'LT_TM                 ,RJCT_MSG                ,USER_BANK       ' +
-        '        ,USER_BANK_ACNT          ,USER_BANK_ACNT_NM       ,MNG_Y' +
-        'N              FROM INOUT A            WHERE RSLT_TP = '#39'0'#39'      ' +
-        ' ORDER BY RQST_TRADE_DT, RQST_TM ')
-    object dbMainCHECK_TF: TIntegerField
-      FieldName = 'CHECK_TF'
-      ProviderFlags = []
-      Required = True
-    end
-    object dbMainUSER_ID: TStringField
-      FieldName = 'USER_ID'
-      Required = True
-    end
-    object dbMainRQST_TM: TStringField
-      FieldName = 'RQST_TM'
-      Required = True
-      FixedChar = True
-      Size = 12
-    end
-    object dbMainIO_TP: TStringField
-      FieldName = 'IO_TP'
-      FixedChar = True
-      Size = 1
-    end
-    object dbMainACNT_TP: TStringField
-      FieldName = 'ACNT_TP'
-      FixedChar = True
-      Size = 1
-    end
-    object dbMainACNT_NO: TStringField
-      FieldName = 'ACNT_NO'
-      FixedChar = True
-      Size = 11
-    end
-    object dbMainUSER_NM: TStringField
-      FieldName = 'USER_NM'
-    end
-    object dbMainRQST_AMT: TFloatField
-      FieldName = 'RQST_AMT'
-    end
-    object dbMainRSLT_TP: TStringField
-      FieldName = 'RSLT_TP'
-      FixedChar = True
-      Size = 1
-    end
-    object dbMainRSLT_AMT: TFloatField
-      FieldName = 'RSLT_AMT'
-    end
-    object dbMainRSLT_MNG_ID: TStringField
-      FieldName = 'RSLT_MNG_ID'
-    end
-    object dbMainRQST_TRADE_DT: TStringField
-      FieldName = 'RQST_TRADE_DT'
-      FixedChar = True
-      Size = 8
-    end
-    object dbMainRQST_SYS_DT: TStringField
-      FieldName = 'RQST_SYS_DT'
-      FixedChar = True
-      Size = 8
-    end
-    object dbMainRSLT_TRADE_DT: TStringField
-      FieldName = 'RSLT_TRADE_DT'
-      FixedChar = True
-      Size = 8
-    end
-    object dbMainRSLT_SYS_DT: TStringField
-      FieldName = 'RSLT_SYS_DT'
-      FixedChar = True
-      Size = 8
-    end
-    object dbMainRSLT_TM: TStringField
-      FieldName = 'RSLT_TM'
-      FixedChar = True
-      Size = 6
-    end
-    object dbMainRJCT_MSG: TStringField
-      FieldName = 'RJCT_MSG'
-      Size = 100
-    end
-    object dbMainUSER_BANK: TStringField
-      FieldName = 'USER_BANK'
-    end
-    object dbMainUSER_BANK_ACNT: TStringField
-      FieldName = 'USER_BANK_ACNT'
-    end
-    object dbMainUSER_BANK_ACNT_NM: TStringField
-      FieldName = 'USER_BANK_ACNT_NM'
-    end
-    object dbMainMNG_YN: TStringField
-      FieldName = 'MNG_YN'
-      FixedChar = True
-      Size = 1
-    end
+      'SELECT 0 AS CHECK_TF'
+      '      ,USER_ID'
+      '      ,RQST_TM'
+      '      ,IO_TP'
+      '      ,ACNT_TP'
+      '      ,ACNT_NO'
+      '      ,USER_NM'
+      '      ,RQST_AMT'
+      '      ,RSLT_TP'
+      '      ,RSLT_AMT'
+      '      ,RSLT_MNG_ID'
+      '      ,RQST_TRADE_DT'
+      '      ,RQST_SYS_DT'
+      '      ,RSLT_TRADE_DT'
+      '      ,RSLT_SYS_DT'
+      '      ,RSLT_TM'
+      '      ,RJCT_MSG'
+      '      ,USER_BANK'
+      '      ,USER_BANK_ACNT'
+      '      ,USER_BANK_ACNT_NM'
+      '      ,MNG_YN'
+      '  FROM INOUT A'
+      ' WHERE RSLT_TP = '#39'0'#39
+      ' ORDER BY RQST_TRADE_DT, RQST_TM')
   end
   inherited dbPart: TADOQuery
     Left = 145
@@ -1576,5 +1507,13 @@ inherited fmInOut: TfmInOut
       end>
     Left = 24
     Top = 396
+  end
+  object cdsMain: TClientDataSet
+    Aggregates = <>
+    Params = <>
+    AfterOpen = cdsMainAfterOpen
+    AfterScroll = cdsMainAfterScroll
+    Left = 64
+    Top = 400
   end
 end

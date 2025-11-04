@@ -3,435 +3,11 @@ inherited fmUser: TfmUser
   Caption = #54924#50896#44288#47532
   ClientHeight = 673
   ClientWidth = 1199
-  OnShow = FormShow
   ExplicitWidth = 1215
   ExplicitHeight = 712
   PixelsPerInch = 96
   TextHeight = 12
-  inherited pnTop: TRzPanel
-    Width = 1199
-    ExplicitWidth = 1199
-    inherited btnFilter: TbsSkinSpeedButton
-      Left = 442
-      Top = 4
-      Visible = False
-      ExplicitLeft = 442
-      ExplicitTop = 4
-    end
-    inherited btnInsert: TbsSkinSpeedButton
-      Left = 121
-      ExplicitLeft = 121
-    end
-    inherited btnEdit: TbsSkinSpeedButton
-      Left = 197
-      ExplicitLeft = 197
-    end
-    inherited btnDelete: TbsSkinSpeedButton
-      Left = 273
-      ExplicitLeft = 273
-    end
-    inherited btnPost: TbsSkinSpeedButton
-      Left = 349
-      ExplicitLeft = 349
-    end
-    inherited btnClose: TbsSkinSpeedButton
-      Left = 1114
-      ExplicitLeft = 1114
-    end
-    inherited bsRibbonDivider4: TbsRibbonDivider
-      Left = 419
-      ExplicitLeft = 419
-    end
-    inherited btnExcel: TbsSkinSpeedButton
-      Left = 1034
-      Top = 4
-      Height = 23
-      Anchors = [akTop, akRight]
-      OnClick = btnExcelClick
-      ExplicitLeft = 772
-      ExplicitTop = 4
-      ExplicitHeight = 23
-    end
-    inherited pnTitle: TRzPanel
-      BorderHighlight = clWhite
-      BorderShadow = 13290186
-      FlatColor = clGray
-      FlatColorAdjustment = 0
-    end
-    inherited nvMain: TRzDBNavigator
-      Left = 929
-      Hints.Strings = ()
-      Anchors = [akTop, akRight]
-      ExplicitLeft = 929
-    end
-  end
-  inherited pnBottom: TbsSkinPanel
-    Top = 651
-    Width = 1199
-    ExplicitTop = 651
-    ExplicitWidth = 1199
-  end
-  object pnFilter: TbsSkinPanel [2]
-    Left = 0
-    Top = 31
-    Width = 1199
-    Height = 29
-    HintImageIndex = 0
-    TabOrder = 2
-    SkinDataName = 'panel'
-    DefaultFont.Charset = DEFAULT_CHARSET
-    DefaultFont.Color = clWindowText
-    DefaultFont.Height = 13
-    DefaultFont.Name = 'Tahoma'
-    DefaultFont.Style = []
-    DefaultWidth = 0
-    DefaultHeight = 0
-    UseSkinFont = True
-    EmptyDrawing = False
-    RibbonStyle = False
-    ImagePosition = bsipDefault
-    TransparentMode = False
-    CaptionImageIndex = -1
-    RealHeight = -1
-    AutoEnabledControls = True
-    CheckedMode = False
-    Checked = False
-    DefaultAlignment = taLeftJustify
-    DefaultCaptionHeight = 22
-    BorderStyle = bvFrame
-    CaptionMode = False
-    RollUpMode = False
-    RollUpState = False
-    NumGlyphs = 1
-    Spacing = 2
-    Align = alTop
-    DesignSize = (
-      1199
-      29)
-    object btnDetail: TbsSkinSpeedButton
-      Tag = 500
-      Left = 433
-      Top = 4
-      Width = 75
-      Height = 20
-      Cursor = crHandPoint
-      HintImageIndex = 0
-      SkinData = fmMain.bsSkinData
-      SkinDataName = 'resizetoolbutton'
-      DefaultFont.Charset = DEFAULT_CHARSET
-      DefaultFont.Color = clWindowText
-      DefaultFont.Height = 14
-      DefaultFont.Name = 'Arial'
-      DefaultFont.Style = []
-      DefaultWidth = 0
-      DefaultHeight = 0
-      UseSkinFont = True
-      CheckedMode = False
-      ImageList = imgBtn
-      UseSkinSize = True
-      UseSkinFontColor = True
-      WidthWithCaption = 0
-      WidthWithoutCaption = 0
-      ImageIndex = 11
-      RepeatMode = False
-      RepeatInterval = 100
-      Transparent = False
-      Flat = False
-      AllowAllUp = False
-      Down = False
-      GroupIndex = 0
-      Caption = #49345#49464#51312#54924
-      ShowCaption = True
-      NumGlyphs = 1
-      Spacing = 1
-      OnClick = btnDetailClick
-    end
-    object btnCntReset: TbsSkinSpeedButton
-      Tag = 500
-      Left = 982
-      Top = 4
-      Width = 78
-      Height = 20
-      Cursor = crHandPoint
-      HintImageIndex = 0
-      Anchors = [akTop, akRight]
-      Visible = False
-      SkinData = fmMain.bsSkinData
-      SkinDataName = 'resizetoolbutton'
-      DefaultFont.Charset = DEFAULT_CHARSET
-      DefaultFont.Color = clWindowText
-      DefaultFont.Height = 14
-      DefaultFont.Name = 'Arial'
-      DefaultFont.Style = []
-      DefaultWidth = 0
-      DefaultHeight = 0
-      UseSkinFont = True
-      CheckedMode = False
-      ImageList = imgBtn
-      UseSkinSize = True
-      UseSkinFontColor = True
-      WidthWithCaption = 0
-      WidthWithoutCaption = 0
-      ImageIndex = 12
-      RepeatMode = False
-      RepeatInterval = 100
-      Transparent = False
-      Flat = False
-      AllowAllUp = False
-      Down = False
-      GroupIndex = 0
-      Caption = #49352#47196#44256#52840
-      ShowCaption = True
-      NumGlyphs = 1
-      Spacing = 1
-      OnClick = btnCntResetClick
-    end
-    object btnLoginManager: TbsSkinSpeedButton
-      Tag = 500
-      Left = 1066
-      Top = 4
-      Width = 127
-      Height = 20
-      Cursor = crHandPoint
-      HintImageIndex = 0
-      Anchors = [akTop, akRight]
-      SkinData = fmMain.bsSkinData
-      SkinDataName = 'resizetoolbutton'
-      DefaultFont.Charset = DEFAULT_CHARSET
-      DefaultFont.Color = clWindowText
-      DefaultFont.Height = 14
-      DefaultFont.Name = 'Arial'
-      DefaultFont.Style = []
-      DefaultWidth = 0
-      DefaultHeight = 0
-      UseSkinFont = True
-      CheckedMode = False
-      ImageList = imgBtn
-      UseSkinSize = True
-      UseSkinFontColor = True
-      WidthWithCaption = 0
-      WidthWithoutCaption = 0
-      ImageIndex = 15
-      RepeatMode = False
-      RepeatInterval = 100
-      Transparent = False
-      Flat = False
-      AllowAllUp = False
-      Down = False
-      GroupIndex = 0
-      Caption = #47196#44536#51064#44288#47532#51088#51312#54924
-      ShowCaption = True
-      NumGlyphs = 1
-      Spacing = 1
-      OnClick = btnLoginManagerClick
-    end
-    object lbConnUser: TbsSkinLabel
-      Left = 759
-      Top = 4
-      Width = 219
-      Height = 20
-      HintImageIndex = 0
-      Anchors = [akTop, akRight]
-      TabOrder = 2
-      Visible = False
-      SkinData = fmMain.bsSkinData
-      SkinDataName = 'label'
-      DefaultFont.Charset = DEFAULT_CHARSET
-      DefaultFont.Color = clWindowText
-      DefaultFont.Height = 13
-      DefaultFont.Name = 'Tahoma'
-      DefaultFont.Style = []
-      DefaultWidth = 0
-      DefaultHeight = 0
-      UseSkinFont = True
-      Transparent = False
-      ShadowEffect = False
-      ShadowColor = clBlack
-      ShadowOffset = 0
-      ShadowSize = 3
-      ReflectionEffect = False
-      ReflectionOffset = -5
-      EllipsType = bsetNoneEllips
-      UseSkinSize = False
-      UseSkinFontColor = True
-      BorderStyle = bvFrame
-      Alignment = taCenter
-      AutoSize = False
-    end
-    object bsSkinLabel1: TbsSkinLabel
-      Left = 122
-      Top = 4
-      Width = 75
-      Height = 20
-      HintImageIndex = 0
-      TabOrder = 0
-      SkinData = fmMain.bsSkinData
-      SkinDataName = 'label'
-      DefaultFont.Charset = DEFAULT_CHARSET
-      DefaultFont.Color = clWindowText
-      DefaultFont.Height = 13
-      DefaultFont.Name = 'Tahoma'
-      DefaultFont.Style = []
-      DefaultWidth = 0
-      DefaultHeight = 0
-      UseSkinFont = True
-      Transparent = False
-      ShadowEffect = False
-      ShadowColor = clBlack
-      ShadowOffset = 0
-      ShadowSize = 3
-      ReflectionEffect = False
-      ReflectionOffset = -5
-      EllipsType = bsetNoneEllips
-      UseSkinSize = False
-      UseSkinFontColor = True
-      BorderStyle = bvFrame
-      Alignment = taCenter
-      Caption = #44160#49353
-      AutoSize = False
-    end
-    object edFind: TRzEdit
-      Left = 203
-      Top = 4
-      Width = 227
-      Height = 20
-      Hint = #54924#50896#47749' '#48143' '#54924#50896' ID'#47484' '#51077#47141#54980' '#50644#53552#47484' '#52824#49464#50836'!'
-      ImeName = 'Microsoft IME 2010'
-      TabOrder = 1
-      OnKeyDown = edFindKeyDown
-    end
-    object cbxManagerSearch: TRzCheckBox
-      Left = 522
-      Top = 6
-      Width = 95
-      Height = 15
-      AutoSize = False
-      Caption = #44288#47532#54924#50896#51312#54924
-      DisabledColor = 15790320
-      FillColor = clWhite
-      FocusColor = 15790335
-      FrameColor = clGray
-      HotTrack = True
-      HotTrackColor = 7838964
-      HotTrackStyle = htsFrame
-      ReadOnlyColor = 14811135
-      State = cbUnchecked
-      TabOrder = 3
-      WordWrap = True
-      OnClick = cbxManagerSearchClick
-    end
-  end
-  object pnLeft: TRzSizePanel [3]
-    Left = 0
-    Top = 60
-    Width = 131
-    Height = 591
-    Color = 15987699
-    HotSpotVisible = True
-    SizeBarWidth = 7
-    TabOrder = 3
-    object RzPanel5: TRzPanel
-      Left = 0
-      Top = 166
-      Width = 123
-      Height = 28
-      Align = alTop
-      BorderOuter = fsFlat
-      BorderHighlight = clWhite
-      BorderShadow = 12303291
-      Color = 15790320
-      FlatColor = clGray
-      FlatColorAdjustment = 0
-      TabOrder = 0
-      object RzPanel1: TRzPanel
-        Left = 5
-        Top = 4
-        Width = 113
-        Height = 21
-        BorderOuter = fsFlat
-        Caption = #48516#47448#49440#53469
-        Color = clWhite
-        FlatColor = clGray
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -12
-        Font.Name = #44404#47548#52404
-        Font.Style = []
-        ParentFont = False
-        TabOrder = 0
-      end
-    end
-    object RzPanel6: TRzPanel
-      Left = 0
-      Top = 0
-      Width = 123
-      Height = 166
-      Align = alTop
-      BorderOuter = fsFlat
-      BorderHighlight = clWhite
-      BorderShadow = 12303291
-      Color = 15790320
-      FlatColor = clGray
-      FlatColorAdjustment = 0
-      TabOrder = 1
-      object rgType: TbsSkinRadioGroup
-        Left = 5
-        Top = 5
-        Width = 113
-        Height = 155
-        Cursor = crHandPoint
-        HintImageIndex = 0
-        TabOrder = 0
-        SkinDataName = 'groupbox'
-        DefaultFont.Charset = DEFAULT_CHARSET
-        DefaultFont.Color = clWindowText
-        DefaultFont.Height = 13
-        DefaultFont.Name = 'Tahoma'
-        DefaultFont.Style = []
-        DefaultWidth = 0
-        DefaultHeight = 0
-        UseSkinFont = True
-        EmptyDrawing = False
-        RibbonStyle = False
-        ImagePosition = bsipDefault
-        TransparentMode = False
-        CaptionImageIndex = -1
-        RealHeight = -1
-        AutoEnabledControls = True
-        CheckedMode = False
-        Checked = False
-        DefaultAlignment = taCenter
-        DefaultCaptionHeight = 22
-        BorderStyle = bvFrame
-        CaptionMode = True
-        RollUpMode = False
-        RollUpState = False
-        NumGlyphs = 1
-        Spacing = 2
-        Caption = #54924#50896#46321#44553
-        OnClick = rgTypeClick
-        UseSkinSize = True
-        ButtonSkinDataName = 'radiobox'
-        ButtonDefaultFont.Charset = DEFAULT_CHARSET
-        ButtonDefaultFont.Color = clWindowText
-        ButtonDefaultFont.Height = 13
-        ButtonDefaultFont.Name = 'Tahoma'
-        ButtonDefaultFont.Style = []
-      end
-    end
-    object lbxPart: TRzListBox
-      Left = 0
-      Top = 194
-      Width = 123
-      Height = 397
-      Align = alClient
-      ImeName = 'Microsoft IME 2010'
-      ItemHeight = 12
-      TabOrder = 2
-      OnClick = lbxPartClick
-    end
-  end
-  object gdMain: TDBGridEh [4]
+  object gdMain: TDBGridEh [0]
     Left = 131
     Top = 60
     Width = 569
@@ -456,6 +32,7 @@ inherited fmUser: TfmUser
     TitleParams.Color = clBtnFace
     TitleParams.RowHeight = 21
     TitleParams.FillStyle = cfstGradientEh
+    OnCellClick = gdMainCellClick
     OnTitleBtnClick = gdMainTitleBtnClick
     Columns = <
       item
@@ -716,12 +293,433 @@ inherited fmUser: TfmUser
     object RowDetailData: TRowDetailPanelControlEh
     end
   end
+  inherited pnTop: TRzPanel
+    Width = 1199
+    ExplicitWidth = 1199
+    inherited btnFilter: TbsSkinSpeedButton
+      Left = 442
+      Visible = False
+      ExplicitLeft = 442
+    end
+    inherited btnInsert: TbsSkinSpeedButton
+      Left = 121
+      ExplicitLeft = 121
+    end
+    inherited btnEdit: TbsSkinSpeedButton
+      Left = 197
+      ExplicitLeft = 197
+    end
+    inherited btnDelete: TbsSkinSpeedButton
+      Left = 273
+      ExplicitLeft = 273
+    end
+    inherited btnPost: TbsSkinSpeedButton
+      Left = 349
+      ExplicitLeft = 349
+    end
+    inherited btnClose: TbsSkinSpeedButton
+      Left = 1114
+      ExplicitLeft = 1114
+    end
+    inherited bsRibbonDivider4: TbsRibbonDivider
+      Left = 419
+      ExplicitLeft = 419
+    end
+    inherited btnExcel: TbsSkinSpeedButton
+      Left = 1034
+      Top = 4
+      Height = 23
+      Anchors = [akTop, akRight]
+      OnClick = btnExcelClick
+      ExplicitLeft = 772
+      ExplicitTop = 4
+      ExplicitHeight = 23
+    end
+    inherited pnTitle: TRzPanel
+      BorderHighlight = clWhite
+      BorderShadow = 13290186
+      FlatColor = clGray
+      FlatColorAdjustment = 0
+    end
+    inherited nvMain: TRzDBNavigator
+      Left = 929
+      Hints.Strings = ()
+      Anchors = [akTop, akRight]
+      ExplicitLeft = 929
+    end
+  end
+  inherited pnBottom: TbsSkinPanel
+    Top = 651
+    Width = 1199
+    ExplicitTop = 651
+    ExplicitWidth = 1199
+  end
+  object pnFilter: TbsSkinPanel [3]
+    Left = 0
+    Top = 31
+    Width = 1199
+    Height = 29
+    HintImageIndex = 0
+    TabOrder = 2
+    SkinDataName = 'panel'
+    DefaultFont.Charset = DEFAULT_CHARSET
+    DefaultFont.Color = clWindowText
+    DefaultFont.Height = 13
+    DefaultFont.Name = 'Tahoma'
+    DefaultFont.Style = []
+    DefaultWidth = 0
+    DefaultHeight = 0
+    UseSkinFont = True
+    EmptyDrawing = False
+    RibbonStyle = False
+    ImagePosition = bsipDefault
+    TransparentMode = False
+    CaptionImageIndex = -1
+    RealHeight = -1
+    AutoEnabledControls = True
+    CheckedMode = False
+    Checked = False
+    DefaultAlignment = taLeftJustify
+    DefaultCaptionHeight = 22
+    BorderStyle = bvFrame
+    CaptionMode = False
+    RollUpMode = False
+    RollUpState = False
+    NumGlyphs = 1
+    Spacing = 2
+    Align = alTop
+    DesignSize = (
+      1199
+      29)
+    object btnDetail: TbsSkinSpeedButton
+      Tag = 500
+      Left = 433
+      Top = 4
+      Width = 75
+      Height = 20
+      Cursor = crHandPoint
+      HintImageIndex = 0
+      SkinData = fmMain.bsSkinData
+      SkinDataName = 'resizetoolbutton'
+      DefaultFont.Charset = DEFAULT_CHARSET
+      DefaultFont.Color = clWindowText
+      DefaultFont.Height = 14
+      DefaultFont.Name = 'Arial'
+      DefaultFont.Style = []
+      DefaultWidth = 0
+      DefaultHeight = 0
+      UseSkinFont = True
+      CheckedMode = False
+      ImageList = imgBtn
+      UseSkinSize = True
+      UseSkinFontColor = True
+      WidthWithCaption = 0
+      WidthWithoutCaption = 0
+      ImageIndex = 11
+      RepeatMode = False
+      RepeatInterval = 100
+      Transparent = False
+      Flat = False
+      AllowAllUp = False
+      Down = False
+      GroupIndex = 0
+      Caption = #49345#49464#51312#54924
+      ShowCaption = True
+      NumGlyphs = 1
+      Spacing = 1
+      OnClick = btnDetailClick
+    end
+    object btnCntReset: TbsSkinSpeedButton
+      Tag = 500
+      Left = 982
+      Top = 4
+      Width = 78
+      Height = 20
+      Cursor = crHandPoint
+      HintImageIndex = 0
+      Anchors = [akTop, akRight]
+      Visible = False
+      SkinData = fmMain.bsSkinData
+      SkinDataName = 'resizetoolbutton'
+      DefaultFont.Charset = DEFAULT_CHARSET
+      DefaultFont.Color = clWindowText
+      DefaultFont.Height = 14
+      DefaultFont.Name = 'Arial'
+      DefaultFont.Style = []
+      DefaultWidth = 0
+      DefaultHeight = 0
+      UseSkinFont = True
+      CheckedMode = False
+      ImageList = imgBtn
+      UseSkinSize = True
+      UseSkinFontColor = True
+      WidthWithCaption = 0
+      WidthWithoutCaption = 0
+      ImageIndex = 12
+      RepeatMode = False
+      RepeatInterval = 100
+      Transparent = False
+      Flat = False
+      AllowAllUp = False
+      Down = False
+      GroupIndex = 0
+      Caption = #49352#47196#44256#52840
+      ShowCaption = True
+      NumGlyphs = 1
+      Spacing = 1
+      OnClick = btnCntResetClick
+    end
+    object btnLoginManager: TbsSkinSpeedButton
+      Tag = 500
+      Left = 1066
+      Top = 4
+      Width = 127
+      Height = 20
+      Cursor = crHandPoint
+      HintImageIndex = 0
+      Anchors = [akTop, akRight]
+      SkinData = fmMain.bsSkinData
+      SkinDataName = 'resizetoolbutton'
+      DefaultFont.Charset = DEFAULT_CHARSET
+      DefaultFont.Color = clWindowText
+      DefaultFont.Height = 14
+      DefaultFont.Name = 'Arial'
+      DefaultFont.Style = []
+      DefaultWidth = 0
+      DefaultHeight = 0
+      UseSkinFont = True
+      CheckedMode = False
+      ImageList = imgBtn
+      UseSkinSize = True
+      UseSkinFontColor = True
+      WidthWithCaption = 0
+      WidthWithoutCaption = 0
+      ImageIndex = 15
+      RepeatMode = False
+      RepeatInterval = 100
+      Transparent = False
+      Flat = False
+      AllowAllUp = False
+      Down = False
+      GroupIndex = 0
+      Caption = #47196#44536#51064#44288#47532#51088#51312#54924
+      ShowCaption = True
+      NumGlyphs = 1
+      Spacing = 1
+      OnClick = btnLoginManagerClick
+    end
+    object lbConnUser: TbsSkinLabel
+      Left = 759
+      Top = 4
+      Width = 219
+      Height = 20
+      HintImageIndex = 0
+      Anchors = [akTop, akRight]
+      TabOrder = 2
+      Visible = False
+      SkinData = fmMain.bsSkinData
+      SkinDataName = 'label'
+      DefaultFont.Charset = DEFAULT_CHARSET
+      DefaultFont.Color = clWindowText
+      DefaultFont.Height = 13
+      DefaultFont.Name = 'Tahoma'
+      DefaultFont.Style = []
+      DefaultWidth = 0
+      DefaultHeight = 0
+      UseSkinFont = True
+      Transparent = False
+      ShadowEffect = False
+      ShadowColor = clBlack
+      ShadowOffset = 0
+      ShadowSize = 3
+      ReflectionEffect = False
+      ReflectionOffset = -5
+      EllipsType = bsetNoneEllips
+      UseSkinSize = False
+      UseSkinFontColor = True
+      BorderStyle = bvFrame
+      Alignment = taCenter
+      AutoSize = False
+    end
+    object bsSkinLabel1: TbsSkinLabel
+      Left = 122
+      Top = 4
+      Width = 75
+      Height = 20
+      HintImageIndex = 0
+      TabOrder = 0
+      SkinData = fmMain.bsSkinData
+      SkinDataName = 'label'
+      DefaultFont.Charset = DEFAULT_CHARSET
+      DefaultFont.Color = clWindowText
+      DefaultFont.Height = 13
+      DefaultFont.Name = 'Tahoma'
+      DefaultFont.Style = []
+      DefaultWidth = 0
+      DefaultHeight = 0
+      UseSkinFont = True
+      Transparent = False
+      ShadowEffect = False
+      ShadowColor = clBlack
+      ShadowOffset = 0
+      ShadowSize = 3
+      ReflectionEffect = False
+      ReflectionOffset = -5
+      EllipsType = bsetNoneEllips
+      UseSkinSize = False
+      UseSkinFontColor = True
+      BorderStyle = bvFrame
+      Alignment = taCenter
+      Caption = #44160#49353
+      AutoSize = False
+    end
+    object edFind: TRzEdit
+      Left = 203
+      Top = 4
+      Width = 227
+      Height = 20
+      Hint = #54924#50896#47749' '#48143' '#54924#50896' ID'#47484' '#51077#47141#54980' '#50644#53552#47484' '#52824#49464#50836'!'
+      ImeName = 'Microsoft IME 2010'
+      TabOrder = 1
+      OnKeyDown = edFindKeyDown
+    end
+    object cbxManagerSearch: TRzCheckBox
+      Left = 522
+      Top = 6
+      Width = 95
+      Height = 15
+      AutoSize = False
+      Caption = #44288#47532#54924#50896#51312#54924
+      DisabledColor = 15790320
+      FillColor = clWhite
+      FocusColor = 15790335
+      FrameColor = clGray
+      HotTrack = True
+      HotTrackColor = 7838964
+      HotTrackStyle = htsFrame
+      ReadOnlyColor = 14811135
+      State = cbUnchecked
+      TabOrder = 3
+      WordWrap = True
+      OnClick = cbxManagerSearchClick
+    end
+  end
+  object pnLeft: TRzSizePanel [4]
+    Left = 0
+    Top = 60
+    Width = 131
+    Height = 591
+    Color = 15987699
+    HotSpotVisible = True
+    SizeBarWidth = 7
+    TabOrder = 3
+    object RzPanel5: TRzPanel
+      Left = 0
+      Top = 166
+      Width = 123
+      Height = 28
+      Align = alTop
+      BorderOuter = fsFlat
+      BorderHighlight = clWhite
+      BorderShadow = 12303291
+      Color = 15790320
+      FlatColor = clGray
+      FlatColorAdjustment = 0
+      TabOrder = 0
+      object RzPanel1: TRzPanel
+        Left = 5
+        Top = 4
+        Width = 113
+        Height = 21
+        BorderOuter = fsFlat
+        Caption = #48516#47448#49440#53469
+        Color = clWhite
+        FlatColor = clGray
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -12
+        Font.Name = #44404#47548#52404
+        Font.Style = []
+        ParentFont = False
+        TabOrder = 0
+      end
+    end
+    object RzPanel6: TRzPanel
+      Left = 0
+      Top = 0
+      Width = 123
+      Height = 166
+      Align = alTop
+      BorderOuter = fsFlat
+      BorderHighlight = clWhite
+      BorderShadow = 12303291
+      Color = 15790320
+      FlatColor = clGray
+      FlatColorAdjustment = 0
+      TabOrder = 1
+      object rgType: TbsSkinRadioGroup
+        Left = 5
+        Top = 5
+        Width = 113
+        Height = 155
+        Cursor = crHandPoint
+        HintImageIndex = 0
+        TabOrder = 0
+        SkinDataName = 'groupbox'
+        DefaultFont.Charset = DEFAULT_CHARSET
+        DefaultFont.Color = clWindowText
+        DefaultFont.Height = 13
+        DefaultFont.Name = 'Tahoma'
+        DefaultFont.Style = []
+        DefaultWidth = 0
+        DefaultHeight = 0
+        UseSkinFont = True
+        EmptyDrawing = False
+        RibbonStyle = False
+        ImagePosition = bsipDefault
+        TransparentMode = False
+        CaptionImageIndex = -1
+        RealHeight = -1
+        AutoEnabledControls = True
+        CheckedMode = False
+        Checked = False
+        DefaultAlignment = taCenter
+        DefaultCaptionHeight = 22
+        BorderStyle = bvFrame
+        CaptionMode = True
+        RollUpMode = False
+        RollUpState = False
+        NumGlyphs = 1
+        Spacing = 2
+        Caption = #54924#50896#46321#44553
+        OnClick = rgTypeClick
+        UseSkinSize = True
+        ButtonSkinDataName = 'radiobox'
+        ButtonDefaultFont.Charset = DEFAULT_CHARSET
+        ButtonDefaultFont.Color = clWindowText
+        ButtonDefaultFont.Height = 13
+        ButtonDefaultFont.Name = 'Tahoma'
+        ButtonDefaultFont.Style = []
+      end
+    end
+    object lbxPart: TRzListBox
+      Left = 0
+      Top = 194
+      Width = 123
+      Height = 397
+      Align = alClient
+      ImeName = 'Microsoft IME 2010'
+      ItemHeight = 12
+      TabOrder = 2
+      OnClick = lbxPartClick
+    end
+  end
   object pgMain: TbsSkinPageControl [5]
     Left = 700
     Top = 60
     Width = 499
     Height = 591
-    ActivePage = bsSkinTabSheet1
+    ActivePage = bsSkinTabSheet2
     Align = alRight
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clBtnText
@@ -1411,6 +1409,7 @@ inherited fmUser: TfmUser
           Height = 65
           BorderOuter = fsFlat
           TabOrder = 17
+          Visible = False
           object bsSkinLabel22: TbsSkinLabel
             Left = 6
             Top = 31
@@ -1445,10 +1444,10 @@ inherited fmUser: TfmUser
           end
           object edMngid: TkcRzDBEdit
             Left = 90
-            Top = 31
+            Top = 32
             Width = 146
             Height = 20
-            DataSource = dsMain
+            DataSource = dsUser
             DataField = 'UPDATE_MNG_ID'
             Font.Charset = DEFAULT_CHARSET
             Font.Color = clBtnText
@@ -1510,11 +1509,11 @@ inherited fmUser: TfmUser
             AutoSize = False
           end
           object edPassM: TkcRzDBEdit
-            Left = 325
-            Top = 31
+            Left = 328
+            Top = 29
             Width = 150
             Height = 20
-            DataSource = dsMain
+            DataSource = dsUser
             DataField = 'USER_PWD'
             Font.Charset = DEFAULT_CHARSET
             Font.Color = clBtnText
@@ -1560,11 +1559,11 @@ inherited fmUser: TfmUser
           AutoSize = False
         end
         object edUserID: TkcRzDBEdit
-          Left = 90
+          Left = 92
           Top = 31
           Width = 150
           Height = 20
-          DataSource = dsMain
+          DataSource = dsUser
           DataField = 'USER_ID'
           ReadOnly = True
           Color = clInfoBk
@@ -1584,11 +1583,11 @@ inherited fmUser: TfmUser
           EnterToTab = True
         end
         object edUserNickName: TkcRzDBEdit
-          Left = 90
+          Left = 92
           Top = 57
           Width = 150
           Height = 20
-          DataSource = dsMain
+          DataSource = dsUser
           DataField = 'USER_NICK_NM'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBtnText
@@ -1602,11 +1601,11 @@ inherited fmUser: TfmUser
           EnterToTab = True
         end
         object edUser_Nm: TkcRzDBEdit
-          Left = 338
+          Left = 340
           Top = 57
           Width = 150
           Height = 20
-          DataSource = dsMain
+          DataSource = dsUser
           DataField = 'USER_NM'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBtnText
@@ -1624,7 +1623,7 @@ inherited fmUser: TfmUser
           Width = 150
           Height = 20
           DataField = 'USER_GRADE'
-          DataSource = dsMain
+          DataSource = dsUser
           Style = csDropDownList
           Ctl3D = False
           Font.Charset = DEFAULT_CHARSET
@@ -1640,12 +1639,12 @@ inherited fmUser: TfmUser
           EnterToTab = True
         end
         object cbUserPart: TkcRzDBComboBox
-          Left = 338
+          Left = 340
           Top = 83
           Width = 150
           Height = 20
           DataField = 'PART_CD'
-          DataSource = dsMain
+          DataSource = dsUser
           Style = csDropDownList
           Ctl3D = False
           Font.Charset = DEFAULT_CHARSET
@@ -1667,11 +1666,11 @@ inherited fmUser: TfmUser
           EnterToTab = True
         end
         object edRegNo: TkcRzDBEdit
-          Left = 90
+          Left = 92
           Top = 109
           Width = 150
           Height = 20
-          DataSource = dsMain
+          DataSource = dsUser
           DataField = 'BIRTH_DT'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBtnText
@@ -1684,12 +1683,12 @@ inherited fmUser: TfmUser
           EnterToTab = True
         end
         object edRegDt: TRzDBDateTimePicker
-          Left = 338
+          Left = 340
           Top = 109
           Width = 150
           Height = 20
-          Date = 45425.701733541670000000
-          Time = 45425.701733541670000000
+          Date = 45963.828974328700000000
+          Time = 45963.828974328700000000
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBtnText
           Font.Height = -12
@@ -1699,16 +1698,18 @@ inherited fmUser: TfmUser
           ParentFont = False
           TabOrder = 25
           DataField = 'REG_DT'
-          DataSource = dsMain
+          DataSource = dsUser
         end
         object cbServerIP: TkcRzDBComboBox
-          Left = 90
+          Left = 92
           Top = 135
           Width = 150
           Height = 20
           DataField = 'SERVER_IP'
-          DataSource = dsMain
+          DataSource = dsUser
+          ReadOnly = True
           Style = csDropDownList
+          Color = clInfoBk
           Ctl3D = False
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBtnText
@@ -1727,7 +1728,7 @@ inherited fmUser: TfmUser
           Top = 135
           Width = 74
           Height = 20
-          DataSource = dsMain
+          DataSource = dsUser
           DataField = 'USER_PWD'
           ReadOnly = True
           Color = clInfoBk
@@ -1747,7 +1748,7 @@ inherited fmUser: TfmUser
           Width = 150
           Height = 20
           DataField = 'PARTNER_NICK_NM'
-          DataSource = dsMain
+          DataSource = dsUser
           Style = csDropDownList
           Ctl3D = False
           Font.Charset = DEFAULT_CHARSET
@@ -1767,7 +1768,7 @@ inherited fmUser: TfmUser
           Top = 187
           Width = 150
           Height = 20
-          DataSource = dsMain
+          DataSource = dsUser
           DataField = 'USER_EMAIL'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBtnText
@@ -1780,11 +1781,11 @@ inherited fmUser: TfmUser
           EnterToTab = True
         end
         object edTelNo: TkcRzDBEdit
-          Left = 90
-          Top = 213
+          Left = 87
+          Top = 214
           Width = 150
           Height = 20
-          DataSource = dsMain
+          DataSource = dsUser
           DataField = 'USER_TEL'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBtnText
@@ -1801,7 +1802,7 @@ inherited fmUser: TfmUser
           Top = 213
           Width = 150
           Height = 20
-          DataSource = dsMain
+          DataSource = dsUser
           DataField = 'USER_HP'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBtnText
@@ -1814,11 +1815,11 @@ inherited fmUser: TfmUser
           EnterToTab = True
         end
         object edAddr1: TkcRzDBEdit
-          Left = 90
+          Left = 92
           Top = 239
           Width = 396
           Height = 20
-          DataSource = dsMain
+          DataSource = dsUser
           DataField = 'USER_ADDR'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBtnText
@@ -1831,11 +1832,11 @@ inherited fmUser: TfmUser
           EnterToTab = True
         end
         object edUserAcnt: TkcRzDBEdit
-          Left = 90
+          Left = 92
           Top = 265
           Width = 150
           Height = 20
-          DataSource = dsMain
+          DataSource = dsUser
           DataField = 'USER_BANK_ACNT'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBtnText
@@ -1848,11 +1849,11 @@ inherited fmUser: TfmUser
           EnterToTab = True
         end
         object edUserBank: TkcRzDBEdit
-          Left = 338
+          Left = 340
           Top = 265
           Width = 150
           Height = 20
-          DataSource = dsMain
+          DataSource = dsUser
           DataField = 'USER_BANK'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBtnText
@@ -1869,7 +1870,7 @@ inherited fmUser: TfmUser
           Top = 291
           Width = 150
           Height = 20
-          DataSource = dsMain
+          DataSource = dsUser
           DataField = 'USER_BANK_ACNT_NM'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBtnText
@@ -1914,12 +1915,12 @@ inherited fmUser: TfmUser
           AutoSize = False
         end
         object moBody: TRzDBMemo
-          Left = 90
+          Left = 92
           Top = 317
           Width = 396
           Height = 50
           DataField = 'USER_BIGO'
-          DataSource = dsMain
+          DataSource = dsUser
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBtnText
           Font.Height = -12
@@ -1962,12 +1963,12 @@ inherited fmUser: TfmUser
           AutoSize = False
         end
         object cbUserBlack: TkcRzDBComboBox
-          Left = 338
+          Left = 340
           Top = 31
           Width = 150
           Height = 20
           DataField = 'USER_BLACK'
-          DataSource = dsMain
+          DataSource = dsUser
           Style = csDropDownList
           Ctl3D = False
           Font.Charset = DEFAULT_CHARSET
@@ -2026,7 +2027,7 @@ inherited fmUser: TfmUser
           Width = 150
           Height = 20
           DataField = 'BANK_CD'
-          DataSource = dsMain
+          DataSource = dsUser
           Style = csDropDownList
           Ctl3D = False
           Font.Charset = DEFAULT_CHARSET
@@ -2084,7 +2085,7 @@ inherited fmUser: TfmUser
           Top = 373
           Width = 150
           Height = 20
-          DataSource = dsMain
+          DataSource = dsUser
           DataField = 'RECOMM_NM'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBtnText
@@ -2129,15 +2130,14 @@ inherited fmUser: TfmUser
           AutoSize = False
         end
         object cbMngUser: TkcRzDBComboBox
-          Left = 338
+          Left = 340
           Top = 373
           Width = 150
           Height = 20
           DataField = 'MNG_USER'
-          DataSource = dsMain
+          DataSource = dsUser
           Style = csDropDownList
           Ctl3D = False
-          Enabled = False
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBtnText
           Font.Height = -12
@@ -2193,7 +2193,7 @@ inherited fmUser: TfmUser
           Top = 161
           Width = 74
           Height = 20
-          DataSource = dsMain
+          DataSource = dsUser
           DataField = 'USER_SIGN'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBtnText
@@ -2201,7 +2201,6 @@ inherited fmUser: TfmUser
           Font.Name = #44404#47548
           Font.Style = []
           ImeName = 'Microsoft IME 2010'
-          MaxLength = 4
           ParentFont = False
           TabOrder = 47
           EnterToTab = True
@@ -2534,9 +2533,10 @@ inherited fmUser: TfmUser
           Height = 21
           DataField = 'API_TP'
           DataSource = dsAcnt
+          ReadOnly = True
           Style = csDropDownList
+          Color = clInfoBk
           Ctl3D = False
-          Enabled = False
           ImeName = 'Microsoft IME 2010'
           ItemHeight = 13
           ParentCtl3D = False
@@ -2621,7 +2621,7 @@ inherited fmUser: TfmUser
         end
         object edAcntNo: TkcRzDBEdit
           Left = 91
-          Top = 32
+          Top = 31
           Width = 151
           Height = 21
           DataSource = dsAcnt
@@ -2821,7 +2821,7 @@ inherited fmUser: TfmUser
           Spacing = 1
           OnClick = btnAcntMakeClick
         end
-        object bsSkinButton1: TbsSkinButton
+        object btnNego: TbsSkinButton
           Tag = 200
           Left = 193
           Top = 274
@@ -2856,7 +2856,7 @@ inherited fmUser: TfmUser
           Caption = #54801#51032#49688#49688#47308
           NumGlyphs = 1
           Spacing = 1
-          OnClick = bsSkinButton1Click
+          OnClick = btnNegoClick
         end
         object ckGujaYn: TRzCheckBox
           Left = 258
@@ -2911,7 +2911,7 @@ inherited fmUser: TfmUser
         end
         object edMinAmtGuja: TkcRzDBEdit
           Left = 91
-          Top = 111
+          Top = 110
           Width = 151
           Height = 21
           DataSource = dsAcnt
@@ -3156,7 +3156,7 @@ inherited fmUser: TfmUser
           Spacing = 1
           OnClick = btnLevClick
         end
-        object bsSkinButton4: TbsSkinButton
+        object btnArtcOpt: TbsSkinButton
           Tag = 200
           Left = 301
           Top = 274
@@ -3191,18 +3191,7 @@ inherited fmUser: TfmUser
           Caption = #54924#50896#48324' '#44144#47000#51333#47785
           NumGlyphs = 1
           Spacing = 1
-          OnClick = bsSkinButton4Click
-        end
-        object edGujaMaxCnt: TkcRzDBEdit
-          Left = 91
-          Top = 84
-          Width = 151
-          Height = 21
-          DataSource = dsAcnt
-          DataField = 'NEGO_GUJA_MAXCNT'
-          ImeName = 'Microsoft IME 2010'
-          TabOrder = 31
-          EnterToTab = True
+          OnClick = btnArtcOptClick
         end
         object edLev: TkcRzDBEdit
           Left = 219
@@ -3220,12 +3209,12 @@ inherited fmUser: TfmUser
           Font.Style = [fsBold]
           ImeName = 'Microsoft IME 2010'
           ParentFont = False
-          TabOrder = 32
+          TabOrder = 31
           EnterToTab = True
         end
         object pnlLev: TRzPanel
-          Left = 120
-          Top = 46
+          Left = 132
+          Top = 309
           Width = 192
           Height = 207
           BorderOuter = fsFlat
@@ -3279,7 +3268,7 @@ inherited fmUser: TfmUser
           end
           object btnLevSave: TbsSkinSpeedButton
             Tag = 500
-            Left = 100
+            Left = 92
             Top = 142
             Width = 67
             Height = 24
@@ -3319,7 +3308,7 @@ inherited fmUser: TfmUser
           end
           object btnLevCancel: TbsSkinSpeedButton
             Tag = 500
-            Left = 100
+            Left = 92
             Top = 170
             Width = 67
             Height = 24
@@ -3562,6 +3551,14 @@ inherited fmUser: TfmUser
             TabOrder = 8
             WordWrap = True
           end
+        end
+        object edtGujaMaxCnt: TRzNumericEdit
+          Left = 91
+          Top = 84
+          Width = 151
+          Height = 21
+          TabOrder = 32
+          DisplayFormat = ',0;(,0)'
         end
       end
       object pnAcnt: TRzPanel
@@ -4616,7 +4613,7 @@ inherited fmUser: TfmUser
           496
           20)
         object lbLogin: TbsSkinLabel
-          Left = 310
+          Left = 302
           Top = 1
           Width = 126
           Height = 19
@@ -4647,7 +4644,7 @@ inherited fmUser: TfmUser
           Alignment = taCenter
           Caption = '0'#44148
           AutoSize = False
-          ExplicitLeft = 311
+          ExplicitLeft = 303
         end
       end
       object edIP: TEdit
@@ -4663,7 +4660,7 @@ inherited fmUser: TfmUser
   end
   inherited imgBtn: TImageList
     Bitmap = {
-      494C01011600D001B00210001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C01011600D001D00210001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000006000000001002000000000000060
       000000000000000000000000000000000000000000000000000000000000087B
       1000107B1800107B1800107B1000087B100000730800006B0000000000000000
@@ -5462,14 +5459,12 @@ inherited fmUser: TfmUser
       C003807FC003C003FFFFC0FFFFFFFFFF00000000000000000000000000000000
       000000000000}
   end
+  inherited dsMain: TDataSource
+    DataSet = cdsMain
+  end
   inherited dbMain: TADOQuery
     CursorType = ctStatic
-    AfterOpen = dbMainAfterOpen
-    AfterInsert = dbMainAfterInsert
-    BeforeEdit = dbMainBeforeEdit
-    AfterEdit = dbMainAfterEdit
-    BeforePost = dbMainBeforePost
-    BeforeDelete = dbMainBeforeDelete
+    LockType = ltBatchOptimistic
     SQL.Strings = (
       '    SELECT 0 AS CHECK_TF        '
       '          ,A.USER_ID           '
@@ -5522,18 +5517,18 @@ inherited fmUser: TfmUser
   end
   object dsAcnt: TDataSource
     DataSet = dbAcnt
-    Left = 248
-    Top = 440
+    Left = 816
+    Top = 40
   end
   object dsMemo: TDataSource
     DataSet = dbMemo
-    Left = 336
-    Top = 440
+    Left = 904
+    Top = 36
   end
   object dsLogin: TDataSource
     DataSet = dbLogin
-    Left = 328
-    Top = 392
+    Left = 1084
+    Top = 44
   end
   object tmOpen: TTimer
     Enabled = False
@@ -5543,6 +5538,7 @@ inherited fmUser: TfmUser
     Top = 400
   end
   object dbLogin: TADOQuery
+    Connection = MastDB.ADOConn
     Parameters = <>
     SQL.Strings = (
       'SELECT '
@@ -5557,10 +5553,12 @@ inherited fmUser: TfmUser
       '      HTS_VER,'
       '      COUNT(1) OVER() AS TOTCNT'
       'FROM LOGIN_HIS')
-    Left = 296
-    Top = 392
+    Left = 1056
+    Top = 44
   end
   object dbAcnt: TADOQuery
+    Connection = MastDB.ADOConn
+    CursorType = ctStatic
     AfterOpen = dbAcntAfterOpen
     BeforeDelete = dbAcntBeforeDelete
     Parameters = <>
@@ -5594,20 +5592,21 @@ inherited fmUser: TfmUser
       'LEVERAGE          ,'
       '(ACNT_AMT + CLR_PL - CMSN) AS PLAMT '
       'FROM ACNT_MST')
-    Left = 216
-    Top = 440
+    Left = 788
+    Top = 40
   end
   object dbMemo: TADOQuery
+    Connection = MastDB.ADOConn
     BeforePost = dbMemoBeforePost
     Parameters = <>
     SQL.Strings = (
       'SELECT * FROM USER_MEMO')
-    Left = 304
-    Top = 440
+    Left = 876
+    Top = 36
   end
   object popBlockIP: TbsSkinPopupMenu
-    Left = 1120
-    Top = 56
+    Left = 1136
+    Top = 44
     object popbtnInputIP: TMenuItem
       Caption = #48660#47085'IP '#52628#44032
       OnClick = popbtnInputIPClick
@@ -5645,5 +5644,29 @@ inherited fmUser: TfmUser
       Caption = #47196#44536#51064#45236#50669' '#50641#49472#51200#51109
       OnClick = popbtnExcelClick
     end
+  end
+  object dbUser: TADOQuery
+    Connection = MastDB.ADOConn
+    CursorType = ctStatic
+    AfterInsert = dbUserAfterInsert
+    AfterEdit = dbUserAfterEdit
+    BeforePost = dbUserBeforePost
+    BeforeDelete = dbUserBeforeDelete
+    Parameters = <>
+    Left = 708
+    Top = 40
+  end
+  object dsUser: TDataSource
+    DataSet = dbUser
+    Left = 736
+    Top = 40
+  end
+  object cdsMain: TClientDataSet
+    Aggregates = <>
+    Params = <>
+    AfterOpen = cdsMainAfterOpen
+    AfterScroll = cdsMainAfterScroll
+    Left = 64
+    Top = 400
   end
 end
