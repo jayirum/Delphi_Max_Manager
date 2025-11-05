@@ -1,0 +1,314 @@
+inherited fmBlockIp: TfmBlockIp
+  Tag = 2006
+  Caption = #52264#45800'IP'#44288#47532
+  ExplicitWidth = 945
+  ExplicitHeight = 580
+  PixelsPerInch = 96
+  TextHeight = 12
+  inherited pnTop: TRzPanel
+    inherited btnFilter: TbsSkinSpeedButton
+      Width = 110
+      Caption = #51204#52404#51312#54924'F1'
+      ExplicitWidth = 110
+    end
+    inherited btnInsert: TbsSkinSpeedButton
+      Left = 244
+      Top = 4
+      ExplicitLeft = 244
+      ExplicitTop = 4
+    end
+    inherited btnEdit: TbsSkinSpeedButton
+      Left = 322
+      ExplicitLeft = 322
+    end
+    inherited btnDelete: TbsSkinSpeedButton
+      Left = 398
+      ExplicitLeft = 398
+    end
+    inherited btnPost: TbsSkinSpeedButton
+      Left = 474
+      ExplicitLeft = 474
+    end
+    inherited bsRibbonDivider4: TbsRibbonDivider
+      Left = 229
+      ExplicitLeft = 229
+    end
+    inherited btnExcel: TbsSkinSpeedButton
+      Left = 661
+      OnClick = btnExcelClick
+      ExplicitLeft = 661
+    end
+    inherited nvMain: TRzDBNavigator
+      Left = 555
+      Hints.Strings = ()
+      ExplicitLeft = 555
+    end
+  end
+  object RzPanel4: TRzPanel [2]
+    Left = 442
+    Top = 60
+    Width = 495
+    Height = 471
+    Align = alRight
+    BorderOuter = fsFlat
+    BorderHighlight = clWhite
+    BorderShadow = 12303291
+    Color = 15790320
+    FlatColor = clGray
+    FlatColorAdjustment = 0
+    FrameController = MastDB.PanelRzFrameController
+    TabOrder = 2
+    ExplicitTop = 31
+    ExplicitHeight = 500
+    object bsSkinLabel2: TbsSkinLabel
+      Left = 6
+      Top = 6
+      Width = 80
+      Height = 20
+      HintImageIndex = 0
+      TabOrder = 0
+      SkinData = fmMain.bsSkinData
+      SkinDataName = 'label'
+      DefaultFont.Charset = DEFAULT_CHARSET
+      DefaultFont.Color = clWindowText
+      DefaultFont.Height = 13
+      DefaultFont.Name = 'Tahoma'
+      DefaultFont.Style = []
+      DefaultWidth = 0
+      DefaultHeight = 0
+      UseSkinFont = True
+      Transparent = False
+      ShadowEffect = False
+      ShadowColor = clBlack
+      ShadowOffset = 0
+      ShadowSize = 3
+      ReflectionEffect = False
+      ReflectionOffset = -5
+      EllipsType = bsetNoneEllips
+      UseSkinSize = False
+      UseSkinFontColor = True
+      BorderStyle = bvFrame
+      Alignment = taCenter
+      Caption = #52264#45800'IP'
+      AutoSize = False
+    end
+    object bsSkinLabel5: TbsSkinLabel
+      Left = 6
+      Top = 32
+      Width = 80
+      Height = 20
+      HintImageIndex = 0
+      TabOrder = 1
+      SkinData = fmMain.bsSkinData
+      SkinDataName = 'label'
+      DefaultFont.Charset = DEFAULT_CHARSET
+      DefaultFont.Color = clWindowText
+      DefaultFont.Height = 13
+      DefaultFont.Name = 'Tahoma'
+      DefaultFont.Style = []
+      DefaultWidth = 0
+      DefaultHeight = 0
+      UseSkinFont = True
+      Transparent = False
+      ShadowEffect = False
+      ShadowColor = clBlack
+      ShadowOffset = 0
+      ShadowSize = 3
+      ReflectionEffect = False
+      ReflectionOffset = -5
+      EllipsType = bsetNoneEllips
+      UseSkinSize = False
+      UseSkinFontColor = True
+      BorderStyle = bvFrame
+      Alignment = taCenter
+      Caption = #52264#45800#49324#50976
+      AutoSize = False
+    end
+    object kcRzDBEdit1: TkcRzDBEdit
+      Left = 91
+      Top = 6
+      Width = 121
+      Height = 20
+      DataSource = dsMain
+      DataField = 'UIP_IP'
+      Ctl3D = True
+      FrameController = MastDB.RzFrameController
+      ImeName = 'Microsoft Office IME 2007'
+      ParentCtl3D = False
+      TabOrder = 2
+      EnterToTab = True
+    end
+    object MoMsg: TRzDBMemo
+      Left = 91
+      Top = 32
+      Width = 394
+      Height = 65
+      DataField = 'UIP_BIGO'
+      DataSource = dsMain
+      ImeName = 'Microsoft Office IME 2007'
+      TabOrder = 3
+      FrameController = MastDB.RzFrameController
+    end
+  end
+  object gdMain: TDBGridEh [3]
+    Left = 0
+    Top = 60
+    Width = 442
+    Height = 471
+    TabStop = False
+    Align = alClient
+    ColumnDefValues.Layout = tlCenter
+    Ctl3D = False
+    DataSource = dsMain
+    DynProps = <>
+    FixedColor = 15790320
+    Flat = True
+    ImeName = 'Microsoft IME 2010'
+    IndicatorOptions = [gioShowRowIndicatorEh, gioShowRecNoEh]
+    Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit]
+    OptionsEh = [dghFixed3D, dghHighlightFocus, dghClearSelection, dghAutoSortMarking, dghDialogFind, dghShowRecNo, dghColumnResize, dghColumnMove, dghExtendVertLines]
+    ParentCtl3D = False
+    RowDetailPanel.Color = clBtnFace
+    RowHeight = 21
+    TabOrder = 3
+    TitleParams.Color = clBtnFace
+    TitleParams.RowHeight = 21
+    TitleParams.FillStyle = cfstGradientEh
+    Columns = <
+      item
+        Alignment = taCenter
+        DynProps = <>
+        EditButtons = <>
+        FieldName = 'UIP_IP'
+        Footers = <>
+        Title.Alignment = taCenter
+        Title.Caption = #52264#45800'IP'
+        Title.Color = 16250871
+        Width = 110
+      end
+      item
+        DynProps = <>
+        EditButtons = <>
+        FieldName = 'UIP_BIGO'
+        Footers = <>
+        Title.Alignment = taCenter
+        Title.Caption = #52264#45800#49324#50976
+        Title.Color = 16250871
+        Width = 350
+      end>
+    object RowDetailData: TRowDetailPanelControlEh
+    end
+  end
+  object pnFilter: TbsSkinPanel [4]
+    Left = 0
+    Top = 31
+    Width = 937
+    Height = 29
+    HintImageIndex = 0
+    TabOrder = 4
+    SkinDataName = 'panel'
+    DefaultFont.Charset = DEFAULT_CHARSET
+    DefaultFont.Color = clWindowText
+    DefaultFont.Height = 13
+    DefaultFont.Name = 'Tahoma'
+    DefaultFont.Style = []
+    DefaultWidth = 0
+    DefaultHeight = 0
+    UseSkinFont = True
+    EmptyDrawing = False
+    RibbonStyle = False
+    ImagePosition = bsipDefault
+    TransparentMode = False
+    CaptionImageIndex = -1
+    RealHeight = -1
+    AutoEnabledControls = True
+    CheckedMode = False
+    Checked = False
+    DefaultAlignment = taLeftJustify
+    DefaultCaptionHeight = 22
+    BorderStyle = bvFrame
+    CaptionMode = False
+    RollUpMode = False
+    RollUpState = False
+    NumGlyphs = 1
+    Spacing = 2
+    Align = alTop
+    ExplicitLeft = -14
+    ExplicitWidth = 951
+    object btnFind: TbsSkinSpeedButton
+      Tag = 500
+      Left = 256
+      Top = 4
+      Width = 57
+      Height = 20
+      Cursor = crHandPoint
+      HintImageIndex = 0
+      SkinData = fmMain.bsSkinData
+      SkinDataName = 'resizetoolbutton'
+      DefaultFont.Charset = DEFAULT_CHARSET
+      DefaultFont.Color = clWindowText
+      DefaultFont.Height = 14
+      DefaultFont.Name = 'Arial'
+      DefaultFont.Style = []
+      DefaultWidth = 0
+      DefaultHeight = 0
+      UseSkinFont = True
+      CheckedMode = False
+      ImageList = imgBtn
+      UseSkinSize = True
+      UseSkinFontColor = True
+      WidthWithCaption = 0
+      WidthWithoutCaption = 0
+      ImageIndex = -1
+      RepeatMode = False
+      RepeatInterval = 100
+      Transparent = False
+      Flat = False
+      AllowAllUp = False
+      Down = False
+      GroupIndex = 0
+      Caption = #44160#49353
+      ShowCaption = True
+      NumGlyphs = 1
+      Spacing = 1
+      OnClick = btnFindClick
+    end
+    object edFind: TRzEdit
+      Left = 23
+      Top = 4
+      Width = 227
+      Height = 20
+      Hint = #54924#50896#47749' '#48143' '#54924#50896' ID'#47484' '#51077#47141#54980' '#50644#53552#47484' '#52824#49464#50836'!'
+      FrameController = MastDB.RzFrameController
+      ImeMode = imSHanguel
+      ImeName = 'Microsoft IME 2010'
+      TabOrder = 0
+      OnKeyDown = edFindKeyDown
+    end
+  end
+  inherited dbMain: TUniQuery
+    SQL.Strings = (
+      'SELECT IP_SEQ'
+      '      ,UIP_IP'
+      '      ,UIP_BIGO'
+      'FROM USER_BLOCK_IP')
+    BeforePost = dbMainBeforePost
+    object dbMainIP_SEQ: TIntegerField
+      FieldName = 'IP_SEQ'
+      ReadOnly = True
+      Required = True
+    end
+    object dbMainUIP_IP: TStringField
+      FieldName = 'UIP_IP'
+      Required = True
+      FixedChar = True
+      Size = 15
+    end
+    object dbMainUIP_BIGO: TStringField
+      FieldName = 'UIP_BIGO'
+    end
+  end
+  inherited dbPart: TUniQuery
+    Left = 161
+  end
+end

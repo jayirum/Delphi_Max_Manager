@@ -1,0 +1,182 @@
+unit MUserNegoARTC;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, RzLstBox, bsSkinCtrls, VCL_Helper, MBasic, DBGridEhGrouping,
+  ToolCtrlsEh, DBGridEhToolCtrls, DynVarsEh, GridsEh, DBAxisGridsEh, DBGridEh,
+  RzDBEdit, kcRaizeCtrl, StdCtrls, RzCmboBx, RzDBCmbo, RzSplit, Mask, RzEdit,
+  bsMessages, DB, MemDS, DBAccess, Uni, ImgList, BusinessSkinForm, RzDBNav,
+  bsribbon, ExtCtrls, RzPanel, UniDAC_Helper;
+
+type
+  TfmUserNegoARTC = class(TfmBasic)
+    pnLeft: TRzSizePanel;
+    RzPanel5: TRzPanel;
+    RzPanel6: TRzPanel;
+    gdUser: TDBGridEh;
+    dsPart: TDataSource;
+    edFind: TRzEdit;
+    btnFind: TbsSkinSpeedButton;
+    dsUser: TDataSource;
+    dbUser: TUniQuery;
+    edUserID: TkcRzDBEdit;
+    dbUserUSER_ID: TStringField;
+    dbUserUSER_NM: TStringField;
+    gdMain: TDBGridEh;
+    dbMainUSER_ID: TStringField;
+    dbMainUSER_NM: TStringField;
+    dbMainARTC_CD: TStringField;
+    dbMainARTC_USE_YN: TStringField;
+    bsSkinLabel1: TbsSkinLabel;
+    cbArtcCD: TkcRzComboBox;
+    procedure FormShow(Sender: TObject);
+    procedure btnExcelClick(Sender: TObject);
+    procedure btnFilterClick(Sender: TObject);
+    procedure btnFindClick(Sender: TObject);
+    procedure edFindKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
+    procedure edUserIDChange(Sender: TObject);
+    procedure gdUserTitleBtnClick(Sender: TObject; ACol: Integer;
+      Column: TColumnEh);
+    procedure gdUserDblClick(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+    procedure MainTableOpen(sWhere : String='');
+    procedure UserTableOpen(sWhere : String='');
+    procedure MainWher(sData : String);
+  end;
+
+var
+  fmUserNegoARTC: TfmUserNegoARTC;
+
+implementation
+
+uses StdUtils, MMastDB, MDelay, MNegoCmsn, PacketStruct;
+
+{$R *.dfm}
+
+{ TfmSample }
+
+procedure TfmUserNegoARTC.btnFindClick(Sender: TObject);
+var
+  sWhere : String;
+begin
+  inherited;
+//  sWhere := Format(' AND A.USER_NM LIKE %s', [QuotedStr('%' + edFind.Text + '%')]);
+  sWhere := ' AND ' + StrReplace(Get_INIFile(__Find_FileName, 'FINDSQL', 'USER_A'), '<X>', edFind.Text);
+
+  UserTableOpen(sWhere);
+
+end;
+
+procedure TfmUserNegoARTC.btnExcelClick(Sender: TObject);
+begin
+  inherited;
+  Export_Excel(gdMain);
+end;
+
+procedure TfmUserNegoARTC.gdUserDblClick(Sender: TObject);
+begin
+  inherited;
+  MainTableOpen;
+end;
+
+procedure TfmUserNegoARTC.gdUserTitleBtnClick(Sender: TObject; ACol: Integer;
+  Column: TColumnEh);
+begin
+  inherited;
+  with dbUser do
+  begin
+    if IndexFieldNames = Column.FieldName then IndexFieldNames := Column.FieldName + ' Desc'
+    else IndexFieldNames := Column.FieldName
+  end;
+end;
+
+procedure TfmUserNegoARTC.btnFilterClick(Sender: TObject);
+begin
+  inherited;
+  MainTableOpen;
+end;
+
+procedure TfmUserNegoARTC.edFindKeyDown(Sender: TObject; var Key: Word;
+  Shift: TShiftState);
+begin
+  inherited;
+  if Key = 13 then btnFind.ButtonClick;
+end;
+
+procedure TfmUserNegoARTC.edUserIDChange(Sender: TObject);
+begin
+  inherited;
+//  MainWher(dbUser.FieldByName('USERID').AsString);
+end;
+
+procedure TfmUserNegoARTC.FormShow(Sender: TObject);
+begin
+  inherited;
+
+  PartTableOpen(cbArtcCD, '@|ARTC_NM, ARTC_CD|ARTC_MST');
+//  MainTableOpen;
+//  UserTableOpen;
+
+//  PartTableOpen(TComponent(gdMain.Columns[1]), Format('@|CODE_VALUE_NM, CODE_VALUE|CODE_MST|WHERE CODE_ID = %s', [QuotedStr('ACNT_TP')]));
+
+  end;
+
+procedure TfmUserNegoARTC.MainTableOpen(sWhere : String='');
+var
+  sSql, sQuery : String;
+begin
+	sSQL := Format('SELECT A.USER_ID, ' +
+                        'A.USER_NM, ' +
+                        'B.ARTC_CD, ' +
+                        'B.ARTC_USE_YN ' +
+                   'FROM USER_MST A, NEGO_ARTC B ' +
+                  'WHERE A.USER_ID = B.USER_ID ' +
+                    'AND B.ARTC_CD <> %s ' +
+                    'AND A.USER_ID = %s ', [QuotedStr(''),
+                                            QuotedStr(dbUser.FieldByName('USER_ID').AsString)]);
+
+
+
+  try
+    Delay_Show();
+    Uni_Open(dbMain, sSql);
+  finally
+    Delay_Hide;
+  end;
+end;
+
+procedure TfmUserNegoARTC.MainWher(sData : String);
+var
+  sSql : String;
+begin
+  inherited;
+  sSql := Format(' AND A.USER_ID = %s',[QuotedStr(sData)]);
+  MainTableOpen(sSql);
+
+end;
+
+procedure TfmUserNegoARTC.UserTableOpen(sWhere : String='');
+var
+  sSql : String;
+begin
+	sSQL := 'SELECT A.USER_ID, ' +
+                 'A.USER_NM ' +
+            'FROM USER_MST A, NEGO_ARTC B ' +
+           'WHERE A.USER_ID = B.USER_ID ' +
+                  sWhere +
+       ' GROUP BY A.USER_ID, A.USER_NM ';
+
+  try
+    Delay_Show();
+    Uni_Open(dbUser, sSql);
+  finally
+    Delay_Hide;
+  end;
+end;
+
+end.

@@ -1,0 +1,25 @@
+unit MOrdCntr;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, MBasic, bsMessages, DB, MemDS, DBAccess, Uni, ImgList,
+  BusinessSkinForm, bsSkinCtrls, RzDBNav, bsribbon, ExtCtrls, RzPanel;
+
+type
+  TfmOrdCntr = class(TfmBasic)
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  fmOrdCntr: TfmOrdCntr;
+
+implementation
+
+{$R *.dfm}
+
+end.

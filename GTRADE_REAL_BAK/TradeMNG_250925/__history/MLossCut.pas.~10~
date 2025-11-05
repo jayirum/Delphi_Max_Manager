@@ -1,0 +1,176 @@
+unit MLossCut;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, RzLstBox, bsSkinCtrls, VCL_Helper, MBasic, DBGridEhGrouping,
+  ToolCtrlsEh, DBGridEhToolCtrls, DynVarsEh, GridsEh, DBAxisGridsEh, DBGridEh,
+  RzDBEdit, kcRaizeCtrl, StdCtrls, RzCmboBx, RzDBCmbo, RzSplit, Mask, RzEdit,
+  bsMessages, DB, MemDS, DBAccess, Uni, ImgList, BusinessSkinForm, RzDBNav,
+  bsribbon, ExtCtrls, RzPanel, UniDAC_Helper;
+
+type
+  TfmLossCut = class(TfmBasic)
+    gdMain: TDBGridEh;
+    pnCnt: TRzPanel;
+    dbMainACNT_NO: TStringField;
+    dbMainTRADE_DT: TStringField;
+    dbMainTM: TStringField;
+    dbMainACNT_TP: TStringField;
+    dbMainUSER_ID: TStringField;
+    dbMainACNT_AMT: TFloatField;
+    dbMainCLR_PL: TFloatField;
+    dbMainCMSN: TFloatField;
+    dbMainESTM_PL: TFloatField;
+    dbMainESTM_AMT: TFloatField;
+    dbMainSYS_DT: TStringField;
+    dbMainUSER_NM: TStringField;
+    dbMainTOTCNT: TIntegerField;
+    bsSkinLabel45: TbsSkinLabel;
+    dtDt: TkcRzDateTimeEdit;
+    chUserTp: TbsSkinCheckRadioBox;
+    dbMainTOTCNT2: TIntegerField;
+    dbMainNCLR_QTY1: TIntegerField;
+    dbMainACNT_AMT2: TFloatField;
+    dbMainUSER_ID2: TStringField;
+    dbMainUSER_ID3: TStringField;
+    dbMainESTM_AMT2: TFloatField;
+    dbMainESTM_AMT3: TFloatField;
+    procedure FormShow(Sender: TObject);
+    procedure btnExcelClick(Sender: TObject);
+    procedure dtDtChange(Sender: TObject);
+    procedure gdMainTitleBtnClick(Sender: TObject; ACol: Integer;
+      Column: TColumnEh);
+    procedure chUserTpClick(Sender: TObject);
+    procedure gdMainColumns14AdvDrawDataCell(Sender: TCustomDBGridEh; Cell,
+      AreaCell: TGridCoord; Column: TColumnEh; const ARect: TRect;
+      var Params: TColCellParamsEh; var Processed: Boolean);
+    procedure dbMainCalcFields(DataSet: TDataSet);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+    procedure MainTableOpen; override;
+  end;
+
+var
+  fmLossCut: TfmLossCut;
+
+implementation
+
+uses StdUtils, MMastDB, MDelay;
+
+{$R *.dfm}
+
+procedure TfmLossCut.btnExcelClick(Sender: TObject);
+begin
+  inherited;
+  Export_Excel(gdMain);
+end;
+
+procedure TfmLossCut.chUserTpClick(Sender: TObject);
+begin
+  inherited;
+  btnFilter.ButtonClick;
+end;
+
+procedure TfmLossCut.dbMainCalcFields(DataSet: TDataSet);
+begin
+  with DataSet do
+  begin
+    FieldByName('AVG_PRC').AsString  := FormatFloat('#,##0.#######', FieldByName('AVG_PRC').AsFloat);
+    FieldByName('CURR_PRC').AsString   := FormatFloat('#,##0.#######', FieldByName('CURR_PRC').AsFloat);
+  end;
+
+end;
+
+procedure TfmLossCut.dtDtChange(Sender: TObject);
+begin
+  inherited;
+  MainTableOpen;
+end;
+
+procedure TfmLossCut.FormShow(Sender: TObject);
+begin
+  inherited;
+
+  dtDt.Date := TextToDate(__Trade_DT);
+
+end;
+
+procedure TfmLossCut.gdMainColumns14AdvDrawDataCell(Sender: TCustomDBGridEh;
+  Cell, AreaCell: TGridCoord; Column: TColumnEh; const ARect: TRect;
+  var Params: TColCellParamsEh; var Processed: Boolean);
+begin
+	with TDBGridEh(Sender).DataSource.DataSet do
+  begin
+  	Sender.Canvas.Font.Color := clBlack;
+	  if FieldByName(Column.FieldName).AsString = '매수' then Sender.Canvas.Font.Color := clRed
+  	else if FieldByName(Column.FieldName).AsString = '매도' then Sender.Canvas.Font.Color := clBlue;
+
+    Sender.DefaultDrawColumnDataCell(Cell, AreaCell, Column, ARect, Params);
+    Processed := True;
+  end;
+end;
+
+procedure TfmLossCut.gdMainTitleBtnClick(Sender: TObject; ACol: Integer;
+  Column: TColumnEh);
+begin
+  inherited;
+  with dbMain do
+  begin
+    if IndexFieldNames = Column.FieldName then IndexFieldNames := Column.FieldName + ' Desc'
+    else IndexFieldNames := Column.FieldName
+  end;
+end;
+
+procedure TfmLossCut.MainTableOpen;
+var
+  sSql, sUserTp : String;
+begin
+  try
+    Delay_Show();
+
+    if chUserTp.Checked then sUserTp := ' AND B.USER_GRADE = 2 '
+    else sUserTp := '';
+
+    sSql := Format( 'SELECT A.ACNT_NO            '+
+                    ',A.TRADE_DT                 '+
+                    ',A.TM                       '+
+                    ',A.ACNT_TP                  '+
+                    ',A.USER_ID                  '+
+                    ',A.ACNT_AMT                 '+
+                    ',A.CLR_PL                   '+
+                    ',A.CMSN                     '+
+                    ',A.ACNT_AMT + A.CLR_PL - A.CMSN AS ACMT_REALAMT '+
+                    ',A.ESTM_PL                  '+
+                    ',A.ESTM_AMT                 '+
+                    ',A.SYS_DT                   '+
+                    ',A.NCLR_QTY                 '+
+                    ',A.LEVERAGE                 '+
+                    ',A.STK_CD                   '+
+                    ',A.AVG_PRC                  '+
+                    ',CASE WHEN A.BS_TP = %s THEN %s ELSE %s END AS BS_TP '+
+                    ',A.CURR_PRC                 '+
+                    ',B.USER_NM                  '+
+                    ',COUNT(1) OVER() AS TOTCNT  '+
+                    'FROM LOSSCUT_HIS A          '+
+                    '    ,USER_MST B             '+
+                    'WHERE A.USER_ID = B.USER_ID '+
+                    'AND A.TRADE_DT = %s %s   ORDER BY A.TM DESC   ',
+                    [QuotedStr('B'), QuotedStr('매수'), QuotedStr('매도'),
+                     QuotedStr(StrReplace(dtDt.Text, '-', '')), sUserTp]);
+
+    Uni_Open(dbMain, sSql);
+    PartTableOpen(TComponent(gdMain.Columns[3]), Format('@|CODE_VALUE_NM, CODE_VALUE|CODE_MST|WHERE CODE_ID = %s', [QuotedStr('ACNT_TP')]));
+
+    if dbMain.RecordCount > 0 then pnCnt.Caption := dbMain.FieldByName('TOTCNT').AsString + ' 건'
+    else pnCnt.Caption := '0 건';
+
+  finally
+    Delay_Hide;
+  end;
+end;
+
+end.

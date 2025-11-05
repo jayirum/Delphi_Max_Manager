@@ -1,0 +1,297 @@
+unit MHybrid;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, RzLstBox, bsSkinCtrls, VCL_Helper, MBasic, DBGridEhGrouping,
+  ToolCtrlsEh, DBGridEhToolCtrls, DynVarsEh, GridsEh, DBAxisGridsEh, DBGridEh,
+  RzDBEdit, kcRaizeCtrl, StdCtrls, RzCmboBx, RzDBCmbo, RzSplit, Mask, RzEdit,
+  bsMessages, DB, MemDS, DBAccess, Uni, ImgList, BusinessSkinForm, RzDBNav,
+  bsribbon, ExtCtrls, RzPanel, math;
+
+type
+  TfmHybrid = class(TfmBasic)
+    pnFilter: TbsSkinPanel;
+    bsSkinLabel1: TbsSkinLabel;
+    edFind: TRzEdit;
+    pnLeft: TRzSizePanel;
+    RzPanel5: TRzPanel;
+    RzPanel1: TRzPanel;
+    RzPanel6: TRzPanel;
+    rgType: TbsSkinRadioGroup;
+    RzPanel4: TRzPanel;
+    pnUser: TRzPanel;
+    edUserID: TkcRzDBEdit;
+    gdMain: TDBGridEh;
+    lbxPart: TRzListBox;
+    dbMainACNT_NO: TStringField;
+    dbMainACNT_TP: TStringField;
+    dbMainUSER_NM: TStringField;
+    dbMainUSER_ID: TStringField;
+    dbMainSTK_CD: TStringField;
+    dbMainBS_TP: TStringField;
+    dbMainAPI_TP: TStringField;
+    dbMainACNT_AMT: TFloatField;
+    dbMainCLR_PL: TFloatField;
+    dbMainCMSN: TFloatField;
+    dbMainNCLR_POS_QTY: TIntegerField;
+    dbMainAVG_PRC: TFloatField;
+    dbMainEVAPL: TFloatField;
+    dbMainSUMPL: TFloatField;
+    dbMainDOT_CNT: TIntegerField;
+    dbMainAVGPRC: TStringField;
+    procedure FormShow(Sender: TObject);
+    procedure lbxPartClick(Sender: TObject);
+    procedure rgTypeClick(Sender: TObject);
+    procedure btnFilterClick(Sender: TObject);
+    procedure edFindKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
+    procedure btnExcelClick(Sender: TObject);
+    procedure edUserIDChange(Sender: TObject);
+    procedure dbMainBeforePost(DataSet: TDataSet);
+    procedure dbMainAfterInsert(DataSet: TDataSet);
+    procedure dbMainCalcFields(DataSet: TDataSet);
+    procedure gdMainDrawColumnCell(Sender: TObject; const Rect: TRect;
+      DataCol: Integer; Column: TColumnEh; State: TGridDrawState);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+    procedure MainTableOpen; override;
+  end;
+
+var
+  fmHybrid: TfmHybrid;
+
+implementation
+
+uses StdUtils, MMastDB, MDelay;
+
+{$R *.dfm}
+
+{ TfmSample }
+
+procedure TfmHybrid.btnExcelClick(Sender: TObject);
+begin
+  inherited;
+  Export_Excel(gdMain);
+end;
+
+procedure TfmHybrid.btnFilterClick(Sender: TObject);
+begin
+	if edFind.Text = '' then _sMainWhere := ''
+  else
+  	_sMainWhere := StrReplace(__Find_User, '<X>', edFind.Text);
+
+  inherited;
+end;
+
+procedure TfmHybrid.dbMainAfterInsert(DataSet: TDataSet);
+begin
+  inherited;
+
+	with DataSet do
+  begin
+//    FieldByName('REG_DT').AsDateTime := Date;
+  end;
+end;
+
+procedure TfmHybrid.dbMainBeforePost(DataSet: TDataSet);
+var
+  sMsg: String;
+begin
+  inherited;
+
+	with DataSet do
+  begin
+//  	sMsg := '';
+//  	// 필수입력값 체크
+//    if FieldByName('REG_DT').IsNull          then sMsg := '등록일자';
+//    if FieldByName('CONN_PWD').AsString = '' then sMsg := '비밀번호';
+//    if FieldByName('FRONT_IP').AsString = '' then sMsg := '접속IP';
+//    if FieldByName('USER_NM').AsString = ''  then sMsg := '회원명';
+//    if FieldByName('USERID').AsString = ''   then sMsg := '회원ID';
+//
+//    if sMsg <> '' then
+//    begin
+//      bsMsgError(sMsg + '은(는) 반드시 입력하셔야 합니다');
+//      Abort;
+//    end;
+  end;
+end;
+
+procedure TfmHybrid.dbMainCalcFields(DataSet: TDataSet);
+var
+  iCnt : Integer;
+begin
+  inherited;
+  with DataSet do
+  begin
+    iCnt := FieldByName('DOT_CNT').AsInteger;
+    FieldByName('AVGPRC').AsString  := FormatFloat(FormatDotCnt(iCnt+1), FieldByName('AVG_PRC').AsFloat);
+  end;
+end;
+
+procedure TfmHybrid.edFindKeyDown(Sender: TObject; var Key: Word;
+  Shift: TShiftState);
+begin
+  inherited;
+	if Key = 13 then btnFilter.ButtonClick;
+end;
+
+procedure TfmHybrid.edUserIDChange(Sender: TObject);
+begin
+  inherited;
+
+	if edUserID.Text = '' then Exit;
+
+  pnUser.Caption := Format('회원명 [%s]', [dbMain.FieldByName('USER_NM').AsString]);
+end;
+
+procedure TfmHybrid.FormShow(Sender: TObject);
+begin
+  inherited;
+
+  PartTableOpen(TComponent(gdMain.Columns[2]), Format('@|CODE_VALUE_NM, CODE_VALUE|CODE_MST|WHERE CODE_ID = %s', [QuotedStr('ACNT_TP')]));
+  PartTableOpen(TComponent(gdMain.Columns[4]), Format('@|CODE_VALUE_NM, CODE_VALUE|CODE_MST|WHERE CODE_ID = %s', [QuotedStr('BS_TP')]));
+  PartTableOpen(TComponent(gdMain.Columns[5]), Format('@|CODE_VALUE_NM, CODE_VALUE|CODE_MST|WHERE CODE_ID = %s', [QuotedStr('API_TP')]));
+  PartTableOpen(rgType, Format('@|CODE_VALUE_NM, CODE_VALUE|CODE_MST|WHERE CODE_ID = %s AND CODE_DISP = %s ORDER BY CODE_VALUE', [QuotedStr('ACNT_TP'),QuotedStr('Y')]), '[전체]', '0');
+  PartTableOpen(lbxPart, Format('@|CODE_VALUE_NM, CODE_VALUE|CODE_MST|WHERE CODE_ID = %s AND CODE_VALUE <> %s ORDER BY CODE_VALUE', [QuotedStr('API_TP'),QuotedStr('H')]), '[전체]', '0');
+
+  with rgType do
+  begin
+    Tag := 1;
+    ItemIndex := 0;
+    Tag := 0;
+  end;
+
+end;
+
+procedure TfmHybrid.gdMainDrawColumnCell(Sender: TObject; const Rect: TRect;
+  DataCol: Integer; Column: TColumnEh; State: TGridDrawState);
+begin
+  inherited;
+    with TDBGridEh(Sender), TDBGridEh(Sender).DataSource.DataSet do
+    begin
+      if FieldByName('BS_TP').AsString = 'B' then Canvas.Font.Color := clRed
+      else Canvas.Font.Color := clBlue;
+
+      if DataCol = 4 then DefaultDrawColumnCell(Rect, DataCol, Column, TGridDrawState(State));
+
+      Canvas.Font.Color := clBlack;
+      if CompareValue(FieldByName('EVAPL').AsFloat, 0) > 0 then Canvas.Font.Color := clRed
+      else if CompareValue(FieldByName('EVAPL').AsFloat, 0) < 0 then Canvas.Font.Color := clBlue;
+
+      if DataCol = 8 then DefaultDrawColumnCell(Rect, DataCol, Column, TGridDrawState(State));
+    end;
+end;
+
+procedure TfmHybrid.lbxPartClick(Sender: TObject);
+var
+  sCd : String;
+begin
+  inherited;
+
+  with rgType do
+  begin
+  	Tag := 1;
+  	ItemIndex := 0;
+  	Tag := 0;
+  end;
+
+  if lbxPart.ItemIndex = 1 then sCd := 'R'
+  else if lbxPart.ItemIndex = 2 then sCd := 'V';
+
+
+  if lbxPart.ItemIndex = 0 then _sMainWhere := ''
+  else _sMainWhere := Format(' AND A.API_TP = %s ', [QuotedStr(sCd)]);
+
+  MainTableOpen;
+end;
+
+procedure TfmHybrid.MainTableOpen;
+var
+  sSql : String;
+begin
+  try
+    Delay_Show();
+
+    sSql := Format( 'SELECT ACNT_NO,      '+
+                    '       ACNT_TP,      '+
+                    '       USER_NM,      '+
+                    '       USER_ID,      '+
+                    '       STK_CD,       '+
+                    '       BS_TP,        '+
+                    '       API_TP,       '+
+                    '       ACNT_AMT,     '+
+                    '       CLR_PL,       '+
+                    '       CMSN,         '+
+                    '       NCLR_POS_QTY, '+
+                    '       AVG_PRC,      '+
+                    '       CASE WHEN BS_TP = %s THEN (AVG_PRC - CNTR_PRC) * NCLR_POS_QTY * TICK '+
+                    '            WHEN BS_TP = %s THEN (CNTR_PRC - AVG_PRC) * NCLR_POS_QTY * TICK END EVAPL, '+
+                    '       (ACNT_AMT + CLR_PL - CMSN) AS SUMPL, '+
+                    '(SELECT TOP(1) DOT_CNT FROM ARTC_MST WHERE ARTC_CD = ARTC_CD) AS DOT_CNT '+
+                    'FROM '+
+                    '(SELECT  A.ACNT_NO '+
+                    '        ,A.ACNT_TP '+
+                    '        ,D.USER_NM '+
+                    '        ,D.USER_ID '+
+                    '        ,A.STK_CD  '+
+                    '        ,A.BS_TP   '+
+                    '        ,A.API_TP  '+
+                    '        ,SUM(D.ACNT_AMT) AS ACNT_AMT '+
+                    '        ,SUM(D.CLR_PL) AS CLR_PL     '+
+                    '        ,SUM(D.CMSN) AS CMSN         '+
+                    '        ,ISNULL(SUM(A.NCLR_POS_QTY), 0) AS NCLR_POS_QTY '+
+                    '        ,ISNULL(SUM(C.CNTR_PRC),0) AS CNTR_PRC          '+
+                    '        ,ISNULL(SUM(A.AVG_PRC),0) AS AVG_PRC            '+
+                    '        ,CASE WHEN ((A.ARTC_CD = %s OR A.ARTC_CD = %s) AND (SUM(A.AVG_PRC) < 0)) '+
+                    '              THEN SUM(B.TICK_VALUE_LOW / B.TICK_SIZE_LOW)   '+
+                    '              ELSE SUM(B.TICK_VALUE / B.TICK_SIZE) END TICK  '+
+                    'FROM NCLR_POS A, '+
+                    '     ARTC_MST B, '+
+                    '     CURR_PRC C, '+
+                    '     ACNT_MST D  '+
+                    'WHERE A.ARTC_CD = B.ARTC_CD '+
+                    'AND (A.BS_TP = B.BS_TP OR B.BS_TP = %s) '+
+                    'AND A.STK_CD = C.STK_CD   '+
+                    'AND A.ACNT_NO = D.ACNT_NO '+
+                     _sMainWhere +
+                    ' GROUP BY A.ACNT_NO,      '+
+                    '         A.ACNT_TP,       '+
+                    '         D.USER_NM,       '+
+                    '         D.USER_ID,       '+
+                    '         A.STK_CD,        '+
+                    '         A.BS_TP,         '+
+                    '         A.API_TP,        '+
+                    '         A.ARTC_CD) TMP   ',
+                    [QuotedStr('S'),
+                     QuotedStr('B'),
+                     QuotedStr('201'),
+                     QuotedStr('301'),
+                     QuotedStr('A')]);
+
+    Uni_Open(dbMain, sSql);
+
+  finally
+    Delay_Hide;
+  end;
+
+end;
+
+procedure TfmHybrid.rgTypeClick(Sender: TObject);
+begin
+  inherited;
+  if rgType.Tag = 0 then
+  begin
+    if rgType.ItemIndex = 0 then _sMainWhere := ''
+    else _sMainWhere := ' AND A.ACNT_TP = ' + QuotedStr(rgType.Values[rgType.ItemIndex]);
+
+    MainTableOpen;
+
+	  lbxPart.ItemIndex := 0;
+  end;
+end;
+
+end.

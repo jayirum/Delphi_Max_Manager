@@ -3,6 +3,7 @@ inherited fmUser: TfmUser
   Caption = #54924#50896#44288#47532
   ClientHeight = 673
   ClientWidth = 1199
+  OnCloseQuery = FormCloseQuery
   ExplicitWidth = 1215
   ExplicitHeight = 712
   PixelsPerInch = 96
@@ -298,8 +299,10 @@ inherited fmUser: TfmUser
     ExplicitWidth = 1199
     inherited btnFilter: TbsSkinSpeedButton
       Left = 442
+      Top = 4
       Visible = False
       ExplicitLeft = 442
+      ExplicitTop = 4
     end
     inherited btnInsert: TbsSkinSpeedButton
       Left = 121
@@ -719,7 +722,7 @@ inherited fmUser: TfmUser
     Top = 60
     Width = 499
     Height = 591
-    ActivePage = bsSkinTabSheet2
+    ActivePage = bsSkinTabSheet1
     Align = alRight
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clBtnText
@@ -753,10 +756,6 @@ inherited fmUser: TfmUser
     object bsSkinTabSheet1: TbsSkinTabSheet
       Caption = #54924#50896#44288#47532
       ImageIndex = 13
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object RzPanel4: TRzPanel
         Left = 2
         Top = 0
@@ -1447,7 +1446,7 @@ inherited fmUser: TfmUser
             Top = 32
             Width = 146
             Height = 20
-            DataSource = dsUser
+            DataSource = dsMain
             DataField = 'UPDATE_MNG_ID'
             Font.Charset = DEFAULT_CHARSET
             Font.Color = clBtnText
@@ -1513,7 +1512,7 @@ inherited fmUser: TfmUser
             Top = 29
             Width = 150
             Height = 20
-            DataSource = dsUser
+            DataSource = dsMain
             DataField = 'USER_PWD'
             Font.Charset = DEFAULT_CHARSET
             Font.Color = clBtnText
@@ -1563,7 +1562,7 @@ inherited fmUser: TfmUser
           Top = 31
           Width = 150
           Height = 20
-          DataSource = dsUser
+          DataSource = dsMain
           DataField = 'USER_ID'
           ReadOnly = True
           Color = clInfoBk
@@ -1587,7 +1586,7 @@ inherited fmUser: TfmUser
           Top = 57
           Width = 150
           Height = 20
-          DataSource = dsUser
+          DataSource = dsMain
           DataField = 'USER_NICK_NM'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBtnText
@@ -1605,7 +1604,7 @@ inherited fmUser: TfmUser
           Top = 57
           Width = 150
           Height = 20
-          DataSource = dsUser
+          DataSource = dsMain
           DataField = 'USER_NM'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBtnText
@@ -1618,12 +1617,12 @@ inherited fmUser: TfmUser
           EnterToTab = True
         end
         object cbUser_Grade: TkcRzDBComboBox
-          Left = 90
+          Left = 92
           Top = 83
           Width = 150
           Height = 20
           DataField = 'USER_GRADE'
-          DataSource = dsUser
+          DataSource = dsMain
           Style = csDropDownList
           Ctl3D = False
           Font.Charset = DEFAULT_CHARSET
@@ -1644,7 +1643,7 @@ inherited fmUser: TfmUser
           Width = 150
           Height = 20
           DataField = 'PART_CD'
-          DataSource = dsUser
+          DataSource = dsMain
           Style = csDropDownList
           Ctl3D = False
           Font.Charset = DEFAULT_CHARSET
@@ -1670,7 +1669,7 @@ inherited fmUser: TfmUser
           Top = 109
           Width = 150
           Height = 20
-          DataSource = dsUser
+          DataSource = dsMain
           DataField = 'BIRTH_DT'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBtnText
@@ -1698,7 +1697,7 @@ inherited fmUser: TfmUser
           ParentFont = False
           TabOrder = 25
           DataField = 'REG_DT'
-          DataSource = dsUser
+          DataSource = dsMain
         end
         object cbServerIP: TkcRzDBComboBox
           Left = 92
@@ -1706,7 +1705,7 @@ inherited fmUser: TfmUser
           Width = 150
           Height = 20
           DataField = 'SERVER_IP'
-          DataSource = dsUser
+          DataSource = dsMain
           ReadOnly = True
           Style = csDropDownList
           Color = clInfoBk
@@ -1724,11 +1723,11 @@ inherited fmUser: TfmUser
           EnterToTab = True
         end
         object edPass: TkcRzDBEdit
-          Left = 338
+          Left = 340
           Top = 135
           Width = 74
           Height = 20
-          DataSource = dsUser
+          DataSource = dsMain
           DataField = 'USER_PWD'
           ReadOnly = True
           Color = clInfoBk
@@ -1743,12 +1742,12 @@ inherited fmUser: TfmUser
           EnterToTab = True
         end
         object cbPartnerNick: TkcRzDBComboBox
-          Left = 90
+          Left = 92
           Top = 187
           Width = 150
           Height = 20
           DataField = 'PARTNER_NICK_NM'
-          DataSource = dsUser
+          DataSource = dsMain
           Style = csDropDownList
           Ctl3D = False
           Font.Charset = DEFAULT_CHARSET
@@ -1764,11 +1763,11 @@ inherited fmUser: TfmUser
           EnterToTab = True
         end
         object edEmail: TkcRzDBEdit
-          Left = 338
+          Left = 340
           Top = 187
           Width = 150
           Height = 20
-          DataSource = dsUser
+          DataSource = dsMain
           DataField = 'USER_EMAIL'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBtnText
@@ -1781,11 +1780,11 @@ inherited fmUser: TfmUser
           EnterToTab = True
         end
         object edTelNo: TkcRzDBEdit
-          Left = 87
-          Top = 214
+          Left = 92
+          Top = 213
           Width = 150
           Height = 20
-          DataSource = dsUser
+          DataSource = dsMain
           DataField = 'USER_TEL'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBtnText
@@ -1798,11 +1797,11 @@ inherited fmUser: TfmUser
           EnterToTab = True
         end
         object edHpNo: TkcRzDBEdit
-          Left = 338
+          Left = 340
           Top = 213
           Width = 150
           Height = 20
-          DataSource = dsUser
+          DataSource = dsMain
           DataField = 'USER_HP'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBtnText
@@ -1819,7 +1818,7 @@ inherited fmUser: TfmUser
           Top = 239
           Width = 396
           Height = 20
-          DataSource = dsUser
+          DataSource = dsMain
           DataField = 'USER_ADDR'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBtnText
@@ -1836,7 +1835,7 @@ inherited fmUser: TfmUser
           Top = 265
           Width = 150
           Height = 20
-          DataSource = dsUser
+          DataSource = dsMain
           DataField = 'USER_BANK_ACNT'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBtnText
@@ -1853,7 +1852,7 @@ inherited fmUser: TfmUser
           Top = 265
           Width = 150
           Height = 20
-          DataSource = dsUser
+          DataSource = dsMain
           DataField = 'USER_BANK'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBtnText
@@ -1866,11 +1865,11 @@ inherited fmUser: TfmUser
           EnterToTab = True
         end
         object edAcntNm: TkcRzDBEdit
-          Left = 90
+          Left = 92
           Top = 291
           Width = 150
           Height = 20
-          DataSource = dsUser
+          DataSource = dsMain
           DataField = 'USER_BANK_ACNT_NM'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBtnText
@@ -1920,7 +1919,7 @@ inherited fmUser: TfmUser
           Width = 396
           Height = 50
           DataField = 'USER_BIGO'
-          DataSource = dsUser
+          DataSource = dsMain
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBtnText
           Font.Height = -12
@@ -1968,7 +1967,7 @@ inherited fmUser: TfmUser
           Width = 150
           Height = 20
           DataField = 'USER_BLACK'
-          DataSource = dsUser
+          DataSource = dsMain
           Style = csDropDownList
           Ctl3D = False
           Font.Charset = DEFAULT_CHARSET
@@ -2022,12 +2021,12 @@ inherited fmUser: TfmUser
           AutoSize = False
         end
         object cbBankCd: TkcRzDBComboBox
-          Left = 338
+          Left = 340
           Top = 291
           Width = 150
           Height = 20
           DataField = 'BANK_CD'
-          DataSource = dsUser
+          DataSource = dsMain
           Style = csDropDownList
           Ctl3D = False
           Font.Charset = DEFAULT_CHARSET
@@ -2081,11 +2080,11 @@ inherited fmUser: TfmUser
           AutoSize = False
         end
         object edPartnerNm: TkcRzDBEdit
-          Left = 90
+          Left = 92
           Top = 373
           Width = 150
           Height = 20
-          DataSource = dsUser
+          DataSource = dsMain
           DataField = 'RECOMM_NM'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBtnText
@@ -2135,7 +2134,7 @@ inherited fmUser: TfmUser
           Width = 150
           Height = 20
           DataField = 'MNG_USER'
-          DataSource = dsUser
+          DataSource = dsMain
           Style = csDropDownList
           Ctl3D = False
           Font.Charset = DEFAULT_CHARSET
@@ -2193,7 +2192,7 @@ inherited fmUser: TfmUser
           Top = 161
           Width = 74
           Height = 20
-          DataSource = dsUser
+          DataSource = dsMain
           DataField = 'USER_SIGN'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBtnText
@@ -2211,10 +2210,6 @@ inherited fmUser: TfmUser
       Tag = 800
       Caption = #44228#51340#44288#47532
       ImageIndex = 15
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object gdAcnt: TDBGridEh
         Left = 0
         Top = 21
@@ -2582,6 +2577,8 @@ inherited fmUser: TfmUser
           Height = 21
           DataSource = dsAcnt
           DataField = 'ACNT_PWD'
+          ReadOnly = True
+          Color = clInfoBk
           ImeName = 'Microsoft IME 2010'
           PasswordChar = #7
           TabOrder = 1
@@ -3213,8 +3210,8 @@ inherited fmUser: TfmUser
           EnterToTab = True
         end
         object pnlLev: TRzPanel
-          Left = 132
-          Top = 309
+          Left = 180
+          Top = 138
           Width = 192
           Height = 207
           BorderOuter = fsFlat
@@ -3268,7 +3265,7 @@ inherited fmUser: TfmUser
           end
           object btnLevSave: TbsSkinSpeedButton
             Tag = 500
-            Left = 92
+            Left = 93
             Top = 142
             Width = 67
             Height = 24
@@ -3304,11 +3301,10 @@ inherited fmUser: TfmUser
             NumGlyphs = 1
             Spacing = 1
             OnClick = btnLevSaveClick
-            ExplicitLeft = 93
           end
           object btnLevCancel: TbsSkinSpeedButton
             Tag = 500
-            Left = 92
+            Left = 93
             Top = 170
             Width = 67
             Height = 24
@@ -3344,7 +3340,6 @@ inherited fmUser: TfmUser
             NumGlyphs = 1
             Spacing = 1
             OnClick = btnLevCancelClick
-            ExplicitLeft = 93
           end
           object RzPanel10: TRzPanel
             Left = 1
@@ -3583,8 +3578,6 @@ inherited fmUser: TfmUser
     object bsSkinTabSheet3: TbsSkinTabSheet
       Caption = #54924#50896#49345#45812
       ImageIndex = 17
-      ExplicitTop = 21
-      ExplicitHeight = 569
       object bsSkinLabel10: TbsSkinLabel
         Left = 3
         Top = 199
@@ -3810,8 +3803,6 @@ inherited fmUser: TfmUser
       Tag = 800
       Caption = #44288#47532#51088' '#51077#52636#44552
       ImageIndex = 18
-      ExplicitTop = 21
-      ExplicitHeight = 569
       object gdInout: TDBGridEh
         Left = 0
         Top = 21
@@ -3952,7 +3943,6 @@ inherited fmUser: TfmUser
         FlatColor = clGray
         FlatColorAdjustment = 0
         TabOrder = 1
-        ExplicitHeight = 416
         object RzGroupBox1: TRzGroupBox
           Left = 5
           Top = 6
@@ -4401,10 +4391,6 @@ inherited fmUser: TfmUser
     object bsSkinTabSheet5: TbsSkinTabSheet
       Caption = #47196#44536#51064#45236#50669
       ImageIndex = 21
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object gdLogin: TDBGridEh
         Left = 0
         Top = 21
@@ -4613,7 +4599,7 @@ inherited fmUser: TfmUser
           496
           20)
         object lbLogin: TbsSkinLabel
-          Left = 302
+          Left = 303
           Top = 1
           Width = 126
           Height = 19
@@ -4644,7 +4630,6 @@ inherited fmUser: TfmUser
           Alignment = taCenter
           Caption = '0'#44148
           AutoSize = False
-          ExplicitLeft = 303
         end
       end
       object edIP: TEdit
@@ -4660,7 +4645,7 @@ inherited fmUser: TfmUser
   end
   inherited imgBtn: TImageList
     Bitmap = {
-      494C01011600D001D00210001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C01011600D001CC0210001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000006000000001002000000000000060
       000000000000000000000000000000000000000000000000000000000000087B
       1000107B1800107B1800107B1000087B100000730800006B0000000000000000
@@ -5645,26 +5630,12 @@ inherited fmUser: TfmUser
       OnClick = popbtnExcelClick
     end
   end
-  object dbUser: TADOQuery
-    Connection = MastDB.ADOConn
-    CursorType = ctStatic
-    AfterInsert = dbUserAfterInsert
-    AfterEdit = dbUserAfterEdit
-    BeforePost = dbUserBeforePost
-    BeforeDelete = dbUserBeforeDelete
-    Parameters = <>
-    Left = 708
-    Top = 40
-  end
-  object dsUser: TDataSource
-    DataSet = dbUser
-    Left = 736
-    Top = 40
-  end
   object cdsMain: TClientDataSet
     Aggregates = <>
     Params = <>
     AfterOpen = cdsMainAfterOpen
+    AfterEdit = cdsMainAfterEdit
+    AfterCancel = cdsMainAfterCancel
     AfterScroll = cdsMainAfterScroll
     Left = 64
     Top = 400

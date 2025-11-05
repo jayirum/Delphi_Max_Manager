@@ -1,0 +1,394 @@
+unit MTermPL;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, RzLstBox, bsSkinCtrls, VCL_Helper, MBasic, DBGridEhGrouping,
+  ToolCtrlsEh, DBGridEhToolCtrls, DynVarsEh, GridsEh, DBAxisGridsEh, DBGridEh,
+  RzDBEdit, kcRaizeCtrl, StdCtrls, RzCmboBx, RzDBCmbo, RzSplit, Mask, RzEdit,
+  bsMessages, DB, MemDS, DBAccess, Uni, ImgList, BusinessSkinForm, RzDBNav,
+  bsribbon, ExtCtrls, RzPanel, Math, UniDAC_Helper;
+
+type
+  TfmTermPL = class(TfmBasic)
+    gdMain: TDBGridEh;
+    dbSQL: TUniQuery;
+    chOp: TbsSkinCheckBox;
+    chURO: TbsSkinCheckBox;
+    chCL: TbsSkinCheckBox;
+    chGC: TbsSkinCheckBox;
+    chNG: TbsSkinCheckBox;
+    chES: TbsSkinCheckBox;
+    chAD: TbsSkinCheckBox;
+    chBP: TbsSkinCheckBox;
+    chJY: TbsSkinCheckBox;
+    Label2: TLabel;
+    Label1: TLabel;
+    Label3: TLabel;
+    dtDt: TkcRzDateTimeEdit;
+    dtEnd: TkcRzDateTimeEdit;
+    cbUserGrade: TkcRzComboBox;
+    cbUserPart: TkcRzComboBox;
+    cbPartner: TkcRzComboBox;
+    chNQ: TbsSkinCheckBox;
+    chYM: TbsSkinCheckBox;
+    chSCN: TbsSkinCheckBox;
+    chHSI: TbsSkinCheckBox;
+    procedure edFindKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
+    procedure btnExcelClick(Sender: TObject);
+    procedure gdMainTitleBtnClick(Sender: TObject; ACol: Integer;
+      Column: TColumnEh);
+    procedure FormShow(Sender: TObject);
+    procedure chOpClick(Sender: TObject);
+    procedure chUROClick(Sender: TObject);
+    procedure chCLClick(Sender: TObject);
+    procedure chGCClick(Sender: TObject);
+    procedure chNGClick(Sender: TObject);
+    procedure chESClick(Sender: TObject);
+    procedure chADClick(Sender: TObject);
+    procedure chBPClick(Sender: TObject);
+    procedure chJYClick(Sender: TObject);
+    procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
+    procedure cbUserGradeChange(Sender: TObject);
+    procedure cbPartnerChange(Sender: TObject);
+    procedure gdMainColumns13AdvDrawDataCell(Sender: TCustomDBGridEh; Cell,
+      AreaCell: TGridCoord; Column: TColumnEh; const ARect: TRect;
+      var Params: TColCellParamsEh; var Processed: Boolean);
+    procedure chNQClick(Sender: TObject);
+    procedure chYMClick(Sender: TObject);
+    procedure chSCNClick(Sender: TObject);
+    procedure chHSIClick(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+    procedure MainTableOpen; override;
+
+    procedure Set_CFG;
+    procedure Get_CFG;
+  end;
+
+var
+  fmTermPL: TfmTermPL;
+
+implementation
+
+uses StdUtils, MMastDB, MDelay;
+
+{$R *.dfm}
+
+const
+  GD_TRADE_DT     = 0;
+  GD_LINEGAP1     = 1;
+
+  GD_TRADE_CNT    = 2;
+  GD_CLR_PL_TOTAL = 3;
+  GD_CMSN_TOTAL   = 4;
+  GD_NET_PL       = 5;
+  GD_LINEGAP2     = 6;
+
+  GD_BF_ACNT_AMT  = 7;
+  GD_ACNT_AMT     = 8;
+  GD_LINEGAP3     = 9;
+  GD_IN_AMT       = 10;
+  GD_OUT_AMT      = 11;
+  GD_YET_OUT_AMT  = 12;
+  GD_LINEGAP4     = 13;
+
+  GD_N101_CLR_PL  = 14;
+  GD_N101_CMSN    = 15;
+  GD_Y101_CLR_PL  = 16;
+  GD_Y101_CMSN    = 17;
+  GD_N201_CLR_PL  = 18;
+  GD_N201_CMSN    = 19;
+  GD_Y201_CLR_PL  = 20;
+  GD_Y201_CMSN    = 21;
+
+  GD_URO_CLR_PL   = 22;
+  GD_URO_CMSN     = 23;
+  GD_CL_CLR_PL    = 24;
+  GD_CL_CMSN      = 25;
+  GD_GC_CLR_PL    = 26;
+  GD_GC_CMSN      = 27;
+  GD_NG_CLR_PL    = 28;
+  GD_NG_CMSN      = 29;
+  GD_ES_CLR_PL    = 30;
+  GD_ES_CMSN      = 31;
+  GD_AD_CLR_PL    = 32;
+  GD_AD_CMSN      = 33;
+  GD_BP_CLR_PL    = 34;
+  GD_BP_CMSN      = 35;
+  GD_JY_CLR_PL    = 36;
+  GD_JY_CMSN      = 37;
+  GD_NQ_CLR_PL    = 38;
+  GD_NQ_CMSN      = 39;
+  GD_YM_CLR_PL    = 40;
+  GD_YM_CMSN      = 41;
+  GD_SCN_CLR_PL   = 42;
+  GD_SCN_CMSN     = 43;
+  GD_HSI_CLR_PL   = 44;
+  GD_HSI_CMSN     = 45;
+
+  GD_NK_CLR_PL    = 46;
+  GD_NK_CMSN      = 47;
+
+procedure TfmTermPL.btnExcelClick(Sender: TObject);
+begin
+  inherited;
+  Export_Excel(gdMain);
+end;
+
+procedure TfmTermPL.cbPartnerChange(Sender: TObject);
+begin
+  cbUserPart.ItemIndex := 0;
+end;
+
+procedure TfmTermPL.cbUserGradeChange(Sender: TObject);
+begin
+  cbUserPart.ItemIndex := 0;
+end;
+
+procedure TfmTermPL.chADClick(Sender: TObject);
+begin
+  with gdMain do
+  begin
+  	Columns[GD_AD_CLR_PL].Visible := chAD.Checked;
+  	Columns[GD_AD_CMSN].Visible   := chAD.Checked;
+  end;
+end;
+
+procedure TfmTermPL.chBPClick(Sender: TObject);
+begin
+  with gdMain do
+  begin
+  	Columns[GD_BP_CLR_PL].Visible := chBP.Checked;
+  	Columns[GD_BP_CMSN].Visible   := chBP.Checked;
+  end;
+end;
+
+procedure TfmTermPL.chCLClick(Sender: TObject);
+begin
+  with gdMain do
+  begin
+  	Columns[GD_CL_CLR_PL].Visible := chCL.Checked;
+  	Columns[GD_CL_CMSN].Visible   := chCL.Checked;
+  end;
+end;
+
+procedure TfmTermPL.chESClick(Sender: TObject);
+begin
+  with gdMain do
+  begin
+  	Columns[GD_ES_CLR_PL].Visible := chES.Checked;
+  	Columns[GD_ES_CMSN].Visible   := chES.Checked;
+  end;
+end;
+
+procedure TfmTermPL.chGCClick(Sender: TObject);
+begin
+  with gdMain do
+  begin
+  	Columns[GD_GC_CLR_PL].Visible := chGC.Checked;
+  	Columns[GD_GC_CMSN].Visible   := chGC.Checked;
+  end;
+end;
+
+procedure TfmTermPL.chHSIClick(Sender: TObject);
+begin
+  with gdMain do
+  begin
+  	Columns[GD_HSI_CLR_PL].Visible := chHSI.Checked;
+  	Columns[GD_HSI_CMSN].Visible   := chHSI.Checked;
+  end;
+end;
+
+procedure TfmTermPL.chJYClick(Sender: TObject);
+begin
+  with gdMain do
+  begin
+  	Columns[GD_JY_CLR_PL].Visible := chJY.Checked;
+  	Columns[GD_JY_CMSN].Visible   := chJY.Checked;
+  end;
+end;
+
+procedure TfmTermPL.chNGClick(Sender: TObject);
+begin
+  with gdMain do
+  begin
+  	Columns[GD_NG_CLR_PL].Visible := chNG.Checked;
+  	Columns[GD_NG_CMSN].Visible   := chNG.Checked;
+  end;
+end;
+
+procedure TfmTermPL.chNQClick(Sender: TObject);
+begin
+  with gdMain do
+  begin
+  	Columns[GD_NQ_CLR_PL].Visible := chNQ.Checked;
+  	Columns[GD_NQ_CMSN].Visible   := chNQ.Checked;
+  end;
+end;
+
+procedure TfmTermPL.chOpClick(Sender: TObject);
+begin
+  with gdMain do
+  begin
+  	Columns[GD_Y201_CLR_PL].Visible := chOp.Checked;
+  	Columns[GD_Y201_CMSN].Visible   := chOp.Checked;
+  end;
+end;
+
+procedure TfmTermPL.chSCNClick(Sender: TObject);
+begin
+  with gdMain do
+  begin
+  	Columns[GD_SCN_CLR_PL].Visible := chSCN.Checked;
+  	Columns[GD_SCN_CMSN].Visible   := chSCN.Checked;
+  end;
+end;
+
+procedure TfmTermPL.chUROClick(Sender: TObject);
+begin
+  with gdMain do
+  begin
+  	Columns[GD_URO_CLR_PL].Visible := chURO.Checked;
+  	Columns[GD_URO_CMSN].Visible   := chURO.Checked;
+  end;
+end;
+
+procedure TfmTermPL.chYMClick(Sender: TObject);
+begin
+  with gdMain do
+  begin
+  	Columns[GD_YM_CLR_PL].Visible := chYM.Checked;
+  	Columns[GD_YM_CMSN].Visible   := chYM.Checked;
+  end;
+end;
+
+procedure TfmTermPL.edFindKeyDown(Sender: TObject; var Key: Word;
+  Shift: TShiftState);
+begin
+  inherited;
+	if Key = 13 then btnFilter.ButtonClick;
+end;
+
+procedure TfmTermPL.FormCloseQuery(Sender: TObject; var CanClose: Boolean);
+begin
+	Set_CFG;
+end;
+
+procedure TfmTermPL.FormShow(Sender: TObject);
+begin
+  inherited;
+  dtDt.Date := TextToDate(__Trade_DT)-1;
+  dtEnd.Date := TextToDate(__Trade_DT)-1;
+
+  PartTableOpen(cbUserGrade, Format('@|CODE_VALUE_NM, CODE_VALUE|CODE_MST|WHERE CODE_ID = %s AND CODE_VALUE < 9 ORDER BY CODE_VALUE', [QuotedStr('USER_GRADE')]), '전체', '0');
+  cbUserGrade.ItemIndex := 2;
+
+  PartTableOpen(cbPartner, Format('@|USER_NICK_NM+%s+USER_NM, USER_ID|USER_MST|WHERE USER_GRADE IN (%s,%s) ORDER BY USER_NICK_NM ', [QuotedStr(','),QuotedStr('3'),QuotedStr('6')]), '[없음]', 'A');
+  cbPartner.ItemIndex := 0;
+
+  PartTableOpen(cbUserPart, '회원분류', '[전체]', 'A');
+  cbUserPart.ItemIndex := 0;
+
+  Get_CFG;
+end;
+
+procedure TfmTermPL.gdMainColumns13AdvDrawDataCell(Sender: TCustomDBGridEh;
+  Cell, AreaCell: TGridCoord; Column: TColumnEh; const ARect: TRect;
+  var Params: TColCellParamsEh; var Processed: Boolean);
+begin
+	with TDBGridEh(Sender).DataSource.DataSet do
+  begin
+  	Sender.Canvas.Font.Color := clBlack;
+	  if CompareValue(FieldByName(Column.FieldName).AsFloat, 0) > 0 then Sender.Canvas.Font.Color := clRed
+  	else if CompareValue(FieldByName(Column.FieldName).AsFloat, 0) < 0 then Sender.Canvas.Font.Color := clBlue;
+
+    Sender.DefaultDrawColumnDataCell(Cell, AreaCell, Column, ARect, Params);
+    Processed := True;
+ 	end;
+end;
+
+procedure TfmTermPL.gdMainTitleBtnClick(Sender: TObject; ACol: Integer;
+  Column: TColumnEh);
+begin
+  with dbMain do
+  begin
+    if IndexFieldNames = Column.FieldName then
+    begin
+      IndexFieldNames := Column.FieldName + ' Desc';
+      First;
+    end
+    else
+    begin
+      IndexFieldNames := Column.FieldName;
+      First;
+    end;
+  end;
+end;
+
+procedure TfmTermPL.Get_CFG;
+begin
+  chOP.Checked  := StrToBoolDef(Get_CFGFile('fmTermPL', 'GD_OP', ''),  False);
+  chURO.Checked := StrToBoolDef(Get_CFGFile('fmTermPL', 'GD_URO', ''), True);
+  chCL.Checked  := StrToBoolDef(Get_CFGFile('fmTermPL', 'GD_CL', ''),  True);
+  chGC.Checked  := StrToBoolDef(Get_CFGFile('fmTermPL', 'GD_GC', ''),  True);
+  chNG.Checked  := StrToBoolDef(Get_CFGFile('fmTermPL', 'GD_NG', ''),  False);
+  chES.Checked  := StrToBoolDef(Get_CFGFile('fmTermPL', 'GD_ES', ''),  True);
+  chAD.Checked  := StrToBoolDef(Get_CFGFile('fmTermPL', 'GD_AD', ''),  True);
+  chBP.Checked  := StrToBoolDef(Get_CFGFile('fmTermPL', 'GD_BP', ''),  True);
+  chJY.Checked  := StrToBoolDef(Get_CFGFile('fmTermPL', 'GD_JY', ''),  True);
+  chNQ.Checked  := StrToBoolDef(Get_CFGFile('fmTermPL', 'GD_NQ', ''),  True);
+  chYM.Checked  := StrToBoolDef(Get_CFGFile('fmTermPL', 'GD_YM', ''),  True);
+  chSCN.Checked := StrToBoolDef(Get_CFGFile('fmTermPL', 'GD_SCN', ''), True);
+  chHSI.Checked := StrToBoolDef(Get_CFGFile('fmTermPL', 'GD_HSI', ''), True);
+end;
+
+procedure TfmTermPL.MainTableOpen;
+var
+  sSql, sUserTp: String;
+  i: Integer;
+begin
+
+  try
+    Delay_Show();
+
+    if cbUserGrade.ItemIndex = 0 then sUserTp := 'A'
+    else sUserTp := IntToStr(cbUserGrade.ItemIndex);
+
+    sSql := Format('EXEC TERM_CLR_PL %s, %s, %s, %s, %s ',
+                                    [QuotedStr(sUserTp),
+                                     QuotedStr(FormatDateTime('YYYYMMDD', dtDt.Date)),
+                                     QuotedStr(FormatDateTime('YYYYMMDD', dtEnd.Date)),
+                                     QuotedStr(cbPartner.Value),
+                                     QuotedStr(cbUserPart.Value)]);
+//    sSql := Format('EXEC TERM_CLR_PL %s, %s, %s ', [sUserTp, FormatDateTime('YYYYMMDD', dtDt.Date), FormatDateTime('YYYYMMDD', dtEnd.Date)]);
+
+    Uni_Open(dbMain, sSql);
+
+  finally
+    Delay_Hide;
+  end;
+
+end;
+
+procedure TfmTermPL.Set_CFG;
+begin
+  Set_CFGFile('fmTermPL', 'GD_OP', BoolToStr(chOP.Checked));
+  Set_CFGFile('fmTermPL', 'GD_URO', BoolToStr(chURO.Checked));
+  Set_CFGFile('fmTermPL', 'GD_CL', BoolToStr(chCL.Checked));
+  Set_CFGFile('fmTermPL', 'GD_GC', BoolToStr(chGC.Checked));
+  Set_CFGFile('fmTermPL', 'GD_NG', BoolToStr(chNG.Checked));
+  Set_CFGFile('fmTermPL', 'GD_ES', BoolToStr(chES.Checked));
+  Set_CFGFile('fmTermPL', 'GD_AD', BoolToStr(chAD.Checked));
+  Set_CFGFile('fmTermPL', 'GD_BP', BoolToStr(chBP.Checked));
+  Set_CFGFile('fmTermPL', 'GD_JY', BoolToStr(chJY.Checked));
+  Set_CFGFile('fmTermPL', 'GD_NQ', BoolToStr(chNQ.Checked));
+  Set_CFGFile('fmTermPL', 'GD_YM', BoolToStr(chYM.Checked));
+  Set_CFGFile('fmTermPL', 'GD_SCN', BoolToStr(chSCN.Checked));
+  Set_CFGFile('fmTermPL', 'GD_HSI', BoolToStr(chHSI.Checked));
+end;
+
+end.

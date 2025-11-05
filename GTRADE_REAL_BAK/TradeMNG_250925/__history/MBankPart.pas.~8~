@@ -1,0 +1,58 @@
+unit MBankPart;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, MBasic, bsMessages, DB, MemDS, DBAccess, Uni, ImgList,
+  BusinessSkinForm, bsSkinCtrls, RzDBNav, bsribbon, ExtCtrls, RzPanel, StdCtrls,
+  RzLstBox, RzSplit, NxColumns, NxDBColumns, NxScrollControl,
+  NxCustomGridControl, NxCustomGrid, NxDBGrid, DBGridEhGrouping, ToolCtrlsEh,
+  DBGridEhToolCtrls, DynVarsEh, RzCmboBx, RzDBCmbo, kcRaizeCtrl, Mask, RzEdit,
+  RzDBEdit, GridsEh, DBAxisGridsEh, DBGridEh, UniDAC_Helper;
+
+type
+  TfmBankPart = class(TfmBasic)
+    RzPanel2: TRzPanel;
+    gdMain: TDBGridEh;
+    dbMainBANK_CD: TIntegerField;
+    dbMainBANK_DISP_NM: TStringField;
+    dbMainBANK_NM: TStringField;
+    dbMainBANK_ACNT_NO: TStringField;
+    dbMainBANK_ACNT_NM: TStringField;
+    procedure FormShow(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+    procedure MainTableOpen;
+  end;
+
+var
+  fmBankPart: TfmBankPart;
+
+implementation
+
+{$R *.dfm}
+uses
+  stdUtils, MMastDB;
+
+var
+  _Where : String;
+
+procedure TfmBankPart.FormShow(Sender: TObject);
+begin
+  inherited;
+
+  MainTableOpen;
+end;
+
+procedure TfmBankPart.MainTableOpen;
+var
+  sSql : String;
+begin
+  sSql := 'SELECT * FROM BANK_MST ';
+  Uni_Open(dbMain, sSql);
+end;
+
+end.

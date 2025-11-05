@@ -1,0 +1,10 @@
+inherited fmOrdCntr: TfmOrdCntr
+  Caption = #51452#47928'/'#52404#44208' '#45236#50669
+  PixelsPerInch = 96
+  TextHeight = 12
+  inherited pnTop: TRzPanel
+    inherited nvMain: TRzDBNavigator
+      Hints.Strings = ()
+    end
+  end
+end

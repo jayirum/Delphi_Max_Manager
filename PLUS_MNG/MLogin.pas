@@ -40,6 +40,7 @@ type
       Shift: TShiftState; X, Y: Integer);
   private
     { Private declarations }
+    procedure CreateParams(var Params: TCreateParams); override;
     function Get_Login(sID, sPass: String): Boolean;
   public
     { Public declarations }
@@ -75,6 +76,16 @@ begin
     Result := _Result;
     fmLogin.Free;
   end;
+end;
+
+procedure TfmLogin.CreateParams(var Params: TCreateParams);
+begin // 화면의 icon을 taskbar에 표시되도록 함
+  inherited CreateParams(Params);
+
+  Params.ExStyle := WS_EX_APPWINDOW;
+  Params.WndParent := GetDesktopWindow;
+
+//  Params.ExStyle := WS_EX_TRANSPARENT or WS_EX_TOPMOST;
 end;
 
 procedure TfmLogin.FormShow(Sender: TObject);

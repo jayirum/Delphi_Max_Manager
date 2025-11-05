@@ -126,6 +126,18 @@ var
 begin
   if not fnCheckSelectedUser then Exit;
 
+  if Trim(edtitle.Text) = '' then begin
+    bsMsginfo('제목을 입력하세요.');
+    edtitle.SetFocus;
+    Exit;
+  end;
+
+  if Trim(MoMsg.Text) = '' then begin
+    bsMsginfo('메시지를 입력하세요.');
+    MoMsg.SetFocus;
+    Exit;
+  end;
+
   if bsMsgYesNo('선택한 회원을 강제종료 시키겠습니까?', '강제종료') then begin
     iTCnt := gdMain.SelectedRows.Count;
     if iTCnt = 0 then Exit;
@@ -137,7 +149,7 @@ begin
       for i:=0 to gdMain.SelectedRows.Count-1 do begin
         DS.GoToBookmark(TBookmark(gdMain.SelectedRows[i]));
         //loc := DS.FieldByName('ROW_NUM').AsInteger;
-        LogOutProc(edtitle.Text ,MoMsg.Text);
+        LogOutProc(edtitle.Text, MoMsg.Text);
       end;
     finally
       DS.EnableControls;

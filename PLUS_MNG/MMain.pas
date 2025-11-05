@@ -551,6 +551,10 @@ begin
       Exit;
     end;
 
+//    if not MastDB.iwNotiClient.Connected then begin
+//      ShowMessage('연결 안되있어');
+//    end;
+
     MastDB.iwNotiClient.DataToSend := MastDB.PC001_Send + _EOL;
 
     bsRibbon1.Tabs[4].Visible := _Supervisor;

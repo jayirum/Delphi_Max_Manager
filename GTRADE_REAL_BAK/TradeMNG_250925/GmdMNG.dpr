@@ -1,0 +1,56 @@
+program GmdMNG;
+
+uses
+  Forms,
+  MMain in 'MMain.pas' {fmMain},
+  MMastDB in 'MMastDB.pas' {MastDB: TDataModule},
+  MLogin in 'MLogin.pas' {fmLogin},
+  MPart in 'MPart.pas' {fmPart},
+  MDelay in 'MDelay.pas' {fmDelay},
+  MUserFilter in 'MUserFilter.pas' {fmUserFilter},
+  MUser in 'MUser.pas' {fmUser},
+  MAcntMake in 'MAcntMake.pas' {fmAcntMake},
+  MNegoCmsn in 'MNegoCmsn.pas' {fmNegoCmsn},
+  MNego in 'MNego.pas' {fmNego},
+  MArtc in 'MArtc.pas' {fmArtc},
+  MCorp in 'MCorp.pas' {fmCorp},
+  MScL in 'MScL.pas' {fmScL},
+  MStk in 'MStk.pas' {fmStk},
+  MNoti in 'MNoti.pas' {fmNoti},
+  MUserFind in 'MUserFind.pas' {fmUserFind},
+  MOrdDetail in 'MOrdDetail.pas' {fmOrdDetail},
+  MNclr in 'MNclr.pas' {fmNclr},
+  MNoCntrOrd in 'MNoCntrOrd.pas' {fmNoCntrOrd},
+  MExchRt in 'MExchRt.pas' {fmExchRt},
+  MInOutList in 'MInOutList.pas' {fmInOutList},
+  MPLList in 'MPLList.pas' {fmPLList},
+  MRealConn in 'MRealConn.pas' {fmRealConn},
+  MFilterIP in 'MFilterIP.pas' {fmFilterIP},
+  MOverNgt in 'MOverNgt.pas' {fmOverNgt},
+  MHybrid in 'MHybrid.pas' {fmHybrid},
+  MBlockIp in 'MBlockIp.pas' {fmBlockIp},
+  MMngIp in 'MMngIp.pas' {fmMngIp},
+  MDBTool in 'MDBTool.pas' {fmDbTool},
+  MPLClsList in 'MPLClsList.pas' {fmPLClsList},
+  MLogList in 'MLogList.pas' {fmLogList},
+  MBatchScl in 'MBatchScl.pas' {fmBatchScl},
+  MPresent in 'MPresent.pas' {fmPresent},
+  MSysLog in 'MSysLog.pas' {fmSysLog},
+  MPower in 'MPower.pas' {fmPower},
+  MUserPL in 'MUserPL.pas' {fmUserPL},
+  MUserDetail in 'MUserDetail.pas' {fmUserDetail},
+  MBasic in '..\..\..\GTLIB\CommonUnit\MBasic.pas' {fmBasic},
+  MRealPL in 'MRealPL.pas' {fmRealPL},
+  MInOut in 'MInOut.pas' {fmInOut},
+  MTodayPL in 'MTodayPL.pas' {fmTodayPL},
+  MTermPL in 'MTermPL.pas' {fmTermPL};
+
+{$R *.res}
+
+begin
+  Application.Initialize;
+//  Application.MainFormOnTaskbar := True;
+  Application.Title := 'TradePlus °ü¸®ÀÚ';
+  Application.CreateForm(TfmMain, fmMain);
+  Application.Run;
+end.

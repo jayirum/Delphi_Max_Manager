@@ -1,0 +1,179 @@
+unit MOverNgtList;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, RzLstBox, bsSkinCtrls, VCL_Helper, MBasic, DBGridEhGrouping,
+  ToolCtrlsEh, DBGridEhToolCtrls, DynVarsEh, GridsEh, DBAxisGridsEh, DBGridEh,
+  RzDBEdit, kcRaizeCtrl, StdCtrls, RzCmboBx, RzDBCmbo, RzSplit, Mask, RzEdit,
+  bsMessages, DB, MemDS, DBAccess, Uni, ImgList, BusinessSkinForm, RzDBNav,
+  bsribbon, ExtCtrls, RzPanel, UniDAC_Helper, LbButton;
+
+type
+  TfmOverNgtList = class(TfmBasic)
+    gdMain: TDBGridEh;
+    pnInOut: TRzPanel;
+    bsSkinLabel1: TbsSkinLabel;
+    edFind: TRzEdit;
+    dtDt: TkcRzDateTimeEdit;
+    chUserTp: TbsSkinCheckRadioBox;
+    dtEnd: TkcRzDateTimeEdit;
+    dbMainUSER_ID: TStringField;
+    dbMainUSER_NM: TStringField;
+    dbMainRQST_TRADE_DT: TStringField;
+    dbMainRQST_TM: TStringField;
+    dbMainOVERNGT_YN: TStringField;
+    dbMainRSLT_TP: TStringField;
+    dbMainRSLT_TRADE_DT: TStringField;
+    dbMainRSLT_TM: TStringField;
+    dbMainMNG_ID: TStringField;
+    dbMainUSER_GRADE: TStringField;
+    dbMainARTC_CD: TStringField;
+    procedure FormShow(Sender: TObject);
+    procedure edFindKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
+    procedure btnExcelClick(Sender: TObject);
+    procedure btnFilterClick(Sender: TObject);
+    procedure gdMainTitleBtnClick(Sender: TObject; ACol: Integer;
+      Column: TColumnEh);
+    procedure chUserTpClick(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+    procedure MainTableOpen; override;
+    procedure findWhere;
+  end;
+
+var
+  fmOverNgtList: TfmOverNgtList;
+
+implementation
+
+uses StdUtils, MMastDB, MDelay;
+
+{$R *.dfm}
+
+{ TfmSample }
+
+procedure TfmOverNgtList.btnExcelClick(Sender: TObject);
+begin
+  inherited;
+  Export_Excel(gdMain);
+end;
+
+procedure TfmOverNgtList.btnFilterClick(Sender: TObject);
+begin
+  inherited;
+  findWhere;
+end;
+
+procedure TfmOverNgtList.chUserTpClick(Sender: TObject);
+begin
+  inherited;
+  btnFilter.ButtonClick;
+end;
+
+procedure TfmOverNgtList.edFindKeyDown(Sender: TObject; var Key: Word;
+  Shift: TShiftState);
+begin
+	if Key = 13 then btnFilter.ButtonClick;
+end;
+
+procedure TfmOverNgtList.findWhere;
+var
+  sNm, sAcntTp, sIoTp, sDt : String;
+begin
+  _sMainWhere := '';
+
+  if edFind.Text <> '' then sNm := Format(' AND (A.USER_NM LIKE %s OR A.USER_ID LIKE %s ', [QuotedStr('%'+edFind.Text+'%'), QuotedStr('%'+edFind.Text+'%')]);
+//  if rgAcntTp.ItemIndex <> 0 then  sAcntTp := Format(' AND ACNT_TP = %s', [QuotedStr(intTostr(rgAcntTp.ItemIndex))]);
+
+  _sMainWhere := sNm + sAcntTp + sIoTp;
+
+  MainTableOpen;
+
+end;
+
+procedure TfmOverNgtList.FormShow(Sender: TObject);
+begin
+  inherited;
+  _sMainWhere := '';
+
+  dtDt.Date := TextToDate(__Trade_DT); //Now;
+  dtEnd.Date := TextToDate(__Trade_DT); //Now;
+end;
+
+procedure TfmOverNgtList.gdMainTitleBtnClick(Sender: TObject; ACol: Integer;
+  Column: TColumnEh);
+begin
+  inherited;
+  with dbMain do
+  begin
+    if IndexFieldNames = Column.FieldName then
+    begin
+      IndexFieldNames := Column.FieldName + ' Desc';
+      First;
+    end
+    else
+    begin
+      IndexFieldNames := Column.FieldName;
+      First;
+    end;
+  end;
+end;
+
+procedure TfmOverNgtList.MainTableOpen;
+var
+  sSql, sUserTp : String;
+begin
+  try
+    Delay_Show();
+
+    if chUserTp.Checked then sUserTp := ' AND B.USER_GRADE = 2 '
+    else sUserTp := '';
+
+    sSql := Format( 'SELECT A.USER_ID, ' +
+                           'A.ARTC_CD, ' +
+                           'B.USER_NM, ' +
+                           'A.RQST_TRADE_DT, ' +
+                           'A.RQST_TM, ' +
+                           'CASE WHEN A.OVERNGT_YN = %s THEN %s ELSE %s END AS OVERNGT_YN, ' +
+                           'CASE WHEN A.RSLT_TP = %s THEN %s ' +
+                                'WHEN A.RSLT_TP = %s THEN %s ' +
+                                'WHEN A.RSLT_TP = %s THEN %s END AS RSLT_TP, ' +
+                           'A.RSLT_TRADE_DT, ' +
+                           'A.RSLT_TM, ' +
+                           'A.MNG_ID, ' +
+                           '(SELECT CODE_VALUE_NM FROM CODE_MST WHERE CODE_ID = %s AND CODE_VALUE = B.USER_GRADE) AS USER_GRADE ' +
+                      'FROM OVERNGT_HIS A, USER_MST B ' +
+                     'WHERE A.USER_ID = B.USER_ID ' +
+                       'AND A.RQST_TRADE_DT >= %s ' +
+                       'AND A.RQST_TRADE_DT <= %s ' +
+                        _sMainWhere + sUserTp +
+                  'ORDER BY A.USER_ID, A.RQST_TRADE_DT DESC, A.RQST_TM DESC ',
+                     [QuotedStr('Y'),
+                      QuotedStr('신청'),
+                      QuotedStr('취소'),
+                      QuotedStr('0'),
+                      QuotedStr('신청중'),
+                      QuotedStr('1'),
+                      QuotedStr('승인'),
+                      QuotedStr('2'),
+                      QuotedStr('취소'),
+                      QuotedStr('USER_GRADE'),
+                      QuotedStr(StrReplace(dtDt.Text, '-', '')),
+                      QuotedStr(StrReplace(dtEnd.Text, '-', ''))
+                      ]);
+
+    Uni_Open(dbMain, sSql);
+
+
+    pnInOut.Caption := FormatFloat('#,##0건', dbMain.RecordCount);
+
+  finally
+    Delay_Hide;
+  end;
+end;
+
+end.

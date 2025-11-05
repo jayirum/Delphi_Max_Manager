@@ -1,0 +1,104 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <ProjectGuid>{fe7d7031-6155-4b7a-bcb8-4d8d008992ad}</ProjectGuid>
+  </PropertyGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <Projects Include="DaWin_MNG.dproj" />
+    <Projects Include="EClickMNG.dproj" />
+    <Projects Include="FXLifeMNG.dproj" />
+    <Projects Include="GmdMNG.dproj" />
+    <Projects Include="GolfMNG.dproj" />
+    <Projects Include="K_MNG.dproj" />
+    <Projects Include="ProPlus_MNG.dproj" />
+    <Projects Include="TradeMNG.dproj" />
+  </ItemGroup>
+  <ProjectExtensions>
+    <Borland.Personality>Default.Personality</Borland.Personality>
+    <Borland.ProjectType />
+    <BorlandProject>
+<BorlandProject xmlns=""><Default.Personality></Default.Personality></BorlandProject></BorlandProject>
+  </ProjectExtensions>
+  <Target Name="TradeMNG">
+    <MSBuild Projects="TradeMNG.dproj" Targets="" />
+  </Target>
+  <Target Name="TradeMNG:Clean">
+    <MSBuild Projects="TradeMNG.dproj" Targets="Clean" />
+  </Target>
+  <Target Name="TradeMNG:Make">
+    <MSBuild Projects="TradeMNG.dproj" Targets="Make" />
+  </Target>
+  <Target Name="GolfMNG">
+    <MSBuild Projects="GolfMNG.dproj" Targets="" />
+  </Target>
+  <Target Name="GolfMNG:Clean">
+    <MSBuild Projects="GolfMNG.dproj" Targets="Clean" />
+  </Target>
+  <Target Name="GolfMNG:Make">
+    <MSBuild Projects="GolfMNG.dproj" Targets="Make" />
+  </Target>
+  <Target Name="FXLifeMNG">
+    <MSBuild Projects="FXLifeMNG.dproj" Targets="" />
+  </Target>
+  <Target Name="FXLifeMNG:Clean">
+    <MSBuild Projects="FXLifeMNG.dproj" Targets="Clean" />
+  </Target>
+  <Target Name="FXLifeMNG:Make">
+    <MSBuild Projects="FXLifeMNG.dproj" Targets="Make" />
+  </Target>
+  <Target Name="GmdMNG">
+    <MSBuild Projects="GmdMNG.dproj" Targets="" />
+  </Target>
+  <Target Name="GmdMNG:Clean">
+    <MSBuild Projects="GmdMNG.dproj" Targets="Clean" />
+  </Target>
+  <Target Name="GmdMNG:Make">
+    <MSBuild Projects="GmdMNG.dproj" Targets="Make" />
+  </Target>
+  <Target Name="EClickMNG">
+    <MSBuild Projects="EClickMNG.dproj" Targets="" />
+  </Target>
+  <Target Name="EClickMNG:Clean">
+    <MSBuild Projects="EClickMNG.dproj" Targets="Clean" />
+  </Target>
+  <Target Name="EClickMNG:Make">
+    <MSBuild Projects="EClickMNG.dproj" Targets="Make" />
+  </Target>
+  <Target Name="DaWin_MNG">
+    <MSBuild Projects="DaWin_MNG.dproj" Targets="" />
+  </Target>
+  <Target Name="DaWin_MNG:Clean">
+    <MSBuild Projects="DaWin_MNG.dproj" Targets="Clean" />
+  </Target>
+  <Target Name="DaWin_MNG:Make">
+    <MSBuild Projects="DaWin_MNG.dproj" Targets="Make" />
+  </Target>
+  <Target Name="K_MNG">
+    <MSBuild Projects="K_MNG.dproj" Targets="" />
+  </Target>
+  <Target Name="K_MNG:Clean">
+    <MSBuild Projects="K_MNG.dproj" Targets="Clean" />
+  </Target>
+  <Target Name="K_MNG:Make">
+    <MSBuild Projects="K_MNG.dproj" Targets="Make" />
+  </Target>
+  <Target Name="ProPlus_MNG">
+    <MSBuild Projects="ProPlus_MNG.dproj" Targets="" />
+  </Target>
+  <Target Name="ProPlus_MNG:Clean">
+    <MSBuild Projects="ProPlus_MNG.dproj" Targets="Clean" />
+  </Target>
+  <Target Name="ProPlus_MNG:Make">
+    <MSBuild Projects="ProPlus_MNG.dproj" Targets="Make" />
+  </Target>
+  <Target Name="Build">
+    <CallTarget Targets="TradeMNG;GolfMNG;FXLifeMNG;GmdMNG;EClickMNG;DaWin_MNG;K_MNG;ProPlus_MNG" />
+  </Target>
+  <Target Name="Clean">
+    <CallTarget Targets="TradeMNG:Clean;GolfMNG:Clean;FXLifeMNG:Clean;GmdMNG:Clean;EClickMNG:Clean;DaWin_MNG:Clean;K_MNG:Clean;ProPlus_MNG:Clean" />
+  </Target>
+  <Target Name="Make">
+    <CallTarget Targets="TradeMNG:Make;GolfMNG:Make;FXLifeMNG:Make;GmdMNG:Make;EClickMNG:Make;DaWin_MNG:Make;K_MNG:Make;ProPlus_MNG:Make" />
+  </Target>
+  <Import Condition="Exists('$(MSBuildBinPath)\Borland.Group.Targets')" Project="$(MSBuildBinPath)\Borland.Group.Targets" />
+</Project>

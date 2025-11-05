@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+	<Transactions>
+    <Transaction>2014-11-13 13:59:34.902.dproj,D:\GTRADE\SOURCE\MANAGER\TradeMNG\GT_MNG.dproj=D:\GTRADE\SOURCE\MANAGER\TradeMNG\TradeMNG.dproj</Transaction>
+    <Transaction>2014-11-13 18:28:07.789.pas,D:\GTRADE\SOURCE\MANAGER\TradeMNG\Unit1.pas=D:\GTRADE\SOURCE\MANAGER\TradeMNG\MOrdCntr.pas</Transaction>
+    <Transaction>2014-11-13 18:28:07.789.dfm,D:\GTRADE\SOURCE\MANAGER\TradeMNG\Unit1.dfm=D:\GTRADE\SOURCE\MANAGER\TradeMNG\MOrdCntr.dfm</Transaction>
+    <Transaction>2014-11-13 18:31:20.489.pas,D:\GTRADE\SOURCE\MANAGER\TradeMNG\MOrdCntr.pas=</Transaction>
+    <Transaction>2014-11-13 18:31:20.489.dfm,D:\GTRADE\SOURCE\MANAGER\TradeMNG\MOrdCntr.dfm=</Transaction>
+    <Transaction>2014-11-13 18:33:18.007.pas,D:\GTRADE\SOURCE\MANAGER\TradeMNG\Unit1.pas=D:\GTRADE\SOURCE\MANAGER\TradeMNG\MOrdCntr.pas</Transaction>
+    <Transaction>2014-11-13 18:33:18.007.dfm,D:\GTRADE\SOURCE\MANAGER\TradeMNG\Unit1.dfm=D:\GTRADE\SOURCE\MANAGER\TradeMNG\MOrdCntr.dfm</Transaction>
+    <Transaction>2014-11-13 18:58:04.329.pas,D:\GTRADE\SOURCE\MANAGER\TradeMNG\MOrdCntr.pas=</Transaction>
+    <Transaction>2014-11-13 18:58:04.329.dfm,D:\GTRADE\SOURCE\MANAGER\TradeMNG\MOrdCntr.dfm=</Transaction>
+    <Transaction>2014-11-24 14:13:27.326.pas,D:\GTRADE\SOURCE\MANAGER\TradeMNG\MRealPL.pas=D:\GTRADE\SOURCE\MANAGER\TradeMNG\MTodayPL.pas</Transaction>
+    <Transaction>2014-11-24 14:13:27.326.dfm,D:\GTRADE\SOURCE\MANAGER\TradeMNG\MRealPL.dfm=D:\GTRADE\SOURCE\MANAGER\TradeMNG\MTodayPL.dfm</Transaction>
+    <Transaction>2014-11-26 14:45:39.208.pas,D:\GTRADE\SOURCE\MANAGER\TradeMNG\MInOut.pas=D:\GTRADE\SOURCE\MANAGER\TradeMNG\MSend_Cntr.pas</Transaction>
+    <Transaction>2014-11-26 14:45:39.208.dfm,D:\GTRADE\SOURCE\MANAGER\TradeMNG\MInOut.dfm=D:\GTRADE\SOURCE\MANAGER\TradeMNG\MSend_Cntr.dfm</Transaction>
+    <Transaction>2014-11-26 15:01:34.185.pas,D:\GTRADE\SOURCE\MANAGER\TradeMNG\MSend_Cntr.pas=</Transaction>
+    <Transaction>2014-11-26 15:01:34.185.dfm,D:\GTRADE\SOURCE\MANAGER\TradeMNG\MSend_Cntr.dfm=</Transaction>
+    <Transaction>2014-11-27 14:32:08.423.pas,D:\GTRADE\SOURCE\MANAGER\TradeMNG\MTodayPL.pas=D:\GTRADE\SOURCE\MANAGER\TradeMNG\MTermPL.pas</Transaction>
+    <Transaction>2014-11-27 14:32:08.423.dfm,D:\GTRADE\SOURCE\MANAGER\TradeMNG\MTodayPL.dfm=D:\GTRADE\SOURCE\MANAGER\TradeMNG\MTermPL.dfm</Transaction>
+    <Transaction>2014-12-03 10:26:18.735.pas,D:\GTRADE\SOURCE\MANAGER\TradeMNG\MTermPL.pas=D:\GTRADE\SOURCE\MANAGER\TradeMNG\MUserPL.pas</Transaction>
+    <Transaction>2014-12-03 10:26:18.735.dfm,D:\GTRADE\SOURCE\MANAGER\TradeMNG\MTermPL.dfm=D:\GTRADE\SOURCE\MANAGER\TradeMNG\MUserPL.dfm</Transaction>
+  </Transactions>
+</BorlandProject>

@@ -1,0 +1,108 @@
+unit MFilterIP;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, RzLstBox, bsSkinCtrls, VCL_Helper, MBasic, DBGridEhGrouping,
+  ToolCtrlsEh, DBGridEhToolCtrls, DynVarsEh, GridsEh, DBAxisGridsEh, DBGridEh,
+  RzDBEdit, kcRaizeCtrl, StdCtrls, RzCmboBx, RzDBCmbo, RzSplit, Mask, RzEdit,
+  bsMessages, DB, MemDS, DBAccess, Uni, ImgList, BusinessSkinForm, RzDBNav,
+  bsribbon, ExtCtrls, RzPanel, UniDAC_Helper;
+
+type
+  TfmFilterIP = class(TfmBasic)
+    gdMain: TDBGridEh;
+    pnCnt: TRzPanel;
+    bsSkinLabel45: TbsSkinLabel;
+    edFind: TRzEdit;
+    dbMainUSER_ID: TStringField;
+    dbMainUSER_NM: TStringField;
+    dbMainUSER_NICK_NM: TStringField;
+    dbMainLOGIN_DT: TStringField;
+    dbMainLOGIN_TM: TStringField;
+    dbMainLOGIN_IP: TStringField;
+    dbMainLOGIN_MAC: TStringField;
+    dbMainUSER_GRADE: TStringField;
+    dbMainLOGIN_TP: TStringField;
+    procedure btnExcelClick(Sender: TObject);
+    procedure gdMainTitleBtnClick(Sender: TObject; ACol: Integer;
+      Column: TColumnEh);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+    procedure MainTableOpen; override;
+  end;
+
+var
+  fmFilterIP: TfmFilterIP;
+
+implementation
+
+uses StdUtils, MMastDB, MDelay;
+
+{$R *.dfm}
+
+procedure TfmFilterIP.btnExcelClick(Sender: TObject);
+begin
+  inherited;
+  Export_Excel(gdMain);
+end;
+
+procedure TfmFilterIP.gdMainTitleBtnClick(Sender: TObject; ACol: Integer;
+  Column: TColumnEh);
+begin
+  inherited;
+  with dbMain do
+  begin
+    if IndexFieldNames = Column.FieldName then IndexFieldNames := Column.FieldName + ' Desc'
+    else IndexFieldNames := Column.FieldName
+  end;
+end;
+
+procedure TfmFilterIP.MainTableOpen;
+var
+  sSql, sUserTp : String;
+begin
+  if edFind.Text = '' then
+  begin
+//      bsMsgError('검색하실 IP 또는 맥주소를 입력하세요');
+    Exit;
+  end;
+
+  try
+    Delay_Show();
+
+    sSql := Format( 'SELECT A.USER_ID, ' +
+                           'B.USER_NM, ' +
+                           'B.USER_NICK_NM, ' +
+                           'A.LOGIN_DT, ' +
+                           'A.LOGIN_TM, ' +
+                           'A.LOGIN_IP, ' +
+                           'A.LOGIN_MAC, ' +
+                           '(SELECT CODE_VALUE_NM FROM CODE_MST WHERE CODE_ID = %s AND CODE_VALUE = B.USER_GRADE) AS USER_GRADE, ' +
+                           'A.LOGIN_TP ' +
+                      'FROM LOGIN_HIS A, ' +
+                           'USER_MST B ' +
+                     'WHERE A.USER_ID = B.USER_ID ' +
+                       'AND A.LOGIN_MAC <> %s ' +
+                       'AND (A.LOGIN_IP LIKE %s ' +
+                           'OR ' +
+                            'A.LOGIN_MAC LIKE %s) ' +
+                  'ORDER BY A.LOGIN_DT DESC, ' +
+                           'A.LOGIN_TM DESC ',
+                                               [QuotedStr('RECONNECT'),
+                                                QuotedStr('USER_GRADE'),
+                                                QuotedStr('%'+edFind.Text+'%'),
+                                                QuotedStr('%'+edFind.Text+'%')]);
+
+    Uni_Open(dbMain, sSql);
+
+    pnCnt.Caption := FormatFloat('#,##0 건', dbMain.RecordCount);
+  finally
+    Delay_Hide;
+  end;
+end;
+
+end.

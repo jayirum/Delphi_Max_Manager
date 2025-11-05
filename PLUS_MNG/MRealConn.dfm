@@ -263,33 +263,25 @@ inherited fmRealConn: TfmRealConn
   inherited pnTop: TRzPanel
     Width = 1173
     ExplicitWidth = 1173
-    inherited btnFilter: TbsSkinSpeedButton
-      Top = 3
-      ExplicitTop = 3
-    end
     inherited btnInsert: TbsSkinSpeedButton
-      Left = 203
-      Top = 3
       Visible = False
-      ExplicitLeft = 203
-      ExplicitTop = 3
     end
     inherited btnEdit: TbsSkinSpeedButton
       Visible = False
     end
     inherited btnDelete: TbsSkinSpeedButton
-      Top = 3
       Visible = False
-      ExplicitTop = 3
     end
     inherited btnPost: TbsSkinSpeedButton
-      Top = 3
       Visible = False
-      ExplicitTop = 3
     end
     inherited btnClose: TbsSkinSpeedButton
       Left = 1088
       ExplicitLeft = 1088
+    end
+    inherited bsRibbonDivider4: TbsRibbonDivider
+      Left = 194
+      ExplicitLeft = 194
     end
     inherited btnExcel: TbsSkinSpeedButton
       Left = 1012

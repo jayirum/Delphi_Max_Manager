@@ -202,8 +202,6 @@ type
     bsSkinLabel49: TbsSkinLabel;
     edSign: TkcRzDBEdit;
     btnSign: TbsSkinSpeedButton;
-    dbUser: TADOQuery;
-    dsUser: TDataSource;
     cdsMain: TClientDataSet;
     edtGujaMaxCnt: TRzNumericEdit;
     procedure FormCreate(Sender: TObject);
@@ -258,34 +256,37 @@ type
     procedure btnSignClick(Sender: TObject);
     procedure cdsMainAfterScroll(DataSet: TDataSet);
     procedure gdMainCellClick(Column: TColumnEh);
-    procedure dbUserAfterEdit(DataSet: TDataSet);
-    procedure dbUserAfterInsert(DataSet: TDataSet);
-    procedure dbUserBeforeDelete(DataSet: TDataSet);
-    procedure dbUserBeforePost(DataSet: TDataSet);
     procedure cdsMainAfterOpen(DataSet: TDataSet);
+    procedure cdsMainAfterEdit(DataSet: TDataSet);
+    procedure cdsMainAfterCancel(DataSet: TDataSet);
+    procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
   private
     { Private declarations }
     function fnMainSql01: string;
     function fnMainSql02: string;
     procedure pgOpen;
-    procedure UserMstOpen(sId: String);
+    //procedure UserMstOpen(sId: String);
     procedure AcntMstOpen(sId : String);
     procedure UserMemoOpen(sId: String);
     procedure LoginHisOpen(sId: String);
 
-    procedure ReloadUser;
-    procedure Add_NewUser;
-    procedure Update_User;
-    procedure Delete_User;
+    function fnMainBeforePost(sState:char): boolean;
+//    procedure prMainAfterInsert;
+    function fnMainBeforeDelete: boolean;
+
+//    procedure ReloadUser;
+    function Add_NewUser: string;
+    function Update_User: string;
+    function Delete_User: string;
 
     function PosCheck(sId : String): Boolean;
-    procedure passInit(sFlag : String);
     procedure negoCmsnDelete(sData : String; sWhere : String='');
     procedure InOutProc(sIoTp : String; iAmt : Double);
     procedure LoginCnt;
     procedure LoginCntMerge;  // 통합
     procedure prUserBlock(BlockYN: Boolean; sIP: String);
     procedure RefreshSubDB;
+    procedure SetReadOnly(TF: Boolean);
   public
     { Public declarations }
     procedure MainTableOpen; override;
@@ -306,8 +307,20 @@ uses StdUtils, PacketStruct, MMastDB, MDelay, MUserFilter, MNegoCmsn,
 
 var
   _PageOpenTF : boolean=False;
-  _CurrPage : integer = 0;
-  _TotCnt : integer = 0;
+  _CurrPage   : integer = 0;
+  _TotCnt     : integer = 0;
+  _Login_Mng  : boolean = False;
+
+procedure TfmUser.FormCloseQuery(Sender: TObject; var CanClose: Boolean);
+begin
+  inherited;
+  if cdsMain.State in [dsInsert, dsEdit] then begin
+    if not bsMsgYesNo('입력/수정하던 자료가 있씁니다.화면 종료하시겠습니다?') then
+      CanClose := False
+    else
+      CanClose := True;
+  end;
+end;
 
 procedure TfmUser.FormCreate(Sender: TObject);
 var
@@ -403,10 +416,53 @@ begin
   LoginCntMerge;
 end;
 
-procedure TfmUser.acntPassClick(Sender: TObject);
+procedure TfmUser.btnPassClick(Sender: TObject);
+var
+  sSQL : string;
 begin
-  inherited;
-  passInit('ACNT');
+  if bsMsgYesNo('비밀번호 초기화 하시겠습니까? \n\n [1111]로 변경됩니다.') then begin
+    with cdsMain do begin // TEST, update로 수정할것
+      Edit;
+      sSql := Format('UPDATE USER_MST SET USER_PWD = %s WHERE USER_ID = %s',
+                     [QuotedStr('1111'),
+                      QuotedStr(FieldByName('USER_ID').AsString)]);
+      edPass.Text := '1111';
+      fnSqlOpen(MastDB.dbExec, sSql);
+      Post;
+    end;
+    bsMsgInfo('처리되었습니다.');
+  end;
+end;
+
+procedure TfmUser.btnSignClick(Sender: TObject);
+var
+  sSQL : string;
+begin
+  if bsMsgYesNo('보안번호 변경 하시겠습니까?') then begin
+    with cdsMain do begin // TEST, update로 수정할것
+      Edit;
+      sSql := Format('UPDATE USER_MST SET USER_SIGN = %s WHERE USER_ID = %s',
+                     [QuotedStr(edSign.Text),
+                      QuotedStr(FieldByName('USER_ID').AsString)]);
+      fnSqlOpen(MastDB.dbExec, sSql);
+      Post;
+    end;
+    bsMsgInfo('처리되었습니다.');
+  end;
+end;
+
+procedure TfmUser.acntPassClick(Sender: TObject);
+var
+  sSQL : string;
+begin
+  if bsMsgYesNo('비밀번호 초기화 하시겠습니까? \n\n [1111]로 변경됩니다.') then begin
+    with dbAcnt do begin
+      Edit;
+      FieldByName('ACNT_PWD').AsString := '1111';
+      Post;
+    end;
+    bsMsgInfo('처리되었습니다.');
+  end;
 end;
 
 procedure TfmUser.btnNegoClick(Sender: TObject);
@@ -435,7 +491,7 @@ begin
   sRslt := fmAcntMake_Run(cdsMain.FieldByName('USER_ID').AsString, cdsMain.FieldByName('USER_NM').AsString);
 
   if sRslt then
-    AcntMstOpen(dbMain.FieldByName('USER_ID').AsString);
+    AcntMstOpen(cdsMain.FieldByName('USER_ID').AsString);
 end;
 
 procedure TfmUser.btnCntResetClick(Sender: TObject);
@@ -453,16 +509,12 @@ begin
   sSQL := UserFilter_Run;
   if sSQL <> '' then begin
     _sMainWhere := sSQL;
-    _CurrPage := 0;
-    _TotCnt := 0;
+
+    _Login_Mng := False;
+    _CurrPage  := 0;
+    _TotCnt    := 0;
     MainTableOpen;
   end;
-end;
-
-procedure TfmUser.btnPassClick(Sender: TObject);
-begin
-  inherited;
-  passInit('USER');
 end;
 
 procedure TfmUser.btnExcelClick(Sender: TObject);
@@ -479,8 +531,9 @@ begin
   //통합. LoginCnt;
   LoginCntMerge;
 
-  _CurrPage := 0;
-  _TotCnt := 0;
+  _Login_Mng := False;
+  _CurrPage  := 0;
+  _TotCnt    := 0;
   MainTableOpen;
 end;
 
@@ -492,12 +545,25 @@ begin
   pgOpen;
 end;
 
+procedure TfmUser.SetReadOnly(TF:Boolean);
+begin
+  Case pgMain.ActivePageIndex of
+    0 : begin
+      edUserID.ReadOnly   := TF;
+      cbServerIP.ReadOnly := TF;
+      edPass.ReadOnly     := TF;
+    end;
+  end;
+end;
+
 procedure TfmUser.btnInsertClick(Sender: TObject);
 begin
   Case pgMain.ActivePageIndex of
     0 : begin
       edUserID.SetFocus;
-      AppendWork(dbUser);
+      AppendWork(cdsMain); // TEST
+      SetReadOnly(False);
+//      fnMainBeforePost('I');
     end;
     1 : begin
       bsMsgInfo('주문계좌는 추가 불가능합니다.');
@@ -509,11 +575,17 @@ begin
   end;
 end;
 
+procedure TfmUser.cdsMainAfterCancel(DataSet: TDataSet);
+begin
+  inherited;
+//  SetReadOnly(True);
+end;
+
 procedure TfmUser.btnEditClick(Sender: TObject);
 begin
   Case pgMain.ActivePageIndex of
 //    0 : EditWork(dbMain);
-    0 : EditWork(dbUser);
+    0 : EditWork(cdsMain); // TEST
     1 : EditWork(dbAcnt);
   end;
 end;
@@ -526,12 +598,13 @@ begin
     0 : begin
 //    DeleteWork(dbMain);
 //      with dbMain do begin
-      with dbuser do begin
+      with cdsMain do begin // TEST
         if Bof and Eof then Exit;
 
         if bsMsgYesNo('회원정보 및 계좌정보를 삭제하시겠습니까?') then begin
-          Delete_User;
-          //Delete;
+          if not fnMainBeforeDelete then Exit;
+          if Delete_User <> '' then Exit;
+
           _CurrPage := 0;
           _TotCnt := 0;
           MainTableOpen;
@@ -562,15 +635,29 @@ var
 begin
   Case pgMain.ActivePageIndex of
     0 : begin//PostWork(dbMain);
-      if dbUser.State in [dsInsert] then
-        Add_NewUser;
-      if dbUser.State in [dsEdit] then
-        PostWork(dbUser);
+      if cdsMain.State in [dsInsert] then begin// TEST
+        if not fnMainBeforePost('I') then Exit;
+        if Add_NewUser <> '' then Exit;
+//        cdsMain.Post;
+        //prMainAfterInsert;
+
+        _CurrPage := 0;
+        _TotCnt := 0;
+        MainTableOpen;
+      end;
+
+      if cdsMain.State in [dsEdit] then begin // TEST
+        if not fnMainBeforePost('E') then Exit;
+        if Update_User <> '' then Exit;
+        cdsMain.Post;
+//        PostWork(cdsMain); // TEST
         //ReloadUser;
-      _CurrPage := 0;
-      _TotCnt := 0;
-      MainTableOpen;
-      UserMstOpen(cdsMain.FieldByName('USER_ID').AsString);
+        //cdsMain.Post;
+      end;
+//      _CurrPage := 0;
+//      _TotCnt := 0;
+//      MainTableOpen;
+      //UserMstOpen(cdsMain.FieldByName('USER_ID').AsString);
     end;
     1 : begin
       sAcntTp := dbAcnt.FieldByName('ACNT_NO').AsString;
@@ -591,93 +678,121 @@ begin
       AcntMstOpen(dbAcnt.FieldByName('USER_ID').AsString);
 
       dbAcnt.Locate('ACNT_NO', sAcntTp, []);
+      bsMsgInfo('처리완료!');
     end;
-    2 : PostWork(dbMemo);
+    2 : begin
+      PostWork(dbMemo);
+      bsMsgInfo('처리완료!');
+    end;
   end;
-
-  bsMsgInfo('처리완료!');
 end;
 
-procedure TfmUser.Add_NewUser;
+function TfmUser.Add_NewUser: string;
 var
-  sSQL, sRlst : string;
+  sSQL : string;
+  sCD2, sCD3 : string;
 begin
-  with dbUser do begin
+  sCD2 := '';
+  sCD3 := '';
+  if cbBankCd.Text   <> '' then sCD2 := cbBankCd.Values[cbBankCd.ItemIndex];
+  if cbUserPart.Text <> '' then sCD3 := cbUserPart.Values[cbUserPart.ItemIndex];
+
+  with cdsMain do begin // TEST
   sSQL := Format(
-    'PP_USER_ADD %s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s ',
-    [QuotedStr(FieldByName('USER_ID').AsString),
-     QuotedStr(FieldByName('USER_PWD').AsString),
-     QuotedStr(FieldByName('USER_NICK_NM').AsString),
-     QuotedStr(FieldByName('USER_NM').AsString),
-     QuotedStr(FieldByName('USER_TEL').AsString),
-     QuotedStr(FieldByName('USER_EMAIL').AsString),
-     QuotedStr(FieldByName('USER_BANK').AsString),
-     QuotedStr(FieldByName('USER_BANK_ACNT').AsString),
-     QuotedStr(FieldByName('USER_BANK_ACNT_NM').AsString),
+    'PP_USER_ADD %s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s ',
+    [QuotedStr(UpperCase(Trim(StrReplace(edUserID.Text, ' ', '')))),
+     QuotedStr(edPass.Text),
+     QuotedStr(edUserNickName.Text),
+     QuotedStr(edUser_Nm.Text),
+     QuotedStr(edTelNo.Text),
+     QuotedStr(edEmail.Text),
+     QuotedStr(edUserBank.Text),
+     QuotedStr(edUserAcnt.Text),
+     QuotedStr(edAcntNm.Text),
      QuotedStr(GetLocalIP),
-     QuotedStr(FieldByName('USER_BIGO').AsString),
-     QuotedStr(FieldByName('RECOMM_NM').AsString) ]);
+     QuotedStr(moBody.Text),
+     QuotedStr(edPartnerNm.Text),
+     QuotedStr(sCD2),
+     QuotedStr(sCD3),
+     QuotedStr(edHpNo.Text),
+     QuotedStr(cbPartnerNick.Text),
+     QuotedStr(edSign.Text),
+     QuotedStr(_Login_ID),
+     QuotedStr(edAddr1.Text) ]);
   end;
 
-  sRlst := fnSqlOpen(MastDB.dbExec, sSql);
-  if sRlst = '' then begin
+  Result := fnSqlOpen(MastDB.dbExec, sSql);
+  if Result = '' then begin
     bsMsgInfo('회원 추가 처리완료!');
   end else begin
     bsMsgError('회원 추가 처리실패!');
   end;
 end;
 
-procedure TfmUser.Update_User;
+function TfmUser.Update_User: string;
 var
-  sSQL, sRlst : string;
+  sSQL : string;
+  sCD1, sCD2, sCD3, sCD4, sCD5 : string;
 begin
-  with dbUser do begin
-    sSQL := Format(
-      'PP_USER_UPDATE %s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s ',
-      [QuotedStr(FieldByName('USER_ID').AsString),
-       QuotedStr(FieldByName('USER_NM').AsString),
-       QuotedStr(FieldByName('USER_NICK_NM').AsString),
-       QuotedStr(FieldByName('USER_GRADE').AsString),
-       QuotedStr(FieldByName('ACNT_STATE').AsString),
-       QuotedStr(FieldByName('BANK_CD').AsString),
-       QuotedStr(FieldByName('PART_CD').AsString),
-       QuotedStr(FieldByName('REG_DT').AsString),
-       QuotedStr(FieldByName('USER_HP').AsString),
-       QuotedStr(FieldByName('USER_EMAIL').AsString),
-       QuotedStr(FieldByName('PARTNER_NICK_NM').AsString),
-       QuotedStr(FieldByName('BIRTH_DT').AsString),
-       QuotedStr(FieldByName('USER_TEL').AsString),
-       QuotedStr(FieldByName('RECOMM_NM').AsString),
-       QuotedStr(FieldByName('USER_PWD').AsString),
-       QuotedStr(FieldByName('USER_SIGN').AsString),
-       QuotedStr(FieldByName('USER_BANK').AsString),
-       QuotedStr(FieldByName('USER_BANK_ACNT').AsString),
-       QuotedStr(FieldByName('USER_BANK_ACNT_NM').AsString),
-       QuotedStr(FieldByName('UPDATE_MNG_ID').AsString),
-       QuotedStr(FieldByName('UPDATE_IP').AsString),
-       QuotedStr(FieldByName('USER_ADDR').AsString),
-       QuotedStr(FieldByName('USER_BIGO').AsString),
-       QuotedStr(FieldByName('USER_BLACK').AsString) ]);
-  end;
+//  with cdsMain do begin // TEST
+  sCD1 := '';
+  sCD2 := '';
+  sCD3 := '';
+  sCD4 := '';
+  sCD5 := '';
 
-  sRlst := fnSqlOpen(MastDB.dbExec, sSql);
-  if sRlst = '' then begin
+  if cbUser_Grade.Text  <> '' then sCD1 := cbUser_Grade.Values[cbUser_Grade.ItemIndex];
+  if cbBankCd.Text      <> '' then sCD2 := cbBankCd.Values[cbBankCd.ItemIndex];
+  if cbUserPart.Text    <> '' then sCD3 := cbUserPart.Values[cbUserPart.ItemIndex];
+  if cbPartnerNick.Text <> '' then sCD4 := cbPartnerNick.Text;
+  if cbUserBlack.Text   <> '' then sCD5 := cbUserBlack.Values[cbUserBlack.ItemIndex];
+
+    sSQL := Format(
+      'PP_USER_UPDATE %s,%s,%s,%s,%s,%s,%s,%s,%s,%s, ' +
+                    ' %s,%s,%s,%s,%s,%s,%s,%s,%s,%s, ' +
+                    ' %s,%s ',
+      [QuotedStr(UpperCase(cdsMain.FieldByName('USER_ID').AsString)),
+       QuotedStr(edUser_Nm.Text),
+       QuotedStr(edUserNickName.Text),
+       QuotedStr(sCD1),
+       QuotedStr(sCD2),
+       QuotedStr(sCD3),
+       QuotedStr(NowDate(True)),
+       QuotedStr(edHpNo.Text),
+       QuotedStr(edEmail.Text),
+       QuotedStr(sCD4),
+       QuotedStr(edTelNo.Text),
+       QuotedStr(edPartnerNm.Text),
+       QuotedStr(edPass.Text),
+       QuotedStr(edSign.Text),
+       QuotedStr(edUserBank.Text),
+       QuotedStr(edUserAcnt.Text),
+       QuotedStr(edAcntNm.Text),
+       QuotedStr(_Login_ID),
+       QuotedStr(GetLocalIP),
+       QuotedStr(edAddr1.Text),
+       QuotedStr(moBody.Text),
+       QuotedStr(sCD5) ]);
+//  end;
+
+  Result := fnSqlOpen(MastDB.dbExec, sSql);
+  if Result = '' then begin
     bsMsgInfo('회원정보 수정 처리완료!');
   end else begin
     bsMsgError('회원정보 수정 처리실패!');
   end;
 end;
 
-procedure TfmUser.Delete_User;
+function TfmUser.Delete_User: string;
 var
   sSQL, sRlst : string;
 begin
   sSQL := Format(
     'PP_USER_DELETE %s ',
-    [QuotedStr(dbUser.FieldByName('USER_ID').AsString) ]);
+    [QuotedStr(cdsMain.FieldByName('USER_ID').AsString) ]); // TEST
 
-  sRlst := fnSqlOpen(MastDB.dbExec, sSql);
-  if sRlst = '' then begin
+  Result := fnSqlOpen(MastDB.dbExec, sSql);
+  if Result = '' then begin
     bsMsgInfo('회원 삭제 처리완료!');
   end else begin
     bsMsgError('회원 삭제 처리실패!');
@@ -784,11 +899,30 @@ end;
 procedure TfmUser.cbxManagerSearchClick(Sender: TObject);
 begin
   inherited;
-  _CurrPage := 0;
-  _TotCnt := 0;
+  _Login_Mng := False;
+  _CurrPage  := 0;
+  _TotCnt    := 0;
   MainTableOpen;
 end;
 
+procedure TfmUser.cdsMainAfterEdit(DataSet: TDataSet);
+begin
+  inherited;
+//  fnMainBeforePost('E');
+  edUserID.ReadOnly := True;
+end;
+
+{procedure TfmUser.prMainAfterInsert;
+begin
+  edUserID.ReadOnly := False;
+  edPass.ReadOnly := False;
+  edSign.ReadOnly := False;
+
+  with DataSet do begin
+    FieldByName('REG_DT').AsDateTime := Date;
+  end;
+end;
+}
 procedure TfmUser.cdsMainAfterOpen(DataSet: TDataSet);
 begin
   inherited;
@@ -808,6 +942,195 @@ begin
       MainTableOpen;
     end;
   end;
+end;
+
+function TfmUser.fnMainBeforeDelete: boolean;
+var
+  sSql : String;
+  bRslt : Boolean;
+begin
+  Result := False;
+  with cdsmain do begin
+    if Trim(edUserID.Text) = '' then begin
+      bsMsgError('삭제할 고객을 선택하세요.');
+      Exit;
+    end;
+
+    if FieldByName('USER_GRADE').AsString = '9' then begin
+      bsMsgError('슈퍼바이져 ID는 삭제 불가능합니다!');
+      Exit;
+    end;
+
+    bRslt := PosCheck(FieldByName('USER_ID').AsString);
+    if bRslt = False then begin
+      bsMsgError('미체결주문 및 미청산포지션이 있을경우 삭제 불가능합니다.');
+      Exit;
+    end;
+
+    //회원ID삭제시 계좌,개별수수료,개별공지,회원메모 전부 삭제
+{    sSql := Format('DELETE FROM ACNT_MST WHERE USER_ID = %s', [QuotedStr(FieldByName('USER_ID').AsString)]);
+    fnSqlOpen(MastDB.dbSQL, sSql);
+
+    negoCmsnDelete(FieldByName('USER_ID').AsString);
+
+    sSql := Format('DELETE FROM NOTICE_MST WHERE USER_ID = %s', [QuotedStr(FieldByName('USER_ID').AsString)]);
+    fnSqlOpen(MastDB.dbSQL, sSql);
+
+    sSql := Format('DELETE FROM USER_MEMO WHERE USER_ID = %s', [QuotedStr(FieldByName('USER_ID').AsString)]);
+    fnSqlOpen(MastDB.dbSQL, sSql);}
+  end;
+  Result := True;
+end;
+
+function TfmUser.fnMainBeforePost(sState:char): boolean; // I (Insert),E (Edit)
+var
+  sMsg, sSQL, sUserID : String;
+  sCD1, sCD2, sCD3, sCD4, sCD5 : string;
+begin
+  Result := False;
+  if not (sState in ['I', 'E']) then Exit;
+
+  with cdsMain do begin
+    sMsg := '';
+    // 필수입력값 체크
+    if Trim(edUserID.Text) = '' then begin
+      sMsg := '회원ID';
+      edUserID.SetFocus;
+    end else
+    if Trim(edUserNickName.Text) = '' then begin
+      sMsg := '회원필명';
+      edUserNickName.SetFocus;
+    end else
+    if Trim(edUser_Nm.Text) = '' then begin
+      sMsg := '회원명';
+      edUser_Nm.SetFocus;
+    end else
+    if Trim(cbUser_Grade.Text) = '' then begin
+      sMsg := '회원등급';
+      cbUser_Grade.SetFocus;
+    end else
+    if Trim(edPass.Text) = '' then begin
+      sMsg := '비밀번호';
+      edPass.SetFocus;
+    end else
+    if Trim(cbServerIP.Text) = '' then begin
+      sMsg := '접속IP';
+      cbServerIP.SetFocus;
+    end;
+
+{    if FieldByName('USER_ID').AsString = ''        then sMsg := '회원ID';
+    if FieldByName('USER_NICK_NM').AsString = ''   then sMsg := '회원필명';
+    if FieldByName('USER_NM').AsString = ''        then sMsg := '회원명';
+    if FieldByName('USER_GRADE').AsString = ''     then sMsg := '회원등급';
+//    if FieldByName('REG_DT').AsString = ''         then sMsg := '등록일자';
+    if FieldByName('USER_PWD').AsString = ''       then sMsg := '비밀번호';
+    if FieldByName('SERVER_IP').AsString = ''      then sMsg := '접속IP';
+}
+
+// [S] Insert, Edit 모드 모두 필요한 항목 --------------------------------------
+{      try
+        sCD2 := cbBankCd.Values[cbBankCd.ItemIndex];
+      except
+        sMsg := '통장분류';
+        cbBankCd.SetFocus;
+      end;
+
+    try
+      sCD3 := cbUserPart.Values[cbUserPart.ItemIndex];
+    except
+      sMsg := '회원분류';
+      cbUserPart.SetFocus;
+    end;
+// [E] Insert, Edit 모드 모두 필요한 항목 --------------------------------------
+
+// [S] Edit 모드 에서만 필요한 항목 --------------------------------------------
+    if sState = 'E' then begin
+      try
+        sCD1 := cbUser_Grade.Values[cbUser_Grade.ItemIndex];
+      except
+        sMsg := '회원등급';
+        cbUser_Grade.SetFocus;
+      end;
+
+      try
+        sCD4 := cbPartnerNick.Values[cbPartnerNick.ItemIndex];;
+      except
+        sMsg := '파트너닉네임';
+        cbPartnerNick.SetFocus;
+      end;
+
+      try
+        sCD5 := cbUserBlack.Values[cbUserBlack.ItemIndex];
+      except
+        sMsg := '관리회원';
+        cbUserBlack.SetFocus;
+      end;
+    end;
+// [E] Edit 모드 에서만 필요한 항목 --------------------------------------------
+}
+    if sMsg <> '' then begin
+      bsMsgError(sMsg + '은(는) 반드시 입력하셔야 합니다');
+      //Abort;
+      Exit;
+    end;
+
+//    FieldByName('UPDATE_MNG_ID').AsString := _Login_ID;
+
+    if sState = 'I' then begin
+//      FieldByName('REG_DT').AsDateTime := Date;
+
+//      cdsMain.FieldByName('USER_ID').AsString := UpperCase(Trim(StrReplace(cdsMain.FieldByName('USER_ID').AsString, ' ', ''))); // TEST
+
+      sUserID := UpperCase(Trim(StrReplace(edUserID.Text, ' ', '')));;
+      edUserID.Text := sUserID;
+//      fmAcntMake_Run(cdsMain.FieldByName('USER_ID').AsString, cdsMain.FieldByName('USER_NM').AsString); // TEST
+//      fmAcntMake_Run(sUserID, edUser_Nm.Text); // TEST
+
+//      if FieldByName('PARTNER_NICK_NM').AsString <> '' then begin
+//        sSql := Format('SELECT USER_ID, USER_NM FROM USER_MST WHERE USER_NICK_NM = %s', [QuotedStr(FieldByName('PARTNER_NICK_NM').AsString)]);
+{      if edUserNickName.Text <> '' then begin
+        sSql := Format('SELECT USER_ID, USER_NM FROM USER_MST WHERE USER_NICK_NM = %s', [QuotedStr(edUserNickName.Text)]);
+        fnSqlOpen(MastDB.dbSQL, sSql);
+
+        FieldByName('PARTNER_ID').AsString := MastDB.dbSQL.FieldByName('USER_ID').AsString;
+        FieldByName('PARTNER_NM').AsString := MastDB.dbSQL.FieldByName('USER_NM').AsString;
+      end;
+}    end;
+
+    if sState = 'E' then begin
+{      if FieldByName('USER_NM').OldValue <> FieldByName('USER_NM').NewValue then begin
+        sSql := Format('UPDATE ACNT_MST SET USER_NM = %s WHERE USER_ID = %s',
+                       [QuotedStr(FieldByName('USER_NM').AsString),
+                        QuotedStr(FieldByName('USER_ID').AsString)]);
+        fnSqlOpen(MastDB.dbSql, sSql);
+      end;
+
+      if FieldByName('PARTNER_NICK_NM').OldValue <> FieldByName('PARTNER_NICK_NM').NewValue then begin
+        sSql := Format('SELECT USER_ID, USER_NM FROM USER_MST WHERE USER_NICK_NM = %s', [QuotedStr(FieldByName('PARTNER_NICK_NM').AsString)]);
+        fnSqlOpen(MastDB.dbSQL, sSql);
+
+        sSql := Format('UPDATE USER_MST SET PARTNER_ID = %s ,PARTNER_NM = %s WHERE USER_ID = %s',
+                       [QuotedStr(MastDB.dbSQL.FieldByName('USER_ID').AsString),
+                        QuotedStr(MastDB.dbSQL.FieldByName('USER_NM').AsString),
+                        QuotedStr(FieldByName('USER_ID').AsString)]);
+        fnSqlOpen(MastDB.dbSQL, sSql);
+      end;
+
+      if FieldByName('USER_GRADE').AsString = '3' then begin
+        if (FieldByName('USER_NM').OldValue <> FieldByName('USER_NM').NewValue) or (FieldByName('USER_NICK_NM').OldValue <> FieldByName('USER_NICK_NM').NewValue) then
+        begin
+          sSql := Format('UPDATE USER_MST SET PARTNER_NM = %s, PARTNER_NICK_NM = %s WHERE PARTNER_ID = %s',
+                         [QuotedStr(FieldByName('USER_NM').AsString),
+                          QuotedStr(FieldByName('USER_NICK_NM').AsString),
+                          QuotedStr(FieldByName('USER_ID').AsString)]);
+          fnSqlOpen(MastDB.dbExec, sSql);
+        end;
+      end;
+}    end;
+
+//    FieldByName('USER_ID').AsString := UpperCase(FieldByName('USER_ID').AsString);
+  end;
+  Result := True;
 end;
 
 procedure TfmUser.ckGujaYnClick(Sender: TObject);
@@ -861,138 +1184,6 @@ begin
       dbMemo.FieldByName('USER_ID').AsString := cdsMain.FieldByName('USER_ID').AsString;
       dbMemo.FieldByName('UM_DT').AsDateTime := Date;
     end;
-  end;
-end;
-
-procedure TfmUser.dbUserAfterEdit(DataSet: TDataSet);
-begin
-  inherited;
-  edUserID.ReadOnly := True;
-end;
-
-procedure TfmUser.dbUserAfterInsert(DataSet: TDataSet);
-begin
-  inherited;
-  edUserID.ReadOnly := False;
-  edPass.ReadOnly := False;
-  edSign.ReadOnly := False;
-
-  with DataSet do begin
-    FieldByName('REG_DT').AsDateTime := Date;
-  end;
-end;
-
-procedure TfmUser.dbUserBeforeDelete(DataSet: TDataSet);
-var
-  sSql : String;
-  bRslt : Boolean;
-begin
-  inherited;
-  with DataSet do begin
-    if FieldByName('USER_GRADE').AsString = '9' then begin
-      bsMsgError('슈퍼바이져 ID는 삭제 불가능합니다!');
-      Abort;
-      Cancel;
-    end;
-
-    bRslt := PosCheck(FieldByName('USER_ID').AsString);
-    if bRslt = False then begin
-      bsMsgError('미체결주문 및 미청산포지션이 있을경우 삭제 불가능합니다.');
-      Abort;
-      Cancel;
-    end;
-
-    //회원ID삭제시 계좌,개별수수료,개별공지,회원메모 전부 삭제
-    sSql := Format('DELETE FROM ACNT_MST WHERE USER_ID = %s', [QuotedStr(FieldByName('USER_ID').AsString)]);
-    fnSqlOpen(MastDB.dbSQL, sSql);
-
-    negoCmsnDelete(FieldByName('USER_ID').AsString);
-
-    sSql := Format('DELETE FROM NOTICE_MST WHERE USER_ID = %s', [QuotedStr(FieldByName('USER_ID').AsString)]);
-    fnSqlOpen(MastDB.dbSQL, sSql);
-
-    sSql := Format('DELETE FROM USER_MEMO WHERE USER_ID = %s', [QuotedStr(FieldByName('USER_ID').AsString)]);
-    fnSqlOpen(MastDB.dbSQL, sSql);
-  end;
-end;
-
-procedure TfmUser.dbUserBeforePost(DataSet: TDataSet);
-var
-  sMsg, sSql : String;
-begin
-  inherited;
-
-  with DataSet do begin
-    sMsg := '';
-    // 필수입력값 체크
-    if FieldByName('USER_ID').AsString = ''        then sMsg := '회원ID';
-    if FieldByName('USER_NICK_NM').AsString = ''   then sMsg := '회원필명';
-    if FieldByName('USER_NM').AsString = ''        then sMsg := '회원명';
-    if FieldByName('USER_GRADE').AsString = ''     then sMsg := '회원등급';
-//    if FieldByName('REG_DT').AsString = ''         then sMsg := '등록일자';
-    if FieldByName('USER_PWD').AsString = ''       then sMsg := '비밀번호';
-    if FieldByName('SERVER_IP').AsString = ''      then sMsg := '접속IP';
-
-    if sMsg <> '' then begin
-      bsMsgError(sMsg + '은(는) 반드시 입력하셔야 합니다');
-      Abort;
-    end;
-
-    FieldByName('UPDATE_MNG_ID').AsString := _Login_ID;
-
-    if State in [dsInsert] then begin
-      FieldByName('REG_DT').AsDateTime := Date;
-
-//      sSql := 'SELECT DUP_YN FROM CORP_MST';
-//      Uni_Open(MastDB.dbSQL, sSql);
-//      ShowMessage(MastDB.dbSQL.FieldByName('DUP_YN').AsString);
-//      FieldByName('NEGO_DUP_YN').AsString := MastDB.dbSQL.FieldByName('DUP_YN').AsString;
-
-      dbUser.FieldByName('USER_ID').AsString := UpperCase(Trim(StrReplace(dbUser.FieldByName('USER_ID').AsString, ' ', '')));
-
-      fmAcntMake_Run(dbUser.FieldByName('USER_ID').AsString, dbUser.FieldByName('USER_NM').AsString);
-
-      if FieldByName('PARTNER_NICK_NM').AsString <> '' then begin
-        sSql := Format('SELECT USER_ID, USER_NM FROM USER_MST WHERE USER_NICK_NM = %s', [QuotedStr(FieldByName('PARTNER_NICK_NM').AsString)]);
-        fnSqlOpen(MastDB.dbSQL, sSql);
-
-        FieldByName('PARTNER_ID').AsString := MastDB.dbSQL.FieldByName('USER_ID').AsString;
-        FieldByName('PARTNER_NM').AsString := MastDB.dbSQL.FieldByName('USER_NM').AsString;
-      end;
-    end;
-
-    if State in [dsEdit] then begin
-      if FieldByName('USER_NM').OldValue <> FieldByName('USER_NM').NewValue then begin
-        sSql := Format('UPDATE ACNT_MST SET USER_NM = %s WHERE USER_ID = %s',
-                       [QuotedStr(FieldByName('USER_NM').AsString),
-                        QuotedStr(FieldByName('USER_ID').AsString)]);
-        fnSqlOpen(MastDB.dbSql, sSql);
-      end;
-
-      if FieldByName('PARTNER_NICK_NM').OldValue <> FieldByName('PARTNER_NICK_NM').NewValue then begin
-        sSql := Format('SELECT USER_ID, USER_NM FROM USER_MST WHERE USER_NICK_NM = %s', [QuotedStr(FieldByName('PARTNER_NICK_NM').AsString)]);
-        fnSqlOpen(MastDB.dbSQL, sSql);
-
-        sSql := Format('UPDATE USER_MST SET PARTNER_ID = %s ,PARTNER_NM = %s WHERE USER_ID = %s',
-                       [QuotedStr(MastDB.dbSQL.FieldByName('USER_ID').AsString),
-                        QuotedStr(MastDB.dbSQL.FieldByName('USER_NM').AsString),
-                        QuotedStr(FieldByName('USER_ID').AsString)]);
-        fnSqlOpen(MastDB.dbSQL, sSql);
-      end;
-
-      if FieldByName('USER_GRADE').AsString = '3' then begin
-        if (FieldByName('USER_NM').OldValue <> FieldByName('USER_NM').NewValue) or (FieldByName('USER_NICK_NM').OldValue <> FieldByName('USER_NICK_NM').NewValue) then
-        begin
-          sSql := Format('UPDATE USER_MST SET PARTNER_NM = %s, PARTNER_NICK_NM = %s WHERE PARTNER_ID = %s',
-                         [QuotedStr(FieldByName('USER_NM').AsString),
-                          QuotedStr(FieldByName('USER_NICK_NM').AsString),
-                          QuotedStr(FieldByName('USER_ID').AsString)]);
-          fnSqlOpen(MastDB.dbExec, sSql);
-        end;
-      end;
-    end;
-
-    FieldByName('USER_ID').AsString := UpperCase(FieldByName('USER_ID').AsString);
   end;
 end;
 
@@ -1079,16 +1270,18 @@ begin
   inherited;
   if edUserID.Text = '' then Exit;
 
-  pnUser.Caption  := Format('회원명 [%s]', [cdsMain.FieldByName('USER_NM').AsString]);
-  pnUmNm.Caption  := Format('회원명 [%s]', [cdsMain.FieldByName('USER_NM').AsString]);
-//  pnLogin.Caption := Format('회원명 [%s]', [dbMain.FieldByName('USER_NM').AsString]);
+  if cdsMain.State in [dsEdit] then begin
+    pnUser.Caption  := Format('회원명 [%s]', [cdsMain.FieldByName('USER_NM').AsString]);
+    pnUmNm.Caption  := Format('회원명 [%s]', [cdsMain.FieldByName('USER_NM').AsString]);
+  //  pnLogin.Caption := Format('회원명 [%s]', [dbMain.FieldByName('USER_NM').AsString]);
 
-  if _Supervisor then sGrade := '9'
-                 else sGrade := '8';
+    if _Supervisor then sGrade := '9'
+                   else sGrade := '8';
 
-  cbUser_Grade.ReadOnly := cdsMain.FieldByName('USER_GRADE').AsString = sGrade;
+    cbUser_Grade.ReadOnly := cdsMain.FieldByName('USER_GRADE').AsString = sGrade;
 
-  tmOpen.Enabled := False;
+    tmOpen.Enabled := False;
+  end;
 //  tmOpen.Enabled := True;
 //  pgOpen;
 end;
@@ -1100,9 +1293,9 @@ begin
   inherited;
   lbAlert.Caption := '';
 
-  if (dbUser.State in [dsBrowse]) or (edUserID.Text = '') then Exit;
+  if (cdsMain.State in [dsBrowse]) or (edUserID.Text = '') then Exit; // TEST
 
-  if dbUser.State in [dsInsert] then begin
+  if cdsMain.State in [dsInsert] then begin // TEST
     with MastDB.dbSQL do begin
       sSql := Format('SELECT COUNT(1) AS CNT FROM USER_MST WHERE USER_ID = %s', [QuotedStr(Trim(StrReplace(edUserID.Text, ' ', '')))]);
 
@@ -1111,7 +1304,7 @@ begin
       if FieldByName('CNT').AsInteger > 0 then begin
         lbAlert.Visible := TRUE;
         lbAlert.Caption := '중복된 ID 입니다..';
-        dbUser.FieldByName('USER_ID').AsString := '';
+        cdsMain.FieldByName('USER_ID').AsString := ''; // TEST
         edUserID.SetFocus;
       end;
     end;
@@ -1125,21 +1318,28 @@ begin
   inherited;
   lbAlert.Caption := '';
 
-  if (dbUser.State in [dsBrowse]) or (edUserID.Text = '') then Exit;
+  if (cdsMain.State in [dsBrowse]) or (edUserID.Text = '') then Exit; // TEST
 
-  if dbUser.FieldByName('USER_NICK_NM').OldValue = dbUser.FieldByName('USER_NICK_NM').NewValue then Exit;
+//  if cdsMain.FieldByName('USER_NICK_NM').OldValue = cdsMain.FieldByName('USER_NICK_NM').NewValue then Exit; // TEST // TODO 반드시 로직 반영할것
 
   with MastDB.dbSQL do begin
-    sSql := Format('SELECT COUNT(1) AS CNT FROM USER_MST WHERE USER_NICK_NM = %s', [QuotedStr(edUserNickName.Text)]);
+//    sSql := Format('SELECT COUNT(1) AS CNT FROM USER_MST WHERE USER_NICK_NM = %s ', [QuotedStr(edUserNickName.Text)]);
+    sSql := Format('SELECT COUNT(1) AS CNT, USER_ID, USER_NM FROM USER_MST WHERE USER_NICK_NM = %s GROUP BY USER_ID, USER_NM ', [QuotedStr(edUserNickName.Text)]);
 
     fnSqlOpen(MastDB.dbSQL, sSql);
 
     if FieldByName('CNT').AsInteger > 0 then begin
       lbAlert.Visible := TRUE;
       lbAlert.Caption := '중복된 회원필명 입니다..';
-      dbUser.FieldByName('USER_NICK_NM').AsString := '';
+//      cdsMain.FieldByName('USER_NICK_NM').AsString := ''; // TEST
+      edUserNickName.Text := '';
       edUserNickName.SetFocus;
+      Exit;
     end;
+
+//    FieldByName('PARTNER_ID').AsString := MastDB.dbSQL.FieldByName('USER_ID').AsString;
+//    FieldByName('PARTNER_NM').AsString := MastDB.dbSQL.FieldByName('USER_NM').AsString;
+//    cbPartnerNick.Text := MastDB.dbSQL.FieldByName('USER_NM').AsString;
   end;
 end;
 
@@ -1188,8 +1388,9 @@ begin
   if lbxPart.ItemIndex = 0 then _sMainWhere := ''
                            else _sMainWhere := Format(' A.PART_CD = %s', [QuotedStr(lbxPart.Values[lbxPart.ItemIndex])]);
 
-  _CurrPage := 0;
-  _TotCnt := 0;
+  _Login_Mng := False;
+  _CurrPage  := 0;
+  _TotCnt    := 0;
   MainTableOpen;
 end;
 
@@ -1232,43 +1433,6 @@ begin
   fnSqlOpen(MastDB.dbSQL, sSql);
 end;
 
-procedure TfmUser.passInit(sFlag : String);
-begin
-  if bsMsgYesNo('비밀번호 초기화 하시겠습니까? \n\n [1111]로 변경됩니다.') then begin
-    if sFlag = 'USER' then begin
-      with dbUser do begin
-        Edit;
-        FieldByName('USER_PWD').AsString := '1111';
-        Post;
-      end;
-    end;
-
-    if sFlag = 'ACNT' then begin
-      with dbAcnt do begin
-        Edit;
-        FieldByName('ACNT_PWD').AsString := '1111';
-        Post;
-      end;
-    end;
-
-    bsMsgInfo('처리되었습니다.');
-  end;
-end;
-
-procedure TfmUser.btnSignClick(Sender: TObject);
-begin
-  inherited;
-  if bsMsgYesNo('보안번호 변경 하시겠습니까?') then begin
-    with dbUser do begin
-      Edit;
-      FieldByName('USER_SIGN').AsString := edSign.Text;
-      Post;
-    end;
-
-    bsMsgInfo('처리되었습니다.');
-  end;
-end;
-
 procedure TfmUser.pgMainChange(Sender: TObject);
 begin
   inherited;
@@ -1282,8 +1446,9 @@ begin
     if rgType.ItemIndex = 0 then _sMainWhere := ''
                             else _sMainWhere := ' A.USER_GRADE = ' + QuotedStr(rgType.Values[rgType.ItemIndex]);
 
-    _CurrPage := 0;
-    _TotCnt := 0;
+    _Login_Mng := False;
+    _CurrPage  := 0;
+    _TotCnt    := 0;
     MainTableOpen;
 
     lbxPart.ItemIndex := 0;
@@ -1327,19 +1492,11 @@ begin
 end;
 
 procedure TfmUser.btnLoginManagerClick(Sender: TObject);
-var
-  sSql : string;
 begin
-Exit;
-  inherited;
-  sSql := fnMainSql01 + fnMainSql02 + Format(' AND A.USER_GRADE <= %s AND B.CONN_YN = %s ', [QuotedStr('8'), QuotedStr('Y') ]);
-
-  try
-    Delay_Show;
-    fnSqlOpen(dbMain, sSql);
-  finally
-    Delay_Hide;
-  end;
+  _Login_Mng := True;
+  _CurrPage  := 0;
+  _TotCnt    := 0;
+  MainTableOpen;
 end;
 
 function TfmUser.fnMainSql01:string;
@@ -1406,24 +1563,34 @@ begin
 //  OffsetE := (_CurrPage + 1) * _PAGE_QTY;
 
   sSEL := fnMainSql01;
-  sTB := fnMainSql02;
+  sTB  := fnMainSql02;
+  sOD  := ' A.USER_ID ';
 
-  if cbxManagerSearch.Checked then
-    sTB := sTB + Format(' AND A.USER_GRADE < 9 AND A.USER_BLACK = %s', [QuotedStr('1') ]);
+  if _Login_Mng then begin // 로그인관리자조회 버튼 클릭시
+    sTB := sTB + Format(' AND A.USER_GRADE <= %s AND B.CONN_YN = %s ', [QuotedStr('8'), QuotedStr('Y') ]);
+    sSQL := fnPageSQL2(_CurrPage+1, _PAGE_QTY, sSEL, sTB, sOD);
+  end else begin
+    if cbxManagerSearch.Checked then
+      sTB := sTB + Format(' AND A.USER_GRADE < 9 AND A.USER_BLACK = %s', [QuotedStr('1') ]);
 
-  if _Supervisor then sGrade := '9'
-                 else sGrade := '7';
+    if _Supervisor then sGrade := '9'
+                   else sGrade := '7';
 
-  if _sMainWhere <> '' then sTB := sTB + Format(' OR (%s) AND (A.USER_GRADE < %s) ', [_sMainWhere, sGrade])
-                       else sTB := sTB + Format(' OR (A.USER_GRADE < %s)', [sGrade]);
+    if _sMainWhere <> '' then sTB := sTB + Format(' OR (%s) AND (A.USER_GRADE < %s) ', [_sMainWhere, sGrade])
+                         else sTB := sTB + Format(' OR (A.USER_GRADE < %s)', [sGrade]);
 
-  sOD := 'A.USER_ID ';
-
-  sSQL := fnPageSQL2(_CurrPage+1, _PAGE_QTY, sSEL, sTB, sOD);
-
+    sSQL := fnPageSQL2(_CurrPage+1, _PAGE_QTY, sSEL, sTB, sOD);
+  end;
 //  sSQL := fnPageSQL(sSQL, OffsetS, OffsetE);
   try
     Delay_Show;
+//    with cdsMain do begin
+//      if State in [dsInsert, dsEdit] then begin
+//        Cancel;
+        //Abort;
+//      end;
+//    end;
+
     fnSqlDataAdd(_CurrPage, dbMain, cdsMain, sSQL);
     _TotCnt := _TotCnt + dbMain.RecordCount;
   finally
@@ -1446,7 +1613,7 @@ begin
   if pgMain.ActivePageIndex = 0 then begin
     //SuperViser.Visible := _Supervisor;
     SuperViser.Visible := False; // 2025.11.03 요청에 의해 수
-    UserMstOpen(sUserID);
+    //UserMstOpen(sUserID);
   end;
 
   if (pgMain.ActivePageIndex = 1) or (pgMain.ActivePageIndex = 3) then
@@ -1460,7 +1627,7 @@ begin
     LoginHisOpen(sUserID);
 end;
 
-procedure TfmUser.UserMstOpen(sId: String);
+{procedure TfmUser.UserMstOpen(sId: String);
 var
   sSql : String;
 begin
@@ -1507,7 +1674,7 @@ begin
     [QuotedStr(sId)]);
   fnSqlOpen(dbUser,sSql);
 end;
-
+}
 procedure TfmUser.AcntMstOpen(sId: String);
 var
   i, j : integer;
@@ -1637,7 +1804,7 @@ begin
   fnSqlOpen(dbAcnt,sSql);
 end;
 
-procedure TfmUser.ReloadUser;
+{procedure TfmUser.ReloadUser;
 var
   i : integer;
   sName : string;
@@ -1649,7 +1816,7 @@ begin
   end;
   cdsMain.Post;
 end;
-
+}
 procedure TfmUser.popbtnInputIPClick(Sender: TObject);
 begin
   inherited;
@@ -1696,7 +1863,6 @@ end;
 procedure TfmUser.btnLevClick(Sender: TObject);
 begin
   inherited;
-  // TODO : 회원의 레버리지 조회
   pnlLev.Visible := not pnlLev.Visible;
 end;
 

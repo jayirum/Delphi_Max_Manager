@@ -72,6 +72,7 @@ inherited fmOrdDetail: TfmOrdDetail
       BorderShadow = 13290186
       FlatColor = clGray
       FlatColorAdjustment = 0
+      FrameController = MastDB.RzFrameController
       ExplicitLeft = 3
     end
     inherited nvMain: TRzDBNavigator
@@ -89,6 +90,7 @@ inherited fmOrdDetail: TfmOrdDetail
       CalendarElements = [ceYear, ceMonth, ceArrows, ceDaysOfWeek, ceFillDays, ceTodayButton]
       CaptionTodayBtn = #50724#45720#47196
       EditType = etDate
+      FrameController = MastDB.RzFrameController
       ImeName = 'Microsoft Office IME 2007'
       TabOrder = 2
       EnterToTab = True
@@ -154,6 +156,7 @@ inherited fmOrdDetail: TfmOrdDetail
       FillColor = clWhite
       FocusColor = 15790335
       FrameColor = clGray
+      FrameController = MastDB.RzFrameController
       HotTrack = True
       HotTrackColor = 7838964
       HotTrackStyle = htsFrame
@@ -257,6 +260,7 @@ inherited fmOrdDetail: TfmOrdDetail
       Color = 15790320
       FlatColor = clGray
       FlatColorAdjustment = 0
+      FrameController = MastDB.PanelRzFrameController
       TabOrder = 1
       object btnFind: TbsSkinSpeedButton
         Tag = 500
@@ -301,6 +305,7 @@ inherited fmOrdDetail: TfmOrdDetail
         Top = 13
         Width = 135
         Height = 20
+        FrameController = MastDB.RzFrameController
         ImeName = 'Microsoft IME 2010'
         TabOrder = 0
         OnKeyDown = edFindKeyDown
@@ -626,14 +631,15 @@ inherited fmOrdDetail: TfmOrdDetail
         Color = 15790320
         FlatColor = clGray
         FlatColorAdjustment = 0
+        FrameController = MastDB.PanelRzFrameController
         TabOrder = 1
         DesignSize = (
           785
           31)
         object btnOrdExcel: TbsSkinSpeedButton
           Tag = 600
-          Left = 483
-          Top = 3
+          Left = 484
+          Top = 4
           Width = 75
           Height = 23
           Cursor = crHandPoint
@@ -668,8 +674,6 @@ inherited fmOrdDetail: TfmOrdDetail
           NumGlyphs = 1
           Spacing = 1
           OnClick = btnOrdExcelClick
-          ExplicitLeft = 484
-          ExplicitTop = 4
         end
         object bsSkinSpeedButton1: TbsSkinSpeedButton
           Tag = 500
@@ -710,8 +714,8 @@ inherited fmOrdDetail: TfmOrdDetail
           OnClick = bsSkinSpeedButton1Click
         end
         object pnOrdCnt: TRzPanel
-          Left = 660
-          Top = 3
+          Left = 661
+          Top = 4
           Width = 113
           Height = 23
           Anchors = [akRight, akBottom]
@@ -726,14 +730,13 @@ inherited fmOrdDetail: TfmOrdDetail
           Font.Height = -12
           Font.Name = #44404#47548#52404
           Font.Style = [fsBold]
+          FrameController = MastDB.RzFrameController
           ParentFont = False
           TabOrder = 0
-          ExplicitLeft = 661
-          ExplicitTop = 4
         end
         object RzDBNavigator2: TRzDBNavigator
-          Left = 559
-          Top = 3
+          Left = 560
+          Top = 4
           Width = 100
           Height = 23
           DataSource = dsOrd
@@ -742,8 +745,6 @@ inherited fmOrdDetail: TfmOrdDetail
           BorderOuter = fsNone
           Color = 16185078
           TabOrder = 1
-          ExplicitLeft = 560
-          ExplicitTop = 4
         end
         object bsSkinLabel1: TbsSkinLabel
           Left = 8
@@ -791,6 +792,7 @@ inherited fmOrdDetail: TfmOrdDetail
       Color = 15790320
       FlatColor = clGray
       FlatColorAdjustment = 0
+      FrameController = MastDB.PanelRzFrameController
       TabOrder = 1
       DesignSize = (
         785
@@ -902,6 +904,7 @@ inherited fmOrdDetail: TfmOrdDetail
         Font.Height = -12
         Font.Name = #44404#47548#52404
         Font.Style = [fsBold]
+        FrameController = MastDB.RzFrameController
         ParentFont = False
         TabOrder = 1
       end
@@ -974,6 +977,7 @@ inherited fmOrdDetail: TfmOrdDetail
         Height = 20
         Style = csDropDownList
         Ctl3D = False
+        FrameController = MastDB.RzFrameController
         ImeName = 'Microsoft Office IME 2007'
         ItemHeight = 12
         ParentCtl3D = False
@@ -1392,12 +1396,13 @@ inherited fmOrdDetail: TfmOrdDetail
       Color = 15790320
       FlatColor = clGray
       FlatColorAdjustment = 0
+      FrameController = MastDB.PanelRzFrameController
       TabOrder = 3
       DesignSize = (
         785
         31)
       object pnPL: TRzPanel
-        Left = 87
+        Left = 88
         Top = 4
         Width = 113
         Height = 23
@@ -1413,9 +1418,9 @@ inherited fmOrdDetail: TfmOrdDetail
         Font.Height = -12
         Font.Name = #44404#47548#52404
         Font.Style = [fsBold]
+        FrameController = MastDB.RzFrameController
         ParentFont = False
         TabOrder = 0
-        ExplicitLeft = 88
       end
       object bsSkinLabel2: TbsSkinLabel
         Left = 8
@@ -1482,7 +1487,7 @@ inherited fmOrdDetail: TfmOrdDetail
         AutoSize = False
       end
       object pnCMSN: TRzPanel
-        Left = 308
+        Left = 309
         Top = 4
         Width = 113
         Height = 23
@@ -1498,15 +1503,15 @@ inherited fmOrdDetail: TfmOrdDetail
         Font.Height = -12
         Font.Name = #44404#47548#52404
         Font.Style = [fsBold]
+        FrameController = MastDB.RzFrameController
         ParentFont = False
         TabOrder = 3
-        ExplicitLeft = 309
       end
     end
   end
   inherited imgBtn: TImageList
     Bitmap = {
-      494C01010B0034004C0110001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C01010B003400480110001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000003000000001002000000000000030
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000

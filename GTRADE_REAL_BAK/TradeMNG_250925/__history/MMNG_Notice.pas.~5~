@@ -1,0 +1,41 @@
+unit MMNG_Notice;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, bsMessages, BusinessSkinForm;
+
+type
+  TfmMNG_Notice = class(TForm)
+    bsBusinessSkinForm: TbsBusinessSkinForm;
+    bsSkinMessage: TbsSkinMessage;
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  fmMNG_Notice: TfmMNG_Notice;
+  procedure MNGNoti_Run;
+
+implementation
+
+{$R *.dfm}
+
+procedure MNGNoti_Run;
+begin
+  fmMNG_Notice := TfmMNG_Notice.Create(Application);
+
+  with fmMNG_Notice do
+  begin
+    try
+      ShowModal;
+    finally
+      Free;
+    end;
+  end;
+end;
+
+end.

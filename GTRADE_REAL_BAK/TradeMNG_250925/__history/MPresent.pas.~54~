@@ -1,0 +1,575 @@
+unit MPresent;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, RzLstBox, bsSkinCtrls, VCL_Helper, MBasic, DBGridEhGrouping,
+  ToolCtrlsEh, DBGridEhToolCtrls, DynVarsEh, GridsEh, DBAxisGridsEh, DBGridEh,
+  RzDBEdit, kcRaizeCtrl, StdCtrls, RzCmboBx, RzDBCmbo, RzSplit, Mask, RzEdit,
+  bsMessages, DB, MemDS, DBAccess, Uni, ImgList, BusinessSkinForm, RzDBNav,
+  bsribbon, ExtCtrls, RzPanel, ThdTimer;
+
+type
+  TfmPresent = class(TfmBasic)
+    dbMainSTK_CD: TStringField;
+    dbMainBS_TP: TStringField;
+    dbMainNCLR_POS_QTY: TIntegerField;
+    pnMain: TRzPanel;
+    RzGroupBox1: TRzGroupBox;
+    gdMain: TDBGridEh;
+    DBGridEh1: TDBGridEh;
+    dbNclr: TUniQuery;
+    dsNclr: TDataSource;
+    dbNclrSTK_CD: TStringField;
+    dbNclrBS_TP: TStringField;
+    dbNclrNCLR_POS_QTY: TIntegerField;
+    RzGroupBox2: TRzGroupBox;
+    DBGridEh2: TDBGridEh;
+    RzGroupBox3: TRzGroupBox;
+    DBGridEh4: TDBGridEh;
+    RzGroupBox4: TRzGroupBox;
+    dbNclrListR: TUniQuery;
+    dsNclrListR: TDataSource;
+    dbNclrListV: TUniQuery;
+    dsNclrListV: TDataSource;
+    dbMitR: TUniQuery;
+    dsMitR: TDataSource;
+    dbMitV: TUniQuery;
+    dsMitV: TDataSource;
+    dbNoCntrR: TUniQuery;
+    dsNoCntrR: TDataSource;
+    dbNoCntrV: TUniQuery;
+    dsNoCntrV: TDataSource;
+    dbNclrListRSTK_CD: TStringField;
+    dbNclrListRBS_TP: TStringField;
+    dbNclrListRNCLR_POS_QTY: TIntegerField;
+    dbNclrListRAVG_PRC: TFloatField;
+    dbNclrListRUSER_NM: TStringField;
+    dbNclrListROVERNGT_YN: TStringField;
+    dbNclrListVSTK_CD: TStringField;
+    dbNclrListVBS_TP: TStringField;
+    dbNclrListVNCLR_POS_QTY: TIntegerField;
+    dbNclrListVAVG_PRC: TFloatField;
+    dbNclrListVUSER_NM: TStringField;
+    dbNclrListVOVERNGT_YN: TStringField;
+    DBGridEh3: TDBGridEh;
+    dbMitRUSER_NM: TStringField;
+    dbMitRSTK_CD: TStringField;
+    dbMitRBS_TP: TStringField;
+    dbMitRREMN_QTY: TIntegerField;
+    dbMitRMIT_PRC: TFloatField;
+    dbMitVUSER_NM: TStringField;
+    dbMitVSTK_CD: TStringField;
+    dbMitVBS_TP: TStringField;
+    dbMitVREMN_QTY: TIntegerField;
+    dbMitVMIT_PRC: TFloatField;
+    DBGridEh5: TDBGridEh;
+    dbNoCntrRUSER_NM: TStringField;
+    dbNoCntrRSTK_CD: TStringField;
+    dbNoCntrRBS_TP: TStringField;
+    dbNoCntrRREMN_QTY: TIntegerField;
+    dbNoCntrRORD_PRC: TFloatField;
+    dbNoCntrVUSER_NM: TStringField;
+    dbNoCntrVSTK_CD: TStringField;
+    dbNoCntrVBS_TP: TStringField;
+    dbNoCntrVREMN_QTY: TIntegerField;
+    dbNoCntrVORD_PRC: TFloatField;
+    DBGridEh11: TDBGridEh;
+    DBGridEh12: TDBGridEh;
+    DBGridEh13: TDBGridEh;
+    DBGridEh14: TDBGridEh;
+    DBGridEh6: TDBGridEh;
+    DBGridEh7: TDBGridEh;
+    DBGridEh15: TDBGridEh;
+    DBGridEh16: TDBGridEh;
+    cbAutoTime: TkcRzComboBox;
+    chAutoSelect: TbsSkinCheckRadioBox;
+    dbNclrListVNCLR_POS_QTY1: TIntegerField;
+    dbMitVLEVERAGE: TIntegerField;
+    dbNoCntrVLEVERAGE: TIntegerField;
+    tmAuto: TThreadedTimer;
+    chUserTp: TbsSkinCheckRadioBox;
+    chName: TbsSkinCheckRadioBox;
+    procedure FormShow(Sender: TObject);
+    procedure btnExcelClick(Sender: TObject);
+    procedure tmAutoTimer(Sender: TObject);
+    procedure chAutoSelectClick(Sender: TObject);
+    procedure DBGridEh1TitleBtnClick(Sender: TObject; ACol: Integer;
+      Column: TColumnEh);
+    procedure DBGridEh3TitleBtnClick(Sender: TObject; ACol: Integer;
+      Column: TColumnEh);
+    procedure DBGridEh6TitleBtnClick(Sender: TObject; ACol: Integer;
+      Column: TColumnEh);
+    procedure DBGridEh5TitleBtnClick(Sender: TObject; ACol: Integer;
+      Column: TColumnEh);
+    procedure DBGridEh1Columns1AdvDrawDataCell(Sender: TCustomDBGridEh; Cell,
+      AreaCell: TGridCoord; Column: TColumnEh; const ARect: TRect;
+      var Params: TColCellParamsEh; var Processed: Boolean);
+    procedure DBGridEh1Columns2AdvDrawDataCell(Sender: TCustomDBGridEh; Cell,
+      AreaCell: TGridCoord; Column: TColumnEh; const ARect: TRect;
+      var Params: TColCellParamsEh; var Processed: Boolean);
+    procedure DBGridEh3Columns3AdvDrawDataCell(Sender: TCustomDBGridEh; Cell,
+      AreaCell: TGridCoord; Column: TColumnEh; const ARect: TRect;
+      var Params: TColCellParamsEh; var Processed: Boolean);
+    procedure DBGridEh3Columns4AdvDrawDataCell(Sender: TCustomDBGridEh; Cell,
+      AreaCell: TGridCoord; Column: TColumnEh; const ARect: TRect;
+      var Params: TColCellParamsEh; var Processed: Boolean);
+    procedure DBGridEh6Columns2AdvDrawDataCell(Sender: TCustomDBGridEh; Cell,
+      AreaCell: TGridCoord; Column: TColumnEh; const ARect: TRect;
+      var Params: TColCellParamsEh; var Processed: Boolean);
+    procedure DBGridEh6Columns3AdvDrawDataCell(Sender: TCustomDBGridEh; Cell,
+      AreaCell: TGridCoord; Column: TColumnEh; const ARect: TRect;
+      var Params: TColCellParamsEh; var Processed: Boolean);
+    procedure DBGridEh5Columns2AdvDrawDataCell(Sender: TCustomDBGridEh; Cell,
+      AreaCell: TGridCoord; Column: TColumnEh; const ARect: TRect;
+      var Params: TColCellParamsEh; var Processed: Boolean);
+    procedure DBGridEh5Columns3AdvDrawDataCell(Sender: TCustomDBGridEh; Cell,
+      AreaCell: TGridCoord; Column: TColumnEh; const ARect: TRect;
+      var Params: TColCellParamsEh; var Processed: Boolean);
+    procedure FormActivate(Sender: TObject);
+    procedure FormDeactivate(Sender: TObject);
+    procedure pnTitleDblClick(Sender: TObject);
+  private
+    { Private declarations }
+    _ActiveTimer: Boolean;
+  public
+    { Public declarations }
+    procedure MainTableOpen; override;
+  end;
+
+var
+  fmPresent: TfmPresent;
+
+implementation
+
+uses StdUtils, MMastDB, MDelay;
+
+{$R *.dfm}
+
+{ TfmSample }
+
+procedure TfmPresent.btnExcelClick(Sender: TObject);
+begin
+  inherited;
+  Export_Excel(gdMain);
+end;
+
+procedure TfmPresent.chAutoSelectClick(Sender: TObject);
+begin
+	if chAutoSelect.Checked then
+  begin
+  	bsMsgWarning(Format('자동조회를 하시면 데이타 반복적인 조회로 서버에 부하를 줄 수 있습니다..\n\n필요한 경우에만 사용하시길 바랍니다. ( 조회시간 : %s )', [cbAutoTime.Text]));
+
+    tmAuto.Interval := StrToIntDef(cbAutoTime.Value, 30) * 1000;
+    tmAuto.Enabled := False;
+    tmAuto.Enabled := True;
+  end
+  else
+  	tmAuto.Enabled := False;
+end;
+
+procedure TfmPresent.DBGridEh1Columns1AdvDrawDataCell(Sender: TCustomDBGridEh;
+  Cell, AreaCell: TGridCoord; Column: TColumnEh; const ARect: TRect;
+  var Params: TColCellParamsEh; var Processed: Boolean);
+begin
+	with TDBGridEh(Sender).DataSource.DataSet do
+  begin
+  	Sender.Canvas.Font.Color := clBlack;
+	  if FieldByName(Column.FieldName).AsString = '매수' then Sender.Canvas.Font.Color := clRed
+  	else if FieldByName(Column.FieldName).AsString = '매도' then Sender.Canvas.Font.Color := clBlue;
+
+    Sender.DefaultDrawColumnDataCell(Cell, AreaCell, Column, ARect, Params);
+    Processed := True;
+  end;
+end;
+
+procedure TfmPresent.DBGridEh1Columns2AdvDrawDataCell(Sender: TCustomDBGridEh;
+  Cell, AreaCell: TGridCoord; Column: TColumnEh; const ARect: TRect;
+  var Params: TColCellParamsEh; var Processed: Boolean);
+begin
+	with TDBGridEh(Sender).DataSource.DataSet do
+  begin
+  	Sender.Canvas.Font.Color := clBlack;
+	  if FieldByName('BS_TP').AsString = '매수' then Sender.Canvas.Font.Color := clRed
+  	else if FieldByName('BS_TP').AsString = '매도' then Sender.Canvas.Font.Color := clBlue;
+
+    Sender.DefaultDrawColumnDataCell(Cell, AreaCell, Column, ARect, Params);
+    Processed := True;
+  end;
+end;
+
+procedure TfmPresent.DBGridEh1TitleBtnClick(Sender: TObject; ACol: Integer;
+  Column: TColumnEh);
+begin
+  with dbNclr do
+  begin
+    if IndexFieldNames = Column.FieldName then
+    begin
+      IndexFieldNames := Column.FieldName + ' Desc';
+      First;
+    end
+    else
+    begin
+      IndexFieldNames := Column.FieldName;
+      First;
+    end;
+  end;
+end;
+
+procedure TfmPresent.DBGridEh3Columns3AdvDrawDataCell(Sender: TCustomDBGridEh;
+  Cell, AreaCell: TGridCoord; Column: TColumnEh; const ARect: TRect;
+  var Params: TColCellParamsEh; var Processed: Boolean);
+begin
+	with TDBGridEh(Sender).DataSource.DataSet do
+  begin
+  	Sender.Canvas.Font.Color := clBlack;
+	  if FieldByName(Column.FieldName).AsString = '매수' then Sender.Canvas.Font.Color := clRed
+  	else if FieldByName(Column.FieldName).AsString = '매도' then Sender.Canvas.Font.Color := clBlue;
+
+    Sender.DefaultDrawColumnDataCell(Cell, AreaCell, Column, ARect, Params);
+    Processed := True;
+  end;
+end;
+
+procedure TfmPresent.DBGridEh3Columns4AdvDrawDataCell(Sender: TCustomDBGridEh;
+  Cell, AreaCell: TGridCoord; Column: TColumnEh; const ARect: TRect;
+  var Params: TColCellParamsEh; var Processed: Boolean);
+begin
+	with TDBGridEh(Sender).DataSource.DataSet do
+  begin
+  	Sender.Canvas.Font.Color := clBlack;
+	  if FieldByName('BS_TP').AsString = '매수' then Sender.Canvas.Font.Color := clRed
+  	else if FieldByName('BS_TP').AsString = '매도' then Sender.Canvas.Font.Color := clBlue;
+
+    Sender.DefaultDrawColumnDataCell(Cell, AreaCell, Column, ARect, Params);
+    Processed := True;
+  end;
+end;
+
+procedure TfmPresent.DBGridEh3TitleBtnClick(Sender: TObject; ACol: Integer;
+  Column: TColumnEh);
+begin
+  with dbNclrListV do
+  begin
+    if IndexFieldNames = Column.FieldName then
+    begin
+      IndexFieldNames := Column.FieldName + ' Desc';
+      First;
+    end
+    else
+    begin
+      IndexFieldNames := Column.FieldName;
+      First;
+    end;
+  end;
+end;
+
+procedure TfmPresent.DBGridEh5Columns2AdvDrawDataCell(Sender: TCustomDBGridEh;
+  Cell, AreaCell: TGridCoord; Column: TColumnEh; const ARect: TRect;
+  var Params: TColCellParamsEh; var Processed: Boolean);
+begin
+	with TDBGridEh(Sender).DataSource.DataSet do
+  begin
+  	Sender.Canvas.Font.Color := clBlack;
+	  if FieldByName(Column.FieldName).AsString = '매수' then Sender.Canvas.Font.Color := clRed
+  	else if FieldByName(Column.FieldName).AsString = '매도' then Sender.Canvas.Font.Color := clBlue;
+
+    Sender.DefaultDrawColumnDataCell(Cell, AreaCell, Column, ARect, Params);
+    Processed := True;
+  end;
+end;
+
+procedure TfmPresent.DBGridEh5Columns3AdvDrawDataCell(Sender: TCustomDBGridEh;
+  Cell, AreaCell: TGridCoord; Column: TColumnEh; const ARect: TRect;
+  var Params: TColCellParamsEh; var Processed: Boolean);
+begin
+	with TDBGridEh(Sender).DataSource.DataSet do
+  begin
+  	Sender.Canvas.Font.Color := clBlack;
+	  if FieldByName('BS_TP').AsString = '매수' then Sender.Canvas.Font.Color := clRed
+  	else if FieldByName('BS_TP').AsString = '매도' then Sender.Canvas.Font.Color := clBlue;
+
+    Sender.DefaultDrawColumnDataCell(Cell, AreaCell, Column, ARect, Params);
+    Processed := True;
+  end;
+end;
+
+procedure TfmPresent.DBGridEh5TitleBtnClick(Sender: TObject; ACol: Integer;
+  Column: TColumnEh);
+begin
+  with dbMitV do
+  begin
+    if IndexFieldNames = Column.FieldName then
+    begin
+      IndexFieldNames := Column.FieldName + ' Desc';
+      First;
+    end
+    else
+    begin
+      IndexFieldNames := Column.FieldName;
+      First;
+    end;
+  end;
+end;
+
+procedure TfmPresent.DBGridEh6Columns2AdvDrawDataCell(Sender: TCustomDBGridEh;
+  Cell, AreaCell: TGridCoord; Column: TColumnEh; const ARect: TRect;
+  var Params: TColCellParamsEh; var Processed: Boolean);
+begin
+	with TDBGridEh(Sender).DataSource.DataSet do
+  begin
+  	Sender.Canvas.Font.Color := clBlack;
+	  if FieldByName(Column.FieldName).AsString = '매수' then Sender.Canvas.Font.Color := clRed
+  	else if FieldByName(Column.FieldName).AsString = '매도' then Sender.Canvas.Font.Color := clBlue;
+
+    Sender.DefaultDrawColumnDataCell(Cell, AreaCell, Column, ARect, Params);
+    Processed := True;
+  end;
+end;
+
+procedure TfmPresent.DBGridEh6Columns3AdvDrawDataCell(Sender: TCustomDBGridEh;
+  Cell, AreaCell: TGridCoord; Column: TColumnEh; const ARect: TRect;
+  var Params: TColCellParamsEh; var Processed: Boolean);
+begin
+	with TDBGridEh(Sender).DataSource.DataSet do
+  begin
+  	Sender.Canvas.Font.Color := clBlack;
+	  if FieldByName('BS_TP').AsString = '매수' then Sender.Canvas.Font.Color := clRed
+  	else if FieldByName('BS_TP').AsString = '매도' then Sender.Canvas.Font.Color := clBlue;
+
+    Sender.DefaultDrawColumnDataCell(Cell, AreaCell, Column, ARect, Params);
+    Processed := True;
+  end;
+end;
+
+procedure TfmPresent.DBGridEh6TitleBtnClick(Sender: TObject; ACol: Integer;
+  Column: TColumnEh);
+begin
+  with dbNoCntrV do
+  begin
+    if IndexFieldNames = Column.FieldName then
+    begin
+      IndexFieldNames := Column.FieldName + ' Desc';
+      First;
+    end
+    else
+    begin
+      IndexFieldNames := Column.FieldName;
+      First;
+    end;
+  end;
+end;
+
+procedure TfmPresent.FormActivate(Sender: TObject);
+begin
+	if _ActiveTimer then Exit;
+
+	tmAuto.Enabled := chAutoSelect.Checked;
+end;
+
+procedure TfmPresent.FormDeactivate(Sender: TObject);
+begin
+	if _ActiveTimer then Exit;
+
+  tmAuto.Enabled := False;
+end;
+
+procedure TfmPresent.FormShow(Sender: TObject);
+begin
+	_ActiveTimer := False;
+
+  chName.Checked := __PresentName;
+end;
+
+procedure TfmPresent.MainTableOpen;
+var
+  sSql, sTemp, sTemp2 : String;
+begin
+	__PresentName := chName.Checked;
+
+  sTemp := 'A.STK_CD';
+
+  if chName.Checked then
+  	sTemp := Format('(SELECT ARTC_NM FROM ARTC_MST WHERE ARTC_CD = A.ARTC_CD AND (BS_TP=%s OR BS_TP=A.BS_TP)) AS STK_CD', [QuotedStr('A')]);
+
+
+  sTemp2 := '(SELECT B1.ACNT_NO FROM USER_MST A1, ACNT_MST B1 WHERE A1.USER_ID = B1.USER_ID) B';
+
+  if chUserTp.Checked then
+    sTemp2 := Format('(SELECT B1.ACNT_NO FROM USER_MST A1, ACNT_MST B1 WHERE A1.USER_ID = B1.USER_ID AND A1.USER_GRADE = %s) B',
+                       [QuotedStr('2')])
+
+  try
+    Delay_Show();
+
+//    sSql := Format( 'SELECT STK_CD,                           '+
+//                    ' (SELECT CODE_VALUE_NM FROM CODE_MST WHERE CODE_ID = %s AND CODE_VALUE = A.BS_TP) AS BS_TP, '+
+//                    '       SUM(NCLR_POS_QTY) AS NCLR_POS_QTY '+
+//                    'FROM NCLR_POS A                          '+
+//                    'WHERE API_TP = %s                        '+
+//                    'GROUP BY STK_CD,BS_TP                    '
+//                    ,[QuotedStr('BS_TP'),
+//                      QuotedStr('R')]);
+//
+//    Uni_Open(dbMain,sSql);
+
+    sSql := Format( 'SELECT %s, '+
+                    ' (SELECT CODE_VALUE_NM FROM CODE_MST WHERE CODE_ID = %s AND CODE_VALUE = A.BS_TP) AS BS_TP, '+
+                    ' CASE WHEN BS_TP = %s THEN SUM(NCLR_POS_QTY) ELSE -SUM(NCLR_POS_QTY) END AS NCLR_POS_QTY ' +
+                    'FROM NCLR_POS A '+
+                    'WHERE API_TP = %s '+
+                    'GROUP BY STK_CD, ARTC_CD, BS_TP '
+                    ,[sTemp,
+                      QuotedStr('BS_TP'),
+                      QuotedStr('B'),
+                      QuotedStr('V')]);
+
+    Uni_Open(dbNclr,sSql);
+
+//    sSql := Format( 'SELECT A.STK_CD, '+
+//                    '       (SELECT CODE_VALUE_NM FROM CODE_MST WHERE CODE_ID = %s AND CODE_VALUE = A.BS_TP) AS BS_TP, '+
+//                    '       A.NCLR_POS_QTY, '+
+//                    '       A.AVG_PRC, '+
+//                    '       B.USER_NM, '+
+//                    '       CASE WHEN B.OVERNGT_YN = %s THEN %s WHEN B.OVERNGT_YN = %s THEN %s END OVERNGT_YN '+
+//                    'FROM NCLR_POS A, '+
+//                    '     ACNT_MST B '+
+//                    'WHERE A.ACNT_NO = B.ACNT_NO '+
+//                    'AND A.API_TP = %s '+
+//                    'ORDER BY B.USER_NM DESC, A.STK_CD DESC '
+//                    ,[QuotedStr('BS_TP'),
+//                      QuotedStr('1'),
+//                      QuotedStr('종가'),
+//                      QuotedStr('2'),
+//                      QuotedStr('오버'),
+//                      QuotedStr('R')]);
+//
+//    Uni_Open(dbNclrListR, sSql);
+
+    sSql := Format( 'SELECT %s, '+
+                    '       (SELECT CODE_VALUE_NM FROM CODE_MST WHERE CODE_ID = %s AND CODE_VALUE = A.BS_TP) AS BS_TP, '+
+                    '       CASE WHEN BS_TP = %s THEN A.NCLR_POS_QTY ELSE -A.NCLR_POS_QTY END AS NCLR_POS_QTY, '+
+                    '       A.AVG_PRC, '+
+                    '       B.LEVERAGE, '+
+                    '       B.USER_NM, '+
+                    '       CASE WHEN B.OVERNGT_YN = %s THEN %s WHEN B.OVERNGT_YN = %s THEN %s END OVERNGT_YN '+
+                    'FROM NCLR_POS A, '+
+                    '     ACNT_MST B '+
+                    'WHERE A.ACNT_NO = B.ACNT_NO '+
+                    'AND A.API_TP = %s '+
+                    'ORDER BY B.USER_NM, A.STK_CD '
+                    ,[sTemp,
+                      QuotedStr('BS_TP'),
+                      QuotedStr('B'),
+                      QuotedStr('1'),
+                      QuotedStr('종가'),
+                      QuotedStr('2'),
+                      QuotedStr('오버'),
+                      QuotedStr('V')]);
+
+    Uni_Open(dbNclrListV, sSql);
+
+//    sSql := Format( 'SELECT B.USER_NM, '+
+//                    '       A.STK_CD,'+
+//                    '       (SELECT CODE_VALUE_NM FROM CODE_MST WHERE CODE_ID = %s AND CODE_VALUE = A.BS_TP) AS BS_TP, '+
+//                    '       A.REMN_QTY, '+
+//                    '       A.MIT_PRC '+
+//                    'FROM ORD A, '+
+//                    '     ACNT_MST B '+
+//                    'WHERE A.ACNT_NO = B.ACNT_NO '+
+//                    'AND A.COND_TP = %s '+
+//                    'AND A.REMN_QTY > 0 '+
+//                    'AND A.API_TP = %s '+
+//                    'ORDER BY B.USER_NM DESC, A.STK_CD DESC '
+//                    ,[QuotedStr('BS_TP'),
+//                      QuotedStr('1'),
+//                      QuotedStr('R')]);
+//
+//    Uni_Open(dbMitR, sSql);
+
+    sSql := Format( 'SELECT B.USER_NM, '+
+                    '       %s,'+
+                    '       (SELECT CODE_VALUE_NM FROM CODE_MST WHERE CODE_ID = %s AND CODE_VALUE = A.BS_TP) AS BS_TP, '+
+                    '       CASE WHEN A.BS_TP = %s THEN A.REMN_QTY ELSE -A.REMN_QTY END AS REMN_QTY, '+
+                    '       A.LEVERAGE, '+
+                    '       A.MIT_PRC '+
+                    'FROM ORD A, '+
+                    '     ACNT_MST B '+
+                    'WHERE A.ACNT_NO = B.ACNT_NO '+
+                    'AND A.COND_TP = %s '+
+                    'AND A.REMN_QTY > 0 '+
+                    'AND A.API_TP = %s '+
+                    'ORDER BY B.USER_NM, A.STK_CD '
+                    ,[sTemp,
+                      QuotedStr('BS_TP'),
+                      QuotedStr('B'),
+                      QuotedStr('1'),
+                      QuotedStr('V')]);
+
+    Uni_Open(dbMitV, sSql);
+
+//    sSql := Format( 'SELECT B.USER_NM, '+
+//                    '       A.STK_CD, '+
+//                    '       (SELECT CODE_VALUE_NM FROM CODE_MST WHERE CODE_ID = %s AND CODE_VALUE = A.BS_TP) AS BS_TP, '+
+//                    '       A.REMN_QTY, '+
+//                    '       A.ORD_PRC '+
+//                    'FROM ORD A, '+
+//                    '     ACNT_MST B '+
+//                    'WHERE A.ACNT_NO = B.ACNT_NO '+
+//                    'AND A.COND_TP <> %s '+
+//                    'AND A.REMN_QTY > 0 '+
+//                    'AND A.API_TP = %s '+
+//                    'ORDER BY B.USER_NM DESC, A.STK_CD DESC '
+//                    ,[QuotedStr('BS_TP'),
+//                      QuotedStr('1'),
+//                      QuotedStr('R')]);
+//
+//    Uni_Open(dbNoCntrR, sSql);
+
+    sSql := Format( 'SELECT B.USER_NM, '+
+                    '       %s, '+
+                    '       (SELECT CODE_VALUE_NM FROM CODE_MST WHERE CODE_ID = %s AND CODE_VALUE = A.BS_TP) AS BS_TP, '+
+                    '       CASE WHEN A.BS_TP = %s THEN A.REMN_QTY ELSE -A.REMN_QTY END AS REMN_QTY, '+
+                    '       A.LEVERAGE, '+
+                    '       A.ORD_PRC '+
+                    'FROM ORD A, '+
+                    '     ACNT_MST B '+
+                    'WHERE A.ACNT_NO = B.ACNT_NO '+
+                    'AND A.COND_TP <> %s '+
+                    'AND A.REMN_QTY > 0 '+
+                    'AND A.API_TP = %s '+
+                    'ORDER BY B.USER_NM, A.STK_CD '
+                    ,[sTemp,
+                      QuotedStr('BS_TP'),
+                      QuotedStr('B'),
+                      QuotedStr('1'),
+                      QuotedStr('V')]);
+
+    Uni_Open(dbNoCntrV, sSql);
+
+  finally
+    Delay_Hide;
+  end;
+end;
+
+procedure TfmPresent.pnTitleDblClick(Sender: TObject);
+begin
+  if bsMsgYesNo('자동조회를 활성화 하시겠습니까?') then
+  begin
+  	_ActiveTimer := True;
+    cbAutoTime.Add('15초마다');
+  end
+  else _ActiveTimer := False;
+end;
+
+procedure TfmPresent.tmAutoTimer(Sender: TObject);
+begin
+  tmAuto.Enabled := False;
+
+	MainTableOpen;
+
+  tmAuto.Enabled := chAutoSelect.Checked;
+end;
+
+end.

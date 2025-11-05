@@ -46,7 +46,6 @@ uses
   MUserStkPL in 'MUserStkPL.pas' {fmUserStkPL},
   MScL in 'MScL.pas' {fmScL},
   MStk in 'MStk.pas' {fmStk},
-  MUser in 'MUser.pas' {fmUser},
   MUserArtc in 'MUserArtc.pas' {fmUserArtc},
   MUserDetail in 'MUserDetail.pas' {fmUserDetail},
   MUserFilter in 'MUserFilter.pas' {fmUserFilter},
@@ -59,14 +58,16 @@ uses
   MOvList in 'MOvList.pas' {fmOvList},
   MNegoCmsn in 'MNegoCmsn.pas' {fmNegoCmsn},
   MOvApprove in 'MOvApprove.pas' {fmOvApprove},
-  uChatClientM in '..\..\..\GTLIB\CommonUnit\uChatClientM.pas' {frmChatClientM};
+  uChatClientM in '..\..\..\GTLIB\CommonUnit\uChatClientM.pas' {frmChatClientM},
+  checkdbgrid in 'checkdbgrid.pas',
+  MUser in 'MUser.pas' {fmUser};
 
 {$R *.res}
 
 begin
   Application.Initialize;
 //  Application.MainFormOnTaskbar := True;
-  Application.Title := '챔피언 관리자';
+  Application.Title := 'GTS Management';
   Application.CreateForm(TfmMain, fmMain);
   Application.Run;
 end.

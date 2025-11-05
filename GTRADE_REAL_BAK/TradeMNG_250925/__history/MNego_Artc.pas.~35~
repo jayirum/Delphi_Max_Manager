@@ -1,0 +1,535 @@
+unit MNego_Artc;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, bsSkinCtrls, ExtCtrls, RzPanel, StdCtrls, DB, MemDS, DBAccess, Uni,
+  bsMessages, BusinessSkinForm;
+
+type
+  TfmNego_Artc = class(TForm)
+    bsBusinessSkinForm: TbsBusinessSkinForm;
+    bsSkinMessage: TbsSkinMessage;
+    dbMain: TUniQuery;
+    dsMain: TDataSource;
+    bsSkinPanel1: TbsSkinPanel;
+    btnClose: TbsSkinSpeedButton;
+    pnOut: TbsSkinPanel;
+    pnSSI: TbsSkinPanel;
+    lbArtcCD_SSI: TLabel;
+    lbName_SSI: TRzPanel;
+    btnOK_SSI: TbsSkinButton;
+    btnCancel_SSI: TbsSkinButton;
+    pnURO: TbsSkinPanel;
+    lbArtcCD_URO: TLabel;
+    lbName_URO: TRzPanel;
+    btnOK_URO: TbsSkinButton;
+    btnCancel_URO: TbsSkinButton;
+    pnSCN: TbsSkinPanel;
+    lbArtcCD_SCN: TLabel;
+    lbName_SCN: TRzPanel;
+    btnOK_SCN: TbsSkinButton;
+    btnCancel_SCN: TbsSkinButton;
+    pnNQ: TbsSkinPanel;
+    lbArtcCD_NQ: TLabel;
+    lbName_NQ: TRzPanel;
+    btnOK_NQ: TbsSkinButton;
+    btnCancel_NQ: TbsSkinButton;
+    pnJY: TbsSkinPanel;
+    lbArtcCD_JY: TLabel;
+    lbName_JY: TRzPanel;
+    btnOK_JY: TbsSkinButton;
+    btnCancel_JY: TbsSkinButton;
+    pnHSI: TbsSkinPanel;
+    lbArtcCD_HSI: TLabel;
+    lbName_HSI: TRzPanel;
+    btnOK_HSI: TbsSkinButton;
+    btnCancel_HSI: TbsSkinButton;
+    pnGC: TbsSkinPanel;
+    lbArtcCD_GC: TLabel;
+    lbName_GC: TRzPanel;
+    btnOK_GC: TbsSkinButton;
+    btnCancel_GC: TbsSkinButton;
+    pnFDAX: TbsSkinPanel;
+    lbArtcCD_FDAX: TLabel;
+    lbName_FDAX: TRzPanel;
+    btnOK_FDAX: TbsSkinButton;
+    btnCancel_FDAX: TbsSkinButton;
+    pnES: TbsSkinPanel;
+    lbArtcCD_ES: TLabel;
+    lbName_ES: TRzPanel;
+    btnOK_ES: TbsSkinButton;
+    btnCancel_ES: TbsSkinButton;
+    pnCL: TbsSkinPanel;
+    lbArtcCD_CL: TLabel;
+    lbName_CL: TRzPanel;
+    btnOK_CL: TbsSkinButton;
+    btnCancel_CL: TbsSkinButton;
+    pnBP: TbsSkinPanel;
+    lbArtcCD_BP: TLabel;
+    lbName_BP: TRzPanel;
+    btnOK_BP: TbsSkinButton;
+    btnCancel_BP: TbsSkinButton;
+    pnAD: TbsSkinPanel;
+    lbArtcCD_AD: TLabel;
+    lbName_AD: TRzPanel;
+    btnOK_AD: TbsSkinButton;
+    btnCancel_AD: TbsSkinButton;
+    pnYM: TbsSkinPanel;
+    lbArtcCD_YM: TLabel;
+    lbName_YM: TRzPanel;
+    btnOK_YM: TbsSkinButton;
+    btnCancel_YM: TbsSkinButton;
+    pnUserID: TRzPanel;
+    bsSkinLabel42: TbsSkinLabel;
+    dbSQL: TUniQuery;
+    procedure FormShow(Sender: TObject);
+    procedure btnCloseClick(Sender: TObject);
+    procedure btnOK_ADClick(Sender: TObject);
+    procedure btnCancel_ADClick(Sender: TObject);
+    procedure btnOK_BPClick(Sender: TObject);
+    procedure btnCancel_BPClick(Sender: TObject);
+    procedure btnOK_CLClick(Sender: TObject);
+    procedure btnOK_ESClick(Sender: TObject);
+    procedure btnOK_FDAXClick(Sender: TObject);
+    procedure btnOK_GCClick(Sender: TObject);
+    procedure btnOK_HSIClick(Sender: TObject);
+    procedure btnOK_JYClick(Sender: TObject);
+    procedure btnOK_NQClick(Sender: TObject);
+    procedure btnOK_SCNClick(Sender: TObject);
+    procedure btnOK_SSIClick(Sender: TObject);
+    procedure btnOK_UROClick(Sender: TObject);
+    procedure btnOK_YMClick(Sender: TObject);
+    procedure btnCancel_CLClick(Sender: TObject);
+    procedure btnCancel_ESClick(Sender: TObject);
+    procedure btnCancel_FDAXClick(Sender: TObject);
+    procedure btnCancel_GCClick(Sender: TObject);
+    procedure btnCancel_HSIClick(Sender: TObject);
+    procedure btnCancel_JYClick(Sender: TObject);
+    procedure btnCancel_NQClick(Sender: TObject);
+    procedure btnCancel_SCNClick(Sender: TObject);
+    procedure btnCancel_SSIClick(Sender: TObject);
+    procedure btnCancel_UROClick(Sender: TObject);
+    procedure btnCancel_YMClick(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+    procedure DataOpen_NegoARTC(sUserID: String);
+    function DataExec_ArtcUseYN(sArtcCD, sUseYN: String): Boolean;
+  end;
+
+var
+  fmNego_Artc: TfmNego_Artc;
+  procedure NeroArtc_Run(sUserID, sUserNM: String);
+
+implementation
+
+{$R *.dfm}
+
+{ TfmNego_Artc }
+var
+	_sUserID, _sUserNM: String;
+
+procedure NeroArtc_Run(sUserID, sUserNM: String);
+begin
+	fmNego_Artc := TfmNego_Artc.Create(Application);
+
+  with fmNego_Artc do
+  begin
+    try
+    	_sUserID := sUserID;
+      _sUserNM := sUserNM;
+
+    	pnUserID.Caption := _sUserNM + ' - ' + sUserID;
+
+      ShowModal;
+    finally
+    	Free;
+    end;
+  end;
+end;
+
+procedure TfmNego_Artc.btnCancel_ADClick(Sender: TObject);
+begin
+	DataExec_ArtcUseYN(lbArtcCD_AD.Caption, 'N');
+end;
+
+procedure TfmNego_Artc.btnCancel_BPClick(Sender: TObject);
+begin
+	DataExec_ArtcUseYN(lbArtcCD_BP.Caption, 'N');
+end;
+
+procedure TfmNego_Artc.btnCancel_CLClick(Sender: TObject);
+begin
+	DataExec_ArtcUseYN(lbArtcCD_CL.Caption, 'N');
+end;
+
+procedure TfmNego_Artc.btnCancel_ESClick(Sender: TObject);
+begin
+	DataExec_ArtcUseYN(lbArtcCD_ES.Caption, 'N');
+end;
+
+procedure TfmNego_Artc.btnCancel_FDAXClick(Sender: TObject);
+begin
+	DataExec_ArtcUseYN(lbArtcCD_FDAX.Caption, 'N');
+end;
+
+procedure TfmNego_Artc.btnCancel_GCClick(Sender: TObject);
+begin
+	DataExec_ArtcUseYN(lbArtcCD_GC.Caption, 'N');
+end;
+
+procedure TfmNego_Artc.btnCancel_HSIClick(Sender: TObject);
+begin
+	DataExec_ArtcUseYN(lbArtcCD_HSI.Caption, 'N');
+end;
+
+procedure TfmNego_Artc.btnCancel_JYClick(Sender: TObject);
+begin
+	DataExec_ArtcUseYN(lbArtcCD_JY.Caption, 'N');
+end;
+
+procedure TfmNego_Artc.btnCancel_NQClick(Sender: TObject);
+begin
+	DataExec_ArtcUseYN(lbArtcCD_NQ.Caption, 'N');
+end;
+
+procedure TfmNego_Artc.btnCancel_SCNClick(Sender: TObject);
+begin
+	DataExec_ArtcUseYN(lbArtcCD_SCN.Caption, 'N');
+end;
+
+procedure TfmNego_Artc.btnCancel_SSIClick(Sender: TObject);
+begin
+	DataExec_ArtcUseYN(lbArtcCD_SSI.Caption, 'N');
+end;
+
+procedure TfmNego_Artc.btnCancel_UROClick(Sender: TObject);
+begin
+	DataExec_ArtcUseYN(lbArtcCD_URO.Caption, 'N');
+end;
+
+procedure TfmNego_Artc.btnCancel_YMClick(Sender: TObject);
+begin
+	DataExec_ArtcUseYN(lbArtcCD_YM.Caption, 'N');
+end;
+
+procedure TfmNego_Artc.btnCloseClick(Sender: TObject);
+begin
+	Close;
+end;
+
+procedure TfmNego_Artc.btnOK_ADClick(Sender: TObject);
+begin
+	DataExec_ArtcUseYN(lbArtcCD_AD.Caption, 'Y');
+end;
+
+procedure TfmNego_Artc.btnOK_BPClick(Sender: TObject);
+begin
+	DataExec_ArtcUseYN(lbArtcCD_BP.Caption, 'Y');
+end;
+
+procedure TfmNego_Artc.btnOK_CLClick(Sender: TObject);
+begin
+	DataExec_ArtcUseYN(lbArtcCD_CL.Caption, 'Y');
+end;
+
+procedure TfmNego_Artc.btnOK_ESClick(Sender: TObject);
+begin
+	DataExec_ArtcUseYN(lbArtcCD_ES.Caption, 'Y');
+end;
+
+procedure TfmNego_Artc.btnOK_FDAXClick(Sender: TObject);
+begin
+	DataExec_ArtcUseYN(lbArtcCD_FDAX.Caption, 'Y');
+end;
+
+procedure TfmNego_Artc.btnOK_GCClick(Sender: TObject);
+begin
+	DataExec_ArtcUseYN(lbArtcCD_GC.Caption, 'Y');
+end;
+
+procedure TfmNego_Artc.btnOK_HSIClick(Sender: TObject);
+begin
+	DataExec_ArtcUseYN(lbArtcCD_HSI.Caption, 'Y');
+end;
+
+procedure TfmNego_Artc.btnOK_JYClick(Sender: TObject);
+begin
+	DataExec_ArtcUseYN(lbArtcCD_JY.Caption, 'Y');
+end;
+
+procedure TfmNego_Artc.btnOK_NQClick(Sender: TObject);
+begin
+	DataExec_ArtcUseYN(lbArtcCD_NQ.Caption, 'Y');
+end;
+
+procedure TfmNego_Artc.btnOK_SCNClick(Sender: TObject);
+begin
+	DataExec_ArtcUseYN(lbArtcCD_SCN.Caption, 'Y');
+end;
+
+procedure TfmNego_Artc.btnOK_SSIClick(Sender: TObject);
+begin
+	DataExec_ArtcUseYN(lbArtcCD_SSI.Caption, 'Y');
+end;
+
+procedure TfmNego_Artc.btnOK_UROClick(Sender: TObject);
+begin
+	DataExec_ArtcUseYN(lbArtcCD_URO.Caption, 'Y');
+end;
+
+procedure TfmNego_Artc.btnOK_YMClick(Sender: TObject);
+begin
+	DataExec_ArtcUseYN(lbArtcCD_YM.Caption, 'Y');
+end;
+
+function TfmNego_Artc.DataExec_ArtcUseYN(sArtcCD, sUseYN: String): Boolean;
+var
+  sSQL, sMsg: String;
+begin
+  Result := False;
+
+  if sUseYN = 'Y' then sMsg := '거래가능'
+  else sMsg := '거래불가';
+
+  sSQL := Format('EXEC PT_NEGO_ARTC %s, %s, %s '
+                       , [QuotedStr(_sUserID),
+                          QuotedStr(sArtcCD),
+                          QuotedStr(sUseYN)
+                          ]);
+
+  try
+    with dbSQL do
+    begin
+      Close;
+      SQL.Text := sSQL;
+      ExecSQL;
+
+      if FieldByName('RESULT_CODE').AsString = '0000' then
+      begin
+        bsSkinMessage.MessageDlg2(Format('%s이(가) 처리되었습니다', [sMsg]), '확인', mtInformation, [mbOK], 0);
+        DataOpen_NegoARTC(_sUserID);
+        Result := True;
+      end
+      else
+      begin
+        bsSkinMessage.MessageDlg2('오류입니다. 다시 신청하세요. [0001]', '오류', mtError, [mbOK], 0);
+      end;
+
+      Close;
+    end;
+  except
+    bsSkinMessage.MessageDlg2('오류입니다. 다시 신청하세요. [0002]', '오류', mtError, [mbOK], 0);
+  end;
+end;
+
+procedure TfmNego_Artc.DataOpen_NegoARTC(sUserID: String);
+var
+  sSQL, sMsg, sArtcCD, sArtcNM, sUseYN: String;
+  iHeight: Integer;
+begin
+  sSQL := Format('SELECT A.ARTC_CD, '            +
+                        'A.ARTC_NM '            +
+                   'FROM ARTC_MST A, '           +
+                        'STK_MST B '             +
+                  'WHERE A.ACNT_TP = %s '        +
+                    'AND A.ARTC_USE_YN = %s '    +
+                    'AND B.STK_USE_YN = %s '     +
+                    'AND A.ARTC_CD = B.ARTC_CD ', [QuotedStr('2'), QuotedStr('Y'), QuotedStr('Y')]);
+
+	sSQL := Format('SELECT * ' +
+                   'FROM ( ' +
+                          'SELECT AA.*, ISNULL(BB.ARTC_USE_YN, %s) AS ARTC_USE_YN ' +
+                            'FROM (' + sSQL +
+                                 ') AA LEFT OUTER JOIN ' +
+                                 '(SELECT ARTC_CD, ARTC_USE_YN FROM NEGO_ARTC WHERE USER_ID = %s) BB ' +
+                                 'ON AA.ARTC_CD = BB.ARTC_CD ' +
+                         ') A1 ORDER BY A1.ARTC_CD ', [QuotedStr('Y'), QuotedStr(_sUserID)]);
+
+  try
+    with dbMain do
+    begin
+    	Close;
+      SQL.Text := sSQL;
+      Open;
+
+      iHeight := 100;
+      First;
+      while Not Eof do
+      begin
+        iHeight := iHeight + 32;
+        sArtcCD := Trim(FieldByName('ARTC_CD').AsString);
+        sArtcNM := Trim(FieldByName('ARTC_NM').AsString);
+        sUseYN  := Trim(FieldByName('ARTC_USE_YN').AsString);
+
+				if (sArtcCD = 'AD') or (sArtcCD = '6A') then
+        begin
+          pnAD.Visible := True;
+          lbName_AD.Caption    := sArtcNM;
+          btnOK_AD.Enabled     := sUseYN <> 'Y';
+          btnCancel_AD.Enabled := sUseYN = 'Y';
+          lbArtcCD_AD.Caption  := sArtcCD;
+        end
+        else if (sArtcCD = 'BP') or (sArtcCD = '6B') then
+        begin
+          pnBP.Visible := True;
+          lbName_BP.Caption    := sArtcNM;
+          btnOK_BP.Enabled     := sUseYN <> 'Y';
+          btnCancel_BP.Enabled := sUseYN = 'Y';
+          lbArtcCD_BP.Caption  := sArtcCD;
+        end
+        else if sArtcCD = 'CL' then
+        begin
+          pnCL.Visible := True;
+          lbName_CL.Caption    := sArtcNM;
+          btnOK_CL.Enabled     := sUseYN <> 'Y';
+          btnCancel_CL.Enabled := sUseYN = 'Y';
+          lbArtcCD_CL.Caption  := sArtcCD;
+        end
+        else if sArtcCD = 'ES' then
+        begin
+          pnES.Visible := True;
+          lbName_ES.Caption    := sArtcNM;
+          btnOK_ES.Enabled     := sUseYN <> 'Y';
+          btnCancel_ES.Enabled := sUseYN = 'Y';
+          lbArtcCD_ES.Caption  := sArtcCD;
+        end
+        else if sArtcCD = 'FDAX' then
+        begin
+          pnFDAX.Visible := True;
+          lbName_FDAX.Caption    := sArtcNM;
+          btnOK_FDAX.Enabled     := sUseYN <> 'Y';
+          btnCancel_FDAX.Enabled := sUseYN = 'Y';
+          lbArtcCD_FDAX.Caption  := sArtcCD;
+        end
+        else if sArtcCD = 'GC' then
+        begin
+          pnGC.Visible := True;
+          lbName_GC.Caption    := sArtcNM;
+          btnOK_GC.Enabled     := sUseYN <> 'Y';
+          btnCancel_GC.Enabled := sUseYN = 'Y';
+          lbArtcCD_GC.Caption  := sArtcCD;
+        end
+        else if sArtcCD = 'HSI' then
+        begin
+          pnHSI.Visible := True;
+          lbName_HSI.Caption    := sArtcNM;
+          btnOK_HSI.Enabled     := sUseYN <> 'Y';
+          btnCancel_HSI.Enabled := sUseYN = 'Y';
+          lbArtcCD_HSI.Caption  := sArtcCD;
+        end
+        else if (sArtcCD = 'JY') or (sArtcCD = '6J') then
+        begin
+          pnJY.Visible := True;
+          lbName_JY.Caption    := sArtcNM;
+          btnOK_JY.Enabled     := sUseYN <> 'Y';
+          btnCancel_JY.Enabled := sUseYN = 'Y';
+          lbArtcCD_JY.Caption  := sArtcCD;
+        end
+        else if sArtcCD = 'NQ' then
+        begin
+          pnNQ.Visible := True;
+          lbName_NQ.Caption    := sArtcNM;
+          btnOK_NQ.Enabled     := sUseYN <> 'Y';
+          btnCancel_NQ.Enabled := sUseYN = 'Y';
+          lbArtcCD_NQ.Caption  := sArtcCD;
+        end
+        else if sArtcCD = 'SCN' then
+        begin
+          pnSCN.Visible := True;
+          lbName_SCN.Caption    := sArtcNM;
+          btnOK_SCN.Enabled     := sUseYN <> 'Y';
+          btnCancel_SCN.Enabled := sUseYN = 'Y';
+          lbArtcCD_SCN.Caption  := sArtcCD;
+        end
+        else if sArtcCD = 'SSI' then
+        begin
+          pnSSI.Visible := True;
+          lbName_SSI.Caption    := sArtcNM;
+          btnOK_SSI.Enabled     := sUseYN <> 'Y';
+          btnCancel_SSI.Enabled := sUseYN = 'Y';
+          lbArtcCD_SSI.Caption  := sArtcCD;
+        end
+        else if (sArtcCD = 'URO') or (sArtcCD = '6E') then
+        begin
+          pnURO.Visible := True;
+          lbName_URO.Caption    := sArtcNM;
+          btnOK_URO.Enabled     := sUseYN <> 'Y';
+          btnCancel_URO.Enabled := sUseYN = 'Y';
+          lbArtcCD_URO.Caption  := sArtcCD;
+        end
+        else if sArtcCD = 'YM' then
+        begin
+          pnYM.Visible := True;
+          lbName_YM.Caption    := sArtcNM;
+          btnOK_YM.Enabled     := sUseYN <> 'Y';
+          btnCancel_YM.Enabled := sUseYN = 'Y';
+          lbArtcCD_YM.Caption  := sArtcCD;
+        end;
+
+        Next;
+      end;
+    end;
+
+    Height := iHeight;
+  except
+    Close;
+  end;
+end;
+
+procedure TfmNego_Artc.FormShow(Sender: TObject);
+begin
+	DataOpen_NegoARTC(_sUserID);
+end;
+
+{
+
+function TfmOverNgt.DataExec_OverNgy(sArtcCD, sArtcNM, sOverNgtYN: String): Boolean;
+var
+  sSQL, sMsg: String;
+begin
+  Result := False;
+
+  if sOverNgtYN = 'Y' then sMsg := '신청'
+  else sMsg := '취소';
+
+  sSQL := Format('PT_REQ_OVERNGT %s, %s, %s, %s, %s, %s, %s '
+                       , [QuotedStr(USER_ID),
+                          QuotedStr(TRADE_DT),
+                          QuotedStr(sOverNgtYN),
+                          QuotedStr(ACNT_NO),
+                          QuotedStr(sArtcCD),
+                          QuotedStr(USER_NM),
+                          QuotedStr('CLINET')
+                          ]);
+
+  if Not Client_Open(dbSQL, sSQL) then Exit;
+
+  try
+    with dbSQL do
+    begin
+      if FieldByName('RESULT_CODE').AsString = '0000' then
+      begin
+        if sOverNgtYN = 'Y' then Send_NC002(sOverNgtYN, sArtcCD, sArtcNM);
+        
+        bsMsgInfo(Format('%s이(가) 완료되었습니다', [sMsg]));
+        DataOpen_OverNgt;
+        Result := True;
+      end
+      else
+      begin
+        bsMsgInfo(Format('%s    다시 신청하세요.', [FieldByName('RESULT_MSG').AsString]), Format('%s 오류', [sMsg]));
+      end;
+
+      Close;
+    end;
+  except
+    MsgError('인터넷이 불안정합니다. 재실행하세요.');
+    Application.Terminate;
+  end;
+end;
+}
+end.
