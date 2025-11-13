@@ -137,73 +137,81 @@ begin
                           else sUserTp := ' AND B1.USER_GRADE <> 7 ';
     end;
 
-    sSql := Format(
-      'SELECT ACNT_NO ' +
-      '      ,USER_NM ' +
-      '      ,USER_ID ' +
-      '      ,ACNT_TP ' +
-      '      ,MAX(ACNT_AMT) AS ACNT_AMT ' +                                     // 잔액
-      '      ,MAX(CMSN) AS CMSN         ' +                                     // 수수료
-      '      ,MAX(LEVERAGE) AS LEVERAGE ' +                                     // 레버리지
-      '      ,SUM(NCLR_POS_QTY) AS QTY  ' +                                     // 수량
-      '      ,MAX(REALPL) AS REALPL     ' +                                     // 실현손익
-      '      ,SUM(EVAPL) AS EVAPL       ' +                                     // 평가손익
-      '      ,(MAX(ACNT_AMT) + MAX(REALPL) + SUM(EVAPL)) AS EVA_AMT ' +         // 평가잔액
-      '  FROM (SELECT ACNT_NO      ' +
-      '              ,ACNT_TP      ' +
-      '              ,USER_NM      ' +
-      '              ,USER_ID      ' +
-      '              ,ACNT_AMT     ' +
-      '              ,CLR_PL       ' +
-      '              ,CMSN         ' +
-      '              ,LEVERAGE     ' +
-      '              ,NCLR_POS_QTY ' +
-      '              ,CASE WHEN BS_TP = %s THEN (AVG_PRC - CNTR_PRC) * NCLR_POS_QTY * TICK           ' +
-      '                    WHEN BS_TP = %s THEN (CNTR_PRC - AVG_PRC) * NCLR_POS_QTY * TICK END EVAPL ' +
-      '              ,(ACNT_AMT + CLR_PL - CMSN) AS SUMPL                                            ' +
-      '              ,(CLR_PL - CMSN) AS REALPL                                                      ' +
-      '              ,(SELECT TOP(1) DOT_CNT FROM ARTC_MST WHERE ARTC_CD = ARTC_CD) AS DOT_CNT       ' +
-      '          FROM (SELECT A.ACNT_NO ' +
-      '                      ,A.ACNT_TP ' +
-      '                      ,D.USER_NM ' +
-      '                      ,D.USER_ID ' +
-      '                      ,A.STK_CD  ' +
-      '                      ,A.BS_TP   ' +
-      '                      ,SUM(D.ACNT_AMT) AS ACNT_AMT ' +
-      '                      ,SUM(D.CLR_PL) AS CLR_PL     ' +
-      '                      ,SUM(D.CMSN) AS CMSN         ' +
-      '                      ,SUM(D.LEVERAGE) AS LEVERAGE ' +
-      '                      ,ISNULL(SUM(A.NCLR_POS_QTY), 0) AS NCLR_POS_QTY ' +
-      '                      ,ISNULL(SUM(C.CNTR_PRC),0) AS CNTR_PRC          ' +
-      '                      ,ISNULL(SUM(A.AVG_PRC),0) AS AVG_PRC            ' +
-//      '                      ,CASE WHEN ((A.ARTC_CD = %s OR A.ARTC_CD = %s) AND (SUM(A.AVG_PRC) < 0)) ' +
-//      '                            THEN SUM(B.TICK_VALUE_LOW / B.TICK_SIZE_LOW)  ' +
-//      '                            ELSE SUM(B.TICK_VALUE / B.TICK_SIZE) END TICK ' +
-      '                      ,B.TICK_SIZE * B.TICK_VALUE / D.LEVERAGE TICK ' +
-      '                  FROM NCLR_POS A, ' +
-      '                       ARTC_MST B, ' +
-      '                       CURR_PRC C, ' +
-      '                       (SELECT A1.* FROM ACNT_MST A1, USER_MST B1 WHERE A1.USER_ID = B1.USER_ID %s ) D ' +
-      '                 WHERE A.ARTC_CD = B.ARTC_CD               ' +
-      '                   AND (A.BS_TP = B.BS_TP OR B.BS_TP = %s) ' +
-      '                   AND A.STK_CD = C.STK_CD                 ' +
-      '                   AND A.ACNT_NO = D.ACNT_NO               ' +
-      '                 GROUP BY A.ACNT_NO,     ' +
-      '                          A.ACNT_TP,     ' +
-      '                          D.USER_NM,     ' +
-      '                          D.USER_ID,     ' +
-      '                          A.STK_CD,      ' +
-      '                          A.BS_TP,       ' +
-      '                          A.ARTC_CD) TMP ' +
-      '       ) MAIN     ' +
-      ' GROUP BY ACNT_NO, USER_NM, USER_ID, ACNT_TP ',
-      [QuotedStr('S'),
-       QuotedStr('B'),
-       QuotedStr('201'),
-       QuotedStr('301'),
-       sUserTp,
-       QuotedStr('A')]);
-    fnSqlOpen(dbMain, sSql);
+    sSql := Format( 'SELECT ACNT_NO,                                                                         '+
+                    '       MAX(LEVERAGE) AS LEVERAGE,                                                       '+
+                    '       USER_NM,                                                                         '+
+                    '       USER_ID,                                                                         '+
+                    '       0 AS ACNT_TP,                                                                    '+
+                    '       MAX(ACNT_AMT) AS ACNT_AMT,                                                       '+    //잔액
+                    '       MAX(CMSN) AS CMSN,                                                               '+    //수수료
+                    '       SUM(NCLR_POS_QTY) AS QTY,                                                        '+    //수량
+                    '       SUM(EVAPL) / MAX(LEVERAGE) AS EVAPL,                                             '+    //평가손익
+                    '       MAX(REALPL) AS REALPL,                                                           '+    //실현손익
+//                    '       (MAX(ACNT_AMT) + MAX(REALPL) + (SUM(EVAPL)/ MAX(LEVERAGE))) - MAX(CMSN) AS EVA_AMT '+    //평가잔액
+                    '       (MAX(ACNT_AMT) + MAX(REALPL) + (SUM(EVAPL)/ MAX(LEVERAGE))) AS EVA_AMT '+    //평가잔액
+                    'FROM                                                                                    '+
+                    '( SELECT ACNT_NO,                                                                       '+
+//                    '       ACNT_TP,                                                                         '+
+                    '       USER_NM,                                                                         '+
+                    '       USER_ID,                                                                         '+
+                    '       LEVERAGE,                                                                        '+
+                    '       ACNT_AMT,                                                                        '+
+                    '       CLR_PL,                                                                          '+
+                    '       CMSN,                                                                            '+
+                    '       NCLR_POS_QTY,                                                                    '+
+                    '       CASE WHEN BS_TP = %s THEN (AVG_PRC - CNTR_PRC) * NCLR_POS_QTY * TICK             '+
+                    '            WHEN BS_TP = %s THEN (CNTR_PRC - AVG_PRC) * NCLR_POS_QTY * TICK END EVAPL,  '+
+                    '       (ACNT_AMT + CLR_PL - CMSN) AS SUMPL,                                             '+
+                    '       (CLR_PL - CMSN) AS REALPL,                                                       '+
+                    '(SELECT TOP(1) DOT_CNT FROM ARTC_MST WHERE ARTC_CD = ARTC_CD) AS DOT_CNT                '+
+                    'FROM                                                                                    '+
+                    '(SELECT  A.ACNT_NO                                                                      '+
+//                    '        ,A.ACNT_TP                                                                      '+
+                    '        ,D.USER_NM                                                                      '+
+                    '        ,D.USER_ID                                                                      '+
+                    '        ,MAX(D.LEVERAGE) AS LEVERAGE                                                    '+
+                    '        ,A.STK_CD                                                                       '+
+                    '        ,A.BS_TP                                                                        '+
+                    '        ,SUM(D.ACNT_AMT) AS ACNT_AMT                                                    '+
+                    '        ,SUM(D.CLR_PL) AS CLR_PL                                                        '+
+                    '        ,SUM(D.CMSN) AS CMSN                                                            '+
+                    '        ,ISNULL(SUM(A.NCLR_POS_QTY), 0) AS NCLR_POS_QTY                                 '+
+                    '        ,ISNULL(SUM(C.CNTR_PRC),0) AS CNTR_PRC                                          '+
+                    '        ,ISNULL(SUM(A.AVG_PRC),0) AS AVG_PRC                                            '+
+                    '        ,CASE WHEN ((A.ARTC_CD = %s OR A.ARTC_CD = %s) AND (SUM(A.AVG_PRC) < 3))        '+
+                    '              THEN SUM(B.TICK_VALUE_LOW / B.TICK_SIZE_LOW)                              '+
+                    '              ELSE SUM(B.TICK_VALUE / B.TICK_SIZE) END TICK                             '+
+                    'FROM NCLR_POS A,                                                                        '+
+                    '     ARTC_MST B,                                                                        '+
+                    '     CURR_PRC C,                                                                        '+
+                    '     (SELECT A1.* FROM ACNT_MST A1, USER_MST B1 WHERE A1.USER_ID = B1.USER_ID %s ) D '+
+                    'WHERE A.ARTC_CD = B.ARTC_CD                                                             '+
+                    'AND (A.BS_TP = B.BS_TP OR B.BS_TP = %s)                                                 '+
+                    'AND A.STK_CD = C.STK_CD                                                                 '+
+                    'AND A.ACNT_NO = D.ACNT_NO                                                               '+
+                    'AND (C.NGT_YN = %s OR C.NGT_YN = %s)                                                    '+
+                    ' GROUP BY A.ACNT_NO,                                                                    '+
+//                    '         A.ACNT_TP,                                                                     '+
+                    '         D.USER_NM,                                                                     '+
+                    '         D.USER_ID,                                                                     '+
+                    '         A.STK_CD,                                                                      '+
+                    '         A.BS_TP,                                                                       '+
+                    '         A.ARTC_CD) TMP ) MAIN                                                          '+
+                    ' GROUP BY ACNT_NO,                                                                      '+
+                    '       USER_NM,                                                                         '+
+                    '       USER_ID                                                                          ',
+                    [QuotedStr('S'),
+                     QuotedStr('B'),
+                     QuotedStr('201'),
+                     QuotedStr('301'),
+                     sUserTp,
+                     QuotedStr('A'),
+                     QuotedStr('A'),
+                     QuotedStr('N')
+                     ]);
+
+
+   fnSqlOpen(dbMain, sSql);
   finally
     Delay_Hide;
   end;

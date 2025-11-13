@@ -265,6 +265,7 @@ inherited fmRealPL: TfmRealPL
       end
       item
         Alignment = taCenter
+        DisplayFormat = '#,##0'
         DynProps = <>
         EditButtons = <>
         FieldName = 'ACNT_AMT'
@@ -276,6 +277,7 @@ inherited fmRealPL: TfmRealPL
       end
       item
         Alignment = taCenter
+        DisplayFormat = '#,##0'
         DynProps = <>
         EditButtons = <>
         FieldName = 'CMSN'
@@ -293,6 +295,7 @@ inherited fmRealPL: TfmRealPL
       end
       item
         Alignment = taCenter
+        DisplayFormat = '#,##0'
         DynProps = <>
         EditButtons = <>
         FieldName = 'REALPL'
@@ -309,6 +312,7 @@ inherited fmRealPL: TfmRealPL
       end
       item
         Alignment = taCenter
+        DisplayFormat = '#,##0'
         DynProps = <>
         EditButtons = <>
         FieldName = 'EVAPL'
@@ -325,6 +329,7 @@ inherited fmRealPL: TfmRealPL
       end
       item
         Alignment = taCenter
+        DisplayFormat = '#,##0'
         DynProps = <>
         EditButtons = <>
         FieldName = 'EVA_AMT'
@@ -373,7 +378,7 @@ inherited fmRealPL: TfmRealPL
   end
   inherited imgBtn: TImageList
     Bitmap = {
-      494C01010B003400B40010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C01010B003400B80010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000003000000001002000000000000030
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000

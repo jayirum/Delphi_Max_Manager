@@ -751,6 +751,7 @@ begin
       ' ORDER BY A.ACNT_NO ',
       [sUserTp,
        sUserPart ]);
+
     fnSqlOpen(dbMain, sSql);
   finally
     Delay_Hide;
