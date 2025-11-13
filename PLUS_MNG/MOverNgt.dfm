@@ -2,8 +2,6 @@ inherited fmOverNgt: TfmOverNgt
   Tag = 3007
   Caption = 'OV/'#51333#44032#52397#49328' '#49888#52397#54788#54889
   OnShow = FormShow
-  ExplicitWidth = 953
-  ExplicitHeight = 592
   PixelsPerInch = 96
   TextHeight = 12
   inherited pnTop: TRzPanel
@@ -11,6 +9,7 @@ inherited fmOverNgt: TfmOverNgt
       Left = 385
       Top = 4
       Height = 23
+      SkinData = fmMain.bsSkinData
       ExplicitLeft = 385
       ExplicitTop = 4
       ExplicitHeight = 23
@@ -18,12 +17,14 @@ inherited fmOverNgt: TfmOverNgt
     inherited btnInsert: TbsSkinSpeedButton
       Left = 485
       Visible = False
+      SkinData = fmMain.bsSkinData
       ExplicitLeft = 485
     end
     inherited btnEdit: TbsSkinSpeedButton
       Left = 479
       Top = 0
       Visible = False
+      SkinData = fmMain.bsSkinData
       ExplicitLeft = 479
       ExplicitTop = 0
     end
@@ -31,6 +32,7 @@ inherited fmOverNgt: TfmOverNgt
       Left = 473
       Top = 0
       Visible = False
+      SkinData = fmMain.bsSkinData
       ExplicitLeft = 473
       ExplicitTop = 0
     end
@@ -38,14 +40,19 @@ inherited fmOverNgt: TfmOverNgt
       Left = 467
       Top = 0
       Visible = False
+      SkinData = fmMain.bsSkinData
       ExplicitLeft = 467
       ExplicitTop = 0
+    end
+    inherited btnClose: TbsSkinSpeedButton
+      SkinData = fmMain.bsSkinData
     end
     inherited bsRibbonDivider4: TbsRibbonDivider
       Left = 456
       Top = 1
       Height = 25
       Visible = False
+      SkinData = fmMain.bsSkinData
       ExplicitLeft = 456
       ExplicitTop = 1
       ExplicitHeight = 25
@@ -55,6 +62,7 @@ inherited fmOverNgt: TfmOverNgt
       Top = 4
       Height = 23
       Anchors = [akTop, akRight]
+      SkinData = fmMain.bsSkinData
       OnClick = btnExcelClick
       ExplicitLeft = 1067
       ExplicitTop = 4
@@ -146,6 +154,9 @@ inherited fmOverNgt: TfmOverNgt
         #51333#44032#52397#49328
         #50724#48260#45208#51079)
     end
+  end
+  inherited pnBottom: TbsSkinPanel
+    SkinData = fmMain.bsSkinData
   end
   object gdMain: TDBGridEh [2]
     Left = 0
@@ -308,9 +319,13 @@ inherited fmOverNgt: TfmOverNgt
     object RowDetailData: TRowDetailPanelControlEh
     end
   end
+  inherited bsBusinessSkinForm: TbsBusinessSkinForm
+    SkinData = fmMain.bsSkinData
+    MenusSkinData = fmMain.bsSkinData
+  end
   inherited imgBtn: TImageList
     Bitmap = {
-      494C01010B003400980010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C01010B0034009C0010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000003000000001002000000000000030
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -712,6 +727,10 @@ inherited fmOverNgt: TfmOverNgt
       8001000F800180018001000F800180018001003F800180018001003F80018001
       C003807FC003C003FFFFC0FFFFFFFFFF00000000000000000000000000000000
       000000000000}
+  end
+  inherited bsSkinMessage: TbsSkinMessage
+    SkinData = fmMain.bsSkinData
+    CtrlSkinData = fmMain.bsSkinData
   end
   inherited dbMain: TADOQuery
     SQL.Strings = (

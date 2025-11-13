@@ -118,7 +118,7 @@ procedure TfmCorp.FormShow(Sender: TObject);
 begin
   inherited;
 
-  MainTableOpen;
+//  MainTableOpen;
 end;
 
 procedure TfmCorp.MainTableOpen;

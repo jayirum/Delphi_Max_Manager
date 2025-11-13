@@ -8,26 +8,40 @@ inherited fmCorp: TfmCorp
   TextHeight = 12
   inherited pnTop: TRzPanel
     Color = 16448250
+    inherited btnFilter: TbsSkinSpeedButton
+      SkinData = fmMain.bsSkinData
+    end
     inherited btnInsert: TbsSkinSpeedButton
       Left = 360
       Visible = False
+      SkinData = fmMain.bsSkinData
       ExplicitLeft = 360
     end
     inherited btnEdit: TbsSkinSpeedButton
       Left = 204
+      SkinData = fmMain.bsSkinData
       ExplicitLeft = 204
     end
     inherited btnDelete: TbsSkinSpeedButton
       Left = 438
       Visible = False
+      SkinData = fmMain.bsSkinData
       ExplicitLeft = 438
     end
     inherited btnPost: TbsSkinSpeedButton
       Left = 282
+      SkinData = fmMain.bsSkinData
       ExplicitLeft = 282
+    end
+    inherited btnClose: TbsSkinSpeedButton
+      SkinData = fmMain.bsSkinData
+    end
+    inherited bsRibbonDivider4: TbsRibbonDivider
+      SkinData = fmMain.bsSkinData
     end
     inherited btnExcel: TbsSkinSpeedButton
       Visible = False
+      SkinData = fmMain.bsSkinData
     end
     inherited nvMain: TRzDBNavigator
       Hints.Strings = ()
@@ -36,6 +50,7 @@ inherited fmCorp: TfmCorp
   end
   inherited pnBottom: TbsSkinPanel
     Top = 483
+    SkinData = fmMain.bsSkinData
     ExplicitTop = 483
   end
   object pnMain: TRzPanel [2]
@@ -55,6 +70,8 @@ inherited fmCorp: TfmCorp
     GradientColorStop = 16448250
     ParentCtl3D = False
     TabOrder = 2
+    ExplicitLeft = -8
+    ExplicitTop = 34
     object RzLabel2: TRzLabel
       Left = 678
       Top = 423
@@ -591,7 +608,6 @@ inherited fmCorp: TfmCorp
         Height = 20
         DataSource = dsMain
         DataField = 'HYB_HOGA_NO'
-        Alignment = taRightJustify
         Ctl3D = True
         FrameController = MastDB.RzFrameController
         ImeName = 'Microsoft Office IME 2007'
@@ -610,7 +626,6 @@ inherited fmCorp: TfmCorp
         Height = 20
         DataSource = dsMain
         DataField = 'HYB_TIME_CONDITION'
-        Alignment = taRightJustify
         Ctl3D = True
         FrameController = MastDB.RzFrameController
         ImeName = 'Microsoft Office IME 2007'
@@ -757,7 +772,6 @@ inherited fmCorp: TfmCorp
         Height = 20
         DataSource = dsMain
         DataField = 'PL_DISP_DAY'
-        Alignment = taRightJustify
         Ctl3D = True
         FrameController = MastDB.RzFrameController
         ImeName = 'Microsoft Office IME 2007'
@@ -898,7 +912,6 @@ inherited fmCorp: TfmCorp
         Height = 20
         DataSource = dsMain
         DataField = 'PARTNER_DISP_DAY'
-        Alignment = taRightJustify
         Ctl3D = True
         FrameController = MastDB.RzFrameController
         ImeName = 'Microsoft Office IME 2007'
@@ -1187,7 +1200,6 @@ inherited fmCorp: TfmCorp
         Height = 20
         DataSource = dsMain
         DataField = 'CNTR_F_RT'
-        Alignment = taRightJustify
         Ctl3D = True
         FrameController = MastDB.RzFrameController
         ImeName = 'Microsoft Office IME 2007'
@@ -1238,7 +1250,6 @@ inherited fmCorp: TfmCorp
         Height = 20
         DataSource = dsMain
         DataField = 'CNTR_GF_RT'
-        Alignment = taRightJustify
         Ctl3D = True
         FrameController = MastDB.RzFrameController
         ImeName = 'Microsoft Office IME 2007'
@@ -1562,6 +1573,8 @@ inherited fmCorp: TfmCorp
     end
   end
   inherited bsBusinessSkinForm: TbsBusinessSkinForm
+    SkinData = fmMain.bsSkinData
+    MenusSkinData = fmMain.bsSkinData
     Left = 772
     Top = 108
   end
@@ -1569,7 +1582,7 @@ inherited fmCorp: TfmCorp
     Left = 852
     Top = 60
     Bitmap = {
-      494C01010B003400CC0010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C01010B003400D00010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000003000000001002000000000000030
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -1977,6 +1990,8 @@ inherited fmCorp: TfmCorp
     Top = 60
   end
   inherited bsSkinMessage: TbsSkinMessage
+    SkinData = fmMain.bsSkinData
+    CtrlSkinData = fmMain.bsSkinData
     Left = 812
     Top = 109
   end

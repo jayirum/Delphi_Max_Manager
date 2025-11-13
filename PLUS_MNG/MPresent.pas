@@ -129,6 +129,7 @@ begin
        QuotedStr('S'),
        sUserTp,
        QuotedStr('V')]); // 'R'
+
     fnSqlOpen(dbMain,sSql);
 
     sSql := Format(
@@ -141,6 +142,7 @@ begin
       '      ,CASE WHEN B.OVERNGT_YN = %s THEN %s ' +
       '            WHEN B.OVERNGT_YN = %s THEN %s ' +
       '             END OVERNGT_YN ' +
+      '       ,B.LEVERAGE          ' +
       '  FROM (SELECT A1.* FROM NCLR_POS A1, ACNT_MST B1, USER_MST C1 WHERE A1.ACNT_NO = B1.ACNT_NO AND B1.USER_ID = C1.USER_ID %s ) A ' +
       '      ,ACNT_MST B ' +
       ' WHERE A.ACNT_NO = B.ACNT_NO ' +
@@ -156,6 +158,7 @@ begin
        QuotedStr('¿À¹ö'),
        sUserTp,
        QuotedStr('V')]); // 'R'
+
     fnSqlOpen(dbNclrListR, sSql);
 
     sSql := Format(
@@ -164,7 +167,8 @@ begin
       '      ,(SELECT %s FROM STK_MST WHERE STK_CD = A.STK_CD) AS STK_NM ' +
       '      ,(SELECT CODE_VALUE_NM FROM CODE_MST WHERE CODE_ID = %s AND CODE_VALUE = A.BS_TP) AS BS_TP ' +
       '      ,A.REMN_QTY ' +
-      '      ,A.MIT_PRC  ' +
+      '      ,A.ORD_PRC  ' +
+      '      ,A.LEVERAGE ' +
       '  FROM ORD A      ' +
       //'      ,ACNT_MST B ' +
       '      ,(SELECT B1.* FROM ACNT_MST B1, USER_MST C1 WHERE B1.USER_ID = C1.USER_ID %s ) B ' +
@@ -176,8 +180,9 @@ begin
       [sStk,
        QuotedStr('BS_TP'),
        sUserTp,
-       QuotedStr('1'),
+       QuotedStr('0'),
        QuotedStr('V')]); // 'R'
+
     fnSqlOpen(dbMitR, sSql);
 
     sSql := Format(
@@ -187,6 +192,7 @@ begin
       '      ,(SELECT CODE_VALUE_NM FROM CODE_MST WHERE CODE_ID = %s AND CODE_VALUE = A.BS_TP) AS BS_TP ' +
       '      ,A.REMN_QTY ' +
       '      ,A.ORD_PRC  ' +
+      '      ,A.LEVERAGE ' +
       '  FROM ORD A      ' +
       //'      ,ACNT_MST B ' +
       '      ,(SELECT B1.* FROM ACNT_MST B1, USER_MST C1 WHERE B1.USER_ID = C1.USER_ID %s ) B ' +
@@ -199,9 +205,10 @@ begin
       [sStk,
        QuotedStr('BS_TP'),
        sUserTp,
-       QuotedStr('1'),
+       QuotedStr('0'),
        QuotedStr('V'), // 'R'
-       QuotedStr('05') ]);
+       QuotedStr('02') ]);
+
     fnSqlOpen(dbNoCntrR, sSql);
   finally
     Delay_Hide;

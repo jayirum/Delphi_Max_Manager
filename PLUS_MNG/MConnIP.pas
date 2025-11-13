@@ -63,8 +63,12 @@ var
   sSql, sResult, sMac, sUserTp, sWhere : String;
 begin
   sMac := Trim(edMac.Text);
+  {
   if sMac <> '' then sMac := Format('AND (A.LOGIN_MAC LIKE %s) ', [QuotedStr('%'+sMac+'%')])
                 else Exit;
+  }
+  if sMac='' then exit;
+  
   try
     Delay_Show();
     sSql := Format(
@@ -80,9 +84,13 @@ begin
       '      ,COUNT(1) OVER() AS TOTCNT ' +
       '  FROM LOGIN_HIS A, ' +
       '       USER_MST  B  ' +
-      ' WHERE A.USER_ID = B.USER_ID  %s ' +
+      ' WHERE A.USER_ID = B.USER_ID  AND (A.LOGIN_IP LIKE %s OR A.LOGIN_MAC LIKE %s) ' +
       ' ORDER BY A.LOGIN_DT, A.LOGIN_TM ' ,
-      [QuotedStr(sMac) ]);
+      [QuotedStr('%'+sMac+'%'), QuotedStr('%'+sMac+'%')]
+      );
+      //[QuotedStr(sMac) ]);
+
+
     sResult := fnSqlOpen(dbMain, sSql);
 
     if sResult = '' then pnCnt.Caption := dbMain.FieldByName('TOTCNT').AsString + ' °Ç'

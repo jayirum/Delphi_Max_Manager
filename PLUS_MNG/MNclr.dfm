@@ -4,7 +4,7 @@ inherited fmNclr: TfmNclr
   ClientWidth = 1154
   OnShow = FormShow
   ExplicitWidth = 1170
-  ExplicitHeight = 240
+  ExplicitHeight = 592
   PixelsPerInch = 96
   TextHeight = 12
   inherited pnTop: TRzPanel
@@ -53,7 +53,7 @@ inherited fmNclr: TfmNclr
       ExplicitTop = 0
     end
     inherited btnClose: TbsSkinSpeedButton
-      Left = 1067
+      Left = 1065
       SkinData = fmMain.bsSkinData
       ExplicitLeft = 1068
     end
@@ -63,7 +63,7 @@ inherited fmNclr: TfmNclr
       ExplicitLeft = 193
     end
     inherited btnExcel: TbsSkinSpeedButton
-      Left = 991
+      Left = 989
       Top = 4
       Height = 23
       Anchors = [akTop, akRight]
@@ -81,13 +81,13 @@ inherited fmNclr: TfmNclr
       FrameController = MastDB.RzFrameController
     end
     inherited nvMain: TRzDBNavigator
-      Left = 776
+      Left = 774
       Hints.Strings = ()
       Anchors = [akTop, akRight]
-      ExplicitLeft = 776
+      ExplicitLeft = 774
     end
     object pnNclr: TRzPanel
-      Left = 877
+      Left = 875
       Top = 4
       Width = 113
       Height = 23
@@ -206,15 +206,12 @@ inherited fmNclr: TfmNclr
       end
       item
         Alignment = taCenter
-        Color = 16250879
         DynProps = <>
         EditButtons = <>
         FieldName = 'STK_CD'
         Footers = <>
         Title.Alignment = taCenter
         Title.Caption = #51333#47785#53076#46300
-        Title.Color = 16250871
-        Width = 80
       end
       item
         Alignment = taCenter
@@ -243,7 +240,7 @@ inherited fmNclr: TfmNclr
         Color = 16515071
         DynProps = <>
         EditButtons = <>
-        FieldName = 'AVGPRC'
+        FieldName = 'AVG_PRC'
         Footers = <>
         Title.Alignment = taCenter
         Title.Caption = #54217#44512#45800#44032
@@ -263,6 +260,7 @@ inherited fmNclr: TfmNclr
       end
       item
         Alignment = taCenter
+        DisplayFormat = '#,###'
         DynProps = <>
         EditButtons = <>
         FieldName = 'LOSSCUT_AMT'
@@ -275,6 +273,7 @@ inherited fmNclr: TfmNclr
       item
         Alignment = taCenter
         Color = 15138815
+        DisplayFormat = '#,###'
         DynProps = <>
         EditButtons = <>
         FieldName = 'ACNT_AMT'
@@ -306,16 +305,7 @@ inherited fmNclr: TfmNclr
       end
       item
         Alignment = taCenter
-        DynProps = <>
-        EditButtons = <>
-        Footers = <>
-        Title.Alignment = taCenter
-        Title.Caption = #50724#48260#45208#51079#50976#54805
-        Title.Color = 16250871
-        Width = 100
-      end
-      item
-        Alignment = taCenter
+        DisplayFormat = '#,###'
         DynProps = <>
         EditButtons = <>
         FieldName = 'OVERNGT_QTY'
@@ -342,6 +332,8 @@ inherited fmNclr: TfmNclr
     FlatColor = clGray
     FlatColorAdjustment = 0
     TabOrder = 3
+    ExplicitLeft = 848
+    ExplicitTop = 34
     object bsRibbonDivider1: TbsRibbonDivider
       Left = 9
       Top = 142
@@ -642,6 +634,15 @@ inherited fmNclr: TfmNclr
       ImeName = 'Microsoft IME 2010'
       TabOrder = 11
     end
+    object Memo1: TMemo
+      Left = 56
+      Top = 308
+      Width = 229
+      Height = 93
+      Lines.Strings = (
+        'Memo1')
+      TabOrder = 12
+    end
   end
   inherited bsBusinessSkinForm: TbsBusinessSkinForm
     SkinData = fmMain.bsSkinData
@@ -649,7 +650,7 @@ inherited fmNclr: TfmNclr
   end
   inherited imgBtn: TImageList
     Bitmap = {
-      494C01010B003400AC0010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C01010B003400B40010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000003000000001002000000000000030
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -1057,32 +1058,24 @@ inherited fmNclr: TfmNclr
     CtrlSkinData = fmMain.bsSkinData
   end
   inherited dbMain: TADOQuery
+    Connection = MastDB.ADOConn
+    CursorType = ctStatic
     OnCalcFields = dbMainCalcFields
     SQL.Strings = (
-      'SELECT   B.USER_NM        AS USER_NM '
-      '        ,A.ACNT_NO        AS ACNT_NO         '
-      '        ,A.STK_CD         AS STK_CD          '
-      '        ,A.ACNT_TP        AS ACNT_TP         '
-      '        ,A.ARTC_CD        AS ARTC_CD         '
-      '        ,A.BS_TP          AS BS_TP           '
-      '        ,A.NCLR_POS_QTY   AS NCLR_POS_QTY    '
-      '        ,A.AVG_PRC        AS AVG_PRC         '
-      '        ,A.NCNTR_QTY      AS NCNTR_QTY       '
-      '        ,A.TRADE_DT       AS TRADE_DT        '
-      '        ,A.NCLR_POS_TM    AS NCLR_POS_TM     '
-      '        ,A.SYS_DT         AS SYS_DT          '
-      '        ,A.API_TP         AS API_TP          '
-      '        ,A.LOSSCUT_AMT    AS LOSSCUT_AMT     '
-      '        ,A.OVERNGT_QTY    AS OVERNGT_QTY     '
-      '        ,A.OVERNGT_TP     AS OVERNGT_TP      '
-      '        ,A.OVERNGT_AMT    AS OVERNGT_AMT '
-      '        ,COUNT(1) OVER()  AS TOTCNT '
       
-        '        ,(SELECT TOP(1) DOT_CNT FROM ARTC_MST WHERE ARTC_CD = A.' +
-        'ARTC_CD) AS DOT_CNT   '
-      'FROM NCLR_POS A,'
-      '     ACNT_MST B'
-      'WHERE A.ACNT_NO = B.ACNT_NO')
+        'SELECT B.USER_ID            ,B.USER_NM            ,B.ACNT_AMT   ' +
+        '        ,A.ACNT_NO            ,A.STK_CD             ,A.ACNT_TP  ' +
+        '          ,A.ARTC_CD            ,A.BS_TP              ,A.NCLR_PO' +
+        'S_QTY       ,A.AVG_PRC            ,A.NCNTR_QTY          ,A.TRADE' +
+        '_DT           ,A.NCLR_POS_TM        ,A.SYS_DT             ,A.API' +
+        '_TP             ,A.LOSSCUT_AMT        ,A.OVERNGT_QTY        ,ISN' +
+        'ULL(A.OVERNGT_TP, '#39'N'#39') OVERNGT_TP       ,A.OVERNGT_AMT        ,C' +
+        'OUNT(1) OVER()  AS TOTCNT       ,(SELECT TOP(1) DOT_CNT FROM ART' +
+        'C_MST WHERE ARTC_CD = A.ARTC_CD) AS DOT_CNT       ,(SELECT TOP(1' +
+        ') ARTC_NM FROM ARTC_MST WHERE ARTC_CD = A.ARTC_CD) AS STK_NM    ' +
+        'FROM NCLR_POS A,        (SELECT A1.* FROM ACNT_MST A1, USER_MST ' +
+        'B1 WHERE A1.USER_ID = B1.USER_ID  AND B1.USER_GRADE IN ('#39'2'#39','#39'7'#39')' +
+        '  ) B  WHERE A.ACNT_NO = B.ACNT_NO ')
   end
   inherited dbPart: TADOQuery
     Left = 145

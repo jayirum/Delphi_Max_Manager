@@ -1,24 +1,36 @@
 inherited fmAccount: TfmAccount
   Caption = #44228#51340#44288#47532
   OnShow = FormShow
-  ExplicitWidth = 953
-  ExplicitHeight = 592
   PixelsPerInch = 96
   TextHeight = 12
   inherited pnTop: TRzPanel
     inherited btnFilter: TbsSkinSpeedButton
       Tag = 1070
+      SkinData = fmMain.bsSkinData
     end
     inherited btnInsert: TbsSkinSpeedButton
       Tag = 1010
+      SkinData = fmMain.bsSkinData
     end
     inherited btnEdit: TbsSkinSpeedButton
       Tag = 1020
+      SkinData = fmMain.bsSkinData
     end
     inherited btnDelete: TbsSkinSpeedButton
       Tag = 1030
+      SkinData = fmMain.bsSkinData
+    end
+    inherited btnPost: TbsSkinSpeedButton
+      SkinData = fmMain.bsSkinData
+    end
+    inherited btnClose: TbsSkinSpeedButton
+      SkinData = fmMain.bsSkinData
+    end
+    inherited bsRibbonDivider4: TbsRibbonDivider
+      SkinData = fmMain.bsSkinData
     end
     inherited btnExcel: TbsSkinSpeedButton
+      SkinData = fmMain.bsSkinData
       OnClick = btnExcelClick
     end
     inherited pnTitle: TRzPanel
@@ -31,6 +43,9 @@ inherited fmAccount: TfmAccount
     inherited nvMain: TRzDBNavigator
       Hints.Strings = ()
     end
+  end
+  inherited pnBottom: TbsSkinPanel
+    SkinData = fmMain.bsSkinData
   end
   object pnFilter: TbsSkinPanel [2]
     Left = 0
@@ -1405,6 +1420,10 @@ inherited fmAccount: TfmAccount
       end
       object bsSkinTabSheet2: TbsSkinTabSheet
         Caption = #44228#51340#44288#47532
+        ExplicitLeft = 0
+        ExplicitTop = 0
+        ExplicitWidth = 0
+        ExplicitHeight = 0
         object RzPanel8: TRzPanel
           Left = 0
           Top = 130
@@ -1575,9 +1594,13 @@ inherited fmAccount: TfmAccount
     object RowDetailData: TRowDetailPanelControlEh
     end
   end
+  inherited bsBusinessSkinForm: TbsBusinessSkinForm
+    SkinData = fmMain.bsSkinData
+    MenusSkinData = fmMain.bsSkinData
+  end
   inherited imgBtn: TImageList
     Bitmap = {
-      494C01010B003400800010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C01010B003400880010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000003000000001002000000000000030
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -1979,6 +2002,10 @@ inherited fmAccount: TfmAccount
       8001000F800180018001000F800180018001003F800180018001003F80018001
       C003807FC003C003FFFFC0FFFFFFFFFF00000000000000000000000000000000
       000000000000}
+  end
+  inherited bsSkinMessage: TbsSkinMessage
+    SkinData = fmMain.bsSkinData
+    CtrlSkinData = fmMain.bsSkinData
   end
   inherited dbMain: TADOQuery
     AfterInsert = dbMainAfterInsert

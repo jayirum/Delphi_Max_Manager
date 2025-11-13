@@ -77,7 +77,7 @@ begin
   lbxPart.ItemIndex := 0;
   queryWhere;
 
-  MainTableOpen;
+//  MainTableOpen;
 end;
 
 procedure TfmPart.lbxPartClick(Sender: TObject);

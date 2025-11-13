@@ -4,7 +4,7 @@ interface
 
 uses
   Windows, Classes, Forms, Controls, StdCtrls, ExtCtrls, SysUtils,
-  Dialogs, Messages, ImgList, Menus, TypInfo, 
+  Dialogs, Messages, ImgList, Menus, TypInfo,
 //  DB, DBAccess, MemDS, Variants, Graphics,
 // BusinessSkinForm_1042
   BusinessSkinForm, bsDialogs, bsMessages, bsPngImageList, bsSkinMenus, bsRibbon,
@@ -497,8 +497,8 @@ begin
     sCallRun := ParamStr(2);
   end;
 
-// Update 하지 않고 프로그램 실행할때 사용
-  sCallRun := 'UPDATE_Y';
+// TODO.JAY.Update 하지 않고 프로그램 실행할때 사용
+sCallRun := 'UPDATE_Y';
 
 //  if Not bUpdateRun then begin
   if sCallRun = '' then begin // Client를 바로 실행한 경우
@@ -551,10 +551,6 @@ begin
       Exit;
     end;
 
-//    if not MastDB.iwNotiClient.Connected then begin
-//      ShowMessage('연결 안되있어');
-//    end;
-
     MastDB.iwNotiClient.DataToSend := MastDB.PC001_Send + _EOL;
 
     bsRibbon1.Tabs[4].Visible := _Supervisor;
@@ -565,7 +561,7 @@ end;
 
 procedure TfmMain.FormShow(Sender: TObject);
 begin
-  Caption := '';
+//  Caption := '';
 
   Power_Exec;
 

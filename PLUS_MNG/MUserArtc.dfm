@@ -12,6 +12,7 @@ inherited fmUserArtc: TfmUserArtc
     inherited btnFilter: TbsSkinSpeedButton
       Top = 4
       Height = 23
+      SkinData = fmMain.bsSkinData
       ExplicitTop = 4
       ExplicitHeight = 23
     end
@@ -19,6 +20,7 @@ inherited fmUserArtc: TfmUserArtc
       Left = 765
       Top = 0
       Visible = False
+      SkinData = fmMain.bsSkinData
       ExplicitLeft = 765
       ExplicitTop = 0
     end
@@ -26,6 +28,7 @@ inherited fmUserArtc: TfmUserArtc
       Left = 765
       Top = 0
       Visible = False
+      SkinData = fmMain.bsSkinData
       ExplicitLeft = 765
       ExplicitTop = 0
     end
@@ -33,6 +36,7 @@ inherited fmUserArtc: TfmUserArtc
       Left = 765
       Top = 0
       Visible = False
+      SkinData = fmMain.bsSkinData
       ExplicitLeft = 765
       ExplicitTop = 0
     end
@@ -40,17 +44,20 @@ inherited fmUserArtc: TfmUserArtc
       Left = 772
       Top = 6
       Visible = False
+      SkinData = fmMain.bsSkinData
       ExplicitLeft = 772
       ExplicitTop = 6
     end
     inherited btnClose: TbsSkinSpeedButton
       Left = 830
+      SkinData = fmMain.bsSkinData
       ExplicitLeft = 830
     end
     inherited bsRibbonDivider4: TbsRibbonDivider
       Left = 772
       Top = -2
       Visible = False
+      SkinData = fmMain.bsSkinData
       ExplicitLeft = 772
       ExplicitTop = -2
     end
@@ -59,6 +66,7 @@ inherited fmUserArtc: TfmUserArtc
       Top = 4
       Height = 23
       Anchors = [akTop, akRight]
+      SkinData = fmMain.bsSkinData
       OnClick = btnExcelClick
       ExplicitLeft = 773
       ExplicitTop = 4
@@ -185,6 +193,7 @@ inherited fmUserArtc: TfmUserArtc
   end
   inherited pnBottom: TbsSkinPanel
     Width = 915
+    SkinData = fmMain.bsSkinData
     ExplicitWidth = 915
   end
   object gdMain: TDBGridEh [2]
@@ -398,9 +407,13 @@ inherited fmUserArtc: TfmUserArtc
       end
     end
   end
+  inherited bsBusinessSkinForm: TbsBusinessSkinForm
+    SkinData = fmMain.bsSkinData
+    MenusSkinData = fmMain.bsSkinData
+  end
   inherited imgBtn: TImageList
     Bitmap = {
-      494C01010B003400C00010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C01010B003400C40010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000003000000001002000000000000030
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -802,6 +815,10 @@ inherited fmUserArtc: TfmUserArtc
       8001000F800180018001000F800180018001003F800180018001003F80018001
       C003807FC003C003FFFFC0FFFFFFFFFF00000000000000000000000000000000
       000000000000}
+  end
+  inherited bsSkinMessage: TbsSkinMessage
+    SkinData = fmMain.bsSkinData
+    CtrlSkinData = fmMain.bsSkinData
   end
   inherited dbMain: TADOQuery
     SQL.Strings = (

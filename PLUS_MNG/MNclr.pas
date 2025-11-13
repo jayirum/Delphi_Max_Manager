@@ -38,6 +38,7 @@ type
     bsSkinStdLabel1: TbsSkinStdLabel;
     btnOrdCancel: TbsSkinSpeedButton;
     edPrice: TRzEdit;
+    Memo1: TMemo;
     procedure FormCreate(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure btnExcelClick(Sender: TObject);
@@ -151,20 +152,24 @@ begin
       '      ,A.AVG_PRC      ' +
       '      ,A.NCNTR_QTY    ' +
       '      ,A.TRADE_DT     ' +
-      '      ,A.NCLR_POS_TM  ' +
+      //'      ,A.NCLR_POS_TM  ' +
       '      ,A.SYS_DT       ' +
       '      ,A.API_TP       ' +
       '      ,A.LOSSCUT_AMT  ' +
       '      ,A.OVERNGT_QTY  ' +
-      '      ,A.OVERNGT_TP   ' +
+      '      ,ISNULL(A.OVERNGT_TP, ''N'') OVERNGT_TP ' +
       '      ,A.OVERNGT_AMT  ' +
       '      ,COUNT(1) OVER()  AS TOTCNT ' +
       '      ,(SELECT TOP(1) DOT_CNT FROM ARTC_MST WHERE ARTC_CD = A.ARTC_CD) AS DOT_CNT ' +
+      '      ,(SELECT TOP(1) ARTC_NM FROM ARTC_MST WHERE ARTC_CD = A.ARTC_CD) AS STK_NM  ' +
       '  FROM NCLR_POS A, ' +
       '       (SELECT A1.* FROM ACNT_MST A1, USER_MST B1 WHERE A1.USER_ID = B1.USER_ID %s ) B ' +
       ' WHERE A.ACNT_NO = B.ACNT_NO ',
       [sUserTp]);
+
+
     sResult := fnSqlOpen(dbMain, sSql);
+
 
     if sResult = '' then pnNclr.Caption := dbMain.FieldByName('TOTCNT').AsString + ' 건'
                     else pnNclr.Caption := '0 건';
@@ -188,7 +193,7 @@ begin
   end;
 
   if rbtPriceTp.ItemIndex = 0 then begin
-    sPrice := '(SELECT A1.NOW_PRC FROM CURR_PRC A1 WHERE A1.STK_CD = A.STK_CD)';
+    sPrice := Format('(SELECT A1.NOW_PRC FROM CURR_PRC A1 WHERE A1.STK_CD = %s)', [sStkId]);
   end else begin
     sPrice := Trim(edPrice.Text);
     if sPrice = '' then begin
@@ -202,10 +207,12 @@ begin
     'UPDATE NCLR_POS A ' +
     '   SET A.PRICE = %s ' + // TODO : A.PRICE 수정할것, 청산할 필드로 
     '  FROM ACNT_MST B ' +
-    ' WHERE A.ACNT_NO = B.ACNT_NO AND A.USER_ID = %s AND A.STK_CD = %s; ',
+    ' WHERE A.ACNT_NO = B.ACNT_NO AND B.USER_ID = %s AND A.STK_CD = %s; ',
     [sPrice,
      QuotedStr(sUserId),
      QuotedStr(sStkId) ]);
+
+  memo1.Text := ssql;
   fnSqlOpen(MastDB.dbExec, sSql);
 end;
 

@@ -340,12 +340,10 @@ inherited fmPresent: TfmPresent
             Alignment = taCenter
             DynProps = <>
             EditButtons = <>
-            FieldName = 'OVERNGT_YN'
+            FieldName = 'LEVERAGE'
             Footers = <>
             Title.Alignment = taCenter
             Title.Caption = #48708#50984
-            Title.Color = 16250871
-            Width = 46
           end>
         object RowDetailData: TRowDetailPanelControlEh
         end
@@ -440,8 +438,10 @@ inherited fmPresent: TfmPresent
             Width = 60
           end
           item
+            Alignment = taCenter
             DynProps = <>
             EditButtons = <>
+            FieldName = 'LEVERAGE'
             Footers = <>
             Title.Alignment = taCenter
             Title.Caption = #48708#50984
@@ -703,8 +703,8 @@ inherited fmPresent: TfmPresent
       Color = 16448250
       TabOrder = 3
       object gdNoCntrR: TDBGridEh
-        Left = 9
-        Top = 16
+        Left = 2
+        Top = 17
         Width = 364
         Height = 549
         TabStop = False
@@ -783,8 +783,10 @@ inherited fmPresent: TfmPresent
             Width = 60
           end
           item
+            Alignment = taCenter
             DynProps = <>
             EditButtons = <>
+            FieldName = 'LEVERAGE'
             Footers = <>
             Title.Alignment = taCenter
             Title.Caption = #48708#50984
@@ -1044,7 +1046,7 @@ inherited fmPresent: TfmPresent
   end
   inherited imgBtn: TImageList
     Bitmap = {
-      494C01010B0034009C0010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C01010B003400A80010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000003000000001002000000000000030
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -1488,6 +1490,7 @@ inherited fmPresent: TfmPresent
   end
   object dbNclrListR: TADOQuery
     Connection = MastDB.ADOConn
+    CursorType = ctStatic
     Parameters = <>
     SQL.Strings = (
       'SELECT A.STK_CD,'
@@ -1509,6 +1512,7 @@ inherited fmPresent: TfmPresent
   end
   object dbMitR: TADOQuery
     Connection = MastDB.ADOConn
+    CursorType = ctStatic
     Parameters = <>
     SQL.Strings = (
       'SELECT B.USER_NM,'
@@ -1529,6 +1533,7 @@ inherited fmPresent: TfmPresent
   end
   object dbNoCntrR: TADOQuery
     Connection = MastDB.ADOConn
+    CursorType = ctStatic
     Parameters = <>
     SQL.Strings = (
       'SELECT B.USER_NM,'

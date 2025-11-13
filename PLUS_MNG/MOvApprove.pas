@@ -74,7 +74,7 @@ begin
   inherited;
   PartTableOpen(TComponent(gdMain.Columns[4]), Format('@|STK_NM, STK_CD|STK_MST|WHERE STK_CD = %s', [QuotedStr('STK_CD')]));
 
-  MainTableOpen;
+//  MainTableOpen;
 end;
 
 procedure TfmOvApprove.MainTableOpen;

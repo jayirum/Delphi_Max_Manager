@@ -2,7 +2,7 @@ inherited fmInOut: TfmInOut
   Tag = 2001
   Caption = #51077#52636#44552#52376#47532
   ClientWidth = 1203
-  ExplicitLeft = -93
+  OnShow = FormShow
   ExplicitWidth = 1219
   PixelsPerInch = 96
   TextHeight = 12
@@ -10,41 +10,47 @@ inherited fmInOut: TfmInOut
     Width = 1203
     ExplicitWidth = 1203
     inherited btnFilter: TbsSkinSpeedButton
-      Top = 3
-      ExplicitTop = 3
+      SkinData = fmMain.bsSkinData
     end
     inherited btnInsert: TbsSkinSpeedButton
       Left = 541
       Visible = False
+      SkinData = fmMain.bsSkinData
       ExplicitLeft = 541
     end
     inherited btnEdit: TbsSkinSpeedButton
       Left = 617
       Top = 2
       Visible = False
+      SkinData = fmMain.bsSkinData
       ExplicitLeft = 617
       ExplicitTop = 2
     end
     inherited btnDelete: TbsSkinSpeedButton
       Left = 693
       Visible = False
+      SkinData = fmMain.bsSkinData
       ExplicitLeft = 693
     end
     inherited btnPost: TbsSkinSpeedButton
       Left = 769
       Visible = False
+      SkinData = fmMain.bsSkinData
       ExplicitLeft = 769
     end
     inherited btnClose: TbsSkinSpeedButton
       Left = 1118
+      SkinData = fmMain.bsSkinData
       ExplicitLeft = 1118
     end
     inherited bsRibbonDivider4: TbsRibbonDivider
       Visible = False
+      SkinData = fmMain.bsSkinData
     end
     inherited btnExcel: TbsSkinSpeedButton
       Left = 956
       Visible = False
+      SkinData = fmMain.bsSkinData
       ExplicitLeft = 956
     end
     object btnPl: TbsSkinSpeedButton [8]
@@ -114,6 +120,7 @@ inherited fmInOut: TfmInOut
   end
   inherited pnBottom: TbsSkinPanel
     Width = 1203
+    SkinData = fmMain.bsSkinData
     ExplicitWidth = 1203
   end
   object RzPanel6: TRzPanel [2]
@@ -879,9 +886,13 @@ inherited fmInOut: TfmInOut
       end
     end
   end
+  inherited bsBusinessSkinForm: TbsBusinessSkinForm
+    SkinData = fmMain.bsSkinData
+    MenusSkinData = fmMain.bsSkinData
+  end
   inherited imgBtn: TImageList
     Bitmap = {
-      494C01010F005400340110001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C01010F005400380110001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000004000000001002000000000000040
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -1418,6 +1429,10 @@ inherited fmInOut: TfmInOut
   end
   inherited dsMain: TDataSource
     DataSet = cdsMain
+  end
+  inherited bsSkinMessage: TbsSkinMessage
+    SkinData = fmMain.bsSkinData
+    CtrlSkinData = fmMain.bsSkinData
   end
   inherited dbMain: TADOQuery
     Connection = MastDB.ADOConn

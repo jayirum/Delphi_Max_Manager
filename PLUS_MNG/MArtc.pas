@@ -102,7 +102,7 @@ begin
   PartTableOpen(TComponent(gdMain.Columns[2]), CodeFormat('ORD_STATE', 'ORDER BY CODE_VALUE'));
   PartTableOpen(TComponent(gdMain.Columns[7]), CodeFormat('CMSN_TP', 'ORDER BY CODE_VALUE'));
 
-  MainTableOpen;
+//  MainTableOpen;
 end;
 
 procedure TfmArtc.MainTableOpen;

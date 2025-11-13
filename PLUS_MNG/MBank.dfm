@@ -12,7 +12,7 @@ inherited fmBank: TfmBank
   TextHeight = 12
   inherited pnTop: TRzPanel
     Width = 679
-    ExplicitWidth = 526
+    ExplicitWidth = 679
     inherited btnFilter: TbsSkinSpeedButton
       Visible = False
       SkinData = fmMain.bsSkinData
@@ -77,8 +77,8 @@ inherited fmBank: TfmBank
     Top = 308
     Width = 679
     SkinData = fmMain.bsSkinData
-    ExplicitTop = 541
-    ExplicitWidth = 526
+    ExplicitTop = 308
+    ExplicitWidth = 679
   end
   object RzPanel2: TRzPanel [2]
     Left = 0
@@ -93,9 +93,6 @@ inherited fmBank: TfmBank
     FlatColor = clGray
     FlatColorAdjustment = 0
     TabOrder = 2
-    ExplicitLeft = 190
-    ExplicitWidth = 336
-    ExplicitHeight = 510
     object gdMain: TDBGridEh
       Left = 1
       Top = 1
@@ -185,7 +182,7 @@ inherited fmBank: TfmBank
     Left = 96
     Top = 108
     Bitmap = {
-      494C01010A0018005C0010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C01010A001800640010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000003000000001002000000000000030
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000

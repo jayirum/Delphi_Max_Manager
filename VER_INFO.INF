@@ -1,4 +1,4 @@
-VERSION=20250901.01
+VERSION=20261113.01
 
 NAME=챔피언 관리자
 URLFILENAME=mng/update_mng.zip

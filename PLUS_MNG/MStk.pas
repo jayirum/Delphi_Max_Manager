@@ -65,7 +65,7 @@ end;
 procedure TfmStk.FormShow(Sender: TObject);
 begin
   inherited;
-  MainTableOpen;
+//  MainTableOpen;
 end;
 
 procedure TfmStk.gdMainTitleBtnClick(Sender: TObject; ACol: Integer;

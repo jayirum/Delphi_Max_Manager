@@ -95,7 +95,9 @@ var
   sCorpNm, sCorpTel,
   sFile, sSql : String;
 begin
-  SetWindowPos(handle, HWND_TOPMOST, Left, Top, Width, Height, SWP_NOACTIVATE or SWP_NOMOVE or SWP_NOSIZE);
+  if MastDB.iwNotiClient.Connected then
+    SetWindowPos(handle, HWND_TOPMOST, Left, Top, Width, Height, SWP_NOACTIVATE or SWP_NOMOVE or SWP_NOSIZE);
+    
 //  edID.Text := 'GTRADE';
 //  edPass.Text := '123123';
 //  edID.Text := 'ADMIN';      // TODO : 중요, 운영환경에서 삭제할것

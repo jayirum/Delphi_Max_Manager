@@ -204,6 +204,7 @@ type
     btnSign: TbsSkinSpeedButton;
     cdsMain: TClientDataSet;
     edtGujaMaxCnt: TRzNumericEdit;
+    Label1: TLabel;
     procedure FormCreate(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure lbxPartClick(Sender: TObject);
@@ -315,7 +316,7 @@ procedure TfmUser.FormCloseQuery(Sender: TObject; var CanClose: Boolean);
 begin
   inherited;
   if cdsMain.State in [dsInsert, dsEdit] then begin
-    if not bsMsgYesNo('입력/수정하던 자료가 있씁니다.화면 종료하시겠습니다?') then
+    if not bsMsgYesNo('입력/수정하던 자료가 있습니다. 화면을 종료 시키겠습니다?') then
       CanClose := False
     else
       CanClose := True;
@@ -562,6 +563,7 @@ begin
     0 : begin
       edUserID.SetFocus;
       AppendWork(cdsMain); // TEST
+      edRegDt.DateTime := Now;
       SetReadOnly(False);
 //      fnMainBeforePost('I');
     end;
@@ -1305,6 +1307,7 @@ begin
         lbAlert.Visible := TRUE;
         lbAlert.Caption := '중복된 ID 입니다..';
         cdsMain.FieldByName('USER_ID').AsString := ''; // TEST
+        bsMsgInfo(lbAlert.Caption);
         edUserID.SetFocus;
       end;
     end;
@@ -1333,6 +1336,7 @@ begin
       lbAlert.Caption := '중복된 회원필명 입니다..';
 //      cdsMain.FieldByName('USER_NICK_NM').AsString := ''; // TEST
       edUserNickName.Text := '';
+      bsMsgInfo(lbAlert.Caption);
       edUserNickName.SetFocus;
       Exit;
     end;
@@ -1582,8 +1586,11 @@ begin
     sSQL := fnPageSQL2(_CurrPage+1, _PAGE_QTY, sSEL, sTB, sOD);
   end;
 //  sSQL := fnPageSQL(sSQL, OffsetS, OffsetE);
+
   try
     Delay_Show;
+
+    fnSqlDataAdd(_CurrPage, dbMain, cdsMain, sSQL);
 //    with cdsMain do begin
 //      if State in [dsInsert, dsEdit] then begin
 //        Cancel;
@@ -1591,7 +1598,6 @@ begin
 //      end;
 //    end;
 
-    fnSqlDataAdd(_CurrPage, dbMain, cdsMain, sSQL);
     _TotCnt := _TotCnt + dbMain.RecordCount;
   finally
     Delay_Hide;

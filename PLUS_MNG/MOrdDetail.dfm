@@ -14,6 +14,7 @@ inherited fmOrdDetail: TfmOrdDetail
     inherited btnFilter: TbsSkinSpeedButton
       Left = 462
       Height = 24
+      SkinData = fmMain.bsSkinData
       ExplicitLeft = 462
       ExplicitHeight = 24
     end
@@ -21,6 +22,7 @@ inherited fmOrdDetail: TfmOrdDetail
       Left = 767
       Top = 1
       Visible = False
+      SkinData = fmMain.bsSkinData
       ExplicitLeft = 767
       ExplicitTop = 1
     end
@@ -28,6 +30,7 @@ inherited fmOrdDetail: TfmOrdDetail
       Left = 787
       Top = 1
       Visible = False
+      SkinData = fmMain.bsSkinData
       ExplicitLeft = 787
       ExplicitTop = 1
     end
@@ -35,6 +38,7 @@ inherited fmOrdDetail: TfmOrdDetail
       Left = 767
       Top = 1
       Visible = False
+      SkinData = fmMain.bsSkinData
       ExplicitLeft = 767
       ExplicitTop = 1
     end
@@ -42,17 +46,20 @@ inherited fmOrdDetail: TfmOrdDetail
       Left = 758
       Top = 1
       Visible = False
+      SkinData = fmMain.bsSkinData
       ExplicitLeft = 758
       ExplicitTop = 1
     end
     inherited btnClose: TbsSkinSpeedButton
       Left = 935
+      SkinData = fmMain.bsSkinData
       ExplicitLeft = 871
     end
     inherited bsRibbonDivider4: TbsRibbonDivider
       Left = 735
       Top = 4
       Visible = False
+      SkinData = fmMain.bsSkinData
       ExplicitLeft = 735
       ExplicitTop = 4
     end
@@ -62,6 +69,7 @@ inherited fmOrdDetail: TfmOrdDetail
       Height = 23
       Anchors = [akTop, akRight]
       Visible = False
+      SkinData = fmMain.bsSkinData
       ExplicitLeft = 1073
       ExplicitTop = 4
       ExplicitHeight = 23
@@ -152,6 +160,7 @@ inherited fmOrdDetail: TfmOrdDetail
       Height = 15
       AutoSize = False
       Caption = #51452#47928'/'#52404#44208' '#46041#49884#51312#54924
+      Checked = True
       DisabledColor = 15790320
       FillColor = clWhite
       FocusColor = 15790335
@@ -161,7 +170,7 @@ inherited fmOrdDetail: TfmOrdDetail
       HotTrackColor = 7838964
       HotTrackStyle = htsFrame
       ReadOnlyColor = 14811135
-      State = cbUnchecked
+      State = cbChecked
       TabOrder = 4
       Transparent = True
       WordWrap = True
@@ -170,6 +179,7 @@ inherited fmOrdDetail: TfmOrdDetail
   inherited pnBottom: TbsSkinPanel
     Top = 565
     Width = 1020
+    SkinData = fmMain.bsSkinData
     ExplicitTop = 565
     ExplicitWidth = 1020
   end
@@ -638,8 +648,8 @@ inherited fmOrdDetail: TfmOrdDetail
           31)
         object btnOrdExcel: TbsSkinSpeedButton
           Tag = 600
-          Left = 484
-          Top = 4
+          Left = 483
+          Top = 3
           Width = 75
           Height = 23
           Cursor = crHandPoint
@@ -674,6 +684,8 @@ inherited fmOrdDetail: TfmOrdDetail
           NumGlyphs = 1
           Spacing = 1
           OnClick = btnOrdExcelClick
+          ExplicitLeft = 484
+          ExplicitTop = 4
         end
         object bsSkinSpeedButton1: TbsSkinSpeedButton
           Tag = 500
@@ -714,8 +726,8 @@ inherited fmOrdDetail: TfmOrdDetail
           OnClick = bsSkinSpeedButton1Click
         end
         object pnOrdCnt: TRzPanel
-          Left = 661
-          Top = 4
+          Left = 660
+          Top = 3
           Width = 113
           Height = 23
           Anchors = [akRight, akBottom]
@@ -735,8 +747,8 @@ inherited fmOrdDetail: TfmOrdDetail
           TabOrder = 0
         end
         object RzDBNavigator2: TRzDBNavigator
-          Left = 560
-          Top = 4
+          Left = 559
+          Top = 3
           Width = 100
           Height = 23
           DataSource = dsOrd
@@ -1402,7 +1414,7 @@ inherited fmOrdDetail: TfmOrdDetail
         785
         31)
       object pnPL: TRzPanel
-        Left = 88
+        Left = 87
         Top = 4
         Width = 113
         Height = 23
@@ -1487,7 +1499,7 @@ inherited fmOrdDetail: TfmOrdDetail
         AutoSize = False
       end
       object pnCMSN: TRzPanel
-        Left = 309
+        Left = 308
         Top = 4
         Width = 113
         Height = 23
@@ -1509,9 +1521,13 @@ inherited fmOrdDetail: TfmOrdDetail
       end
     end
   end
+  inherited bsBusinessSkinForm: TbsBusinessSkinForm
+    SkinData = fmMain.bsSkinData
+    MenusSkinData = fmMain.bsSkinData
+  end
   inherited imgBtn: TImageList
     Bitmap = {
-      494C01010B003400480110001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C01010B0034004C0110001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000003000000001002000000000000030
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -1913,6 +1929,10 @@ inherited fmOrdDetail: TfmOrdDetail
       8001000F800180018001000F800180018001003F800180018001003F80018001
       C003807FC003C003FFFFC0FFFFFFFFFF00000000000000000000000000000000
       000000000000}
+  end
+  inherited bsSkinMessage: TbsSkinMessage
+    SkinData = fmMain.bsSkinData
+    CtrlSkinData = fmMain.bsSkinData
   end
   inherited dbMain: TADOQuery
     AfterOpen = dbMainAfterOpen

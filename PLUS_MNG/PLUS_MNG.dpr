@@ -67,7 +67,7 @@ uses
 begin
   Application.Initialize;
 //  Application.MainFormOnTaskbar := True;
-  Application.Title := 'GTS Management';
+  Application.Title := 'Champion °ü¸®ÀÚ';
   Application.CreateForm(TfmMain, fmMain);
   Application.Run;
 end.

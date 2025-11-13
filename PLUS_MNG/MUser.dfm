@@ -4,6 +4,7 @@ inherited fmUser: TfmUser
   ClientHeight = 673
   ClientWidth = 1199
   OnCloseQuery = FormCloseQuery
+  OnShow = FormShow
   ExplicitWidth = 1215
   ExplicitHeight = 712
   PixelsPerInch = 96
@@ -305,8 +306,10 @@ inherited fmUser: TfmUser
       ExplicitTop = 4
     end
     inherited btnInsert: TbsSkinSpeedButton
-      Left = 121
-      ExplicitLeft = 121
+      Left = 116
+      Top = 4
+      ExplicitLeft = 116
+      ExplicitTop = 4
     end
     inherited btnEdit: TbsSkinSpeedButton
       Left = 197
@@ -337,6 +340,13 @@ inherited fmUser: TfmUser
       ExplicitLeft = 772
       ExplicitTop = 4
       ExplicitHeight = 23
+    end
+    object Label1: TLabel [8]
+      Left = 516
+      Top = 8
+      Width = 36
+      Height = 12
+      Caption = 'Label1'
     end
     inherited pnTitle: TRzPanel
       BorderHighlight = clWhite
@@ -807,20 +817,6 @@ inherited fmUser: TfmUser
           Spacing = 1
           OnClick = btnPassClick
         end
-        object lbAlert: TLabel
-          Left = 254
-          Top = 31
-          Width = 232
-          Height = 20
-          AutoSize = False
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clRed
-          Font.Height = 13
-          Font.Name = 'Tahoma'
-          Font.Style = []
-          ParentFont = False
-          Visible = False
-        end
         object RzLabel1: TRzLabel
           Left = 8
           Top = 408
@@ -871,6 +867,52 @@ inherited fmUser: TfmUser
           NumGlyphs = 1
           Spacing = 1
           OnClick = btnSignClick
+        end
+        object lbAlert: TLabel
+          Left = 255
+          Top = 32
+          Width = 232
+          Height = 20
+          AutoSize = False
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clRed
+          Font.Height = 13
+          Font.Name = 'Tahoma'
+          Font.Style = []
+          ParentFont = False
+          Visible = False
+        end
+        object bsSkinLabel34: TbsSkinLabel
+          Left = 254
+          Top = 31
+          Width = 80
+          Height = 20
+          HintImageIndex = 0
+          TabOrder = 38
+          SkinData = fmMain.bsSkinData
+          SkinDataName = 'label'
+          DefaultFont.Charset = DEFAULT_CHARSET
+          DefaultFont.Color = clWindowText
+          DefaultFont.Height = 13
+          DefaultFont.Name = 'Tahoma'
+          DefaultFont.Style = []
+          DefaultWidth = 0
+          DefaultHeight = 0
+          UseSkinFont = True
+          Transparent = False
+          ShadowEffect = False
+          ShadowColor = clBlack
+          ShadowOffset = 0
+          ShadowSize = 3
+          ReflectionEffect = False
+          ReflectionOffset = -5
+          EllipsType = bsetNoneEllips
+          UseSkinSize = False
+          UseSkinFontColor = True
+          BorderStyle = bvFrame
+          Alignment = taCenter
+          Caption = #44288#47532#54924#50896
+          AutoSize = False
         end
         object pnUser: TRzPanel
           Left = 6
@@ -1929,38 +1971,6 @@ inherited fmUser: TfmUser
           ParentFont = False
           TabOrder = 37
         end
-        object bsSkinLabel34: TbsSkinLabel
-          Left = 254
-          Top = 31
-          Width = 80
-          Height = 20
-          HintImageIndex = 0
-          TabOrder = 38
-          SkinData = fmMain.bsSkinData
-          SkinDataName = 'label'
-          DefaultFont.Charset = DEFAULT_CHARSET
-          DefaultFont.Color = clWindowText
-          DefaultFont.Height = 13
-          DefaultFont.Name = 'Tahoma'
-          DefaultFont.Style = []
-          DefaultWidth = 0
-          DefaultHeight = 0
-          UseSkinFont = True
-          Transparent = False
-          ShadowEffect = False
-          ShadowColor = clBlack
-          ShadowOffset = 0
-          ShadowSize = 3
-          ReflectionEffect = False
-          ReflectionOffset = -5
-          EllipsType = bsetNoneEllips
-          UseSkinSize = False
-          UseSkinFontColor = True
-          BorderStyle = bvFrame
-          Alignment = taCenter
-          Caption = #44288#47532#54924#50896
-          AutoSize = False
-        end
         object cbUserBlack: TkcRzDBComboBox
           Left = 340
           Top = 31
@@ -2135,7 +2145,9 @@ inherited fmUser: TfmUser
           Height = 20
           DataField = 'MNG_USER'
           DataSource = dsMain
+          ReadOnly = True
           Style = csDropDownList
+          Color = clInfoBk
           Ctl3D = False
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBtnText
@@ -2210,6 +2222,10 @@ inherited fmUser: TfmUser
       Tag = 800
       Caption = #44228#51340#44288#47532
       ImageIndex = 15
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object gdAcnt: TDBGridEh
         Left = 0
         Top = 21
@@ -2484,7 +2500,7 @@ inherited fmUser: TfmUser
           Style = csDropDownList
           Ctl3D = False
           ImeName = 'Microsoft IME 2010'
-          ItemHeight = 13
+          ItemHeight = 0
           ParentCtl3D = False
           TabOrder = 4
           EnterToTab = True
@@ -2533,7 +2549,7 @@ inherited fmUser: TfmUser
           Color = clInfoBk
           Ctl3D = False
           ImeName = 'Microsoft IME 2010'
-          ItemHeight = 13
+          ItemHeight = 0
           ParentCtl3D = False
           TabOrder = 3
           EnterToTab = True
@@ -2672,7 +2688,7 @@ inherited fmUser: TfmUser
           Style = csDropDownList
           Ctl3D = False
           ImeName = 'Microsoft IME 2010'
-          ItemHeight = 13
+          ItemHeight = 0
           ParentCtl3D = False
           TabOrder = 5
           Items.Strings = (
@@ -2692,7 +2708,7 @@ inherited fmUser: TfmUser
           Color = clInfoBk
           Ctl3D = False
           ImeName = 'Microsoft IME 2010'
-          ItemHeight = 13
+          ItemHeight = 0
           ParentCtl3D = False
           TabOrder = 0
           Items.Strings = (
@@ -2959,7 +2975,7 @@ inherited fmUser: TfmUser
           Style = csDropDownList
           Ctl3D = False
           ImeName = 'Microsoft IME 2010'
-          ItemHeight = 13
+          ItemHeight = 0
           ParentCtl3D = False
           TabOrder = 21
           EnterToTab = True
@@ -3006,7 +3022,7 @@ inherited fmUser: TfmUser
           Style = csDropDownList
           Ctl3D = False
           ImeName = 'Microsoft IME 2010'
-          ItemHeight = 13
+          ItemHeight = 0
           ParentCtl3D = False
           TabOrder = 23
           Items.Strings = (
@@ -3265,7 +3281,7 @@ inherited fmUser: TfmUser
           end
           object btnLevSave: TbsSkinSpeedButton
             Tag = 500
-            Left = 93
+            Left = 89
             Top = 142
             Width = 67
             Height = 24
@@ -3301,10 +3317,11 @@ inherited fmUser: TfmUser
             NumGlyphs = 1
             Spacing = 1
             OnClick = btnLevSaveClick
+            ExplicitLeft = 93
           end
           object btnLevCancel: TbsSkinSpeedButton
             Tag = 500
-            Left = 93
+            Left = 89
             Top = 170
             Width = 67
             Height = 24
@@ -3340,6 +3357,7 @@ inherited fmUser: TfmUser
             NumGlyphs = 1
             Spacing = 1
             OnClick = btnLevCancelClick
+            ExplicitLeft = 93
           end
           object RzPanel10: TRzPanel
             Left = 1
@@ -3578,6 +3596,8 @@ inherited fmUser: TfmUser
     object bsSkinTabSheet3: TbsSkinTabSheet
       Caption = #54924#50896#49345#45812
       ImageIndex = 17
+      ExplicitTop = 21
+      ExplicitHeight = 569
       object bsSkinLabel10: TbsSkinLabel
         Left = 3
         Top = 199
@@ -3706,7 +3726,7 @@ inherited fmUser: TfmUser
         Style = csDropDownList
         Ctl3D = False
         ImeName = 'Microsoft IME 2010'
-        ItemHeight = 13
+        ItemHeight = 0
         ParentCtl3D = False
         TabOrder = 3
         EnterToTab = True
@@ -3803,6 +3823,8 @@ inherited fmUser: TfmUser
       Tag = 800
       Caption = #44288#47532#51088' '#51077#52636#44552
       ImageIndex = 18
+      ExplicitTop = 21
+      ExplicitHeight = 569
       object gdInout: TDBGridEh
         Left = 0
         Top = 21
@@ -3943,6 +3965,7 @@ inherited fmUser: TfmUser
         FlatColor = clGray
         FlatColorAdjustment = 0
         TabOrder = 1
+        ExplicitHeight = 416
         object RzGroupBox1: TRzGroupBox
           Left = 5
           Top = 6
@@ -4155,7 +4178,7 @@ inherited fmUser: TfmUser
             Style = csDropDownList
             Ctl3D = False
             ImeName = 'Microsoft IME 2010'
-            ItemHeight = 13
+            ItemHeight = 0
             ParentCtl3D = False
             TabOrder = 2
             EnterToTab = True
@@ -4391,6 +4414,10 @@ inherited fmUser: TfmUser
     object bsSkinTabSheet5: TbsSkinTabSheet
       Caption = #47196#44536#51064#45236#50669
       ImageIndex = 21
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object gdLogin: TDBGridEh
         Left = 0
         Top = 21
@@ -4599,7 +4626,7 @@ inherited fmUser: TfmUser
           496
           20)
         object lbLogin: TbsSkinLabel
-          Left = 303
+          Left = 299
           Top = 1
           Width = 126
           Height = 19
@@ -4630,6 +4657,7 @@ inherited fmUser: TfmUser
           Alignment = taCenter
           Caption = '0'#44148
           AutoSize = False
+          ExplicitLeft = 301
         end
       end
       object edIP: TEdit
@@ -4645,7 +4673,7 @@ inherited fmUser: TfmUser
   end
   inherited imgBtn: TImageList
     Bitmap = {
-      494C01011600D001CC0210001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C01011600D001DC0210001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000006000000001002000000000000060
       000000000000000000000000000000000000000000000000000000000000087B
       1000107B1800107B1800107B1000087B100000730800006B0000000000000000

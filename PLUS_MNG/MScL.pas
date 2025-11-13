@@ -91,7 +91,7 @@ end;
 procedure TfmScL.FormShow(Sender: TObject);
 begin
   inherited;
-  MainTableOpen;
+//  MainTableOpen;
 end;
 
 procedure TfmScL.MainTableOpen;

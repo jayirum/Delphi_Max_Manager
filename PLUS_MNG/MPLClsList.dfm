@@ -13,6 +13,7 @@ inherited fmPLClsList: TfmPLClsList
       Left = 791
       Top = 4
       Height = 23
+      SkinData = fmMain.bsSkinData
       ExplicitLeft = 791
       ExplicitTop = 4
       ExplicitHeight = 23
@@ -21,6 +22,7 @@ inherited fmPLClsList: TfmPLClsList
       Left = 973
       Top = -8
       Visible = False
+      SkinData = fmMain.bsSkinData
       ExplicitLeft = 973
       ExplicitTop = -8
     end
@@ -28,6 +30,7 @@ inherited fmPLClsList: TfmPLClsList
       Left = 973
       Top = -8
       Visible = False
+      SkinData = fmMain.bsSkinData
       ExplicitLeft = 973
       ExplicitTop = -8
     end
@@ -35,6 +38,7 @@ inherited fmPLClsList: TfmPLClsList
       Left = 973
       Top = -8
       Visible = False
+      SkinData = fmMain.bsSkinData
       ExplicitLeft = 973
       ExplicitTop = -8
     end
@@ -42,17 +46,20 @@ inherited fmPLClsList: TfmPLClsList
       Left = 973
       Top = -8
       Visible = False
+      SkinData = fmMain.bsSkinData
       ExplicitLeft = 973
       ExplicitTop = -8
     end
     inherited btnClose: TbsSkinSpeedButton
       Left = 1299
+      SkinData = fmMain.bsSkinData
       ExplicitLeft = 1166
     end
     inherited bsRibbonDivider4: TbsRibbonDivider
       Left = 1001
       Top = -2
       Visible = False
+      SkinData = fmMain.bsSkinData
       ExplicitLeft = 1001
       ExplicitTop = -2
     end
@@ -61,6 +68,7 @@ inherited fmPLClsList: TfmPLClsList
       Top = 4
       Height = 23
       Anchors = [akTop, akRight]
+      SkinData = fmMain.bsSkinData
       OnClick = btnExcelClick
       ExplicitLeft = 1036
       ExplicitTop = 4
@@ -266,6 +274,7 @@ inherited fmPLClsList: TfmPLClsList
   end
   inherited pnBottom: TbsSkinPanel
     Width = 1384
+    SkinData = fmMain.bsSkinData
     ExplicitWidth = 1384
   end
   object gdMain: TDBGridEh [2]
@@ -564,9 +573,13 @@ inherited fmPLClsList: TfmPLClsList
     object RowDetailData: TRowDetailPanelControlEh
     end
   end
+  inherited bsBusinessSkinForm: TbsBusinessSkinForm
+    SkinData = fmMain.bsSkinData
+    MenusSkinData = fmMain.bsSkinData
+  end
   inherited imgBtn: TImageList
     Bitmap = {
-      494C01010B003400AC0010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C01010B003400B00010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000003000000001002000000000000030
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -968,6 +981,10 @@ inherited fmPLClsList: TfmPLClsList
       8001000F800180018001000F800180018001003F800180018001003F80018001
       C003807FC003C003FFFFC0FFFFFFFFFF00000000000000000000000000000000
       000000000000}
+  end
+  inherited bsSkinMessage: TbsSkinMessage
+    SkinData = fmMain.bsSkinData
+    CtrlSkinData = fmMain.bsSkinData
   end
   inherited dbMain: TADOQuery
     AfterOpen = dbMainAfterOpen

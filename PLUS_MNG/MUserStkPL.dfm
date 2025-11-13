@@ -13,6 +13,7 @@ inherited fmUserStkPL: TfmUserStkPL
       Left = 595
       Top = 5
       Height = 23
+      SkinData = fmMain.bsSkinData
       ExplicitLeft = 595
       ExplicitTop = 5
       ExplicitHeight = 23
@@ -20,12 +21,14 @@ inherited fmUserStkPL: TfmUserStkPL
     inherited btnInsert: TbsSkinSpeedButton
       Left = 940
       Visible = False
+      SkinData = fmMain.bsSkinData
       ExplicitLeft = 940
     end
     inherited btnEdit: TbsSkinSpeedButton
       Left = 936
       Top = 2
       Visible = False
+      SkinData = fmMain.bsSkinData
       ExplicitLeft = 936
       ExplicitTop = 2
     end
@@ -33,22 +36,26 @@ inherited fmUserStkPL: TfmUserStkPL
       Left = 924
       Top = 4
       Visible = False
+      SkinData = fmMain.bsSkinData
       ExplicitLeft = 924
       ExplicitTop = 4
     end
     inherited btnPost: TbsSkinSpeedButton
       Left = 936
       Visible = False
+      SkinData = fmMain.bsSkinData
       ExplicitLeft = 936
     end
     inherited btnClose: TbsSkinSpeedButton
       Left = 1107
+      SkinData = fmMain.bsSkinData
       ExplicitLeft = 1048
     end
     inherited bsRibbonDivider4: TbsRibbonDivider
       Left = 907
       Top = 3
       Visible = False
+      SkinData = fmMain.bsSkinData
       ExplicitLeft = 907
       ExplicitTop = 3
     end
@@ -57,6 +64,7 @@ inherited fmUserStkPL: TfmUserStkPL
       Top = 4
       Height = 23
       Anchors = [akTop, akRight]
+      SkinData = fmMain.bsSkinData
       OnClick = btnExcelClick
       ExplicitLeft = 773
       ExplicitTop = 4
@@ -255,6 +263,7 @@ inherited fmUserStkPL: TfmUserStkPL
     Top = 508
     Width = 1192
     Height = 45
+    SkinData = fmMain.bsSkinData
     ExplicitTop = 508
     ExplicitWidth = 1192
     ExplicitHeight = 45
@@ -1435,6 +1444,8 @@ inherited fmUserStkPL: TfmUserStkPL
     end
   end
   inherited bsBusinessSkinForm: TbsBusinessSkinForm
+    SkinData = fmMain.bsSkinData
+    MenusSkinData = fmMain.bsSkinData
     Left = 64
     Top = 336
   end
@@ -1442,7 +1453,7 @@ inherited fmUserStkPL: TfmUserStkPL
     Left = 144
     Top = 288
     Bitmap = {
-      494C01010B003400C40010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C01010B003400C80010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000003000000001002000000000000030
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -1850,6 +1861,8 @@ inherited fmUserStkPL: TfmUserStkPL
     Top = 288
   end
   inherited bsSkinMessage: TbsSkinMessage
+    SkinData = fmMain.bsSkinData
+    CtrlSkinData = fmMain.bsSkinData
     Left = 104
     Top = 337
   end

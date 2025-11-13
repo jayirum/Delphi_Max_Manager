@@ -497,7 +497,6 @@ object fmLogin: TfmLogin
     Top = 256
   end
   object dbSQL: TADOQuery
-    Active = True
     Connection = MastDB.ADOConn
     CursorType = ctStatic
     Parameters = <>

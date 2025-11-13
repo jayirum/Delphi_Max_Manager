@@ -367,6 +367,8 @@ begin
        sPartner,
        QuotedStr(sStart),
        QuotedStr(sEnd) ]);
+
+
 //       sUserGrade, sUserPart, sPartner
   finally
     Delay_Hide;
