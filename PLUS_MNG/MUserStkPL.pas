@@ -58,7 +58,6 @@ type
       Column: TColumnEh);
     procedure gdMainDrawColumnCell(Sender: TObject; const Rect: TRect;
       DataCol: Integer; Column: TColumnEh; State: TGridDrawState);
-    procedure tmAutoSearchTimer(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure cbxDayFClick(Sender: TObject);
     procedure cbxNightFClick(Sender: TObject);
@@ -101,7 +100,7 @@ uses StdUtils, MMastDB, MDelay;
 const
   giArtc = 20; // Artc 개수
   giOpt  =  2; // 선택옵션 개수
-  giStartCol = 19; // Opt, Artc 컬럼 시작전 위치
+  giStartCol = 12; // Opt, Artc 컬럼 시작전 위치
 var
   arrArtc : array [1..giArtc] of boolean;
   arrOpt  : array [1..giOpt] of boolean;
@@ -277,8 +276,10 @@ begin
 
   PartTableOpen(cbUserPart, '회원분류', '[전체]', 'ALL');
   PartTableOpen(cbUserPart, '회원분류');
+  cbUserPart.ItemIndex := 0;
 
-  PartTableOpen(cbPartner, '@|DISTINCT PARTNER_NICK_NM + '''','''' + PARTNER_NM, PARTNER_ID|USER_MST|ISNULL(PARTNER_NM,'''') <> '''' ', '[없음]', 'ALL');
+  PartTableOpen(cbPartner, '@|DISTINCT PARTNER_NICK_NM + '''','''' + PARTNER_NM, PARTNER_ID|USER_MST|WHERE ISNULL(PARTNER_NM,'''') <> '''' ', '[없음]', 'ALL');
+  cbPartner.ItemIndex := 0;
 
   dtStart.Date    := TextToDate(_Trade_DT) -7;
   dtEnd.Date      := TextToDate(_Trade_DT);
@@ -443,46 +444,46 @@ begin
       '           ,SUM(CLR_PL    ) CLR_PL ' +
       '           ,SUM(CMSN      ) CMSN   ' +
       '           ,SUM(NET_PL    ) NET_PL ' +
-      '           ,SUM(CASE WHEN ARTC_CD = ''101 '' THEN CLR_PL END) KSF_PL       ' +
-      '           ,SUM(CASE WHEN ARTC_CD = ''101 '' THEN CMSN   END) KSF_CMSN     ' +
-      '           ,SUM(CASE WHEN ARTC_CD = ''201 '' THEN CLR_PL END) KSO_PL_DAY   ' +
-      '           ,SUM(CASE WHEN ARTC_CD = ''201 '' THEN CMSN   END) KSO_CMSN_DAY ' +
-      '           ,SUM(CASE WHEN ARTC_CD = ''301 '' THEN CLR_PL END) KSO_PL_NGT   ' +
-      '           ,SUM(CASE WHEN ARTC_CD = ''301 '' THEN CMSN   END) KSO_CMSN_NGT ' +
-      '           ,SUM(CASE WHEN ARTC_CD = ''URO '' THEN CLR_PL END) URO_CLR_PL   ' +
-      '           ,SUM(CASE WHEN ARTC_CD = ''URO '' THEN CMSN   END) URO_CMSN     ' +
-      '           ,SUM(CASE WHEN ARTC_CD = ''CL  '' THEN CLR_PL END) CL_CLR_PL    ' +
-      '           ,SUM(CASE WHEN ARTC_CD = ''CL  '' THEN CMSN   END) CL_CMSN      ' +
-      '           ,SUM(CASE WHEN ARTC_CD = ''GC  '' THEN CLR_PL END) GC_CLR_PL    ' +
-      '           ,SUM(CASE WHEN ARTC_CD = ''GC  '' THEN CMSN   END) GC_CMSN      ' +
-      '           ,SUM(CASE WHEN ARTC_CD = ''NG  '' THEN CLR_PL END) NG_CLR_PL    ' +
-      '           ,SUM(CASE WHEN ARTC_CD = ''NG  '' THEN CMSN   END) NG_CMSN      ' +
-      '           ,SUM(CASE WHEN ARTC_CD = ''ES  '' THEN CLR_PL END) ES_CLR_PL    ' +
-      '           ,SUM(CASE WHEN ARTC_CD = ''ES  '' THEN CMSN   END) ES_CMSN      ' +
-      '           ,SUM(CASE WHEN ARTC_CD = ''AD  '' THEN CLR_PL END) AD_CLR_PL    ' +
-      '           ,SUM(CASE WHEN ARTC_CD = ''AD  '' THEN CMSN   END) AD_CMSN      ' +
-      '           ,SUM(CASE WHEN ARTC_CD = ''BP  '' THEN CLR_PL END) BP_CLR_PL    ' +
-      '           ,SUM(CASE WHEN ARTC_CD = ''BP  '' THEN CMSN   END) BP_CMSN      ' +
-      '           ,SUM(CASE WHEN ARTC_CD = ''JY  '' THEN CLR_PL END) JY_CLR_PL    ' +
-      '           ,SUM(CASE WHEN ARTC_CD = ''JY  '' THEN CMSN   END) JY_CMSN      ' +
-      '           ,SUM(CASE WHEN ARTC_CD = ''NQ  '' THEN CLR_PL END) NQ_CLR_PL    ' +
-      '           ,SUM(CASE WHEN ARTC_CD = ''NQ  '' THEN CMSN   END) NQ_CMSN      ' +
-      '           ,SUM(CASE WHEN ARTC_CD = ''YM  '' THEN CLR_PL END) YM_CLR_PL    ' +
-      '           ,SUM(CASE WHEN ARTC_CD = ''YM  '' THEN CMSN   END) YM_CMSN      ' +
-      '           ,SUM(CASE WHEN ARTC_CD = ''SCN '' THEN CLR_PL END) SCN_CLR_PL   ' +
-      '           ,SUM(CASE WHEN ARTC_CD = ''SCN '' THEN CMSN   END) SCN_CMSN     ' +
-      '           ,SUM(CASE WHEN ARTC_CD = ''HSI '' THEN CLR_PL END) HSI_CLR_PL   ' +
-      '           ,SUM(CASE WHEN ARTC_CD = ''HSI '' THEN CMSN   END) HSI_CMSN     ' +
-      '           ,SUM(CASE WHEN ARTC_CD = ''SSI '' THEN CLR_PL END) SSI_CLR_PL   ' +
-      '           ,SUM(CASE WHEN ARTC_CD = ''SSI '' THEN CMSN   END) SSI_CMSN     ' +
+      '           ,SUM(CASE WHEN ARTC_CD = ''101'' THEN CLR_PL END) KSF_PL       ' +
+      '           ,SUM(CASE WHEN ARTC_CD = ''101'' THEN CMSN   END) KSF_CMSN     ' +
+      '           ,SUM(CASE WHEN ARTC_CD = ''201'' THEN CLR_PL END) KSO_PL_DAY   ' +
+      '           ,SUM(CASE WHEN ARTC_CD = ''201'' THEN CMSN   END) KSO_CMSN_DAY ' +
+      '           ,SUM(CASE WHEN ARTC_CD = ''301'' THEN CLR_PL END) KSO_PL_NGT   ' +
+      '           ,SUM(CASE WHEN ARTC_CD = ''301'' THEN CMSN   END) KSO_CMSN_NGT ' +
+      '           ,SUM(CASE WHEN ARTC_CD = ''URO'' THEN CLR_PL END) URO_CLR_PL   ' +
+      '           ,SUM(CASE WHEN ARTC_CD = ''URO'' THEN CMSN   END) URO_CMSN     ' +
+      '           ,SUM(CASE WHEN ARTC_CD = ''CL'' THEN CLR_PL END) CL_CLR_PL    ' +
+      '           ,SUM(CASE WHEN ARTC_CD = ''CL'' THEN CMSN   END) CL_CMSN      ' +
+      '           ,SUM(CASE WHEN ARTC_CD = ''GC'' THEN CLR_PL END) GC_CLR_PL    ' +
+      '           ,SUM(CASE WHEN ARTC_CD = ''GC'' THEN CMSN   END) GC_CMSN      ' +
+      '           ,SUM(CASE WHEN ARTC_CD = ''NG'' THEN CLR_PL END) NG_CLR_PL    ' +
+      '           ,SUM(CASE WHEN ARTC_CD = ''NG'' THEN CMSN   END) NG_CMSN      ' +
+      '           ,SUM(CASE WHEN ARTC_CD = ''ES'' THEN CLR_PL END) ES_CLR_PL    ' +
+      '           ,SUM(CASE WHEN ARTC_CD = ''ES'' THEN CMSN   END) ES_CMSN      ' +
+      '           ,SUM(CASE WHEN ARTC_CD = ''AD'' THEN CLR_PL END) AD_CLR_PL    ' +
+      '           ,SUM(CASE WHEN ARTC_CD = ''AD'' THEN CMSN   END) AD_CMSN      ' +
+      '           ,SUM(CASE WHEN ARTC_CD = ''BP'' THEN CLR_PL END) BP_CLR_PL    ' +
+      '           ,SUM(CASE WHEN ARTC_CD = ''BP'' THEN CMSN   END) BP_CMSN      ' +
+      '           ,SUM(CASE WHEN ARTC_CD = ''JY'' THEN CLR_PL END) JY_CLR_PL    ' +
+      '           ,SUM(CASE WHEN ARTC_CD = ''JY'' THEN CMSN   END) JY_CMSN      ' +
+      '           ,SUM(CASE WHEN ARTC_CD = ''NQ'' THEN CLR_PL END) NQ_CLR_PL    ' +
+      '           ,SUM(CASE WHEN ARTC_CD = ''NQ'' THEN CMSN   END) NQ_CMSN      ' +
+      '           ,SUM(CASE WHEN ARTC_CD = ''YM'' THEN CLR_PL END) YM_CLR_PL    ' +
+      '           ,SUM(CASE WHEN ARTC_CD = ''YM'' THEN CMSN   END) YM_CMSN      ' +
+      '           ,SUM(CASE WHEN ARTC_CD = ''SCN'' THEN CLR_PL END) SCN_CLR_PL   ' +
+      '           ,SUM(CASE WHEN ARTC_CD = ''SCN'' THEN CMSN   END) SCN_CMSN     ' +
+      '           ,SUM(CASE WHEN ARTC_CD = ''HSI'' THEN CLR_PL END) HSI_CLR_PL   ' +
+      '           ,SUM(CASE WHEN ARTC_CD = ''HSI'' THEN CMSN   END) HSI_CMSN     ' +
+      '           ,SUM(CASE WHEN ARTC_CD = ''SSI'' THEN CLR_PL END) SSI_CLR_PL   ' +
+      '           ,SUM(CASE WHEN ARTC_CD = ''SSI'' THEN CMSN   END) SSI_CMSN     ' +
       '           ,SUM(CASE WHEN ARTC_CD = ''FDAX'' THEN CLR_PL END) FDAX_CLR_PL  ' +
       '           ,SUM(CASE WHEN ARTC_CD = ''FDAX'' THEN CMSN   END) FDAX_CMSN    ' +
-      '           ,SUM(CASE WHEN ARTC_CD = ''CD  '' THEN CLR_PL END) CD_CLR_PL    ' +
-      '           ,SUM(CASE WHEN ARTC_CD = ''CD  '' THEN CMSN   END) CD_CMSN      ' +
-      '           ,SUM(CASE WHEN ARTC_CD = ''SI  '' THEN CLR_PL END) SI_CLR_PL    ' +
-      '           ,SUM(CASE WHEN ARTC_CD = ''SI  '' THEN CMSN   END) SI_CMSN      ' +
-      '           ,SUM(CASE WHEN ARTC_CD = ''HG  '' THEN CLR_PL END) HG_CLR_PL    ' +
-      '           ,SUM(CASE WHEN ARTC_CD = ''HG  '' THEN CMSN   END) HG_CMSN      ' +
+      '           ,SUM(CASE WHEN ARTC_CD = ''CD'' THEN CLR_PL END) CD_CLR_PL    ' +
+      '           ,SUM(CASE WHEN ARTC_CD = ''CD'' THEN CMSN   END) CD_CMSN      ' +
+      '           ,SUM(CASE WHEN ARTC_CD = ''SI'' THEN CLR_PL END) SI_CLR_PL    ' +
+      '           ,SUM(CASE WHEN ARTC_CD = ''SI'' THEN CMSN   END) SI_CMSN      ' +
+      '           ,SUM(CASE WHEN ARTC_CD = ''HG'' THEN CLR_PL END) HG_CLR_PL    ' +
+      '           ,SUM(CASE WHEN ARTC_CD = ''HG'' THEN CMSN   END) HG_CMSN      ' +
       '       FROM (SELECT A1.* FROM ACNT_STK_CLS A1, USER_MST B1 WHERE A1.USER_ID = B1.USER_ID %s %s %s ) A ' +
       '      WHERE TRADE_DT BETWEEN %s AND %s ' +
       '      GROUP BY USER_NM, USER_ID, ACNT_NO ' +
@@ -504,16 +505,11 @@ begin
        sPartner,
        QuotedStr(sStart),
        QuotedStr(sEnd) ]);
+
     fnSqlOpen(dbMain, sSql);
   finally
     Delay_Hide;
   end;
-end;
-
-procedure TfmUserStkPL.tmAutoSearchTimer(Sender: TObject);
-begin
-  inherited;
-  MainTableOpen;
 end;
 
 end.

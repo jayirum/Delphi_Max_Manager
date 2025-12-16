@@ -617,7 +617,7 @@ object fmUserDetail: TfmUserDetail
       Tag = 500
       Left = 389
       Top = 4
-      Width = 75
+      Width = 95
       Height = 20
       Cursor = crHandPoint
       HintImageIndex = 0
@@ -651,7 +651,6 @@ object fmUserDetail: TfmUserDetail
       NumGlyphs = 1
       Spacing = 1
       OnClick = btnCloseClick
-      ExplicitLeft = 409
     end
     object bsSkinLabel1: TbsSkinLabel
       Left = 5
@@ -700,14 +699,14 @@ object fmUserDetail: TfmUserDetail
       EnterToTab = True
     end
     object pnTp: TRzPanel
-      Left = 306
+      Left = 298
       Top = 3
-      Width = 92
+      Width = 87
       Height = 22
       BorderOuter = fsFlat
       BorderHighlight = clWhite
       BorderShadow = 13290186
-      Color = clWhite
+      Color = 15132927
       FlatColor = clGray
       FlatColorAdjustment = 0
       Font.Charset = DEFAULT_CHARSET
@@ -813,7 +812,7 @@ object fmUserDetail: TfmUserDetail
     Left = 232
     Top = 368
     Bitmap = {
-      494C01011100D000700110001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C01011100D000740110001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000005000000001002000000000000050
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000

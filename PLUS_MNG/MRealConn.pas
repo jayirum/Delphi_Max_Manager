@@ -100,7 +100,6 @@ begin
   edFind.Clear;
 
   cbCheckAll.Checked := False;
-
   _CurrPage := 0;
   _TotCnt := 0;
   MainTableOpen;
@@ -156,6 +155,7 @@ begin
     end;
       
     bsMsgInfo(' ' + IntToStr(iTCnt) + ' 명 로그아웃 되었습니다.');
+    cbCheckAll.Checked := False;
     _CurrPage := 0;
     _TotCnt := 0;
     MainTableOpen;
@@ -188,6 +188,7 @@ begin
     end;
 
     bsMsgInfo(' ' + intTostr(iTCnt) + ' 명 갱신 되었습니다.');
+    cbCheckAll.Checked := False;
     _CurrPage := 0;
     _TotCnt := 0;
     MainTableOpen;
@@ -240,7 +241,7 @@ begin
       iCnt := DS.RecordCount;
       DS.First;
       for i:=0 to iCnt-1 do begin
-        gdMain.SelectedRows.CurrentRowSelected := cbCheckAll.Checked;
+        gdMain.SelectedRows.CurrentRowSelected := TF;
         if i <> (iCnt-1) then // 마지막 Row에서 cdsMainAfterScroll 이벤트 발생 안되게 하기위해
           DS.Next;
       end;

@@ -4,6 +4,7 @@ inherited fmPLList: TfmPLList
   ClientWidth = 1152
   OnShow = FormShow
   ExplicitWidth = 1168
+  ExplicitHeight = 592
   PixelsPerInch = 96
   TextHeight = 12
   inherited pnTop: TRzPanel
@@ -14,7 +15,6 @@ inherited fmPLList: TfmPLList
       Top = 4
       Height = 23
       Anchors = [akLeft]
-      SkinData = fmMain.bsSkinData
       ExplicitLeft = 599
       ExplicitTop = 4
       ExplicitHeight = 23
@@ -23,7 +23,6 @@ inherited fmPLList: TfmPLList
       Left = 945
       Top = 1
       Visible = False
-      SkinData = fmMain.bsSkinData
       ExplicitLeft = 945
       ExplicitTop = 1
     end
@@ -31,7 +30,6 @@ inherited fmPLList: TfmPLList
       Left = 945
       Top = 0
       Visible = False
-      SkinData = fmMain.bsSkinData
       ExplicitLeft = 945
       ExplicitTop = 0
     end
@@ -39,7 +37,6 @@ inherited fmPLList: TfmPLList
       Left = 945
       Top = 1
       Visible = False
-      SkinData = fmMain.bsSkinData
       ExplicitLeft = 945
       ExplicitTop = 1
     end
@@ -47,26 +44,22 @@ inherited fmPLList: TfmPLList
       Left = 945
       Top = 0
       Visible = False
-      SkinData = fmMain.bsSkinData
       ExplicitLeft = 945
       ExplicitTop = 0
     end
     inherited btnClose: TbsSkinSpeedButton
       Left = 1067
-      SkinData = fmMain.bsSkinData
       ExplicitLeft = 1007
     end
     inherited bsRibbonDivider4: TbsRibbonDivider
       Left = 586
       Anchors = [akLeft]
-      SkinData = fmMain.bsSkinData
       ExplicitLeft = 586
     end
     inherited btnExcel: TbsSkinSpeedButton
       Left = 953
       Top = 1
       Visible = False
-      SkinData = fmMain.bsSkinData
       OnClick = btnExcelClick
       ExplicitLeft = 953
       ExplicitTop = 1
@@ -233,7 +226,6 @@ inherited fmPLList: TfmPLList
   end
   inherited pnBottom: TbsSkinPanel
     Width = 1152
-    SkinData = fmMain.bsSkinData
     ExplicitWidth = 1152
   end
   object pnLeft: TRzSizePanel [2]
@@ -820,6 +812,7 @@ inherited fmPLList: TfmPLList
             end
             item
               Alignment = taCenter
+              DisplayFormat = '#,##0'
               DynProps = <>
               EditButtons = <>
               FieldName = 'CLR_PL'
@@ -842,6 +835,7 @@ inherited fmPLList: TfmPLList
             end
             item
               Alignment = taCenter
+              DisplayFormat = '#,##0'
               DynProps = <>
               EditButtons = <>
               FieldName = 'CMSN'
@@ -865,6 +859,7 @@ inherited fmPLList: TfmPLList
             item
               Alignment = taCenter
               Color = 16515071
+              DisplayFormat = '#,##0'
               DynProps = <>
               EditButtons = <>
               FieldName = 'NET_PL'
@@ -1225,6 +1220,7 @@ inherited fmPLList: TfmPLList
         end
         item
           Alignment = taCenter
+          DisplayFormat = '#,##0'
           DynProps = <>
           EditButtons = <>
           FieldName = 'ACNT_AMT_BF'
@@ -1247,6 +1243,7 @@ inherited fmPLList: TfmPLList
         end
         item
           Alignment = taCenter
+          DisplayFormat = '#,##0'
           DynProps = <>
           EditButtons = <>
           FieldName = 'ACNT_AMT_TODAY'
@@ -1270,6 +1267,7 @@ inherited fmPLList: TfmPLList
         item
           Alignment = taCenter
           Color = clWhite
+          DisplayFormat = '#,##0'
           DynProps = <>
           EditButtons = <>
           FieldName = 'RQST_IN_AMT'
@@ -1292,6 +1290,7 @@ inherited fmPLList: TfmPLList
         end
         item
           Alignment = taCenter
+          DisplayFormat = '#,##0'
           DynProps = <>
           EditButtons = <>
           FieldName = 'RSLT_IN_AMT'
@@ -1314,6 +1313,7 @@ inherited fmPLList: TfmPLList
         end
         item
           Alignment = taCenter
+          DisplayFormat = '#,##0'
           DynProps = <>
           EditButtons = <>
           FieldName = 'RQST_OUT_AMT'
@@ -1336,6 +1336,7 @@ inherited fmPLList: TfmPLList
         end
         item
           Alignment = taCenter
+          DisplayFormat = '#,##0'
           DynProps = <>
           EditButtons = <>
           FieldName = 'RSLT_OUT_AMT'
@@ -1359,6 +1360,7 @@ inherited fmPLList: TfmPLList
         item
           Alignment = taCenter
           Color = 16515071
+          DisplayFormat = '#,##0'
           DynProps = <>
           EditButtons = <>
           FieldName = 'NET_PL_SUM'
@@ -1381,6 +1383,7 @@ inherited fmPLList: TfmPLList
         end
         item
           Alignment = taCenter
+          DisplayFormat = '#,##0'
           DynProps = <>
           EditButtons = <>
           FieldName = 'CLR_PL_SUM'
@@ -1403,6 +1406,7 @@ inherited fmPLList: TfmPLList
         end
         item
           Alignment = taCenter
+          DisplayFormat = '#,##0'
           DynProps = <>
           EditButtons = <>
           FieldName = 'CMSN_SUM'
@@ -1425,6 +1429,7 @@ inherited fmPLList: TfmPLList
         end
         item
           Alignment = taCenter
+          DisplayFormat = '#,##0'
           DynProps = <>
           EditButtons = <>
           FieldName = 'KSF_PL'
@@ -1447,6 +1452,7 @@ inherited fmPLList: TfmPLList
         end
         item
           Alignment = taCenter
+          DisplayFormat = '#,##0'
           DynProps = <>
           EditButtons = <>
           FieldName = 'KSF_CMSN'
@@ -1486,6 +1492,7 @@ inherited fmPLList: TfmPLList
         end
         item
           Alignment = taCenter
+          DisplayFormat = '#,##0'
           DynProps = <>
           EditButtons = <>
           FieldName = 'KSO_PL'
@@ -1508,6 +1515,7 @@ inherited fmPLList: TfmPLList
         end
         item
           Alignment = taCenter
+          DisplayFormat = '#,##0'
           DynProps = <>
           EditButtons = <>
           FieldName = 'KSO_CMSN'
@@ -1547,6 +1555,7 @@ inherited fmPLList: TfmPLList
         end
         item
           Alignment = taCenter
+          DisplayFormat = '#,##0'
           DynProps = <>
           EditButtons = <>
           FieldName = 'GF_PL'
@@ -1569,6 +1578,7 @@ inherited fmPLList: TfmPLList
         end
         item
           Alignment = taCenter
+          DisplayFormat = '#,##0'
           DynProps = <>
           EditButtons = <>
           FieldName = 'GF_CMSN'
@@ -1610,13 +1620,9 @@ inherited fmPLList: TfmPLList
       end
     end
   end
-  inherited bsBusinessSkinForm: TbsBusinessSkinForm
-    SkinData = fmMain.bsSkinData
-    MenusSkinData = fmMain.bsSkinData
-  end
   inherited imgBtn: TImageList
     Bitmap = {
-      494C01010B003400080110001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C01010B0034000C0110001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000003000000001002000000000000030
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -2018,10 +2024,6 @@ inherited fmPLList: TfmPLList
       8001000F800180018001000F800180018001003F800180018001003F80018001
       C003807FC003C003FFFFC0FFFFFFFFFF00000000000000000000000000000000
       000000000000}
-  end
-  inherited bsSkinMessage: TbsSkinMessage
-    SkinData = fmMain.bsSkinData
-    CtrlSkinData = fmMain.bsSkinData
   end
   inherited dbPart: TADOQuery
     Left = 145

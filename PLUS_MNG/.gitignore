@@ -1,4 +1,4 @@
-#ºôµå °á°ú¹°
+#ë¹Œë“œ ê²°ê³¼ë¬¼
 
 PLUS_MNG.exe
 GT_UPDATE.exe
@@ -11,7 +11,7 @@ ChatManager.exe
 *.dylib
 *.ocx
 
-#Ä³½Ã ¹× ÀÓ½ÃÆÄÀÏ
+#ìºì‹œ ë° ì„ì‹œíŒŒì¼
 
 *.identcache
 *.local
@@ -21,7 +21,7 @@ ChatManager.exe
 *.dproj.bak
 .~
 
-ÀÚµ¿ »ı¼º ÆÄÀÏ
+ìë™ ìƒì„± íŒŒì¼
 
 *.groupproj.local
 *.groupproj.bak
@@ -31,7 +31,7 @@ ChatManager.exe
 *.rsm
 *.drc
 
-#Æ¯Á¤ IDE Æú´õ
+#íŠ¹ì • IDE í´ë”
 
 /__history/
 /_history/
@@ -43,19 +43,19 @@ ChatManager.exe
 /2025.11.14/
 /2025.11.16/
 /backup_2025.08.26/
-/»õ Æú´õ/2025.11.14/
-/»õ Æú´õ/
+/ìƒˆ í´ë”/2025.11.14/
+/ìƒˆ í´ë”/
 /LOG/
 
 
-#Ãâ·Â Æú´õ (Win32/Win64 ºôµå »êÃâ¹°)
+#ì¶œë ¥ í´ë” (Win32/Win64 ë¹Œë“œ ì‚°ì¶œë¬¼)
 
 Win32/Debug/
 Win32/Release/
 Win64/Debug/
 Win64/Release/
 
-#±âÅ¸ ·Î±×/¹é¾÷
+#ê¸°íƒ€ ë¡œê·¸/ë°±ì—…
 
 *.map
 *.log

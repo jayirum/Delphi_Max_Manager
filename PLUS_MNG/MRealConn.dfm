@@ -18,7 +18,6 @@ inherited fmRealConn: TfmRealConn
     Color = 15790320
     FlatColor = clGray
     FlatColorAdjustment = 0
-    FrameController = MastDB.PanelRzFrameController
     TabOrder = 4
     object btnLogOut: TbsSkinSpeedButton
       Tag = 300
@@ -113,7 +112,6 @@ inherited fmRealConn: TfmRealConn
       Font.Height = -12
       Font.Name = #44404#47548#52404
       Font.Style = []
-      FrameController = MastDB.RzFrameController
       ParentFont = False
       TabOrder = 0
     end
@@ -200,7 +198,7 @@ inherited fmRealConn: TfmRealConn
         DataSource = dsMain
         DataField = 'USER_ID'
         ReadOnly = True
-        FrameController = MastDB.RzFrameController
+        Color = clInfoBk
         ImeMode = imSAlpha
         ImeName = 'Microsoft IME 2010'
         TabOrder = 1
@@ -216,7 +214,6 @@ inherited fmRealConn: TfmRealConn
       Height = 131
       ImeName = 'Microsoft Office IME 2007'
       TabOrder = 3
-      FrameController = MastDB.RzFrameController
     end
     object bsSkinLabel3: TbsSkinLabel
       Left = 6
@@ -255,7 +252,6 @@ inherited fmRealConn: TfmRealConn
       Top = 57
       Width = 398
       Height = 20
-      FrameController = MastDB.RzFrameController
       ImeName = 'Microsoft IME 2010'
       TabOrder = 5
       OnKeyDown = edFindKeyDown
@@ -264,39 +260,27 @@ inherited fmRealConn: TfmRealConn
   inherited pnTop: TRzPanel
     Width = 1173
     ExplicitWidth = 1173
-    inherited btnFilter: TbsSkinSpeedButton
-      SkinData = fmMain.bsSkinData
-    end
     inherited btnInsert: TbsSkinSpeedButton
       Visible = False
-      SkinData = fmMain.bsSkinData
     end
     inherited btnEdit: TbsSkinSpeedButton
       Visible = False
-      SkinData = fmMain.bsSkinData
     end
     inherited btnDelete: TbsSkinSpeedButton
       Visible = False
-      SkinData = fmMain.bsSkinData
     end
     inherited btnPost: TbsSkinSpeedButton
       Visible = False
-      SkinData = fmMain.bsSkinData
     end
     inherited btnClose: TbsSkinSpeedButton
       Left = 1088
-      SkinData = fmMain.bsSkinData
       ExplicitLeft = 1088
-    end
-    inherited bsRibbonDivider4: TbsRibbonDivider
-      SkinData = fmMain.bsSkinData
     end
     inherited btnExcel: TbsSkinSpeedButton
       Left = 1012
       Top = 4
       Height = 23
       Anchors = [akTop, akRight]
-      SkinData = fmMain.bsSkinData
       OnClick = btnExcelClick
       ExplicitLeft = 776
       ExplicitTop = 4
@@ -307,7 +291,6 @@ inherited fmRealConn: TfmRealConn
       BorderShadow = 13290186
       FlatColor = clGray
       FlatColorAdjustment = 0
-      FrameController = MastDB.RzFrameController
     end
     inherited nvMain: TRzDBNavigator
       Left = 911
@@ -318,7 +301,6 @@ inherited fmRealConn: TfmRealConn
   end
   inherited pnBottom: TbsSkinPanel
     Width = 1173
-    SkinData = fmMain.bsSkinData
     ExplicitWidth = 1173
   end
   object pnFilter: TbsSkinPanel [3]
@@ -393,7 +375,6 @@ inherited fmRealConn: TfmRealConn
       Top = 3
       Width = 227
       Height = 20
-      FrameController = MastDB.RzFrameController
       ImeName = 'Microsoft IME 2010'
       TabOrder = 1
       OnKeyDown = edFindKeyDown
@@ -677,13 +658,9 @@ inherited fmRealConn: TfmRealConn
     object RowDetailData: TRowDetailPanelControlEh
     end
   end
-  inherited bsBusinessSkinForm: TbsBusinessSkinForm
-    SkinData = fmMain.bsSkinData
-    MenusSkinData = fmMain.bsSkinData
-  end
   inherited imgBtn: TImageList
     Bitmap = {
-      494C01010D008C00100110001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C01010D008C001C0110001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000004000000001002000000000000040
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -1221,12 +1198,7 @@ inherited fmRealConn: TfmRealConn
   inherited dsMain: TDataSource
     DataSet = cdsMain
   end
-  inherited bsSkinMessage: TbsSkinMessage
-    SkinData = fmMain.bsSkinData
-    CtrlSkinData = fmMain.bsSkinData
-  end
   inherited dbMain: TADOQuery
-    Connection = MastDB.ADOConn
     CursorType = ctStatic
     Prepared = True
     SQL.Strings = (
@@ -1244,11 +1216,7 @@ inherited fmRealConn: TfmRealConn
     Left = 28
   end
   inherited dbPart: TADOQuery
-    Connection = MastDB.ADOConn
     Left = 145
-  end
-  inherited dbPower: TADOQuery
-    Connection = MastDB.ADOConn
   end
   object cdsMain: TClientDataSet
     Aggregates = <>

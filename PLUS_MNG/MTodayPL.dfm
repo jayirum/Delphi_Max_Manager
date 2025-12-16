@@ -3,8 +3,8 @@ inherited fmTodayPL: TfmTodayPL
   Caption = #44552#51068#49552#51061
   ClientWidth = 1192
   OnShow = FormShow
+  ExplicitTop = 8
   ExplicitWidth = 1208
-  ExplicitHeight = 592
   PixelsPerInch = 96
   TextHeight = 12
   inherited pnTop: TRzPanel
@@ -138,7 +138,7 @@ inherited fmTodayPL: TfmTodayPL
       ExplicitTop = 4
       ExplicitHeight = 24
     end
-    object chUserTp: TbsSkinCheckRadioBox
+    object chTrade: TbsSkinCheckRadioBox
       Left = 797
       Top = 4
       Width = 79
@@ -518,17 +518,6 @@ inherited fmTodayPL: TfmTodayPL
         AutoFitColWidth = False
         DynProps = <>
         EditButtons = <>
-        FieldName = 'USER_BLACK_A'
-        Footers = <>
-        Title.Caption = #44288#47532
-        Title.Color = 16250871
-        Width = 39
-      end
-      item
-        Alignment = taCenter
-        AutoFitColWidth = False
-        DynProps = <>
-        EditButtons = <>
         FieldName = 'LEVERAGE'
         Footer.Alignment = taRightJustify
         Footers = <>
@@ -541,41 +530,15 @@ inherited fmTodayPL: TfmTodayPL
         AutoFitColWidth = False
         DynProps = <>
         EditButtons = <>
-        FieldName = 'CNT'
-        Footer.Alignment = taRightJustify
-        Footer.FieldName = 'CNT'
-        Footer.ValueType = fvtSum
-        Footers = <>
-        Title.Caption = #49688#47049
-        Title.Color = 16250871
-        Width = 52
-      end
-      item
-        AutoFitColWidth = False
-        DynProps = <>
-        EditButtons = <>
-        FieldName = 'NET_CNT'
-        Footer.FieldName = 'NET_CNT'
-        Footer.ValueType = fvtSum
-        Footers = <>
-        Visible = False
-        Width = 1
-      end
-      item
-        Alignment = taCenter
-        AutoFitColWidth = False
-        DynProps = <>
-        EditButtons = <>
         FieldName = 'CONN_YN'
         Footer.Alignment = taCenter
         Footer.Color = 16776436
-        Footer.FieldName = 'CONN_CNT'
+        Footer.FieldName = 'CONN_YN'
         Footer.Font.Charset = DEFAULT_CHARSET
         Footer.Font.Color = clRed
         Footer.Font.Height = -12
         Footer.Font.Name = #44404#47548#52404
         Footer.Font.Style = [fsBold]
-        Footer.ValueType = fvtSum
         Footers = <>
         Title.Caption = #51217#49549
         Title.Color = 16250871
@@ -601,15 +564,37 @@ inherited fmTodayPL: TfmTodayPL
         Width = 1
       end
       item
+        Alignment = taRightJustify
         AutoFitColWidth = False
+        DisplayFormat = '#,##0'
         DynProps = <>
         EditButtons = <>
+        FieldName = 'BF_ACNT_AMT'
+        Footer.Alignment = taRightJustify
+        Footer.FieldName = 'BF_ACNT_AMT'
+        Footer.ValueType = fvtSum
         Footers = <>
-        Width = 1
+        Title.Caption = #51204#51068#51092#50529
+        Width = 78
       end
       item
         Alignment = taRightJustify
         AutoFitColWidth = False
+        DisplayFormat = '#,##0'
+        DynProps = <>
+        EditButtons = <>
+        FieldName = 'ACNT_AMT'
+        Footer.Alignment = taRightJustify
+        Footer.FieldName = 'ACNT_AMT'
+        Footer.ValueType = fvtSum
+        Footers = <>
+        Title.Caption = #44552#51068#51092#50529
+        Width = 78
+      end
+      item
+        Alignment = taRightJustify
+        AutoFitColWidth = False
+        DisplayFormat = '#,##0'
         DynProps = <>
         EditButtons = <>
         FieldName = 'CLR_PL'
@@ -625,6 +610,7 @@ inherited fmTodayPL: TfmTodayPL
       item
         Alignment = taRightJustify
         AutoFitColWidth = False
+        DisplayFormat = '#,##0'
         DynProps = <>
         EditButtons = <>
         FieldName = 'CMSN'
@@ -640,20 +626,7 @@ inherited fmTodayPL: TfmTodayPL
       item
         Alignment = taRightJustify
         AutoFitColWidth = False
-        DynProps = <>
-        EditButtons = <>
-        FieldName = 'AVG_PRC'
-        Footer.Alignment = taRightJustify
-        Footer.Color = 16250879
-        Footer.FieldName = 'AVG_PRC'
-        Footer.ValueType = fvtSum
-        Footers = <>
-        Title.Caption = #52509#54217#44032#49552#51061
-        Width = 78
-      end
-      item
-        Alignment = taRightJustify
-        AutoFitColWidth = False
+        DisplayFormat = '#,##0'
         DynProps = <>
         EditButtons = <>
         FieldName = 'NET_PL'
@@ -671,10 +644,10 @@ inherited fmTodayPL: TfmTodayPL
         Width = 78
       end
       item
-        Alignment = taRightJustify
         AutoFitColWidth = False
         DynProps = <>
         EditButtons = <>
+        FieldName = 'TRADE_CNT'
         Footers = <>
         Width = 1
       end
@@ -683,848 +656,9 @@ inherited fmTodayPL: TfmTodayPL
         AutoFitColWidth = False
         DynProps = <>
         EditButtons = <>
-        FieldName = 'BF_ACNT_AMT'
+        FieldName = 'YM_POS_QTY'
         Footer.Alignment = taRightJustify
-        Footer.FieldName = 'BF_ACNT_AMT'
-        Footer.ValueType = fvtSum
-        Footers = <>
-        Title.Caption = #51204#51068#51092#50529
-        Width = 78
-      end
-      item
-        Alignment = taRightJustify
-        AutoFitColWidth = False
-        DynProps = <>
-        EditButtons = <>
-        FieldName = 'ACNT_AMT'
-        Footer.Alignment = taRightJustify
-        Footer.FieldName = 'ACNT_AMT'
-        Footer.ValueType = fvtSum
-        Footers = <>
-        Title.Caption = #44552#51068#51092#50529
-        Width = 78
-      end
-      item
-        Alignment = taRightJustify
-        AutoFitColWidth = False
-        DynProps = <>
-        EditButtons = <>
-        Footers = <>
-        Width = 1
-      end
-      item
-        Alignment = taRightJustify
-        AutoFitColWidth = False
-        DynProps = <>
-        EditButtons = <>
-        FieldName = 'IN_AMT'
-        Footer.Alignment = taRightJustify
-        Footer.FieldName = 'IN_AMT'
-        Footer.ValueType = fvtSum
-        Footers = <>
-        Title.Caption = #51077#44552#50529
-        Width = 78
-      end
-      item
-        Alignment = taRightJustify
-        AutoFitColWidth = False
-        DynProps = <>
-        EditButtons = <>
-        FieldName = 'OUT_AMT'
-        Footer.Alignment = taRightJustify
-        Footer.FieldName = 'OUT_AMT'
-        Footer.ValueType = fvtSum
-        Footers = <>
-        Title.Caption = #52636#44552#50529
-        Width = 78
-      end
-      item
-        Alignment = taRightJustify
-        AutoFitColWidth = False
-        DynProps = <>
-        EditButtons = <>
-        Footers = <>
-        Width = 1
-      end
-      item
-        Alignment = taRightJustify
-        AutoFitColWidth = False
-        DynProps = <>
-        EditButtons = <>
-        FieldName = 'KSF_CNTR_QTY'
-        Footer.Alignment = taRightJustify
-        Footer.FieldName = 'KSF_CNTR_QTY'
-        Footer.ValueType = fvtSum
-        Footers = <>
-        Title.Caption = #44397#45236#49440#47932' ('#51452#44036')|'#49688#47049
-        Width = 37
-      end
-      item
-        Alignment = taRightJustify
-        AutoFitColWidth = False
-        DynProps = <>
-        EditButtons = <>
-        FieldName = 'KSF_AVG_PRC'
-        Footer.Alignment = taRightJustify
-        Footer.FieldName = 'KSF_AVG_PRC'
-        Footers = <>
-        Title.Caption = #44397#45236#49440#47932' ('#51452#44036')|'#54217#44512#45800#44032
-        Width = 65
-      end
-      item
-        Alignment = taRightJustify
-        AutoFitColWidth = False
-        DynProps = <>
-        EditButtons = <>
-        FieldName = 'KSF_CLR_PL'
-        Footer.Alignment = taRightJustify
-        Footer.FieldName = 'KSF_CLR_PL'
-        Footer.ValueType = fvtSum
-        Footers = <>
-        Title.Caption = #44397#45236#49440#47932' ('#51452#44036')|'#49892#54788#49552#51061
-        Width = 65
-      end
-      item
-        Alignment = taRightJustify
-        AutoFitColWidth = False
-        DynProps = <>
-        EditButtons = <>
-        FieldName = 'KSF_CMSN_AMT'
-        Footer.Alignment = taRightJustify
-        Footer.FieldName = 'KSF_CMSN_AMT'
-        Footer.ValueType = fvtSum
-        Footers = <>
-        Title.Caption = #44397#45236#49440#47932' ('#51452#44036')|'#49688#49688#47308
-        Width = 65
-      end
-      item
-        Alignment = taRightJustify
-        AutoFitColWidth = False
-        DynProps = <>
-        EditButtons = <>
-        FieldName = 'KSF_EVL_PL'
-        Footer.Alignment = taRightJustify
-        Footer.FieldName = 'KSF_EVL_PL'
-        Footer.ValueType = fvtSum
-        Footers = <>
-        Title.Caption = #44397#45236#49440#47932' ('#51452#44036')|'#54217#44032#49552#51061
-        Width = 65
-      end
-      item
-        Alignment = taRightJustify
-        AutoFitColWidth = False
-        DynProps = <>
-        EditButtons = <>
-        FieldName = 'KSO_DAY_CNTR_QTY'
-        Footer.Alignment = taRightJustify
-        Footer.FieldName = 'KSO_DAY_CNTR_QTY'
-        Footer.ValueType = fvtSum
-        Footers = <>
-        Title.Caption = #44397#45236#49440#47932' ('#50556#44036')|'#49688#47049
-        Width = 37
-      end
-      item
-        Alignment = taRightJustify
-        AutoFitColWidth = False
-        DynProps = <>
-        EditButtons = <>
-        FieldName = 'KSO_DAY_AVG_PRC'
-        Footer.Alignment = taRightJustify
-        Footer.FieldName = 'KSO_DAY_AVG_PRC'
-        Footers = <>
-        Title.Caption = #44397#45236#49440#47932' ('#50556#44036')|'#54217#44512#45800#44032
-        Width = 65
-      end
-      item
-        Alignment = taRightJustify
-        AutoFitColWidth = False
-        DynProps = <>
-        EditButtons = <>
-        FieldName = 'KSO_DAY_CLR_PL'
-        Footer.Alignment = taRightJustify
-        Footer.FieldName = 'KSO_DAY_CLR_PL'
-        Footer.ValueType = fvtSum
-        Footers = <>
-        Title.Caption = #44397#45236#49440#47932' ('#50556#44036')|'#49892#54788#49552#51061
-        Width = 65
-      end
-      item
-        Alignment = taRightJustify
-        AutoFitColWidth = False
-        DynProps = <>
-        EditButtons = <>
-        FieldName = 'KSO_DAY_CMSN_AMT'
-        Footer.Alignment = taRightJustify
-        Footer.FieldName = 'KSO_DAY_CMSN_AMT'
-        Footer.ValueType = fvtSum
-        Footers = <>
-        Title.Caption = #44397#45236#49440#47932' ('#50556#44036')|'#49688#49688#47308
-        Width = 65
-      end
-      item
-        Alignment = taRightJustify
-        AutoFitColWidth = False
-        DynProps = <>
-        EditButtons = <>
-        FieldName = 'KSO_DAY_EVL_PL'
-        Footer.Alignment = taRightJustify
-        Footer.FieldName = 'KSO_DAY_EVL_PL'
-        Footer.ValueType = fvtSum
-        Footers = <>
-        Title.Caption = #44397#45236#49440#47932' ('#50556#44036')|'#54217#44032#49552#51061
-        Width = 65
-      end
-      item
-        Alignment = taRightJustify
-        AutoFitColWidth = False
-        DynProps = <>
-        EditButtons = <>
-        FieldName = 'KSO_NGT_CNTR_QTY'
-        Footer.Alignment = taRightJustify
-        Footer.FieldName = 'KSO_NGT_CNTR_QTY'
-        Footer.ValueType = fvtSum
-        Footers = <>
-        Title.Caption = #44397#45236#50741#49496' ('#50556#44036')|'#49688#47049
-        Width = 37
-      end
-      item
-        Alignment = taRightJustify
-        AutoFitColWidth = False
-        DynProps = <>
-        EditButtons = <>
-        FieldName = 'KSO_NGT_AVG_PRC'
-        Footer.Alignment = taRightJustify
-        Footer.FieldName = 'KSO_NGT_AVG_PRC'
-        Footers = <>
-        Title.Caption = #44397#45236#50741#49496' ('#50556#44036')|'#54217#44512#45800#44032
-        Width = 65
-      end
-      item
-        Alignment = taRightJustify
-        AutoFitColWidth = False
-        DynProps = <>
-        EditButtons = <>
-        FieldName = 'KSO_NGT_CLR_PL'
-        Footer.Alignment = taRightJustify
-        Footer.FieldName = 'KSO_NGT_CLR_PL'
-        Footer.ValueType = fvtSum
-        Footers = <>
-        Title.Caption = #44397#45236#50741#49496' ('#50556#44036')|'#49892#54788#49552#51061
-        Width = 65
-      end
-      item
-        Alignment = taRightJustify
-        AutoFitColWidth = False
-        DynProps = <>
-        EditButtons = <>
-        FieldName = 'KSO_NGT_CMSN_AMT'
-        Footer.Alignment = taRightJustify
-        Footer.FieldName = 'KSO_NGT_CMSN_AMT'
-        Footer.ValueType = fvtSum
-        Footers = <>
-        Title.Caption = #44397#45236#50741#49496' ('#50556#44036')|'#49688#49688#47308
-        Width = 65
-      end
-      item
-        Alignment = taRightJustify
-        AutoFitColWidth = False
-        DynProps = <>
-        EditButtons = <>
-        FieldName = 'KSO_NGT_EVL_PL'
-        Footer.Alignment = taRightJustify
-        Footer.FieldName = 'KSO_NGT_EVL_PL'
-        Footer.ValueType = fvtSum
-        Footers = <>
-        Title.Caption = #44397#45236#50741#49496' ('#50556#44036')|'#54217#44032#49552#51061
-        Width = 65
-      end
-      item
-        Alignment = taRightJustify
-        AutoFitColWidth = False
-        DynProps = <>
-        EditButtons = <>
-        FieldName = 'URO_CNTR_QTY'
-        Footer.Alignment = taRightJustify
-        Footer.FieldName = 'URO_CNTR_QTY'
-        Footer.ValueType = fvtSum
-        Footers = <>
-        Title.Caption = #50976#47196#49440#47932'|'#49688#47049
-        Width = 37
-      end
-      item
-        Alignment = taRightJustify
-        AutoFitColWidth = False
-        DynProps = <>
-        EditButtons = <>
-        FieldName = 'URO_AVG_PRC'
-        Footer.Alignment = taRightJustify
-        Footer.FieldName = 'URO_AVG_PRC'
-        Footers = <>
-        Title.Caption = #50976#47196#49440#47932'|'#54217#44512#45800#44032
-        Width = 65
-      end
-      item
-        Alignment = taRightJustify
-        AutoFitColWidth = False
-        DynProps = <>
-        EditButtons = <>
-        FieldName = 'URO_CLR_PL'
-        Footer.Alignment = taRightJustify
-        Footer.FieldName = 'URO_CLR_PL'
-        Footer.ValueType = fvtSum
-        Footers = <>
-        Title.Caption = #50976#47196#49440#47932'|'#49892#54788#49552#51061
-        Width = 65
-      end
-      item
-        Alignment = taRightJustify
-        AutoFitColWidth = False
-        DynProps = <>
-        EditButtons = <>
-        FieldName = 'URO_CMSN_AMT'
-        Footer.Alignment = taRightJustify
-        Footer.FieldName = 'URO_CMSN_AMT'
-        Footer.ValueType = fvtSum
-        Footers = <>
-        Title.Caption = #50976#47196#49440#47932'|'#49688#49688#47308
-        Width = 65
-      end
-      item
-        Alignment = taRightJustify
-        AutoFitColWidth = False
-        DynProps = <>
-        EditButtons = <>
-        FieldName = 'URO_EVL_PL'
-        Footer.Alignment = taRightJustify
-        Footer.FieldName = 'URO_EVL_PL'
-        Footer.ValueType = fvtSum
-        Footers = <>
-        Title.Caption = #50976#47196#49440#47932'|'#54217#44032#49552#51061
-        Width = 65
-      end
-      item
-        AutoFitColWidth = False
-        DynProps = <>
-        EditButtons = <>
-        FieldName = 'CL_CNTR_QTY'
-        Footer.Alignment = taRightJustify
-        Footer.FieldName = 'CL_CNTR_QTY'
-        Footer.ValueType = fvtSum
-        Footers = <>
-        Title.Caption = #53356#47336#46300#50724#51068'|'#49688#47049
-        Width = 37
-      end
-      item
-        Alignment = taRightJustify
-        AutoFitColWidth = False
-        DynProps = <>
-        EditButtons = <>
-        FieldName = 'CL_AVG_PRC'
-        Footer.Alignment = taRightJustify
-        Footer.FieldName = 'CL_AVG_PRC'
-        Footers = <>
-        Title.Caption = #53356#47336#46300#50724#51068'|'#54217#44512#45800#44032
-        Width = 65
-      end
-      item
-        Alignment = taRightJustify
-        AutoFitColWidth = False
-        DynProps = <>
-        EditButtons = <>
-        FieldName = 'CL_CLR_PL'
-        Footer.Alignment = taRightJustify
-        Footer.FieldName = 'CL_CLR_PL'
-        Footer.ValueType = fvtSum
-        Footers = <>
-        Title.Caption = #53356#47336#46300#50724#51068'|'#49892#54788#49552#51061
-        Width = 65
-      end
-      item
-        Alignment = taRightJustify
-        AutoFitColWidth = False
-        DynProps = <>
-        EditButtons = <>
-        FieldName = 'CL_CMSN_AMT'
-        Footer.Alignment = taRightJustify
-        Footer.FieldName = 'CL_CMSN_AMT'
-        Footer.ValueType = fvtSum
-        Footers = <>
-        Title.Caption = #53356#47336#46300#50724#51068'|'#49688#49688#47308
-        Width = 65
-      end
-      item
-        Alignment = taRightJustify
-        AutoFitColWidth = False
-        DynProps = <>
-        EditButtons = <>
-        FieldName = 'CL_EVL_PL'
-        Footer.Alignment = taRightJustify
-        Footer.FieldName = 'CL_EVL_PL'
-        Footer.ValueType = fvtSum
-        Footers = <>
-        Title.Caption = #53356#47336#46300#50724#51068'|'#54217#44032#49552#51061
-        Width = 65
-      end
-      item
-        Alignment = taRightJustify
-        AutoFitColWidth = False
-        DynProps = <>
-        EditButtons = <>
-        FieldName = 'GC_CNTR_QTY'
-        Footer.Alignment = taRightJustify
-        Footer.FieldName = 'GC_CNTR_QTY'
-        Footer.ValueType = fvtSum
-        Footers = <>
-        Title.Caption = 'GOLD|'#49688#47049
-        Width = 37
-      end
-      item
-        Alignment = taRightJustify
-        AutoFitColWidth = False
-        DynProps = <>
-        EditButtons = <>
-        FieldName = 'GC_AVG_PRC'
-        Footer.Alignment = taRightJustify
-        Footer.FieldName = 'GC_AVG_PRC'
-        Footers = <>
-        Title.Caption = 'GOLD|'#54217#44512#45800#44032
-        Width = 65
-      end
-      item
-        Alignment = taRightJustify
-        AutoFitColWidth = False
-        DynProps = <>
-        EditButtons = <>
-        FieldName = 'GC_CLR_PL'
-        Footer.Alignment = taRightJustify
-        Footer.FieldName = 'GC_CLR_PL'
-        Footer.ValueType = fvtSum
-        Footers = <>
-        Title.Caption = 'GOLD|'#49892#54788#49552#51061
-        Width = 65
-      end
-      item
-        Alignment = taRightJustify
-        AutoFitColWidth = False
-        DynProps = <>
-        EditButtons = <>
-        FieldName = 'GC_CMSN_AMT'
-        Footer.Alignment = taRightJustify
-        Footer.FieldName = 'GC_CMSN_AMT'
-        Footer.ValueType = fvtSum
-        Footers = <>
-        Title.Caption = 'GOLD|'#49688#49688#47308
-        Width = 65
-      end
-      item
-        Alignment = taRightJustify
-        AutoFitColWidth = False
-        DynProps = <>
-        EditButtons = <>
-        FieldName = 'GC_EVL_PL'
-        Footer.Alignment = taRightJustify
-        Footer.FieldName = 'GC_EVL_PL'
-        Footer.ValueType = fvtSum
-        Footers = <>
-        Title.Caption = 'GOLD|'#54217#44032#49552#51061
-        Width = 65
-      end
-      item
-        Alignment = taRightJustify
-        AutoFitColWidth = False
-        DynProps = <>
-        EditButtons = <>
-        FieldName = 'NG_CNTR_QTY'
-        Footer.Alignment = taRightJustify
-        Footer.FieldName = 'NG_CNTR_QTY'
-        Footer.ValueType = fvtSum
-        Footers = <>
-        Title.Caption = #52380#50672#44032#49828'|'#49688#47049
-        Width = 37
-      end
-      item
-        Alignment = taRightJustify
-        AutoFitColWidth = False
-        DynProps = <>
-        EditButtons = <>
-        FieldName = 'NG_AVG_PRC'
-        Footer.Alignment = taRightJustify
-        Footer.FieldName = 'NG_AVG_PRC'
-        Footers = <>
-        Title.Caption = #52380#50672#44032#49828'|'#54217#44512#45800#44032
-        Width = 65
-      end
-      item
-        Alignment = taRightJustify
-        AutoFitColWidth = False
-        DynProps = <>
-        EditButtons = <>
-        FieldName = 'NG_CLR_PL'
-        Footer.Alignment = taRightJustify
-        Footer.FieldName = 'NG_CLR_PL'
-        Footer.ValueType = fvtSum
-        Footers = <>
-        Title.Caption = #52380#50672#44032#49828'|'#49892#54788#49552#51061
-        Width = 65
-      end
-      item
-        Alignment = taRightJustify
-        AutoFitColWidth = False
-        DynProps = <>
-        EditButtons = <>
-        FieldName = 'NG_CMSN_AMT'
-        Footer.Alignment = taRightJustify
-        Footer.FieldName = 'NG_CMSN_AMT'
-        Footer.ValueType = fvtSum
-        Footers = <>
-        Title.Caption = #52380#50672#44032#49828'|'#49688#49688#47308
-        Width = 65
-      end
-      item
-        Alignment = taRightJustify
-        AutoFitColWidth = False
-        DynProps = <>
-        EditButtons = <>
-        FieldName = 'NG_EVL_PL'
-        Footer.Alignment = taRightJustify
-        Footer.FieldName = 'NG_EVL_PL'
-        Footer.ValueType = fvtSum
-        Footers = <>
-        Title.Caption = #52380#50672#44032#49828'|'#54217#44032#49552#51061
-        Width = 65
-      end
-      item
-        Alignment = taRightJustify
-        AutoFitColWidth = False
-        DynProps = <>
-        EditButtons = <>
-        FieldName = 'ES_CNTR_QTY'
-        Footer.Alignment = taRightJustify
-        Footer.FieldName = 'ES_CNTR_QTY'
-        Footer.ValueType = fvtSum
-        Footers = <>
-        Title.Caption = 'E-Mini S&P|'#49688#47049
-        Width = 37
-      end
-      item
-        Alignment = taRightJustify
-        AutoFitColWidth = False
-        DynProps = <>
-        EditButtons = <>
-        FieldName = 'ES_AVG_PRC'
-        Footer.Alignment = taRightJustify
-        Footer.FieldName = 'ES_AVG_PRC'
-        Footers = <>
-        Title.Caption = 'E-Mini S&P|'#54217#44512#45800#44032
-        Width = 65
-      end
-      item
-        Alignment = taRightJustify
-        AutoFitColWidth = False
-        DynProps = <>
-        EditButtons = <>
-        FieldName = 'ES_CLR_PL'
-        Footer.Alignment = taRightJustify
-        Footer.FieldName = 'ES_CLR_PL'
-        Footer.ValueType = fvtSum
-        Footers = <>
-        Title.Caption = 'E-Mini S&P|'#49892#54788#49552#51061
-        Width = 65
-      end
-      item
-        Alignment = taRightJustify
-        AutoFitColWidth = False
-        DynProps = <>
-        EditButtons = <>
-        FieldName = 'ES_CMSN_AMT'
-        Footer.Alignment = taRightJustify
-        Footer.FieldName = 'ES_CMSN_AMT'
-        Footer.ValueType = fvtSum
-        Footers = <>
-        Title.Caption = 'E-Mini S&P|'#49688#49688#47308
-        Width = 65
-      end
-      item
-        Alignment = taRightJustify
-        AutoFitColWidth = False
-        DynProps = <>
-        EditButtons = <>
-        FieldName = 'ES_EVL_PL'
-        Footer.Alignment = taRightJustify
-        Footer.FieldName = 'ES_EVL_PL'
-        Footer.ValueType = fvtSum
-        Footers = <>
-        Title.Caption = 'E-Mini S&P|'#54217#44032#49552#51061
-        Width = 65
-      end
-      item
-        Alignment = taRightJustify
-        AutoFitColWidth = False
-        DynProps = <>
-        EditButtons = <>
-        FieldName = 'AD_CNTR_QTY'
-        Footer.Alignment = taRightJustify
-        Footer.FieldName = 'AD_CNTR_QTY'
-        Footer.ValueType = fvtSum
-        Footers = <>
-        Title.Caption = 'Aus.'#45804#47084'|'#49688#47049
-        Width = 37
-      end
-      item
-        Alignment = taRightJustify
-        AutoFitColWidth = False
-        DynProps = <>
-        EditButtons = <>
-        FieldName = 'AD_AVG_PRC'
-        Footer.Alignment = taRightJustify
-        Footer.FieldName = 'AD_AVG_PRC'
-        Footers = <>
-        Title.Caption = 'Aus.'#45804#47084'|'#54217#44512#45800#44032
-        Width = 65
-      end
-      item
-        Alignment = taRightJustify
-        AutoFitColWidth = False
-        DynProps = <>
-        EditButtons = <>
-        FieldName = 'AD_CLR_PL'
-        Footer.Alignment = taRightJustify
-        Footer.FieldName = 'AD_CLR_PL'
-        Footer.ValueType = fvtSum
-        Footers = <>
-        Title.Caption = 'Aus.'#45804#47084'|'#49892#54788#49552#51061
-        Width = 65
-      end
-      item
-        Alignment = taRightJustify
-        AutoFitColWidth = False
-        DynProps = <>
-        EditButtons = <>
-        FieldName = 'AD_CMSN_AMT'
-        Footer.Alignment = taRightJustify
-        Footer.FieldName = 'AD_CMSN_AMT'
-        Footer.ValueType = fvtSum
-        Footers = <>
-        Title.Caption = 'Aus.'#45804#47084'|'#49688#49688#47308
-        Width = 65
-      end
-      item
-        Alignment = taRightJustify
-        AutoFitColWidth = False
-        DynProps = <>
-        EditButtons = <>
-        FieldName = 'AD_EVL_PL'
-        Footer.Alignment = taRightJustify
-        Footer.FieldName = 'AD_EVL_PL'
-        Footer.ValueType = fvtSum
-        Footers = <>
-        Title.Caption = 'Aus.'#45804#47084'|'#54217#44032#49552#51061
-        Width = 65
-      end
-      item
-        Alignment = taRightJustify
-        AutoFitColWidth = False
-        DynProps = <>
-        EditButtons = <>
-        FieldName = 'BP_CNTR_QTY'
-        Footer.Alignment = taRightJustify
-        Footer.FieldName = 'BP_CNTR_QTY'
-        Footer.ValueType = fvtSum
-        Footers = <
-          item
-            Alignment = taRightJustify
-            FieldName = 'BP_CNTR_QTY'
-            ValueType = fvtSum
-          end>
-        Title.Caption = 'B.Pound|'#49688#47049
-        Width = 37
-      end
-      item
-        Alignment = taRightJustify
-        AutoFitColWidth = False
-        DynProps = <>
-        EditButtons = <>
-        FieldName = 'BP_AVG_PRC'
-        Footer.Alignment = taRightJustify
-        Footer.FieldName = 'BP_AVG_PRC'
-        Footers = <>
-        Title.Caption = 'B.Pound|'#54217#44512#45800#44032
-        Width = 65
-      end
-      item
-        Alignment = taRightJustify
-        AutoFitColWidth = False
-        DynProps = <>
-        EditButtons = <>
-        FieldName = 'BP_CLR_PL'
-        Footer.Alignment = taRightJustify
-        Footer.FieldName = 'BP_CLR_PL'
-        Footer.ValueType = fvtSum
-        Footers = <>
-        Title.Caption = 'B.Pound|'#49892#54788#49552#51061
-        Width = 65
-      end
-      item
-        Alignment = taRightJustify
-        AutoFitColWidth = False
-        DynProps = <>
-        EditButtons = <>
-        FieldName = 'BP_CMSN_AMT'
-        Footer.Alignment = taRightJustify
-        Footer.FieldName = 'BP_CMSN_AMT'
-        Footer.ValueType = fvtSum
-        Footers = <>
-        Title.Caption = 'B.Pound|'#49688#49688#47308
-        Width = 65
-      end
-      item
-        Alignment = taRightJustify
-        AutoFitColWidth = False
-        DynProps = <>
-        EditButtons = <>
-        FieldName = 'BP_EVL_PL'
-        Footer.Alignment = taRightJustify
-        Footer.FieldName = 'BP_EVL_PL'
-        Footer.ValueType = fvtSum
-        Footers = <>
-        Title.Caption = 'B.Pound|'#54217#44032#49552#51061
-        Width = 65
-      end
-      item
-        Alignment = taRightJustify
-        AutoFitColWidth = False
-        DynProps = <>
-        EditButtons = <>
-        FieldName = 'JY_CNTR_QTY'
-        Footer.Alignment = taRightJustify
-        Footer.FieldName = 'JY_CNTR_QTY'
-        Footer.ValueType = fvtSum
-        Footers = <>
-        Title.Caption = 'J.Yen|'#49688#47049
-        Width = 37
-      end
-      item
-        Alignment = taRightJustify
-        AutoFitColWidth = False
-        DynProps = <>
-        EditButtons = <>
-        FieldName = 'JY_AVG_PRC'
-        Footer.Alignment = taRightJustify
-        Footer.FieldName = 'JY_AVG_PRC'
-        Footers = <>
-        Title.Caption = 'J.Yen|'#54217#44512#45800#44032
-        Width = 65
-      end
-      item
-        Alignment = taRightJustify
-        AutoFitColWidth = False
-        DynProps = <>
-        EditButtons = <>
-        FieldName = 'JY_CLR_PL'
-        Footer.Alignment = taRightJustify
-        Footer.FieldName = 'JY_CLR_PL'
-        Footer.ValueType = fvtSum
-        Footers = <>
-        Title.Caption = 'J.Yen|'#49892#54788#49552#51061
-        Width = 65
-      end
-      item
-        Alignment = taRightJustify
-        AutoFitColWidth = False
-        DynProps = <>
-        EditButtons = <>
-        FieldName = 'JY_CMSN_AMT'
-        Footer.Alignment = taRightJustify
-        Footer.FieldName = 'JY_CMSN_AMT'
-        Footer.ValueType = fvtSum
-        Footers = <>
-        Title.Caption = 'J.Yen|'#49688#49688#47308
-        Width = 65
-      end
-      item
-        AutoFitColWidth = False
-        DynProps = <>
-        EditButtons = <>
-        FieldName = 'JY_EVL_PL'
-        Footer.Alignment = taRightJustify
-        Footer.FieldName = 'JY_EVL_PL'
-        Footer.ValueType = fvtSum
-        Footers = <>
-        Title.Caption = 'J.Yen|'#54217#44032#49552#51061
-        Width = 65
-      end
-      item
-        Alignment = taRightJustify
-        AutoFitColWidth = False
-        DynProps = <>
-        EditButtons = <>
-        FieldName = 'NQ_CNTR_QTY'
-        Footer.Alignment = taRightJustify
-        Footer.FieldName = 'NQ_CNTR_QTY'
-        Footer.ValueType = fvtSum
-        Footers = <>
-        Title.Caption = #45208#49828#45797'|'#49688#47049
-        Width = 37
-      end
-      item
-        Alignment = taRightJustify
-        AutoFitColWidth = False
-        DynProps = <>
-        EditButtons = <>
-        FieldName = 'NQ_AVG_PRC'
-        Footer.Alignment = taRightJustify
-        Footer.FieldName = 'NQ_AVG_PRC'
-        Footers = <>
-        Title.Caption = #45208#49828#45797'|'#54217#44512#45800#44032
-        Width = 65
-      end
-      item
-        Alignment = taRightJustify
-        AutoFitColWidth = False
-        DynProps = <>
-        EditButtons = <>
-        FieldName = 'NQ_CLR_PL'
-        Footer.Alignment = taRightJustify
-        Footer.FieldName = 'NQ_CLR_PL'
-        Footer.ValueType = fvtSum
-        Footers = <>
-        Title.Caption = #45208#49828#45797'|'#49892#54788#49552#51061
-        Width = 65
-      end
-      item
-        Alignment = taRightJustify
-        AutoFitColWidth = False
-        DynProps = <>
-        EditButtons = <>
-        FieldName = 'NQ_CMSN_AMT'
-        Footer.Alignment = taRightJustify
-        Footer.FieldName = 'NQ_CMSN_AMT'
-        Footer.ValueType = fvtSum
-        Footers = <>
-        Title.Caption = #45208#49828#45797'|'#49688#49688#47308
-        Width = 65
-      end
-      item
-        Alignment = taRightJustify
-        AutoFitColWidth = False
-        DynProps = <>
-        EditButtons = <>
-        FieldName = 'NQ_EVL_PL'
-        Footer.Alignment = taRightJustify
-        Footer.FieldName = 'NQ_EVL_PL'
-        Footer.ValueType = fvtSum
-        Footers = <>
-        Title.Caption = #45208#49828#45797'|'#54217#44032#49552#51061
-        Width = 65
-      end
-      item
-        Alignment = taRightJustify
-        AutoFitColWidth = False
-        DynProps = <>
-        EditButtons = <>
-        FieldName = 'YM_CNTR_QTY'
-        Footer.Alignment = taRightJustify
-        Footer.FieldName = 'YM_CNTR_QTY'
+        Footer.FieldName = 'YM_POS_QTY'
         Footer.ValueType = fvtSum
         Footers = <>
         Title.Caption = #45796#50864#51648#49688'|'#49688#47049
@@ -1545,37 +679,33 @@ inherited fmTodayPL: TfmTodayPL
       item
         Alignment = taRightJustify
         AutoFitColWidth = False
+        DisplayFormat = '#,##0'
         DynProps = <>
         EditButtons = <>
-        FieldName = 'YM_CLR_PL'
+        FieldName = 'YM_CMSN'
         Footer.Alignment = taRightJustify
-        Footer.FieldName = 'YM_CLR_PL'
-        Footer.ValueType = fvtSum
-        Footers = <>
-        Title.Caption = #45796#50864#51648#49688'|'#49892#54788#49552#51061
-        Width = 65
-      end
-      item
-        Alignment = taRightJustify
-        AutoFitColWidth = False
-        DynProps = <>
-        EditButtons = <>
-        FieldName = 'YM_CMSN_AMT'
-        Footer.Alignment = taRightJustify
-        Footer.FieldName = 'YM_CMSN_AMT'
+        Footer.FieldName = 'YM_CMSN'
         Footer.ValueType = fvtSum
         Footers = <>
         Title.Caption = #45796#50864#51648#49688'|'#49688#49688#47308
         Width = 65
       end
       item
-        Alignment = taRightJustify
-        AutoFitColWidth = False
+        DisplayFormat = '#,##0'
         DynProps = <>
         EditButtons = <>
-        FieldName = 'YM_EVL_PL'
+        FieldName = 'YM_CLR_PL'
+        Footers = <>
+      end
+      item
+        Alignment = taRightJustify
+        AutoFitColWidth = False
+        DisplayFormat = '#,##0'
+        DynProps = <>
+        EditButtons = <>
+        FieldName = 'YM_EVA_PL'
         Footer.Alignment = taRightJustify
-        Footer.FieldName = 'YM_EVL_PL'
+        Footer.FieldName = 'YM_EVA_PL'
         Footer.ValueType = fvtSum
         Footers = <>
         Title.Caption = #45796#50864#51648#49688'|'#54217#44032#49552#51061
@@ -1584,11 +714,25 @@ inherited fmTodayPL: TfmTodayPL
       item
         Alignment = taRightJustify
         AutoFitColWidth = False
+        DisplayFormat = '#,##0'
         DynProps = <>
         EditButtons = <>
-        FieldName = 'SCN_CNTR_QTY'
+        FieldName = 'SCN_CLR_PL'
         Footer.Alignment = taRightJustify
-        Footer.FieldName = 'SCN_CNTR_QTY'
+        Footer.FieldName = 'SCN_CLR_PL'
+        Footer.ValueType = fvtSum
+        Footers = <>
+        Title.Caption = #51473#44397' A 50|'#49892#54788#49552#51061
+        Width = 65
+      end
+      item
+        Alignment = taRightJustify
+        AutoFitColWidth = False
+        DynProps = <>
+        EditButtons = <>
+        FieldName = 'SCN_POS_QTY'
+        Footer.Alignment = taRightJustify
+        Footer.FieldName = 'SCN_POS_QTY'
         Footer.ValueType = fvtSum
         Footers = <>
         Title.Caption = #51473#44397' A 50|'#49688#47049
@@ -1609,24 +753,12 @@ inherited fmTodayPL: TfmTodayPL
       item
         Alignment = taRightJustify
         AutoFitColWidth = False
+        DisplayFormat = '#,##0'
         DynProps = <>
         EditButtons = <>
-        FieldName = 'SCN_CLR_PL'
+        FieldName = 'SCN_CMSN'
         Footer.Alignment = taRightJustify
-        Footer.FieldName = 'SCN_CLR_PL'
-        Footer.ValueType = fvtSum
-        Footers = <>
-        Title.Caption = #51473#44397' A 50|'#49892#54788#49552#51061
-        Width = 65
-      end
-      item
-        Alignment = taRightJustify
-        AutoFitColWidth = False
-        DynProps = <>
-        EditButtons = <>
-        FieldName = 'SCN_CMSN_AMT'
-        Footer.Alignment = taRightJustify
-        Footer.FieldName = 'SCN_CMSN_AMT'
+        Footer.FieldName = 'SCN_CMSN'
         Footer.ValueType = fvtSum
         Footers = <>
         Title.Caption = #51473#44397' A 50|'#49688#49688#47308
@@ -1635,11 +767,12 @@ inherited fmTodayPL: TfmTodayPL
       item
         Alignment = taRightJustify
         AutoFitColWidth = False
+        DisplayFormat = '#,##0'
         DynProps = <>
         EditButtons = <>
-        FieldName = 'SCN_EVL_PL'
+        FieldName = 'SCN_EVA_PL'
         Footer.Alignment = taRightJustify
-        Footer.FieldName = 'SCN_EVL_PL'
+        Footer.FieldName = 'SCN_EVA_PL'
         Footer.ValueType = fvtSum
         Footers = <>
         Title.Caption = #51473#44397' A 50|'#54217#44032#49552#51061
@@ -1650,9 +783,9 @@ inherited fmTodayPL: TfmTodayPL
         AutoFitColWidth = False
         DynProps = <>
         EditButtons = <>
-        FieldName = 'HSI_CNTR_QTY'
+        FieldName = 'HSI_POS_QTY'
         Footer.Alignment = taRightJustify
-        Footer.FieldName = 'HSI_CNTR_QTY'
+        Footer.FieldName = 'HSI_POS_QTY'
         Footer.ValueType = fvtSum
         Footers = <>
         Title.Caption = #54637#49373#51648#49688'|'#49688#47049
@@ -1673,6 +806,21 @@ inherited fmTodayPL: TfmTodayPL
       item
         Alignment = taRightJustify
         AutoFitColWidth = False
+        DisplayFormat = '#,##0'
+        DynProps = <>
+        EditButtons = <>
+        FieldName = 'HSI_EVA_PL'
+        Footer.Alignment = taRightJustify
+        Footer.FieldName = 'HSI_EVA_PL'
+        Footer.ValueType = fvtSum
+        Footers = <>
+        Title.Caption = #54637#49373#51648#49688'|'#54217#44032#49552#51061
+        Width = 65
+      end
+      item
+        Alignment = taRightJustify
+        AutoFitColWidth = False
+        DisplayFormat = '#,##0'
         DynProps = <>
         EditButtons = <>
         FieldName = 'HSI_CLR_PL'
@@ -1686,11 +834,12 @@ inherited fmTodayPL: TfmTodayPL
       item
         Alignment = taRightJustify
         AutoFitColWidth = False
+        DisplayFormat = '#,##0'
         DynProps = <>
         EditButtons = <>
-        FieldName = 'HSI_CMSN_AMT'
+        FieldName = 'HSI_CMSN'
         Footer.Alignment = taRightJustify
-        Footer.FieldName = 'HSI_CMSN_AMT'
+        Footer.FieldName = 'HSI_CMSN'
         Footer.ValueType = fvtSum
         Footers = <>
         Title.Caption = #54637#49373#51648#49688'|'#49688#49688#47308
@@ -1699,14 +848,55 @@ inherited fmTodayPL: TfmTodayPL
       item
         Alignment = taRightJustify
         AutoFitColWidth = False
+        DisplayFormat = '#,##0'
         DynProps = <>
         EditButtons = <>
-        FieldName = 'HSI_EVL_PL'
+        FieldName = 'NK_CLR_PL'
         Footer.Alignment = taRightJustify
-        Footer.FieldName = 'HSI_EVL_PL'
+        Footer.FieldName = 'NK_CLR_PL'
         Footer.ValueType = fvtSum
         Footers = <>
-        Title.Caption = #54637#49373#51648#49688'|'#54217#44032#49552#51061
+        Title.Caption = #45796#50864#51648#49688'|'#49892#54788#49552#51061
+        Width = 65
+      end
+      item
+        DisplayFormat = '#,##0'
+        DynProps = <>
+        EditButtons = <>
+        FieldName = 'NK_CMSN'
+        Footers = <>
+      end
+      item
+        DynProps = <>
+        EditButtons = <>
+        FieldName = 'NK_POS_QTY'
+        Footers = <>
+      end
+      item
+        DynProps = <>
+        EditButtons = <>
+        FieldName = 'NK_AVG_PRC'
+        Footers = <>
+      end
+      item
+        DisplayFormat = '#,##0'
+        DynProps = <>
+        EditButtons = <>
+        FieldName = 'NK_EVA_PL'
+        Footers = <>
+      end
+      item
+        Alignment = taRightJustify
+        AutoFitColWidth = False
+        DisplayFormat = '#,##0'
+        DynProps = <>
+        EditButtons = <>
+        FieldName = 'CD_CLR_PL'
+        Footer.Alignment = taRightJustify
+        Footer.FieldName = 'CD_CLR_PL'
+        Footer.ValueType = fvtSum
+        Footers = <>
+        Title.Caption = #52880#45208#45796#45804#47084'|'#49892#54788#49552#51061
         Width = 65
       end
       item
@@ -1714,137 +904,9 @@ inherited fmTodayPL: TfmTodayPL
         AutoFitColWidth = False
         DynProps = <>
         EditButtons = <>
-        FieldName = 'SSI_CNTR_QTY'
+        FieldName = 'CD_POS_QTY'
         Footer.Alignment = taRightJustify
-        Footer.FieldName = 'SSI_CNTR_QTY'
-        Footer.ValueType = fvtSum
-        Footers = <>
-        Title.Caption = #45768#52992#51060'225|'#49688#47049
-        Width = 37
-      end
-      item
-        Alignment = taRightJustify
-        AutoFitColWidth = False
-        DynProps = <>
-        EditButtons = <>
-        FieldName = 'SSI_AVG_PRC'
-        Footer.Alignment = taRightJustify
-        Footer.FieldName = 'SSI_AVG_PRC'
-        Footers = <>
-        Title.Caption = #45768#52992#51060'225|'#54217#44512#45800#44032
-        Width = 65
-      end
-      item
-        Alignment = taRightJustify
-        AutoFitColWidth = False
-        DynProps = <>
-        EditButtons = <>
-        FieldName = 'SSI_CLR_PL'
-        Footer.Alignment = taRightJustify
-        Footer.FieldName = 'SSI_CLR_PL'
-        Footer.ValueType = fvtSum
-        Footers = <>
-        Title.Caption = #45768#52992#51060'225|'#49892#54788#49552#51061
-        Width = 65
-      end
-      item
-        Alignment = taRightJustify
-        AutoFitColWidth = False
-        DynProps = <>
-        EditButtons = <>
-        FieldName = 'SSI_CMSN_AMT'
-        Footer.Alignment = taRightJustify
-        Footer.FieldName = 'SSI_CMSN_AMT'
-        Footer.ValueType = fvtSum
-        Footers = <>
-        Title.Caption = #45768#52992#51060'225|'#49688#49688#47308
-        Width = 65
-      end
-      item
-        Alignment = taRightJustify
-        AutoFitColWidth = False
-        DynProps = <>
-        EditButtons = <>
-        FieldName = 'SSI_EVL_PL'
-        Footer.Alignment = taRightJustify
-        Footer.FieldName = 'SSI_EVL_PL'
-        Footer.ValueType = fvtSum
-        Footers = <>
-        Title.Caption = #45768#52992#51060'225|'#54217#44032#49552#51061
-        Width = 65
-      end
-      item
-        Alignment = taRightJustify
-        AutoFitColWidth = False
-        DynProps = <>
-        EditButtons = <>
-        FieldName = 'FDAX_CNTR_QTY'
-        Footer.Alignment = taRightJustify
-        Footer.FieldName = 'FDAX_CNTR_QTY'
-        Footer.ValueType = fvtSum
-        Footers = <>
-        Title.Caption = #46021#51068' DAX|'#49688#47049
-        Width = 37
-      end
-      item
-        Alignment = taRightJustify
-        AutoFitColWidth = False
-        DynProps = <>
-        EditButtons = <>
-        FieldName = 'FDAX_AVG_PRC'
-        Footer.Alignment = taRightJustify
-        Footer.FieldName = 'FDAX_AVG_PRC'
-        Footers = <>
-        Title.Caption = #46021#51068' DAX|'#54217#44512#45800#44032
-        Width = 65
-      end
-      item
-        Alignment = taRightJustify
-        AutoFitColWidth = False
-        DynProps = <>
-        EditButtons = <>
-        FieldName = 'FDAX_CLR_PL'
-        Footer.Alignment = taRightJustify
-        Footer.FieldName = 'FDAX_CLR_PL'
-        Footer.ValueType = fvtSum
-        Footers = <>
-        Title.Caption = #46021#51068' DAX|'#49892#54788#49552#51061
-        Width = 65
-      end
-      item
-        Alignment = taRightJustify
-        AutoFitColWidth = False
-        DynProps = <>
-        EditButtons = <>
-        FieldName = 'FDAX_CMSN_AMT'
-        Footer.Alignment = taRightJustify
-        Footer.FieldName = 'FDAX_CMSN_AMT'
-        Footer.ValueType = fvtSum
-        Footers = <>
-        Title.Caption = #46021#51068' DAX|'#49688#49688#47308
-        Width = 65
-      end
-      item
-        Alignment = taRightJustify
-        AutoFitColWidth = False
-        DynProps = <>
-        EditButtons = <>
-        FieldName = 'FDAX_EVL_PL'
-        Footer.Alignment = taRightJustify
-        Footer.FieldName = 'FDAX_EVL_PL'
-        Footer.ValueType = fvtSum
-        Footers = <>
-        Title.Caption = #46021#51068' DAX|'#54217#44032#49552#51061
-        Width = 65
-      end
-      item
-        Alignment = taRightJustify
-        AutoFitColWidth = False
-        DynProps = <>
-        EditButtons = <>
-        FieldName = 'CD_CNTR_QTY'
-        Footer.Alignment = taRightJustify
-        Footer.FieldName = 'CD_CNTR_QTY'
+        Footer.FieldName = 'CD_POS_QTY'
         Footer.ValueType = fvtSum
         Footers = <>
         Title.Caption = #52880#45208#45796#45804#47084'|'#49688#47049
@@ -1865,24 +927,12 @@ inherited fmTodayPL: TfmTodayPL
       item
         Alignment = taRightJustify
         AutoFitColWidth = False
+        DisplayFormat = '#,##0'
         DynProps = <>
         EditButtons = <>
-        FieldName = 'CD_CLR_PL'
+        FieldName = 'CD_CMSN'
         Footer.Alignment = taRightJustify
-        Footer.FieldName = 'CD_CLR_PL'
-        Footer.ValueType = fvtSum
-        Footers = <>
-        Title.Caption = #52880#45208#45796#45804#47084'|'#49892#54788#49552#51061
-        Width = 65
-      end
-      item
-        Alignment = taRightJustify
-        AutoFitColWidth = False
-        DynProps = <>
-        EditButtons = <>
-        FieldName = 'CD_CMSN_AMT'
-        Footer.Alignment = taRightJustify
-        Footer.FieldName = 'CD_CMSN_AMT'
+        Footer.FieldName = 'CD_CMSN'
         Footer.ValueType = fvtSum
         Footers = <>
         Title.Caption = #52880#45208#45796#45804#47084'|'#49688#49688#47308
@@ -1891,23 +941,992 @@ inherited fmTodayPL: TfmTodayPL
       item
         Alignment = taRightJustify
         AutoFitColWidth = False
+        DisplayFormat = '#,##0 '
         DynProps = <>
         EditButtons = <>
-        FieldName = 'CD_EVL_PL'
+        FieldName = 'CD_EVA_PL'
         Footer.Alignment = taRightJustify
-        Footer.FieldName = 'CD_EVL_PL'
+        Footer.FieldName = 'CD_EVA_PL'
         Footer.ValueType = fvtSum
         Footers = <>
         Title.Caption = #52880#45208#45796#45804#47084'|'#54217#44032#49552#51061
         Width = 65
       end
       item
+        Alignment = taRightJustify
         AutoFitColWidth = False
         DynProps = <>
         EditButtons = <>
-        FieldName = 'SI_CNTR_QTY'
+        FieldName = 'DAX_POS_QTY'
         Footer.Alignment = taRightJustify
-        Footer.FieldName = 'SI_CNTR_QTY'
+        Footer.FieldName = 'DAX_POS_QTY'
+        Footer.ValueType = fvtSum
+        Footers = <>
+        Title.Caption = #46021#51068' DAX|'#49688#47049
+        Width = 37
+      end
+      item
+        Alignment = taRightJustify
+        AutoFitColWidth = False
+        DynProps = <>
+        EditButtons = <>
+        FieldName = 'DAX_AVG_PRC'
+        Footer.Alignment = taRightJustify
+        Footer.FieldName = 'DAX_AVG_PRC'
+        Footers = <>
+        Title.Caption = #46021#51068' DAX|'#54217#44512#45800#44032
+        Width = 65
+      end
+      item
+        Alignment = taRightJustify
+        AutoFitColWidth = False
+        DisplayFormat = '#,##0'
+        DynProps = <>
+        EditButtons = <>
+        FieldName = 'DAX_CMSN'
+        Footer.Alignment = taRightJustify
+        Footer.FieldName = 'DAX_CMSN'
+        Footer.ValueType = fvtSum
+        Footers = <>
+        Title.Caption = #46021#51068' DAX|'#49688#49688#47308
+        Width = 65
+      end
+      item
+        Alignment = taRightJustify
+        AutoFitColWidth = False
+        DisplayFormat = '#,##0'
+        DynProps = <>
+        EditButtons = <>
+        FieldName = 'DAX_CLR_PL'
+        Footer.Alignment = taRightJustify
+        Footer.FieldName = 'DAX_CLR_PL'
+        Footer.ValueType = fvtSum
+        Footers = <>
+        Title.Caption = #46021#51068' DAX|'#49892#54788#49552#51061
+        Width = 65
+      end
+      item
+        Alignment = taRightJustify
+        AutoFitColWidth = False
+        DisplayFormat = '#,##0'
+        DynProps = <>
+        EditButtons = <>
+        FieldName = 'DAX_EVA_PL'
+        Footer.Alignment = taRightJustify
+        Footer.FieldName = 'DAX_EVA_PL'
+        Footer.ValueType = fvtSum
+        Footers = <>
+        Title.Caption = #46021#51068' DAX|'#54217#44032#49552#51061
+        Width = 65
+      end
+      item
+        Alignment = taRightJustify
+        AutoFitColWidth = False
+        DisplayFormat = '#,##0'
+        DynProps = <>
+        EditButtons = <>
+        FieldName = 'N101_CLR_PL'
+        Footer.Alignment = taRightJustify
+        Footer.FieldName = 'N101_CLR_PL'
+        Footer.ValueType = fvtSum
+        Footers = <>
+        Title.Caption = #44397#45236#49440#47932' ('#51452#44036')|'#49892#54788#49552#51061
+        Width = 65
+      end
+      item
+        Alignment = taRightJustify
+        AutoFitColWidth = False
+        DisplayFormat = '#,##0'
+        DynProps = <>
+        EditButtons = <>
+        FieldName = 'N101_CMSN'
+        Footer.Alignment = taRightJustify
+        Footer.FieldName = 'N101_CMSN'
+        Footer.ValueType = fvtSum
+        Footers = <>
+        Title.Caption = #44397#45236#49440#47932' ('#51452#44036')|'#49688#49688#47308
+        Width = 65
+      end
+      item
+        Alignment = taRightJustify
+        AutoFitColWidth = False
+        DynProps = <>
+        EditButtons = <>
+        FieldName = 'N101_POS_QTY'
+        Footer.Alignment = taRightJustify
+        Footer.FieldName = 'N101_POS_QTY'
+        Footer.ValueType = fvtSum
+        Footers = <>
+        Title.Caption = #44397#45236#49440#47932' ('#51452#44036')|'#49688#47049
+        Width = 37
+      end
+      item
+        Alignment = taRightJustify
+        AutoFitColWidth = False
+        DynProps = <>
+        EditButtons = <>
+        FieldName = 'N101_AVG_PRC'
+        Footer.Alignment = taRightJustify
+        Footer.FieldName = 'N101_AVG_PRC'
+        Footers = <>
+        Title.Caption = #44397#45236#49440#47932' ('#51452#44036')|'#54217#44512#45800#44032
+        Width = 65
+      end
+      item
+        Alignment = taRightJustify
+        AutoFitColWidth = False
+        DisplayFormat = '#,##0'
+        DynProps = <>
+        EditButtons = <>
+        FieldName = 'N101_EVA_PL'
+        Footer.Alignment = taRightJustify
+        Footer.FieldName = 'N101_EVA_PL'
+        Footer.ValueType = fvtSum
+        Footers = <>
+        Title.Caption = #44397#45236#49440#47932' ('#51452#44036')|'#54217#44032#49552#51061
+        Width = 65
+      end
+      item
+        Alignment = taRightJustify
+        AutoFitColWidth = False
+        DisplayFormat = '#,##0'
+        DynProps = <>
+        EditButtons = <>
+        FieldName = 'Y101_CLR_PL'
+        Footers = <>
+        Width = 1
+      end
+      item
+        Alignment = taRightJustify
+        AutoFitColWidth = False
+        DisplayFormat = '#,##0'
+        DynProps = <>
+        EditButtons = <>
+        FieldName = 'Y101_CMSN'
+        Footers = <>
+        Width = 1
+      end
+      item
+        DynProps = <>
+        EditButtons = <>
+        FieldName = 'Y101_POS_QTY'
+        Footers = <>
+      end
+      item
+        DynProps = <>
+        EditButtons = <>
+        FieldName = 'Y101_AVG_PRC'
+        Footers = <>
+      end
+      item
+        DisplayFormat = '#,##0'
+        DynProps = <>
+        EditButtons = <>
+        FieldName = 'Y101_EVA_PL'
+        Footers = <>
+      end
+      item
+        Alignment = taRightJustify
+        AutoFitColWidth = False
+        DisplayFormat = '#,##0'
+        DynProps = <>
+        EditButtons = <>
+        FieldName = 'N201_CLR_PL'
+        Footer.Alignment = taRightJustify
+        Footer.FieldName = 'N201_CLR_PL'
+        Footer.ValueType = fvtSum
+        Footers = <>
+        Title.Caption = #44397#45236#49440#47932' ('#50556#44036')|'#49892#54788#49552#51061
+        Width = 65
+      end
+      item
+        Alignment = taRightJustify
+        AutoFitColWidth = False
+        DisplayFormat = '#,##0'
+        DynProps = <>
+        EditButtons = <>
+        FieldName = 'N201_CMSN'
+        Footer.Alignment = taRightJustify
+        Footer.FieldName = 'N201_CMSN'
+        Footer.ValueType = fvtSum
+        Footers = <>
+        Title.Caption = #44397#45236#49440#47932' ('#50556#44036')|'#49688#49688#47308
+        Width = 65
+      end
+      item
+        Alignment = taRightJustify
+        AutoFitColWidth = False
+        DynProps = <>
+        EditButtons = <>
+        FieldName = 'N201_POS_QTY'
+        Footer.Alignment = taRightJustify
+        Footer.FieldName = 'N201_POS_QTY'
+        Footer.ValueType = fvtSum
+        Footers = <>
+        Title.Caption = #44397#45236#49440#47932' ('#50556#44036')|'#49688#47049
+        Width = 37
+      end
+      item
+        Alignment = taRightJustify
+        AutoFitColWidth = False
+        DynProps = <>
+        EditButtons = <>
+        FieldName = 'N201_AVG_PRC'
+        Footer.Alignment = taRightJustify
+        Footer.FieldName = 'N201_AVG_PRC'
+        Footers = <>
+        Title.Caption = #44397#45236#49440#47932' ('#50556#44036')|'#54217#44512#45800#44032
+        Width = 65
+      end
+      item
+        Alignment = taRightJustify
+        AutoFitColWidth = False
+        DisplayFormat = '#,##0'
+        DynProps = <>
+        EditButtons = <>
+        FieldName = 'N201_EVA_PL'
+        Footer.Alignment = taRightJustify
+        Footer.FieldName = 'N201_EVA_PL'
+        Footer.ValueType = fvtSum
+        Footers = <>
+        Title.Caption = #44397#45236#49440#47932' ('#50556#44036')|'#54217#44032#49552#51061
+        Width = 65
+      end
+      item
+        Alignment = taRightJustify
+        AutoFitColWidth = False
+        DisplayFormat = '#,##0'
+        DynProps = <>
+        EditButtons = <>
+        FieldName = 'Y201_CLR_PL'
+        Footer.Alignment = taRightJustify
+        Footer.FieldName = 'Y201_CLR_PL'
+        Footer.ValueType = fvtSum
+        Footers = <>
+        Title.Caption = #44397#45236#50741#49496' ('#50556#44036')|'#49892#54788#49552#51061
+        Width = 65
+      end
+      item
+        Alignment = taRightJustify
+        AutoFitColWidth = False
+        DisplayFormat = '#,##0'
+        DynProps = <>
+        EditButtons = <>
+        FieldName = 'Y201_CMSN'
+        Footer.Alignment = taRightJustify
+        Footer.FieldName = 'Y201_CMSN'
+        Footer.ValueType = fvtSum
+        Footers = <>
+        Title.Caption = #44397#45236#50741#49496' ('#50556#44036')|'#49688#49688#47308
+        Width = 65
+      end
+      item
+        Alignment = taRightJustify
+        AutoFitColWidth = False
+        DynProps = <>
+        EditButtons = <>
+        FieldName = 'Y201_POS_QTY'
+        Footer.Alignment = taRightJustify
+        Footer.FieldName = 'Y201_POS_QTY'
+        Footer.ValueType = fvtSum
+        Footers = <>
+        Title.Caption = #44397#45236#50741#49496' ('#50556#44036')|'#49688#47049
+        Width = 37
+      end
+      item
+        Alignment = taRightJustify
+        AutoFitColWidth = False
+        DynProps = <>
+        EditButtons = <>
+        FieldName = 'Y201_AVG_PRC'
+        Footer.Alignment = taRightJustify
+        Footer.FieldName = 'Y201_AVG_PRC'
+        Footers = <>
+        Title.Caption = #44397#45236#50741#49496' ('#50556#44036')|'#54217#44512#45800#44032
+        Width = 65
+      end
+      item
+        Alignment = taRightJustify
+        AutoFitColWidth = False
+        DisplayFormat = '#,##0'
+        DynProps = <>
+        EditButtons = <>
+        FieldName = 'Y201_EVA_PL'
+        Footer.Alignment = taRightJustify
+        Footer.FieldName = 'Y201_EVA_PL'
+        Footer.ValueType = fvtSum
+        Footers = <>
+        Title.Caption = #44397#45236#50741#49496' ('#50556#44036')|'#54217#44032#49552#51061
+        Width = 65
+      end
+      item
+        Alignment = taRightJustify
+        AutoFitColWidth = False
+        DynProps = <>
+        EditButtons = <>
+        FieldName = 'AD_POS_QTY'
+        Footer.Alignment = taRightJustify
+        Footer.FieldName = 'AD_POS_QTY'
+        Footer.ValueType = fvtSum
+        Footers = <>
+        Title.Caption = 'Aus.'#45804#47084'|'#49688#47049
+        Width = 37
+      end
+      item
+        Alignment = taRightJustify
+        AutoFitColWidth = False
+        DynProps = <>
+        EditButtons = <>
+        FieldName = 'AD_AVG_PRC'
+        Footer.Alignment = taRightJustify
+        Footer.FieldName = 'AD_AVG_PRC'
+        Footers = <>
+        Title.Caption = 'Aus.'#45804#47084'|'#54217#44512#45800#44032
+        Width = 65
+      end
+      item
+        Alignment = taRightJustify
+        AutoFitColWidth = False
+        DisplayFormat = '#,##0'
+        DynProps = <>
+        EditButtons = <>
+        FieldName = 'AD_CMSN'
+        Footer.Alignment = taRightJustify
+        Footer.FieldName = 'AD_CMSN'
+        Footer.ValueType = fvtSum
+        Footers = <>
+        Title.Caption = 'Aus.'#45804#47084'|'#49688#49688#47308
+        Width = 65
+      end
+      item
+        Alignment = taRightJustify
+        AutoFitColWidth = False
+        DisplayFormat = '#,##0'
+        DynProps = <>
+        EditButtons = <>
+        FieldName = 'AD_EVA_PL'
+        Footer.Alignment = taRightJustify
+        Footer.FieldName = 'AD_EVA_PL'
+        Footer.ValueType = fvtSum
+        Footers = <>
+        Title.Caption = 'Aus.'#45804#47084'|'#54217#44032#49552#51061
+        Width = 65
+      end
+      item
+        Alignment = taRightJustify
+        AutoFitColWidth = False
+        DisplayFormat = '#,##0'
+        DynProps = <>
+        EditButtons = <>
+        FieldName = 'AD_CLR_PL'
+        Footer.Alignment = taRightJustify
+        Footer.FieldName = 'AD_CLR_PL'
+        Footer.ValueType = fvtSum
+        Footers = <>
+        Title.Caption = 'Aus.'#45804#47084'|'#49892#54788#49552#51061
+        Width = 65
+      end
+      item
+        Alignment = taRightJustify
+        AutoFitColWidth = False
+        DynProps = <>
+        EditButtons = <>
+        FieldName = 'BP_POS_QTY'
+        Footer.Alignment = taRightJustify
+        Footer.FieldName = 'BP_POS_QTY'
+        Footer.ValueType = fvtSum
+        Footers = <
+          item
+            Alignment = taRightJustify
+            FieldName = 'BP_POS_QTY'
+            ValueType = fvtSum
+          end>
+        Title.Caption = 'B.Pound|'#49688#47049
+        Width = 37
+      end
+      item
+        Alignment = taRightJustify
+        AutoFitColWidth = False
+        DynProps = <>
+        EditButtons = <>
+        FieldName = 'BP_AVG_PRC'
+        Footer.Alignment = taRightJustify
+        Footer.FieldName = 'BP_AVG_PRC'
+        Footers = <>
+        Title.Caption = 'B.Pound|'#54217#44512#45800#44032
+        Width = 65
+      end
+      item
+        Alignment = taRightJustify
+        AutoFitColWidth = False
+        DisplayFormat = '#,##0'
+        DynProps = <>
+        EditButtons = <>
+        FieldName = 'BP_CLR_PL'
+        Footer.Alignment = taRightJustify
+        Footer.FieldName = 'BP_CLR_PL'
+        Footer.ValueType = fvtSum
+        Footers = <>
+        Title.Caption = 'B.Pound|'#49892#54788#49552#51061
+        Width = 65
+      end
+      item
+        Alignment = taRightJustify
+        AutoFitColWidth = False
+        DisplayFormat = '#,##0'
+        DynProps = <>
+        EditButtons = <>
+        FieldName = 'BP_CMSN'
+        Footer.Alignment = taRightJustify
+        Footer.FieldName = 'BP_CMSN'
+        Footer.ValueType = fvtSum
+        Footers = <>
+        Title.Caption = 'B.Pound|'#49688#49688#47308
+        Width = 65
+      end
+      item
+        Alignment = taRightJustify
+        AutoFitColWidth = False
+        DisplayFormat = '#,##0'
+        DynProps = <>
+        EditButtons = <>
+        FieldName = 'BP_EVA_PL'
+        Footer.Alignment = taRightJustify
+        Footer.FieldName = 'BP_EVA_PL'
+        Footer.ValueType = fvtSum
+        Footers = <>
+        Title.Caption = 'B.Pound|'#54217#44032#49552#51061
+        Width = 65
+      end
+      item
+        Alignment = taRightJustify
+        AutoFitColWidth = False
+        DisplayFormat = '#,##0'
+        DynProps = <>
+        EditButtons = <>
+        FieldName = 'NG_CLR_PL'
+        Footer.Alignment = taRightJustify
+        Footer.FieldName = 'NG_CLR_PL'
+        Footer.ValueType = fvtSum
+        Footers = <>
+        Title.Caption = #52380#50672#44032#49828'|'#49892#54788#49552#51061
+        Width = 65
+      end
+      item
+        Alignment = taRightJustify
+        AutoFitColWidth = False
+        DynProps = <>
+        EditButtons = <>
+        FieldName = 'NG_POS_QTY'
+        Footer.Alignment = taRightJustify
+        Footer.FieldName = 'NG_POS_QTY'
+        Footer.ValueType = fvtSum
+        Footers = <>
+        Title.Caption = #52380#50672#44032#49828'|'#49688#47049
+        Width = 37
+      end
+      item
+        Alignment = taRightJustify
+        AutoFitColWidth = False
+        DynProps = <>
+        EditButtons = <>
+        FieldName = 'NG_AVG_PRC'
+        Footer.Alignment = taRightJustify
+        Footer.FieldName = 'NG_AVG_PRC'
+        Footers = <>
+        Title.Caption = #52380#50672#44032#49828'|'#54217#44512#45800#44032
+        Width = 65
+      end
+      item
+        Alignment = taRightJustify
+        AutoFitColWidth = False
+        DisplayFormat = '#,##0'
+        DynProps = <>
+        EditButtons = <>
+        FieldName = 'NG_CMSN'
+        Footer.Alignment = taRightJustify
+        Footer.FieldName = 'NG_CMSN'
+        Footer.ValueType = fvtSum
+        Footers = <>
+        Title.Caption = #52380#50672#44032#49828'|'#49688#49688#47308
+        Width = 65
+      end
+      item
+        Alignment = taRightJustify
+        AutoFitColWidth = False
+        DisplayFormat = '#,##0'
+        DynProps = <>
+        EditButtons = <>
+        FieldName = 'NG_EVA_PL'
+        Footer.Alignment = taRightJustify
+        Footer.FieldName = 'NG_EVA_PL'
+        Footer.ValueType = fvtSum
+        Footers = <>
+        Title.Caption = #52380#50672#44032#49828'|'#54217#44032#49552#51061
+        Width = 65
+      end
+      item
+        Alignment = taRightJustify
+        AutoFitColWidth = False
+        DynProps = <>
+        EditButtons = <>
+        FieldName = 'ES_POS_QTY'
+        Footer.Alignment = taRightJustify
+        Footer.FieldName = 'ES_POS_QTY'
+        Footer.ValueType = fvtSum
+        Footers = <>
+        Title.Caption = 'E-Mini S&P|'#49688#47049
+        Width = 37
+      end
+      item
+        Alignment = taRightJustify
+        AutoFitColWidth = False
+        DynProps = <>
+        EditButtons = <>
+        FieldName = 'ES_AVG_PRC'
+        Footer.Alignment = taRightJustify
+        Footer.FieldName = 'ES_AVG_PRC'
+        Footers = <>
+        Title.Caption = 'E-Mini S&P|'#54217#44512#45800#44032
+        Width = 65
+      end
+      item
+        Alignment = taRightJustify
+        AutoFitColWidth = False
+        DisplayFormat = '#,##0'
+        DynProps = <>
+        EditButtons = <>
+        FieldName = 'ES_CMSN'
+        Footer.Alignment = taRightJustify
+        Footer.FieldName = 'ES_CMSN'
+        Footer.ValueType = fvtSum
+        Footers = <>
+        Title.Caption = 'E-Mini S&P|'#49688#49688#47308
+        Width = 65
+      end
+      item
+        Alignment = taRightJustify
+        AutoFitColWidth = False
+        DisplayFormat = '#,##0'
+        DynProps = <>
+        EditButtons = <>
+        FieldName = 'ES_EVA_PL'
+        Footer.Alignment = taRightJustify
+        Footer.FieldName = 'ES_EVA_PL'
+        Footer.ValueType = fvtSum
+        Footers = <>
+        Title.Caption = 'E-Mini S&P|'#54217#44032#49552#51061
+        Width = 65
+      end
+      item
+        Alignment = taRightJustify
+        AutoFitColWidth = False
+        DisplayFormat = '#,##0'
+        DynProps = <>
+        EditButtons = <>
+        FieldName = 'ES_CLR_PL'
+        Footer.Alignment = taRightJustify
+        Footer.FieldName = 'ES_CLR_PL'
+        Footer.ValueType = fvtSum
+        Footers = <>
+        Title.Caption = 'E-Mini S&P|'#49892#54788#49552#51061
+        Width = 65
+      end
+      item
+        Alignment = taRightJustify
+        AutoFitColWidth = False
+        DynProps = <>
+        EditButtons = <>
+        FieldName = 'POS_QTY_TOTAL'
+        Footer.Alignment = taRightJustify
+        Footer.Color = 16250879
+        Footer.FieldName = 'POS_QTY_TOTAL'
+        Footer.ValueType = fvtSum
+        Footers = <>
+        Title.Caption = #52509#54217#44032#49552#51061
+        Width = 78
+      end
+      item
+        Alignment = taRightJustify
+        AutoFitColWidth = False
+        DynProps = <>
+        EditButtons = <>
+        FieldName = 'JY_POS_QTY'
+        Footer.Alignment = taRightJustify
+        Footer.FieldName = 'JY_POS_QTY'
+        Footer.ValueType = fvtSum
+        Footers = <>
+        Title.Caption = 'J.Yen|'#49688#47049
+        Width = 37
+      end
+      item
+        Alignment = taRightJustify
+        AutoFitColWidth = False
+        DisplayFormat = '#,##0'
+        DynProps = <>
+        EditButtons = <>
+        FieldName = 'JY_CLR_PL'
+        Footer.Alignment = taRightJustify
+        Footer.FieldName = 'JY_CLR_PL'
+        Footer.ValueType = fvtSum
+        Footers = <>
+        Title.Caption = 'J.Yen|'#49892#54788#49552#51061
+        Width = 65
+      end
+      item
+        Alignment = taRightJustify
+        AutoFitColWidth = False
+        DynProps = <>
+        EditButtons = <>
+        FieldName = 'JY_AVG_PRC'
+        Footer.Alignment = taRightJustify
+        Footer.FieldName = 'JY_AVG_PRC'
+        Footers = <>
+        Title.Caption = 'J.Yen|'#54217#44512#45800#44032
+        Width = 65
+      end
+      item
+        Alignment = taRightJustify
+        AutoFitColWidth = False
+        DisplayFormat = '#,##0'
+        DynProps = <>
+        EditButtons = <>
+        FieldName = 'JY_CMSN'
+        Footer.Alignment = taRightJustify
+        Footer.FieldName = 'JY_CMSN'
+        Footer.ValueType = fvtSum
+        Footers = <>
+        Title.Caption = 'J.Yen|'#49688#49688#47308
+        Width = 65
+      end
+      item
+        AutoFitColWidth = False
+        DisplayFormat = '#,##0'
+        DynProps = <>
+        EditButtons = <>
+        FieldName = 'JY_EVA_PL'
+        Footer.Alignment = taRightJustify
+        Footer.FieldName = 'JY_EVA_PL'
+        Footer.ValueType = fvtSum
+        Footers = <>
+        Title.Caption = 'J.Yen|'#54217#44032#49552#51061
+        Width = 65
+      end
+      item
+        Alignment = taRightJustify
+        AutoFitColWidth = False
+        DisplayFormat = '#,##0'
+        DynProps = <>
+        EditButtons = <>
+        FieldName = 'IN_AMT'
+        Footer.Alignment = taRightJustify
+        Footer.FieldName = 'IN_AMT'
+        Footer.ValueType = fvtSum
+        Footers = <>
+        Title.Caption = #51077#44552#50529
+        Width = 78
+      end
+      item
+        Alignment = taRightJustify
+        AutoFitColWidth = False
+        DisplayFormat = '#,##0'
+        DynProps = <>
+        EditButtons = <>
+        FieldName = 'OUT_AMT'
+        Footer.Alignment = taRightJustify
+        Footer.FieldName = 'OUT_AMT'
+        Footer.ValueType = fvtSum
+        Footers = <>
+        Title.Caption = #52636#44552#50529
+        Width = 78
+      end
+      item
+        Alignment = taRightJustify
+        AutoFitColWidth = False
+        DisplayFormat = '#,##0'
+        DynProps = <>
+        EditButtons = <>
+        FieldName = 'NQ_CLR_PL'
+        Footer.Alignment = taRightJustify
+        Footer.FieldName = 'NQ_CLR_PL'
+        Footer.ValueType = fvtSum
+        Footers = <>
+        Title.Caption = #45208#49828#45797'|'#49892#54788#49552#51061
+        Width = 65
+      end
+      item
+        Alignment = taRightJustify
+        AutoFitColWidth = False
+        DynProps = <>
+        EditButtons = <>
+        FieldName = 'NQ_POS_QTY'
+        Footer.Alignment = taRightJustify
+        Footer.FieldName = 'NQ_POS_QTY'
+        Footer.ValueType = fvtSum
+        Footers = <>
+        Title.Caption = #45208#49828#45797'|'#49688#47049
+        Width = 37
+      end
+      item
+        Alignment = taRightJustify
+        AutoFitColWidth = False
+        DynProps = <>
+        EditButtons = <>
+        FieldName = 'NQ_AVG_PRC'
+        Footer.Alignment = taRightJustify
+        Footer.FieldName = 'NQ_AVG_PRC'
+        Footers = <>
+        Title.Caption = #45208#49828#45797'|'#54217#44512#45800#44032
+        Width = 65
+      end
+      item
+        Alignment = taRightJustify
+        AutoFitColWidth = False
+        DisplayFormat = '#,##0'
+        DynProps = <>
+        EditButtons = <>
+        FieldName = 'NQ_CMSN'
+        Footer.Alignment = taRightJustify
+        Footer.FieldName = 'NQ_CMSN'
+        Footer.ValueType = fvtSum
+        Footers = <>
+        Title.Caption = #45208#49828#45797'|'#49688#49688#47308
+        Width = 65
+      end
+      item
+        Alignment = taRightJustify
+        AutoFitColWidth = False
+        DisplayFormat = '#,##0'
+        DynProps = <>
+        EditButtons = <>
+        FieldName = 'NQ_EVA_PL'
+        Footer.Alignment = taRightJustify
+        Footer.FieldName = 'NQ_EVA_PL'
+        Footer.ValueType = fvtSum
+        Footers = <>
+        Title.Caption = #45208#49828#45797'|'#54217#44032#49552#51061
+        Width = 65
+      end
+      item
+        Alignment = taRightJustify
+        AutoFitColWidth = False
+        DisplayFormat = '#,##0'
+        DynProps = <>
+        EditButtons = <>
+        FieldName = 'URO_CLR_PL'
+        Footer.Alignment = taRightJustify
+        Footer.FieldName = 'URO_CLR_PL'
+        Footer.ValueType = fvtSum
+        Footers = <>
+        Title.Caption = #50976#47196#49440#47932'|'#49892#54788#49552#51061
+        Width = 65
+      end
+      item
+        Alignment = taRightJustify
+        AutoFitColWidth = False
+        DynProps = <>
+        EditButtons = <>
+        FieldName = 'URO_POS_QTY'
+        Footer.Alignment = taRightJustify
+        Footer.FieldName = 'URO_POS_QTY'
+        Footer.ValueType = fvtSum
+        Footers = <>
+        Title.Caption = #50976#47196#49440#47932'|'#49688#47049
+        Width = 37
+      end
+      item
+        Alignment = taRightJustify
+        AutoFitColWidth = False
+        DisplayFormat = '#,##0'
+        DynProps = <>
+        EditButtons = <>
+        FieldName = 'URO_CMSN'
+        Footer.Alignment = taRightJustify
+        Footer.FieldName = 'URO_CMSN'
+        Footer.ValueType = fvtSum
+        Footers = <>
+        Title.Caption = #50976#47196#49440#47932'|'#49688#49688#47308
+        Width = 65
+      end
+      item
+        Alignment = taRightJustify
+        AutoFitColWidth = False
+        DynProps = <>
+        EditButtons = <>
+        FieldName = 'URO_AVG_PRC'
+        Footer.Alignment = taRightJustify
+        Footer.FieldName = 'URO_AVG_PRC'
+        Footers = <>
+        Title.Caption = #50976#47196#49440#47932'|'#54217#44512#45800#44032
+        Width = 65
+      end
+      item
+        Alignment = taRightJustify
+        AutoFitColWidth = False
+        DisplayFormat = '#,##0'
+        DynProps = <>
+        EditButtons = <>
+        FieldName = 'URO_EVA_PL'
+        Footer.Alignment = taRightJustify
+        Footer.FieldName = 'URO_EVA_PL'
+        Footer.ValueType = fvtSum
+        Footers = <>
+        Title.Caption = #50976#47196#49440#47932'|'#54217#44032#49552#51061
+        Width = 65
+      end
+      item
+        AutoFitColWidth = False
+        DynProps = <>
+        EditButtons = <>
+        FieldName = 'CL_POS_QTY'
+        Footer.Alignment = taRightJustify
+        Footer.FieldName = 'CL_POS_QTY'
+        Footer.ValueType = fvtSum
+        Footers = <>
+        Title.Caption = #53356#47336#46300#50724#51068'|'#49688#47049
+        Width = 37
+      end
+      item
+        Alignment = taRightJustify
+        AutoFitColWidth = False
+        DisplayFormat = '#,##0'
+        DynProps = <>
+        EditButtons = <>
+        FieldName = 'CL_CMSN'
+        Footer.Alignment = taRightJustify
+        Footer.FieldName = 'CL_CMSN'
+        Footer.ValueType = fvtSum
+        Footers = <>
+        Title.Caption = #53356#47336#46300#50724#51068'|'#49688#49688#47308
+        Width = 65
+      end
+      item
+        Alignment = taRightJustify
+        AutoFitColWidth = False
+        DisplayFormat = '#,##0'
+        DynProps = <>
+        EditButtons = <>
+        FieldName = 'CL_CLR_PL'
+        Footer.Alignment = taRightJustify
+        Footer.FieldName = 'CL_CLR_PL'
+        Footer.ValueType = fvtSum
+        Footers = <>
+        Title.Caption = #53356#47336#46300#50724#51068'|'#49892#54788#49552#51061
+        Width = 65
+      end
+      item
+        Alignment = taRightJustify
+        AutoFitColWidth = False
+        DynProps = <>
+        EditButtons = <>
+        FieldName = 'CL_AVG_PRC'
+        Footer.Alignment = taRightJustify
+        Footer.FieldName = 'CL_AVG_PRC'
+        Footers = <>
+        Title.Caption = #53356#47336#46300#50724#51068'|'#54217#44512#45800#44032
+        Width = 65
+      end
+      item
+        Alignment = taRightJustify
+        AutoFitColWidth = False
+        DisplayFormat = '#,##0'
+        DynProps = <>
+        EditButtons = <>
+        FieldName = 'CL_EVA_PL'
+        Footer.Alignment = taRightJustify
+        Footer.FieldName = 'CL_EVA_PL'
+        Footer.ValueType = fvtSum
+        Footers = <>
+        Title.Caption = #53356#47336#46300#50724#51068'|'#54217#44032#49552#51061
+        Width = 65
+      end
+      item
+        Alignment = taRightJustify
+        AutoFitColWidth = False
+        DynProps = <>
+        EditButtons = <>
+        FieldName = 'GC_POS_QTY'
+        Footer.Alignment = taRightJustify
+        Footer.FieldName = 'GC_POS_QTY'
+        Footer.ValueType = fvtSum
+        Footers = <>
+        Title.Caption = 'GOLD|'#49688#47049
+        Width = 37
+      end
+      item
+        Alignment = taRightJustify
+        AutoFitColWidth = False
+        DisplayFormat = '#,##0'
+        DynProps = <>
+        EditButtons = <>
+        FieldName = 'GC_CLR_PL'
+        Footer.Alignment = taRightJustify
+        Footer.FieldName = 'GC_CLR_PL'
+        Footer.ValueType = fvtSum
+        Footers = <>
+        Title.Caption = 'GOLD|'#49892#54788#49552#51061
+        Width = 65
+      end
+      item
+        Alignment = taRightJustify
+        AutoFitColWidth = False
+        DynProps = <>
+        EditButtons = <>
+        FieldName = 'GC_AVG_PRC'
+        Footer.Alignment = taRightJustify
+        Footer.FieldName = 'GC_AVG_PRC'
+        Footers = <>
+        Title.Caption = 'GOLD|'#54217#44512#45800#44032
+        Width = 65
+      end
+      item
+        Alignment = taRightJustify
+        AutoFitColWidth = False
+        DisplayFormat = '#,##0'
+        DynProps = <>
+        EditButtons = <>
+        FieldName = 'GC_CMSN'
+        Footer.Alignment = taRightJustify
+        Footer.FieldName = 'GC_CMSN'
+        Footer.ValueType = fvtSum
+        Footers = <>
+        Title.Caption = 'GOLD|'#49688#49688#47308
+        Width = 65
+      end
+      item
+        Alignment = taRightJustify
+        AutoFitColWidth = False
+        DisplayFormat = '#,##0'
+        DynProps = <>
+        EditButtons = <>
+        FieldName = 'GC_EVA_PL'
+        Footer.Alignment = taRightJustify
+        Footer.FieldName = 'GC_EVA_PL'
+        Footer.ValueType = fvtSum
+        Footers = <>
+        Title.Caption = 'GOLD|'#54217#44032#49552#51061
+        Width = 65
+      end
+      item
+        AutoFitColWidth = False
+        DisplayFormat = '#,##0'
+        DynProps = <>
+        EditButtons = <>
+        FieldName = 'SI_CLR_PL'
+        Footer.Alignment = taRightJustify
+        Footer.FieldName = 'SI_CLR_PL'
+        Footer.ValueType = fvtSum
+        Footers = <>
+        Title.Caption = #49892#48260'|'#49892#54788#49552#51061
+        Width = 65
+      end
+      item
+        AutoFitColWidth = False
+        DynProps = <>
+        EditButtons = <>
+        FieldName = 'SI_POS_QTY'
+        Footer.Alignment = taRightJustify
+        Footer.FieldName = 'SI_POS_QTY'
         Footer.ValueType = fvtSum
         Footers = <>
         Title.Caption = #49892#48260'|'#49688#47049
@@ -1926,23 +1945,12 @@ inherited fmTodayPL: TfmTodayPL
       end
       item
         AutoFitColWidth = False
+        DisplayFormat = '#,##0'
         DynProps = <>
         EditButtons = <>
-        FieldName = 'SI_CLR_PL'
+        FieldName = 'SI_CMSN'
         Footer.Alignment = taRightJustify
-        Footer.FieldName = 'SI_CLR_PL'
-        Footer.ValueType = fvtSum
-        Footers = <>
-        Title.Caption = #49892#48260'|'#49892#54788#49552#51061
-        Width = 65
-      end
-      item
-        AutoFitColWidth = False
-        DynProps = <>
-        EditButtons = <>
-        FieldName = 'SI_CMSN_AMT'
-        Footer.Alignment = taRightJustify
-        Footer.FieldName = 'SI_CMSN_AMT'
+        Footer.FieldName = 'SI_CMSN'
         Footer.ValueType = fvtSum
         Footers = <>
         Title.Caption = #49892#48260'|'#49688#49688#47308
@@ -1950,11 +1958,12 @@ inherited fmTodayPL: TfmTodayPL
       end
       item
         AutoFitColWidth = False
+        DisplayFormat = '#,##0'
         DynProps = <>
         EditButtons = <>
-        FieldName = 'SI_EVL_PL'
+        FieldName = 'SI_EVA_PL'
         Footer.Alignment = taRightJustify
-        Footer.FieldName = 'SI_EVL_PL'
+        Footer.FieldName = 'SI_EVA_PL'
         Footer.ValueType = fvtSum
         Footers = <>
         Title.Caption = #49892#48260'|'#54217#44032#49552#51061
@@ -1964,9 +1973,9 @@ inherited fmTodayPL: TfmTodayPL
         AutoFitColWidth = False
         DynProps = <>
         EditButtons = <>
-        FieldName = 'HG_CNTR_QTY'
+        FieldName = 'HG_POS_QTY'
         Footer.Alignment = taRightJustify
-        Footer.FieldName = 'HG_CNTR_QTY'
+        Footer.FieldName = 'HG_POS_QTY'
         Footer.ValueType = fvtSum
         Footers = <>
         Title.Caption = #44396#47532'|'#49688#47049
@@ -1974,17 +1983,7 @@ inherited fmTodayPL: TfmTodayPL
       end
       item
         AutoFitColWidth = False
-        DynProps = <>
-        EditButtons = <>
-        FieldName = 'HG_AVG_PRC'
-        Footer.Alignment = taRightJustify
-        Footer.FieldName = 'HG_AVG_PRC'
-        Footers = <>
-        Title.Caption = #44396#47532'|'#54217#44512#45800#44032
-        Width = 65
-      end
-      item
-        AutoFitColWidth = False
+        DisplayFormat = '#,##0'
         DynProps = <>
         EditButtons = <>
         FieldName = 'HG_CLR_PL'
@@ -1999,9 +1998,21 @@ inherited fmTodayPL: TfmTodayPL
         AutoFitColWidth = False
         DynProps = <>
         EditButtons = <>
-        FieldName = 'HG_CMSN_AMT'
+        FieldName = 'HG_AVG_PRC'
         Footer.Alignment = taRightJustify
-        Footer.FieldName = 'HG_CMSN_AMT'
+        Footer.FieldName = 'HG_AVG_PRC'
+        Footers = <>
+        Title.Caption = #44396#47532'|'#54217#44512#45800#44032
+        Width = 65
+      end
+      item
+        AutoFitColWidth = False
+        DisplayFormat = '#,##0'
+        DynProps = <>
+        EditButtons = <>
+        FieldName = 'HG_CMSN'
+        Footer.Alignment = taRightJustify
+        Footer.FieldName = 'HG_CMSN'
         Footer.ValueType = fvtSum
         Footers = <>
         Title.Caption = #44396#47532'|'#49688#49688#47308
@@ -2009,11 +2020,12 @@ inherited fmTodayPL: TfmTodayPL
       end
       item
         AutoFitColWidth = False
+        DisplayFormat = '#,##0'
         DynProps = <>
         EditButtons = <>
-        FieldName = 'HG_EVL_PL'
+        FieldName = 'HG_EVA_PL'
         Footer.Alignment = taRightJustify
-        Footer.FieldName = 'HG_EVL_PL'
+        Footer.FieldName = 'HG_EVA_PL'
         Footer.ValueType = fvtSum
         Footers = <>
         Title.Caption = #44396#47532'|'#54217#44032#49552#51061
@@ -2688,7 +2700,7 @@ inherited fmTodayPL: TfmTodayPL
     Left = 144
     Top = 288
     Bitmap = {
-      494C01010B003400F80010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C01010B0034000C0110001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000003000000001002000000000000030
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -3106,7 +3118,10 @@ inherited fmTodayPL: TfmTodayPL
     Top = 336
   end
   inherited dbMain: TADOQuery
+    Connection = MastDB.ADOConn
     CursorType = ctStatic
+    SQL.Strings = (
+      'exec TODAY_CLR_PL2 '#39'2'#39','#39'20251101'#39', '#39'a'#39','#39'1'#39)
     Left = 64
     Top = 288
   end

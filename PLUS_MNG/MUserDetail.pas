@@ -85,8 +85,10 @@ begin
   _sDate := sDate;
   _sId := sId;
 
-  if sTp = '국내파생' then _sTp := '1' else
-  if sTp = '해외파생' then _sTp := '2';
+  //JAY.2025.11.14, ACNT_MST 의 ACNT_TP 는 0 뿐이다.
+  //if sTp = '국내파생' then _sTp := '1' else
+  //if sTp = '해외파생' then _sTp := '2';
+  _sTp := '0';
 
 //  showmessage(Format('%s , %s , %s, %s', [sId, sTp, sDate, _Trade_DT]));
   Application.CreateForm(TfmUserDetail, fmUserDetail);
@@ -130,7 +132,7 @@ begin
       '       LEFT OUTER JOIN (SELECT ISNULL(SUM(NET_PL_SUM),0) AS NET_PL_SUM  ,' +
       '                               ACNT_TP, USER_ID                          ' +
       '                          FROM ACNT_CLS                                  ' +
-      '                         WHERE TRADE_DT BETWEEN %s AND %s                ' +
+      '                         WHERE TRADE_DT BETWEEN %s AND %s                ' +               //%s
       '                         GROUP BY ACNT_TP, USER_ID) C                    ' +
       '                            ON B.ACNT_TP = C.ACNT_TP                     ' +
       '                           AND B.USER_ID = C.USER_ID                     ' +
@@ -141,7 +143,7 @@ begin
       '       LEFT OUTER JOIN (SELECT ISNULL(SUM(REMN_QTY),0) AS REMN_QTY, USER_ID, ACNT_TP ' +
       '                          FROM ORD                                       ' +
       '                         WHERE REMN_QTY > 0                              ' +
-      '                           AND ACPT_TP <> %s                             ' +
+      '                           AND ACPT_TP <> %s                             ' +               //%s
       '                           AND COND_TP = 0                               ' +
       '                         GROUP BY USER_ID, ACNT_TP) E                    ' +
       '                            ON B.USER_ID = E.USER_ID                     ' +

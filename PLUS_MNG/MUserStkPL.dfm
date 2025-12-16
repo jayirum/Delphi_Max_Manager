@@ -4,6 +4,7 @@ inherited fmUserStkPL: TfmUserStkPL
   ClientWidth = 1192
   OnShow = FormShow
   ExplicitWidth = 1208
+  ExplicitHeight = 592
   PixelsPerInch = 96
   TextHeight = 12
   inherited pnTop: TRzPanel
@@ -962,9 +963,11 @@ inherited fmUserStkPL: TfmUserStkPL
       end
       item
         Alignment = taRightJustify
+        DisplayFormat = '#,###'
         DynProps = <>
         EditButtons = <>
         FieldName = 'ACNT_AMT_TODAY'
+        Footer.DisplayFormat = '#,###'
         Footers = <>
         Title.Caption = #44228#51340#51092#50529
         Title.Color = 16250871
@@ -980,33 +983,27 @@ inherited fmUserStkPL: TfmUserStkPL
       end
       item
         Alignment = taRightJustify
+        DisplayFormat = '#,###'
         DynProps = <>
         EditButtons = <>
         FieldName = 'DT_CNT'
         Footer.Alignment = taRightJustify
+        Footer.DisplayFormat = '#,###'
         Footer.ValueType = fvtSum
-        Footers = <
-          item
-            Alignment = taRightJustify
-            FieldName = 'CMSN'
-            ValueType = fvtSum
-          end>
+        Footers = <>
         Title.Caption = #44144#47000#51068#49688
         Title.Color = 16250871
       end
       item
         Alignment = taRightJustify
         Color = 16250879
+        DisplayFormat = '#,###'
         DynProps = <>
         EditButtons = <>
         FieldName = 'CLR_PL'
+        Footer.DisplayFormat = '#,###'
         Footer.ValueType = fvtSum
-        Footers = <
-          item
-            Alignment = taRightJustify
-            FieldName = 'REALPL'
-            ValueType = fvtSum
-          end>
+        Footers = <>
         Title.Caption = #52509#49892#54788#49552#51061
         Title.Color = 16250871
         Width = 86
@@ -1014,16 +1011,13 @@ inherited fmUserStkPL: TfmUserStkPL
       item
         Alignment = taRightJustify
         Color = 16250879
+        DisplayFormat = '#,###'
         DynProps = <>
         EditButtons = <>
         FieldName = 'CMSN'
+        Footer.DisplayFormat = '#,###'
         Footer.ValueType = fvtSum
-        Footers = <
-          item
-            Alignment = taRightJustify
-            FieldName = 'EVAPL'
-            ValueType = fvtSum
-          end>
+        Footers = <>
         Title.Caption = #52509#49688#49688#47308
         Title.Color = 16250871
         Width = 68
@@ -1031,9 +1025,11 @@ inherited fmUserStkPL: TfmUserStkPL
       item
         Alignment = taRightJustify
         Color = 16250879
+        DisplayFormat = '#,###'
         DynProps = <>
         EditButtons = <>
         FieldName = 'NET_PL'
+        Footer.DisplayFormat = '#,###'
         Footer.ValueType = fvtSum
         Footers = <>
         Title.Caption = #49692#49552#51061
@@ -1049,25 +1045,24 @@ inherited fmUserStkPL: TfmUserStkPL
       end
       item
         Alignment = taRightJustify
+        DisplayFormat = '#,###'
         DynProps = <>
         EditButtons = <>
         FieldName = 'RSLT_IN_AMT'
+        Footer.DisplayFormat = '#,###'
         Footer.ValueType = fvtSum
-        Footers = <
-          item
-            Alignment = taRightJustify
-            FieldName = 'QTY'
-            ValueType = fvtSum
-          end>
+        Footers = <>
         Title.Caption = #51077#44552#50529
         Title.Color = 16250871
         Width = 80
       end
       item
         Alignment = taRightJustify
+        DisplayFormat = '#,###'
         DynProps = <>
         EditButtons = <>
         FieldName = 'RSLT_OUT_AMT'
+        Footer.DisplayFormat = '#,###'
         Footer.ValueType = fvtSum
         Footers = <>
         Title.Caption = #52636#44552#50529
@@ -1082,363 +1077,483 @@ inherited fmUserStkPL: TfmUserStkPL
       end
       item
         Alignment = taRightJustify
+        DisplayFormat = '#,###'
         DynProps = <>
         EditButtons = <>
         FieldName = 'KSF_PL'
+        Footer.DisplayFormat = '#,###'
         Footer.ValueType = fvtSum
         Footers = <>
         Title.Caption = #44397#45236#49440#47932' ('#51452#44036')|'#49892#54788#49552#51061
+        Width = 100
       end
       item
         Alignment = taRightJustify
+        DisplayFormat = '#,###'
         DynProps = <>
         EditButtons = <>
         FieldName = 'KSF_CMSN'
+        Footer.DisplayFormat = '#,###'
         Footer.ValueType = fvtSum
         Footers = <>
         Title.Caption = #44397#45236#49440#47932' ('#51452#44036')|'#49688#49688#47308
+        Width = 100
       end
       item
         Alignment = taRightJustify
+        DisplayFormat = '#,###'
         DynProps = <>
         EditButtons = <>
         FieldName = 'KSO_PL_DAY'
+        Footer.DisplayFormat = '#,###'
         Footer.ValueType = fvtSum
         Footers = <>
         Title.Caption = #44397#45236#50741#49496' ('#51452#44036')|'#49892#54788#49552#51061
+        Width = 100
       end
       item
         Alignment = taRightJustify
+        DisplayFormat = '#,###'
         DynProps = <>
         EditButtons = <>
         FieldName = 'KSO_CMSN_DAY'
+        Footer.DisplayFormat = '#,###'
         Footer.ValueType = fvtSum
         Footers = <>
         Title.Caption = #44397#45236#50741#49496' ('#51452#44036')|'#49688#49688#47308
+        Width = 100
       end
       item
         Alignment = taRightJustify
+        DisplayFormat = '#,###'
         DynProps = <>
         EditButtons = <>
         FieldName = 'KSO_PL_NGT'
+        Footer.DisplayFormat = '#,###'
         Footer.ValueType = fvtSum
         Footers = <>
         Title.Caption = #44397#45236#50741#49496' ('#50556#44036')|'#49892#54788#49552#51061
+        Width = 100
       end
       item
         Alignment = taRightJustify
+        DisplayFormat = '#,###'
         DynProps = <>
         EditButtons = <>
         FieldName = 'KSO_CMSN_NGT'
+        Footer.DisplayFormat = '#,###'
         Footer.ValueType = fvtSum
         Footers = <>
         Title.Caption = #44397#45236#50741#49496' ('#50556#44036')|'#49688#49688#47308
+        Width = 100
       end
       item
         Alignment = taRightJustify
+        DisplayFormat = '#,###'
         DynProps = <>
         EditButtons = <>
         FieldName = 'URO_CLR_PL'
+        Footer.DisplayFormat = '#,###'
         Footer.ValueType = fvtSum
         Footers = <>
         Title.Caption = #50976#47196#49440#47932'|'#49892#54788#49552#51061
+        Width = 100
       end
       item
         Alignment = taRightJustify
+        DisplayFormat = '#,###'
         DynProps = <>
         EditButtons = <>
         FieldName = 'URO_CMSN'
+        Footer.DisplayFormat = '#,###'
         Footer.ValueType = fvtSum
         Footers = <>
         Title.Caption = #50976#47196#49440#47932'|'#49688#49688#47308
+        Width = 100
       end
       item
         Alignment = taRightJustify
+        DisplayFormat = '#,###'
         DynProps = <>
         EditButtons = <>
         FieldName = 'CL_CLR_PL'
+        Footer.DisplayFormat = '#,###'
         Footer.ValueType = fvtSum
         Footers = <>
         Title.Caption = #53356#47336#46300#50724#51068'|'#49892#54788#49552#51061
+        Width = 100
       end
       item
         Alignment = taRightJustify
+        DisplayFormat = '#,###'
         DynProps = <>
         EditButtons = <>
         FieldName = 'CL_CMSN'
+        Footer.DisplayFormat = '#,###'
         Footer.ValueType = fvtSum
         Footers = <>
         Title.Caption = #53356#47336#46300#50724#51068'|'#49688#49688#47308
+        Width = 100
       end
       item
         Alignment = taRightJustify
+        DisplayFormat = '#,###'
         DynProps = <>
         EditButtons = <>
         FieldName = 'GC_CLR_PL'
+        Footer.DisplayFormat = '#,###'
         Footer.ValueType = fvtSum
         Footers = <>
         Title.Caption = 'GOLD|'#49892#54788#49552#51061
+        Width = 100
       end
       item
         Alignment = taRightJustify
+        DisplayFormat = '#,###'
         DynProps = <>
         EditButtons = <>
         FieldName = 'GC_CMSN'
+        Footer.DisplayFormat = '#,###'
         Footer.ValueType = fvtSum
         Footers = <>
         Title.Caption = 'GOLD|'#49688#49688#47308
+        Width = 100
       end
       item
         Alignment = taRightJustify
+        DisplayFormat = '#,###'
         DynProps = <>
         EditButtons = <>
         FieldName = 'NG_CLR_PL'
+        Footer.DisplayFormat = '#,###'
         Footer.ValueType = fvtSum
         Footers = <>
         Title.Caption = #52380#50672#44032#49828'|'#49892#54788#49552#51061
+        Width = 100
       end
       item
         Alignment = taRightJustify
+        DisplayFormat = '#,###'
         DynProps = <>
         EditButtons = <>
         FieldName = 'NG_CMSN'
+        Footer.DisplayFormat = '#,###'
         Footer.ValueType = fvtSum
         Footers = <>
         Title.Caption = #52380#50672#44032#49828'|'#49688#49688#47308
+        Width = 100
       end
       item
         Alignment = taRightJustify
+        DisplayFormat = '#,###'
         DynProps = <>
         EditButtons = <>
         FieldName = 'ES_CLR_PL'
+        Footer.DisplayFormat = '#,###'
         Footer.ValueType = fvtSum
         Footers = <>
         Title.Caption = 'E-Mini S&P|'#49892#54788#49552#51061
+        Width = 100
       end
       item
         Alignment = taRightJustify
+        DisplayFormat = '#,###'
         DynProps = <>
         EditButtons = <>
         FieldName = 'ES_CMSN'
+        Footer.DisplayFormat = '#,###'
         Footer.ValueType = fvtSum
         Footers = <>
         Title.Caption = 'E-Mini S&P|'#49688#49688#47308
+        Width = 100
       end
       item
         Alignment = taRightJustify
+        DisplayFormat = '#,###'
         DynProps = <>
         EditButtons = <>
         FieldName = 'AD_CLR_PL'
+        Footer.DisplayFormat = '#,###'
         Footer.ValueType = fvtSum
         Footers = <>
         Title.Caption = 'Aus.'#45804#47084'|'#49892#54788#49552#51061
+        Width = 100
       end
       item
         Alignment = taRightJustify
+        DisplayFormat = '#,###'
         DynProps = <>
         EditButtons = <>
         FieldName = 'AD_CMSN'
+        Footer.DisplayFormat = '#,###'
         Footer.ValueType = fvtSum
         Footers = <>
         Title.Caption = 'Aus.'#45804#47084'|'#49688#49688#47308
+        Width = 100
       end
       item
         Alignment = taRightJustify
+        DisplayFormat = '#,###'
         DynProps = <>
         EditButtons = <>
         FieldName = 'BP_CLR_PL'
+        Footer.DisplayFormat = '#,###'
         Footer.ValueType = fvtSum
         Footers = <>
         Title.Caption = 'B.Pound|'#49892#54788#49552#51061
+        Width = 100
       end
       item
         Alignment = taRightJustify
+        DisplayFormat = '#,###'
         DynProps = <>
         EditButtons = <>
         FieldName = 'BP_CMSN'
+        Footer.DisplayFormat = '#,###'
         Footer.ValueType = fvtSum
         Footers = <>
         Title.Caption = 'B.Pound|'#49688#49688#47308
+        Width = 100
       end
       item
         Alignment = taRightJustify
+        DisplayFormat = '#,###'
         DynProps = <>
         EditButtons = <>
         FieldName = 'JY_CLR_PL'
+        Footer.DisplayFormat = '#,###'
         Footer.ValueType = fvtSum
         Footers = <>
         Title.Caption = 'J.Yen|'#49892#54788#49552#51061
+        Width = 100
       end
       item
         Alignment = taRightJustify
+        DisplayFormat = '#,###'
         DynProps = <>
         EditButtons = <>
         FieldName = 'JY_CMSN'
+        Footer.DisplayFormat = '#,###'
         Footer.ValueType = fvtSum
         Footers = <>
         Title.Caption = 'J.Yen|'#49688#49688#47308
+        Width = 100
       end
       item
         Alignment = taRightJustify
+        DisplayFormat = '#,###'
         DynProps = <>
         EditButtons = <>
         FieldName = 'NQ_CLR_PL'
+        Footer.DisplayFormat = '#,###'
         Footer.ValueType = fvtSum
         Footers = <>
         Title.Caption = #45208#49828#45797'|'#49892#54788#49552#51061
+        Width = 100
       end
       item
         Alignment = taRightJustify
+        DisplayFormat = '#,###'
         DynProps = <>
         EditButtons = <>
         FieldName = 'NQ_CMSN'
+        Footer.DisplayFormat = '#,###'
         Footer.ValueType = fvtSum
         Footers = <>
         Title.Caption = #45208#49828#45797'|'#49688#49688#47308
+        Width = 100
       end
       item
         Alignment = taRightJustify
+        DisplayFormat = '#,###'
         DynProps = <>
         EditButtons = <>
         FieldName = 'YM_CLR_PL'
+        Footer.DisplayFormat = '#,###'
         Footer.ValueType = fvtSum
         Footers = <>
         Title.Caption = #45796#50864#51648#49688'|'#49892#54788#49552#51061
+        Width = 100
       end
       item
         Alignment = taRightJustify
+        DisplayFormat = '#,###'
         DynProps = <>
         EditButtons = <>
         FieldName = 'YM_CMSN'
+        Footer.DisplayFormat = '#,###'
         Footer.ValueType = fvtSum
         Footers = <>
         Title.Caption = #45796#50864#51648#49688'|'#49688#49688#47308
+        Width = 100
       end
       item
         Alignment = taRightJustify
+        DisplayFormat = '#,###'
         DynProps = <>
         EditButtons = <>
         FieldName = 'SCN_CLR_PL'
+        Footer.DisplayFormat = '#,###'
         Footer.ValueType = fvtSum
         Footers = <>
         Title.Caption = #51473#44397' A 50|'#49892#54788#49552#51061
+        Width = 100
       end
       item
         Alignment = taRightJustify
+        DisplayFormat = '#,###'
         DynProps = <>
         EditButtons = <>
         FieldName = 'SCN_CMSN'
+        Footer.DisplayFormat = '#,###'
         Footer.ValueType = fvtSum
         Footers = <>
         Title.Caption = #51473#44397' A 50|'#49688#49688#47308
+        Width = 100
       end
       item
         Alignment = taRightJustify
+        DisplayFormat = '#,###'
         DynProps = <>
         EditButtons = <>
         FieldName = 'HSI_CLR_PL'
+        Footer.DisplayFormat = '#,###'
         Footer.ValueType = fvtSum
         Footers = <>
         Title.Caption = #54637#49373#51648#49688'|'#49892#54788#49552#51061
+        Width = 100
       end
       item
         Alignment = taRightJustify
+        DisplayFormat = '#,###'
         DynProps = <>
         EditButtons = <>
         FieldName = 'HSI_CMSN'
+        Footer.DisplayFormat = '#,###'
         Footer.ValueType = fvtSum
         Footers = <>
         Title.Caption = #54637#49373#51648#49688'|'#49688#49688#47308
+        Width = 100
       end
       item
         Alignment = taRightJustify
+        DisplayFormat = '#,###'
         DynProps = <>
         EditButtons = <>
         FieldName = 'SSI_CLR_PL'
+        Footer.DisplayFormat = '#,###'
         Footer.ValueType = fvtSum
         Footers = <>
         Title.Caption = #45768#52992#51060'225|'#49892#54788#49552#51061
+        Width = 100
       end
       item
         Alignment = taRightJustify
+        DisplayFormat = '#,###'
         DynProps = <>
         EditButtons = <>
         FieldName = 'SSI_CMSN'
+        Footer.DisplayFormat = '#,###'
         Footer.ValueType = fvtSum
         Footers = <>
         Title.Caption = #45768#52992#51060'225|'#49688#49688#47308
+        Width = 100
       end
       item
         Alignment = taRightJustify
+        DisplayFormat = '#,###'
         DynProps = <>
         EditButtons = <>
         FieldName = 'FDAX_CLR_PL'
+        Footer.DisplayFormat = '#,###'
         Footer.ValueType = fvtSum
         Footers = <>
         Title.Caption = #46021#51068' DAX|'#49892#54788#49552#51061
+        Width = 100
       end
       item
         Alignment = taRightJustify
+        DisplayFormat = '#,###'
         DynProps = <>
         EditButtons = <>
         FieldName = 'FDAX_CMSN'
+        Footer.DisplayFormat = '#,###'
         Footer.ValueType = fvtSum
         Footers = <>
         Title.Caption = #46021#51068' DAX|'#49688#49688#47308
+        Width = 100
       end
       item
         Alignment = taRightJustify
+        DisplayFormat = '#,###'
         DynProps = <>
         EditButtons = <>
         FieldName = 'CD_CLR_PL'
+        Footer.DisplayFormat = '#,###'
         Footer.ValueType = fvtSum
         Footers = <>
         Title.Caption = #52880#45208#45796#45804#47084'|'#49892#54788#49552#51061
+        Width = 100
       end
       item
         Alignment = taRightJustify
+        DisplayFormat = '#,###'
         DynProps = <>
         EditButtons = <>
         FieldName = 'CD_CMSN'
+        Footer.DisplayFormat = '#,###'
         Footer.ValueType = fvtSum
         Footers = <>
         Title.Caption = #52880#45208#45796#45804#47084'|'#49688#49688#47308
+        Width = 100
       end
       item
         Alignment = taRightJustify
+        DisplayFormat = '#,###'
         DynProps = <>
         EditButtons = <>
         FieldName = 'SI_CLR_PL'
+        Footer.DisplayFormat = '#,###'
         Footer.ValueType = fvtSum
         Footers = <>
         Title.Caption = #49892#48260'|'#49892#54788#49552#51061
+        Width = 100
       end
       item
         Alignment = taRightJustify
+        DisplayFormat = '#,###'
         DynProps = <>
         EditButtons = <>
         FieldName = 'SI_CMSN'
+        Footer.DisplayFormat = '#,###'
         Footer.ValueType = fvtSum
         Footers = <>
         Title.Caption = #49892#48260'|'#49688#49688#47308
+        Width = 100
       end
       item
         Alignment = taRightJustify
+        DisplayFormat = '#,###'
         DynProps = <>
         EditButtons = <>
         FieldName = 'HG_CLR_PL'
+        Footer.DisplayFormat = '#,###'
         Footer.ValueType = fvtSum
         Footers = <>
         Title.Caption = #44396#47532'|'#49892#54788#49552#51061
+        Width = 100
       end
       item
         Alignment = taRightJustify
+        DisplayFormat = '#,###'
         DynProps = <>
         EditButtons = <>
         FieldName = 'HG_CMSN'
+        Footer.DisplayFormat = '#,###'
         Footer.ValueType = fvtSum
         Footers = <>
         Title.Caption = #44396#47532'|'#49688#49688#47308
+        Width = 100
       end>
     object RowDetailData: TRowDetailPanelControlEh
     end
@@ -1453,7 +1568,7 @@ inherited fmUserStkPL: TfmUserStkPL
     Left = 144
     Top = 288
     Bitmap = {
-      494C01010B003400C80010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C01010B003400D00010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000003000000001002000000000000030
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -1871,6 +1986,95 @@ inherited fmUserStkPL: TfmUserStkPL
     Top = 336
   end
   inherited dbMain: TADOQuery
+    Connection = MastDB.ADOConn
+    CursorType = ctStatic
+    SQL.Strings = (
+      
+        'SELECT AA.USER_NM USER_NM       ,AA.USER_ID USER_ID       ,AA.AC' +
+        'NT_NO ACNT_NO       ,ACNT_AMT_TODAY           ,DT_CNT           ' +
+        '   ,CLR_PL              ,CMSN                ,NET_PL            ' +
+        '  ,RSLT_IN_AMT         ,RSLT_OUT_AMT        ,KSF_PL             ' +
+        ' ,KSF_CMSN            ,KSO_PL_DAY          ,KSO_CMSN_DAY        ' +
+        ',KSO_PL_NGT          ,KSO_CMSN_NGT        ,URO_CLR_PL          ,' +
+        'URO_CMSN            ,CL_CLR_PL           ,CL_CMSN             ,G' +
+        'C_CLR_PL           ,GC_CMSN             ,NG_CLR_PL           ,NG' +
+        '_CMSN             ,ES_CLR_PL           ,ES_CMSN             ,AD_' +
+        'CLR_PL           ,AD_CMSN             ,BP_CLR_PL           ,BP_C' +
+        'MSN             ,JY_CLR_PL           ,JY_CMSN             ,NQ_CL' +
+        'R_PL           ,NQ_CMSN             ,YM_CLR_PL           ,YM_CMS' +
+        'N             ,SCN_CLR_PL          ,SCN_CMSN            ,HSI_CLR' +
+        '_PL          ,HSI_CMSN            ,SSI_CLR_PL          ,SSI_CMSN' +
+        '            ,FDAX_CLR_PL         ,FDAX_CMSN           ,CD_CLR_PL' +
+        '           ,CD_CMSN             ,SI_CLR_PL           ,SI_CMSN   ' +
+        ' '
+      
+        '         ,HG_CLR_PL           ,HG_CMSN       FROM (SELECT USER_N' +
+        'M            ,USER_ID             ,ACNT_NO             ,(SELECT ' +
+        'MAX(ACNT_AMT_TODAY) FROM ACNT_CLS WHERE TRADE_DT = '#39'20251117'#39' AN' +
+        'D ACNT_NO = A.ACNT_NO) ACNT_AMT_TODAY            ,SUM(RSLT_IN_AM' +
+        'T) RSLT_IN_AMT              ,SUM(RSLT_OUT_AMT) RSLT_OUT_AMT     ' +
+        '    FROM (SELECT A1.* FROM ACNT_CLS A1, USER_MST B1 WHERE A1.USE' +
+        'R_ID = B1.USER_ID    ) A       WHERE TRADE_DT BETWEEN '#39'20251110'#39 +
+        ' AND '#39'20251117'#39'           GROUP BY USER_NM, USER_ID, ACNT_NO ) A' +
+        'A LEFT OUTER JOIN     (SELECT USER_NM            ,USER_ID       ' +
+        '     ,ACNT_NO            ,COUNT(TRADE_DT) DT_CNT            ,SUM' +
+        '(CLR_PL    ) CLR_PL            ,SUM(CMSN      ) CMSN            ' +
+        '  ,SUM(NET_PL    ) NET_PL            ,SUM(CASE WHEN ARTC_CD = '#39'1' +
+        '01'#39' THEN CLR_PL END) KSF_PL                  ,SUM(CASE WHEN ARTC' +
+        '_CD = '#39'101'#39' THEN CMSN   END) KSF_CMSN                ,SUM(CASE W' +
+        'HEN ARTC_CD = '#39'201'#39' THEN CLR_PL END) KSO_PL_DAY              ,SU' +
+        'M(CASE WHEN ARTC_CD = '#39'201'#39' THEN CMSN   END) KSO_CMSN_DAY       ' +
+        ' '
+      
+        '    ,SUM(CASE WHEN ARTC_CD = '#39'301'#39' THEN CLR_PL END) KSO_PL_NGT  ' +
+        '            ,SUM(CASE WHEN ARTC_CD = '#39'301'#39' THEN CMSN   END) KSO_' +
+        'CMSN_NGT            ,SUM(CASE WHEN ARTC_CD = '#39'URO'#39' THEN CLR_PL E' +
+        'ND) URO_CLR_PL              ,SUM(CASE WHEN ARTC_CD = '#39'URO'#39' THEN ' +
+        'CMSN   END) URO_CMSN                ,SUM(CASE WHEN ARTC_CD = '#39'CL' +
+        #39' THEN CLR_PL END) CL_CLR_PL               ,SUM(CASE WHEN ARTC_C' +
+        'D = '#39'CL'#39' THEN CMSN   END) CL_CMSN                 ,SUM(CASE WHEN' +
+        ' ARTC_CD = '#39'GC'#39' THEN CLR_PL END) GC_CLR_PL               ,SUM(CA' +
+        'SE WHEN ARTC_CD = '#39'GC'#39' THEN CMSN   END) GC_CMSN                 ' +
+        ',SUM(CASE WHEN ARTC_CD = '#39'NG'#39' THEN CLR_PL END) NG_CLR_PL        ' +
+        '       ,SUM(CASE WHEN ARTC_CD = '#39'NG'#39' THEN CMSN   END) NG_CMSN   ' +
+        '              ,SUM(CASE WHEN ARTC_CD = '#39'ES'#39' THEN CLR_PL END) ES_' +
+        'CLR_PL               ,SUM(CASE WHEN ARTC_CD = '#39'ES'#39' THEN CMSN   E' +
+        'ND) ES_CMSN                 ,SUM(CASE WHEN ARTC_CD = '#39'AD'#39' THEN C' +
+        'LR_PL END) AD_CLR_PL               ,SUM(CASE WHEN ARTC_CD = '#39'AD'#39 +
+        ' THEN CMSN   END) AD_CMSN                 ,SUM(CASE WHEN ARTC_CD' +
+        ' '
+      
+        '= '#39'BP'#39' THEN CLR_PL END) BP_CLR_PL               ,SUM(CASE WHEN A' +
+        'RTC_CD = '#39'BP'#39' THEN CMSN   END) BP_CMSN                 ,SUM(CASE' +
+        ' WHEN ARTC_CD = '#39'JY'#39' THEN CLR_PL END) JY_CLR_PL               ,S' +
+        'UM(CASE WHEN ARTC_CD = '#39'JY'#39' THEN CMSN   END) JY_CMSN            ' +
+        '     ,SUM(CASE WHEN ARTC_CD = '#39'NQ'#39' THEN CLR_PL END) NQ_CLR_PL   ' +
+        '            ,SUM(CASE WHEN ARTC_CD = '#39'NQ'#39' THEN CMSN   END) NQ_CM' +
+        'SN                 ,SUM(CASE WHEN ARTC_CD = '#39'YM'#39' THEN CLR_PL END' +
+        ') YM_CLR_PL               ,SUM(CASE WHEN ARTC_CD = '#39'YM'#39' THEN CMS' +
+        'N   END) YM_CMSN                 ,SUM(CASE WHEN ARTC_CD = '#39'SCN'#39' ' +
+        'THEN CLR_PL END) SCN_CLR_PL              ,SUM(CASE WHEN ARTC_CD ' +
+        '= '#39'SCN'#39' THEN CMSN   END) SCN_CMSN                ,SUM(CASE WHEN ' +
+        'ARTC_CD = '#39'HSI'#39' THEN CLR_PL END) HSI_CLR_PL              ,SUM(CA' +
+        'SE WHEN ARTC_CD = '#39'HSI'#39' THEN CMSN   END) HSI_CMSN               ' +
+        ' ,SUM(CASE WHEN ARTC_CD = '#39'SSI'#39' THEN CLR_PL END) SSI_CLR_PL     ' +
+        '         ,SUM(CASE WHEN ARTC_CD = '#39'SSI'#39' THEN CMSN   END) SSI_CMS' +
+        'N                ,SUM(CASE WHEN ARTC_CD = '#39'FDAX'#39' THEN CLR_PL END'
+      
+        ') FDAX_CLR_PL             ,SUM(CASE WHEN ARTC_CD = '#39'FDAX'#39' THEN C' +
+        'MSN   END) FDAX_CMSN               ,SUM(CASE WHEN ARTC_CD = '#39'CD'#39 +
+        ' THEN CLR_PL END) CD_CLR_PL               ,SUM(CASE WHEN ARTC_CD' +
+        ' = '#39'CD'#39' THEN CMSN   END) CD_CMSN                 ,SUM(CASE WHEN ' +
+        'ARTC_CD = '#39'SI'#39' THEN CLR_PL END) SI_CLR_PL               ,SUM(CAS' +
+        'E WHEN ARTC_CD = '#39'SI'#39' THEN CMSN   END) SI_CMSN                 ,' +
+        'SUM(CASE WHEN ARTC_CD = '#39'HG'#39' THEN CLR_PL END) HG_CLR_PL         ' +
+        '      ,SUM(CASE WHEN ARTC_CD = '#39'HG'#39' THEN CMSN   END) HG_CMSN    ' +
+        '         FROM (SELECT A1.* FROM ACNT_STK_CLS A1, USER_MST B1 WHE' +
+        'RE A1.USER_ID = B1.USER_ID    ) A       WHERE TRADE_DT BETWEEN '#39 +
+        '20251110'#39' AND '#39'20251117'#39'       GROUP BY USER_NM, USER_ID, ACNT_N' +
+        'O      ) BB                      ON AA.USER_NM = BB.USER_NM  AND' +
+        ' AA.USER_ID = BB.USER_ID  AND AA.ACNT_NO = BB.ACNT_NO ORDER BY A' +
+        'A.USER_NM, AA.ACNT_NO ')
     Left = 64
     Top = 288
   end

@@ -498,7 +498,7 @@ begin
   end;
 
 // TODO.JAY.Update 하지 않고 프로그램 실행할때 사용
-sCallRun := 'UPDATE_Y';
+//sCallRun := 'UPDATE_Y';
 
 //  if Not bUpdateRun then begin
   if sCallRun = '' then begin // Client를 바로 실행한 경우

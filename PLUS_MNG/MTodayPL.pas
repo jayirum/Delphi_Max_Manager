@@ -20,7 +20,7 @@ uses
 type
   TfmTodayPL = class(TfmBasic)
     gdMain: TDBGridEh;
-    chUserTp: TbsSkinCheckRadioBox;
+    chTrade: TbsSkinCheckRadioBox;
     tmAutoSearch: TThreadedTimer;
     bsSkinStdLabel1: TbsSkinStdLabel;
     bsSkinStdLabel2: TbsSkinStdLabel;
@@ -116,6 +116,7 @@ const
   giOpt  =  5; // 선택옵션 개수
   giStartCol = 20; // Opt, Artc 컬럼 시작전 위치
 var
+  _Trade_YN : String = 'N';
   arrArtc : array [1..giArtc] of boolean;
   arrOpt  : array [1..giOpt] of boolean;
 
@@ -398,6 +399,7 @@ begin
   cbxCD.Checked     := arrArtc[18];
   cbxSI.Checked     := arrArtc[19];
   cbxHG.Checked     := arrArtc[20];
+
 end;
 
 procedure TfmTodayPL.FormShow(Sender: TObject);
@@ -405,6 +407,8 @@ var
   i : integer;
 begin
   inherited;
+  _Trade_YN := 'N';
+
   if _Supervisor then cbUserGrade.Visible := True;
   PartTableOpen(cbUserGrade, CodeFormat('USER_GRADE', 'AND CODE_VALUE < 9 ORDER BY CODE_VALUE'), '[전체]', 'ALL');
   cbUserGrade.ItemIndex := 2;
@@ -414,6 +418,7 @@ begin
 
   PartTableOpen(TComponent(gdMain.Columns[3]), CodeFormat('USER_GRADE', 'AND CODE_VALUE < 9'));
 
+  {//JAY
   for i:=11 to gdMain.Columns.Count-1 do
     if (i mod 5) = 3 then begin
       gdMain.Columns[i].DisplayFormat := '#,##0.000';
@@ -422,6 +427,7 @@ begin
       gdMain.Columns[i].DisplayFormat := FORMAT_AMT;
       gdMain.Columns[i].Footer.DisplayFormat := FORMAT_AMT;
     end;
+    }
 end;
 
 procedure TfmTodayPL.gdMainDrawColumnCell(Sender: TObject; const Rect: TRect;
@@ -442,18 +448,18 @@ begin
         DefaultDrawColumnCell(Rect, DataCol, Column, TGridDrawState(State));
       end;
       24 : begin
-        if CompareValue(FieldByName('KSF_CLR_PL').AsFloat, 0) > 0 then Canvas.Font.Color := clRed else
-        if CompareValue(FieldByName('KSF_CLR_PL').AsFloat, 0) < 0 then Canvas.Font.Color := clBlue;
+        if CompareValue(FieldByName('N101_CLR_PL').AsFloat, 0) > 0 then Canvas.Font.Color := clRed else
+        if CompareValue(FieldByName('N101_CLR_PL').AsFloat, 0) < 0 then Canvas.Font.Color := clBlue;
         DefaultDrawColumnCell(Rect, DataCol, Column, TGridDrawState(State));
       end;
       29 : begin
-        if CompareValue(FieldByName('KSO_DAY_CLR_PL').AsFloat, 0) > 0 then Canvas.Font.Color := clRed else
-        if CompareValue(FieldByName('KSO_DAY_CLR_PL').AsFloat, 0) < 0 then Canvas.Font.Color := clBlue;
+        if CompareValue(FieldByName('N201_CLR_PL').AsFloat, 0) > 0 then Canvas.Font.Color := clRed else
+        if CompareValue(FieldByName('N201_CLR_PL').AsFloat, 0) < 0 then Canvas.Font.Color := clBlue;
         DefaultDrawColumnCell(Rect, DataCol, Column, TGridDrawState(State));
       end;
       34 : begin
-        if CompareValue(FieldByName('KSO_NGT_CLR_PL').AsFloat, 0) > 0 then Canvas.Font.Color := clRed else
-        if CompareValue(FieldByName('KSO_NGT_CLR_PL').AsFloat, 0) < 0 then Canvas.Font.Color := clBlue;
+        if CompareValue(FieldByName('Y201_CLR_PL').AsFloat, 0) > 0 then Canvas.Font.Color := clRed else
+        if CompareValue(FieldByName('Y201_CLR_PL').AsFloat, 0) < 0 then Canvas.Font.Color := clBlue;
         DefaultDrawColumnCell(Rect, DataCol, Column, TGridDrawState(State));
       end;
       39 : begin
@@ -522,8 +528,8 @@ begin
         DefaultDrawColumnCell(Rect, DataCol, Column, TGridDrawState(State));
       end;
       104 : begin
-        if CompareValue(FieldByName('FDAX_CLR_PL').AsFloat, 0) > 0 then Canvas.Font.Color := clRed else
-        if CompareValue(FieldByName('FDAX_CLR_PL').AsFloat, 0) < 0 then Canvas.Font.Color := clBlue;
+        if CompareValue(FieldByName('DAX_CLR_PL').AsFloat, 0) > 0 then Canvas.Font.Color := clRed else
+        if CompareValue(FieldByName('DAX_CLR_PL').AsFloat, 0) < 0 then Canvas.Font.Color := clBlue;
         DefaultDrawColumnCell(Rect, DataCol, Column, TGridDrawState(State));
       end;
       109 : begin
@@ -543,6 +549,7 @@ begin
       end;
     end;
   end;
+
 end;
 
 procedure TfmTodayPL.gdMainTitleBtnClick(Sender: TObject; ACol: Integer;
@@ -562,10 +569,10 @@ begin
 
     if _Supervisor then begin
       if cbUserGrade.ItemIndex <> 0 then sUserTp := Format(' AND B.USER_GRADE = %s ', [IntToStr(cbUserGrade.ItemIndex)]) else
-      if chUserTp.Checked           then sUserTp := Format(' AND B.USER_GRADE IN (%s,%s) ', [QuotedStr('2'),QuotedStr('7')])
+      if chTrade.Checked           then sUserTp := Format(' AND B.USER_GRADE IN (%s,%s) ', [QuotedStr('2'),QuotedStr('7')])
                                     else sUserTp := '';
     end else begin
-      if chUserTp.Checked then sUserTp := ' AND B.USER_GRADE = 2 '
+      if chTrade.Checked then sUserTp := ' AND B.USER_GRADE = 2 '
                           else sUserTp := ' AND B.USER_GRADE <> 7 ';
     end;
 
@@ -707,12 +714,12 @@ begin
       '      ,ISNULL(SUM(CASE WHEN B.ARTC_CD = ''SSI'' THEN ' +
       '          (C.AVG_PRC - E.CNTR_PRC) * C.NCLR_POS_QTY / D.TICK_SIZE * D.TICK_VALUE / A.LEVERAGE END),0) SSI_EVL_PL ' +
       // 독일닥스
-      '      ,ISNULL(SUM(CASE WHEN B.ARTC_CD = ''FDAX'' THEN B.CNTR_QTY END),0) FDAX_CNTR_QTY ' +
-      '      ,ISNULL(SUM(CASE WHEN B.ARTC_CD = ''FDAX'' THEN C.AVG_PRC  END),0) FDAX_AVG_PRC  ' +
-      '      ,ISNULL(SUM(CASE WHEN B.ARTC_CD = ''FDAX'' THEN B.CLR_PL   END),0) FDAX_CLR_PL   ' +
-      '      ,ISNULL(SUM(CASE WHEN B.ARTC_CD = ''FDAX'' THEN B.CMSN_AMT END),0) FDAX_CMSN_AMT ' +
+      '      ,ISNULL(SUM(CASE WHEN B.ARTC_CD = ''FDAX'' THEN B.CNTR_QTY END),0) DAX_CNTR_QTY ' +
+      '      ,ISNULL(SUM(CASE WHEN B.ARTC_CD = ''FDAX'' THEN C.AVG_PRC  END),0) DAX_AVG_PRC  ' +
+      '      ,ISNULL(SUM(CASE WHEN B.ARTC_CD = ''FDAX'' THEN B.CLR_PL   END),0) DAX_CLR_PL   ' +
+      '      ,ISNULL(SUM(CASE WHEN B.ARTC_CD = ''FDAX'' THEN B.CMSN_AMT END),0) DAX_CMSN_AMT ' +
       '      ,ISNULL(SUM(CASE WHEN B.ARTC_CD = ''FDAX'' THEN ' +
-      '          (C.AVG_PRC - E.CNTR_PRC) * C.NCLR_POS_QTY / D.TICK_SIZE * D.TICK_VALUE / A.LEVERAGE END),0) FDAX_EVL_PL ' +
+      '          (C.AVG_PRC - E.CNTR_PRC) * C.NCLR_POS_QTY / D.TICK_SIZE * D.TICK_VALUE / A.LEVERAGE END),0) DAX_EVL_PL ' +
       // 캐나다달러
       '      ,ISNULL(SUM(CASE WHEN B.ARTC_CD = ''CD'' THEN B.CNTR_QTY END),0) CD_CNTR_QTY ' +
       '      ,ISNULL(SUM(CASE WHEN B.ARTC_CD = ''CD'' THEN C.AVG_PRC  END),0) CD_AVG_PRC  ' +
@@ -752,7 +759,18 @@ begin
       [sUserTp,
        sUserPart ]);
 
-    fnSqlOpen(dbMain, sSql);
+    if chTrade.Checked then _Trade_YN := 'Y'
+                       else _Trade_YN := 'N';
+
+//exec [TODAY_CLR_PL2] '2','20251101', 'a','1'
+    sSql :=
+      Format('EXEC TODAY_CLR_PL2 %s, %s, %s, %s ', [QuotedStr('2'), QuotedStr('20251101'), QuotedStr('a'), QuotedStr('1')]);
+      //[QuotedStr(sUserTp), QuotedStr(_Trade_DT), QuotedStr(cbUserPart.Value), QuotedStr(_Trade_YN)]);
+//    fnSqlOpen(dbMain, sSql);
+    dbMain.SQL.Text := sSql;
+
+    ActiveSQL(dbMain);
+
   finally
     Delay_Hide;
   end;

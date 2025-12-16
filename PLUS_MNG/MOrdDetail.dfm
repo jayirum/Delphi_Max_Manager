@@ -14,7 +14,6 @@ inherited fmOrdDetail: TfmOrdDetail
     inherited btnFilter: TbsSkinSpeedButton
       Left = 462
       Height = 24
-      SkinData = fmMain.bsSkinData
       ExplicitLeft = 462
       ExplicitHeight = 24
     end
@@ -22,7 +21,6 @@ inherited fmOrdDetail: TfmOrdDetail
       Left = 767
       Top = 1
       Visible = False
-      SkinData = fmMain.bsSkinData
       ExplicitLeft = 767
       ExplicitTop = 1
     end
@@ -30,7 +28,6 @@ inherited fmOrdDetail: TfmOrdDetail
       Left = 787
       Top = 1
       Visible = False
-      SkinData = fmMain.bsSkinData
       ExplicitLeft = 787
       ExplicitTop = 1
     end
@@ -38,7 +35,6 @@ inherited fmOrdDetail: TfmOrdDetail
       Left = 767
       Top = 1
       Visible = False
-      SkinData = fmMain.bsSkinData
       ExplicitLeft = 767
       ExplicitTop = 1
     end
@@ -46,20 +42,17 @@ inherited fmOrdDetail: TfmOrdDetail
       Left = 758
       Top = 1
       Visible = False
-      SkinData = fmMain.bsSkinData
       ExplicitLeft = 758
       ExplicitTop = 1
     end
     inherited btnClose: TbsSkinSpeedButton
       Left = 935
-      SkinData = fmMain.bsSkinData
       ExplicitLeft = 871
     end
     inherited bsRibbonDivider4: TbsRibbonDivider
       Left = 735
       Top = 4
       Visible = False
-      SkinData = fmMain.bsSkinData
       ExplicitLeft = 735
       ExplicitTop = 4
     end
@@ -69,7 +62,6 @@ inherited fmOrdDetail: TfmOrdDetail
       Height = 23
       Anchors = [akTop, akRight]
       Visible = False
-      SkinData = fmMain.bsSkinData
       ExplicitLeft = 1073
       ExplicitTop = 4
       ExplicitHeight = 23
@@ -179,7 +171,6 @@ inherited fmOrdDetail: TfmOrdDetail
   inherited pnBottom: TbsSkinPanel
     Top = 565
     Width = 1020
-    SkinData = fmMain.bsSkinData
     ExplicitTop = 565
     ExplicitWidth = 1020
   end
@@ -506,7 +497,7 @@ inherited fmOrdDetail: TfmOrdDetail
               Color = 16515071
               DynProps = <>
               EditButtons = <>
-              FieldName = 'ORDPRC'
+              FieldName = 'ORD_PRC'
               Footers = <>
               Title.Alignment = taCenter
               Title.Caption = #51452#47928#44032#44201
@@ -648,8 +639,8 @@ inherited fmOrdDetail: TfmOrdDetail
           31)
         object btnOrdExcel: TbsSkinSpeedButton
           Tag = 600
-          Left = 483
-          Top = 3
+          Left = 481
+          Top = 1
           Width = 75
           Height = 23
           Cursor = crHandPoint
@@ -726,8 +717,8 @@ inherited fmOrdDetail: TfmOrdDetail
           OnClick = bsSkinSpeedButton1Click
         end
         object pnOrdCnt: TRzPanel
-          Left = 660
-          Top = 3
+          Left = 658
+          Top = 1
           Width = 113
           Height = 23
           Anchors = [akRight, akBottom]
@@ -747,8 +738,8 @@ inherited fmOrdDetail: TfmOrdDetail
           TabOrder = 0
         end
         object RzDBNavigator2: TRzDBNavigator
-          Left = 559
-          Top = 3
+          Left = 557
+          Top = 1
           Width = 100
           Height = 23
           DataSource = dsOrd
@@ -1118,7 +1109,7 @@ inherited fmOrdDetail: TfmOrdDetail
           Color = 16515071
           DynProps = <>
           EditButtons = <>
-          FieldName = 'CNTRPRC'
+          FieldName = 'CNTR_PRC'
           Footers = <>
           Title.Alignment = taCenter
           Title.Caption = #52404#44208#44032
@@ -1127,6 +1118,7 @@ inherited fmOrdDetail: TfmOrdDetail
         end
         item
           Alignment = taCenter
+          DisplayFormat = '#,##0'
           DynProps = <>
           EditButtons = <>
           FieldName = 'CLR_PL'
@@ -1138,6 +1130,7 @@ inherited fmOrdDetail: TfmOrdDetail
         end
         item
           Alignment = taCenter
+          DisplayFormat = '#,##0'
           DynProps = <>
           EditButtons = <>
           FieldName = 'CLRPLF'
@@ -1150,6 +1143,7 @@ inherited fmOrdDetail: TfmOrdDetail
         end
         item
           Alignment = taCenter
+          DisplayFormat = '#,##0'
           DynProps = <>
           EditButtons = <>
           FieldName = 'CMSN_AMT'
@@ -1161,6 +1155,7 @@ inherited fmOrdDetail: TfmOrdDetail
         end
         item
           Alignment = taCenter
+          DisplayFormat = '#,##0'
           DynProps = <>
           EditButtons = <>
           FieldName = 'CMSNAMTF'
@@ -1231,7 +1226,7 @@ inherited fmOrdDetail: TfmOrdDetail
           Alignment = taCenter
           DynProps = <>
           EditButtons = <>
-          FieldName = 'BFAVGPRC'
+          FieldName = 'BF_AVG_PRC'
           Footers = <>
           Title.Alignment = taCenter
           Title.Caption = #44144#47000#51204#54217#45800
@@ -1242,7 +1237,7 @@ inherited fmOrdDetail: TfmOrdDetail
           Alignment = taCenter
           DynProps = <>
           EditButtons = <>
-          FieldName = 'AFAVGPRC'
+          FieldName = 'AF_AVG_PRC'
           Footers = <>
           Title.Alignment = taCenter
           Title.Caption = #44144#47000#54980#54217#45800
@@ -1251,6 +1246,7 @@ inherited fmOrdDetail: TfmOrdDetail
         end
         item
           Alignment = taCenter
+          DisplayFormat = '#,##0'
           DynProps = <>
           EditButtons = <>
           FieldName = 'BF_NET_ACNT_AMT'
@@ -1262,6 +1258,7 @@ inherited fmOrdDetail: TfmOrdDetail
         end
         item
           Alignment = taCenter
+          DisplayFormat = '#,##0'
           DynProps = <>
           EditButtons = <>
           FieldName = 'AF_NET_ACNT_AMT'
@@ -1286,7 +1283,7 @@ inherited fmOrdDetail: TfmOrdDetail
           Alignment = taCenter
           DynProps = <>
           EditButtons = <>
-          FieldName = 'ORDPRC'
+          FieldName = 'ORD_PRC'
           Footers = <>
           Title.Alignment = taCenter
           Title.Caption = #51452#47928#44032
@@ -1414,7 +1411,7 @@ inherited fmOrdDetail: TfmOrdDetail
         785
         31)
       object pnPL: TRzPanel
-        Left = 87
+        Left = 85
         Top = 4
         Width = 113
         Height = 23
@@ -1499,7 +1496,7 @@ inherited fmOrdDetail: TfmOrdDetail
         AutoSize = False
       end
       object pnCMSN: TRzPanel
-        Left = 308
+        Left = 306
         Top = 4
         Width = 113
         Height = 23
@@ -1521,13 +1518,9 @@ inherited fmOrdDetail: TfmOrdDetail
       end
     end
   end
-  inherited bsBusinessSkinForm: TbsBusinessSkinForm
-    SkinData = fmMain.bsSkinData
-    MenusSkinData = fmMain.bsSkinData
-  end
   inherited imgBtn: TImageList
     Bitmap = {
-      494C01010B0034004C0110001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C01010B003400540110001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000003000000001002000000000000030
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -1929,10 +1922,6 @@ inherited fmOrdDetail: TfmOrdDetail
       8001000F800180018001000F800180018001003F800180018001003F80018001
       C003807FC003C003FFFFC0FFFFFFFFFF00000000000000000000000000000000
       000000000000}
-  end
-  inherited bsSkinMessage: TbsSkinMessage
-    SkinData = fmMain.bsSkinData
-    CtrlSkinData = fmMain.bsSkinData
   end
   inherited dbMain: TADOQuery
     AfterOpen = dbMainAfterOpen

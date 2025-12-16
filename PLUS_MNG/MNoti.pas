@@ -44,10 +44,22 @@ type
     ckTopYn: TRzDBCheckBox;
     bsSkinLabel6: TbsSkinLabel;
     edEndDt: TRzDBDateTimePicker;
-    RzDBDateTimePicker1: TRzDBDateTimePicker;
     bsSkinLabel7: TbsSkinLabel;
     cbNotiBizGb: TkcRzDBComboBox;
     bsSkinLabel8: TbsSkinLabel;
+    dbMainNOTICE_SEQ: TAutoIncField;
+    dbMainTOP_YN: TStringField;
+    dbMainUSER_ID: TStringField;
+    dbMainNOTICE_DT: TStringField;
+    dbMainNOTICE_TM: TStringField;
+    dbMainNOTICE_TP: TStringField;
+    dbMainNOTICE_TITLE: TStringField;
+    dbMainNOTICE_BODY: TMemoField;
+    dbMainNOTICE_YN: TStringField;
+    dbMainEND_DT: TDateTimeField;
+    dbMainNOTICE_BIZ_TP: TIntegerField;
+    edDate: TkcRzDateTimeEdit;
+    edNotiSeq: TkcRzDBEdit;
     procedure FormCreate(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure btnExcelClick(Sender: TObject);
@@ -62,6 +74,9 @@ type
     procedure dbMainBeforePost(DataSet: TDataSet);
     procedure gdMainDrawColumnCell(Sender: TObject; const Rect: TRect;
       DataCol: Integer; Column: TColumnEh; State: TGridDrawState);
+    procedure dbMainAfterPost(DataSet: TDataSet);
+    procedure edDateCloseUp(Sender: TObject);
+    procedure edNotiSeqChange(Sender: TObject);
   private
     { Private declarations }
   public
@@ -99,7 +114,7 @@ begin
     _sMainWhere := Format(' AND USER_ID = %s', [QuotedStr(sUid)]);
   end;
 
-  if not dtStart.Visible then dtStart.Date := StrToDate('2020-01-01');
+  if not dtStart.Visible then dtStart.Date := StrToDate('2020-01-01'); // TODO : 일정기간 이전 날짜로 지정해야 할듯
   if not dtEnd.Visible   then dtEnd.Date   := Now;
 
   _sMainWhere := Format(' WHERE NOTICE_DT BETWEEN %s AND %s ' + _sMainWhere , [QuotedStr(StrReplace(dtStart.Text,'-','')), QuotedStr(StrReplace(dtEnd.Text,'-',''))]);
@@ -158,8 +173,17 @@ begin
     FieldByName('NOTICE_TP').AsString := '01';
     FieldByName('NOTICE_YN').AsString := 'Y';
     FieldByName('TOP_YN').AsString    := 'N';
+//    FieldByName('NOTICE_DT').AsString := NowDate;
     FieldByName('END_DT').AsDateTime  := Date + 7;
   end;
+
+  edDate.Date := Now;
+end;
+
+procedure TfmNoti.dbMainAfterPost(DataSet: TDataSet);
+begin
+  inherited;
+  btnFind.Enabled := True;
 end;
 
 procedure TfmNoti.dbMainBeforePost(DataSet: TDataSet);
@@ -205,7 +229,7 @@ begin
         if FieldByName('NOTICE_TP').AsString = '01' then sNotiTp := '00'
                                                     else sNotiTp := '01';
 
-        sNotiBizTp := FieldByName('NOTICE_TP').AsString;
+//        sNotiBizTp := FieldByName('NOTICE_TP').AsString;
 
         FillChar(NM002, SizeOf(NM002), ' ');
         StrToArr(NumToStr(SizeOf(NM002)), NM002.GT_HEADER.LENGTH);
@@ -225,6 +249,7 @@ begin
         bsMsgInfo('통보완료!');
       end;
     end;
+    FieldByName('NOTICE_DT').AsString := FormatDateTime('YYYYMMDD', edDate.Date);
   end;
 end;
 
@@ -233,6 +258,12 @@ procedure TfmNoti.edFindKeyDown(Sender: TObject; var Key: Word;
 begin
   inherited;
   if Key = 13 then btnFilter.ButtonClick;
+end;
+
+procedure TfmNoti.edDateCloseUp(Sender: TObject);
+begin
+  inherited;
+  EditWork(dbMain);
 end;
 
 procedure TfmNoti.FormCreate(Sender: TObject);
@@ -251,10 +282,11 @@ begin
 
   PartTableOpen(cbNotiTp, '공지분류');
   PartTableOpen(TComponent(gdMain.Columns[2]), '공지분류');
-  PartTableOpen(cbNotiBizGb, '공지구분');
-  PartTableOpen(TComponent(gdMain.Columns[3]), '공지구분');
+  PartTableOpen(cbNotiBizGb, CodeFormat('NOTICE_BIZ_TP', 'ORDER BY CODE_VALUE'));
+  PartTableOpen(TComponent(gdMain.Columns[3]), CodeFormat('NOTICE_BIZ_TP', 'ORDER BY CODE_VALUE')); //'공지구분
+
 //  cbNotiGb.ItemIndex := 0;
-//  MainTableOpen;
+  MainTableOpen;
 end;
 
 procedure TfmNoti.gdMainDrawColumnCell(Sender: TObject; const Rect: TRect;
@@ -271,6 +303,21 @@ Exit;
   end;
 end;
 
+procedure TfmNoti.edNotiSeqChange(Sender: TObject);
+begin
+  with dbMain do begin
+    if Bof and Eof then Exit;
+
+    if FieldByName('NOTICE_DT').AsString = '' then Exit;
+
+    try
+      edDate.Date := TextToDate(FieldByName('NOTICE_DT').AsString);
+    except
+      Exit;
+    end;
+  end;
+end;
+
 procedure TfmNoti.MainTableOpen;
 var
   sSql :String;
@@ -281,8 +328,8 @@ begin
       'SELECT NOTICE_SEQ    ' +
       '      ,TOP_YN        ' +
       '      ,USER_ID       ' +
-//      '      ,NOTICE_DT     ' +
-      '      ,CAST(SUBSTRING(NOTICE_DT, 1, 4)+' + '''-''' + '+SUBSTRING(NOTICE_DT, 5, 2)+' + '''-''' + '+SUBSTRING(NOTICE_DT, 7, 2) AS DATETIME) AS NOTICE_DT ' +
+      '      ,NOTICE_DT     ' +
+//      '      ,CAST(SUBSTRING(NOTICE_DT, 1, 4)+' + '''-''' + '+SUBSTRING(NOTICE_DT, 5, 2)+' + '''-''' + '+SUBSTRING(NOTICE_DT, 7, 2) AS DATETIME) AS NOTICE_DT_F ' +
       '      ,NOTICE_TM     ' +
       '      ,NOTICE_TP     ' +
       '      ,NOTICE_BIZ_TP ' +
@@ -292,7 +339,7 @@ begin
       '      ,END_DT        ' +
       '  FROM NOTICE_MST    ' +
       _sMainWhere +
-      ' ORDER BY TOP_YN DESC, NOTICE_DT DESC ';
+      ' ORDER BY TOP_YN DESC, NOTICE_DT DESC, NOTICE_SEQ DESC ';
     fnSqlOpen(dbMain, sSql);
   finally
     Delay_Hide;
