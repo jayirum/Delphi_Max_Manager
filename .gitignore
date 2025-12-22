@@ -49,3 +49,7 @@ Win64/Release/
 *.log
 *.bak
 *.tmp
+*.zip
+
+# 특정파일
+0His.txt
