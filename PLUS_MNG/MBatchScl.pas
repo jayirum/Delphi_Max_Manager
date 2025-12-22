@@ -174,8 +174,7 @@ begin
 
     fnSqlOpen(dbMain, sSQL);
 
-    with dbMain, gdMain do
-    begin
+    with dbMain, gdMain do begin
       DisableControls;
       First;
       BeginUpdate;

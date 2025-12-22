@@ -191,11 +191,11 @@ begin
     'SELECT A.ACNT_NO AS ACNTNO,                                                                                  ' +
     '       B.USER_NM AS USERNM,                                                                                  ' +
     '       A.USER_ID AS USERID,                                                                                  ' +
-    '       (SELECT NEGO_AMTRT FROM NEGO_CMSN WHERE ACNT_NO = A.ACNT_NO AND ARTC_CD = %s) AS KOA,                 ' +
-    '       (SELECT NEGO_AMTRT FROM NEGO_CMSN WHERE ACNT_NO = A.ACNT_NO AND ARTC_CD = %s AND BS_TP = %s) AS KOCS, ' +
-    '       (SELECT NEGO_AMTRT FROM NEGO_CMSN WHERE ACNT_NO = A.ACNT_NO AND ARTC_CD = %s AND BS_TP = %s) AS KOCB, ' +
-    '       (SELECT NEGO_AMTRT FROM NEGO_CMSN WHERE ACNT_NO = A.ACNT_NO AND ARTC_CD = %s AND BS_TP = %s) AS KOPS, ' +
-    '       (SELECT NEGO_AMTRT FROM NEGO_CMSN WHERE ACNT_NO = A.ACNT_NO AND ARTC_CD = %s AND BS_TP = %s) AS KOPB, ' +
+    '       (SELECT NEGO_AMTRT FROM NEGO_CMSN WHERE ACNT_NO = A.ACNT_NO AND ARTC_CD IN (%s, %s) ) AS KOA,                 ' +
+    '       (SELECT NEGO_AMTRT FROM NEGO_CMSN WHERE ACNT_NO = A.ACNT_NO AND ARTC_CD IN (%s, %s) AND BS_TP = %s) AS KOCS, ' +
+    '       (SELECT NEGO_AMTRT FROM NEGO_CMSN WHERE ACNT_NO = A.ACNT_NO AND ARTC_CD IN (%s, %s) AND BS_TP = %s) AS KOCB, ' +
+    '       (SELECT NEGO_AMTRT FROM NEGO_CMSN WHERE ACNT_NO = A.ACNT_NO AND ARTC_CD IN (%s, %s) AND BS_TP = %s) AS KOPS, ' +
+    '       (SELECT NEGO_AMTRT FROM NEGO_CMSN WHERE ACNT_NO = A.ACNT_NO AND ARTC_CD IN (%s, %s) AND BS_TP = %s) AS KOPB, ' +
     '       (SELECT NEGO_AMTRT FROM NEGO_CMSN WHERE ACNT_NO = A.ACNT_NO AND ARTC_CD = %s) AS EA,                  ' +
     '       (SELECT NEGO_AMTRT FROM NEGO_CMSN WHERE ACNT_NO = A.ACNT_NO AND ARTC_CD = %s) AS CLA,                 ' +
     '       B.ACNT_TP AS ACNTTP                                                                                   ' +
@@ -204,19 +204,14 @@ begin
     ' WHERE A.ACNT_NO = B.ACNT_NO                                                                                 ' +
     '   AND A.USER_ID = %s                                                                                        ' +
     ' GROUP BY A.ACNT_NO, B.USER_NM, A.USER_ID, B.ACNT_TP                                                         ' ,
-    [QuotedStr('101'),
-     QuotedStr('201'),
-     QuotedStr('S'),
-     QuotedStr('201'),
-     QuotedStr('B'),
-     QuotedStr('301'),
-     QuotedStr('S'),
-     QuotedStr('301'),
-     QuotedStr('B'),
+    [QuotedStr('101'), QuotedStr('A01'),
+     QuotedStr('201'), QuotedStr('B01'), QuotedStr('S'),
+     QuotedStr('201'), QuotedStr('B01'), QuotedStr('B'),
+     QuotedStr('301'), QuotedStr('C01'), QuotedStr('S'),
+     QuotedStr('301'), QuotedStr('C01'), QuotedStr('B'),
      QuotedStr('6E'),
      QuotedStr('CL'),
-     QuotedStr('ucla') // TEST
-     //QuotedStr(dbUser.FieldByName('USERID').AsString)
+     QuotedStr(dbUser.FieldByName('USERID').AsString)
       ]);
   try
     Delay_Show();

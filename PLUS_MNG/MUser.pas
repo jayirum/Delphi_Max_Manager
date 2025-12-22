@@ -419,15 +419,19 @@ end;
 
 procedure TfmUser.btnPassClick(Sender: TObject);
 var
-  sSQL : string;
+  sSQL, sPW : string;
 begin
-  if bsMsgYesNo('비밀번호 초기화 하시겠습니까? \n\n [1111]로 변경됩니다.') then begin
+//  if bsMsgYesNo('비밀번호 초기화 하시겠습니까? \n\n [1111]로 변경됩니다.') then begin
+  if bsMsgYesNo('비밀번호를 변경 하시겠습니까?') then begin
     with cdsMain do begin // TEST, update로 수정할것
       Edit;
+      sPW := FieldByName('USER_PWD').AsString;
       sSql := Format('UPDATE USER_MST SET USER_PWD = %s WHERE USER_ID = %s',
-                     [QuotedStr('1111'),
-                      QuotedStr(FieldByName('USER_ID').AsString)]);
-      edPass.Text := '1111';
+                     [//QuotedStr('1111'),
+                      QuotedStr(sPW),
+                      QuotedStr(FieldByName('USER_ID').AsString) ]);
+//      edPass.Text := '1111';
+//      edPass.Text := sPW;
       fnSqlOpen(MastDB.dbExec, sSql);
       Post;
     end;
@@ -439,7 +443,7 @@ procedure TfmUser.btnSignClick(Sender: TObject);
 var
   sSQL : string;
 begin
-  if bsMsgYesNo('보안번호 변경 하시겠습니까?') then begin
+  if bsMsgYesNo('보안번호를 변경 하시겠습니까?') then begin
     with cdsMain do begin // TEST, update로 수정할것
       Edit;
       sSql := Format('UPDATE USER_MST SET USER_SIGN = %s WHERE USER_ID = %s',

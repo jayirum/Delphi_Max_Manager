@@ -2,6 +2,8 @@ inherited fmNego: TfmNego
   Tag = 2002
   Caption = #54801#51032#49688#49688#47308
   OnShow = FormShow
+  ExplicitWidth = 320
+  ExplicitHeight = 240
   PixelsPerInch = 96
   TextHeight = 12
   inherited pnTop: TRzPanel
@@ -11,7 +13,6 @@ inherited fmNego: TfmNego
     Color = 15790320
     FlatColor = clGray
     FlatColorAdjustment = 0
-    FrameController = MastDB.PanelRzFrameController
     inherited btnInsert: TbsSkinSpeedButton
       Left = 203
       Visible = False
@@ -47,7 +48,6 @@ inherited fmNego: TfmNego
       BorderShadow = 13290186
       FlatColor = clGray
       FlatColorAdjustment = 0
-      FrameController = MastDB.RzFrameController
     end
     inherited nvMain: TRzDBNavigator
       Left = 675
@@ -63,7 +63,7 @@ inherited fmNego: TfmNego
       DataSource = dsUser
       DataField = 'USERID'
       ReadOnly = True
-      FrameController = MastDB.RzFrameController
+      Color = clInfoBk
       ImeMode = imSAlpha
       ImeName = 'Microsoft IME 2010'
       TabOrder = 2
@@ -158,7 +158,6 @@ inherited fmNego: TfmNego
       Color = 15790320
       FlatColor = clGray
       FlatColorAdjustment = 0
-      FrameController = MastDB.PanelRzFrameController
       TabOrder = 1
       object btnFind: TbsSkinSpeedButton
         Tag = 500
@@ -204,7 +203,6 @@ inherited fmNego: TfmNego
         Width = 135
         Height = 20
         Hint = #54924#50896#47749#51004#47196' '#44160#49353
-        FrameController = MastDB.RzFrameController
         ImeName = 'Microsoft IME 2010'
         TabOrder = 0
         OnKeyDown = edFindKeyDown
@@ -353,7 +351,7 @@ inherited fmNego: TfmNego
   end
   inherited imgBtn: TImageList
     Bitmap = {
-      494C01010B003400E40010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C01010B003400EC0010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000003000000001002000000000000030
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000

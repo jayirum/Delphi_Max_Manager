@@ -67,7 +67,6 @@ type
     procedure dbOrdCalcFields(DataSet: TDataSet);
     procedure dbOrdAfterOpen(DataSet: TDataSet);
     procedure tmOpenTimer(Sender: TObject);
-    procedure dbMainCalcFields(DataSet: TDataSet);
     procedure dbMainAfterOpen(DataSet: TDataSet);
     procedure gdCntrTitleBtnClick(Sender: TObject; ACol: Integer;
       Column: TColumnEh);
@@ -83,13 +82,15 @@ type
     procedure btnFilterClick(Sender: TObject);
     procedure bsSkinSpeedButton1Click(Sender: TObject);
     procedure btnOvCancelClick(Sender: TObject);
+    procedure dbMainCalcFields(DataSet: TDataSet);
   private
     { Private declarations }
+    procedure CntrTableOpen;
     procedure OrdTableOpen;
   public
     { Public declarations }
-    procedure MainTableOpen; override;
 //    procedure UserTableOpen(sWhere : String='');
+    procedure MainTableOpen; override;
     procedure UserTableOpen;
   end;
 
@@ -129,6 +130,14 @@ begin
   SortData(gdUser, dbUser, ACol);
 end;
 
+procedure TfmOrdDetail.MainTableOpen;
+begin
+  inherited;
+  UserTableOpen;
+  CntrTableOpen;
+  OrdTableOpen;
+end;
+
 procedure TfmOrdDetail.gdCntrTitleBtnClick(Sender: TObject; ACol: Integer;
   Column: TColumnEh);
 begin
@@ -157,7 +166,7 @@ begin
   PartTableOpen(TComponent(gdCntr.Columns[ 5]), CodeFormat('BS_TP'));
   PartTableOpen(TComponent(gdCntr.Columns[13]), CodeFormat('CLR_TP'));
 //  PartTableOpen(TComponent(gdCntr.Columns[23]), CodeFormat('ORD_TP'));
-  PartTableOpen(TComponent(gdCntr.Columns[27]), CodeFormat('API_TP'));
+  PartTableOpen(TComponent(gdCntr.Columns[30]), CodeFormat('API_TP'));
 
   PartTableOpen(TComponent(gdOrd.Columns[ 4]), CodeFormat('ACNT_TP'));
   PartTableOpen(TComponent(gdOrd.Columns[ 6]), CodeFormat('BS_TP'));
@@ -191,7 +200,7 @@ end;
 procedure TfmOrdDetail.btnOvCancelClick(Sender: TObject);
 begin
   inherited;
-  MainTableOpen;
+  CntrTableOpen;
 end;
 
 procedure TfmOrdDetail.bsSkinSpeedButton1Click(Sender: TObject);
@@ -231,7 +240,7 @@ begin
   end;
 end;
 
-procedure TfmOrdDetail.MainTableOpen;
+procedure TfmOrdDetail.CntrTableOpen;
 var
   i, iCnt : integer;
   dPL, dCMSN : double;
@@ -291,7 +300,8 @@ begin
       '  FROM %s A          ' +
       ' WHERE USER_ID = %s  ' +
       '   AND TRADE_DT = %s ' +
-      sAcntTp,
+      sAcntTp +
+      ' ORDER BY CNTR_NO DESC ',
       [QuotedStr('예약주문'),
        QuotedStr('ORD_TP'),
        sTableNm,
@@ -380,7 +390,8 @@ begin
       '  FROM %s A           ' +
       ' WHERE USER_ID = %s   ' +
       '   AND TRADE_DT  = %s ' +
-      sAcntTp,
+      sAcntTp +
+      ' ORDER BY ORD_NO DESC ',
       [sTableNm,
        QuotedStr(dbUser.FieldByName('USER_ID').AsString),
        QuotedStr(StrReplace(dtCntrDt.Text, '-', ''))]);
@@ -402,19 +413,19 @@ begin
   end;
 end;
 
-procedure TfmOrdDetail.dbMainAfterOpen(DataSet: TDataSet);
-begin
-  inherited;
-//  dbMain.DB_Format('CNTR_NO', '###0');
-//  dbMain.DB_Format('ORD_NO', '###0');
-end;
-
 procedure TfmOrdDetail.dbOrdAfterOpen(DataSet: TDataSet);
 begin
   inherited;
   with DataSet do begin
     TFloatField(FieldByName('ORD_PRC')).DisplayFormat := FORMAT_AMTUSD;
   end;
+end;
+
+procedure TfmOrdDetail.dbMainAfterOpen(DataSet: TDataSet);
+begin
+  inherited;
+//  dbMain.DB_Format('CNTR_NO', '###0');
+//  dbMain.DB_Format('ORD_NO', '###0');
 end;
 
 procedure TfmOrdDetail.dbMainCalcFields(DataSet: TDataSet);
@@ -425,12 +436,12 @@ begin
   with DataSet do begin
     // dbMainAfterOpen 으로 이동
     iDigit := FieldByName('DOT_CNT').AsInteger;
-    FieldByName('CNTRPRC' ).AsString := FormatFloat(FormatDotCnt(iDigit  ), FieldByName('CNTR_PRC'  ).AsFloat);
-    FieldByName('CLRPLF'  ).AsString := FormatFloat(FormatDotCnt(iDigit  ), FieldByName('CLR_PL_F'  ).AsFloat);
-    FieldByName('CMSNAMTF').AsString := FormatFloat(FormatDotCnt(iDigit  ), FieldByName('CMSN_AMT_F').AsFloat);
-    FieldByName('ORDPRC'  ).AsString := FormatFloat(FormatDotCnt(iDigit  ), FieldByName('ORD_PRC'   ).AsFloat);
-    FieldByName('BFAVGPRC').AsString := FormatFloat(FormatDotCnt(iDigit+3), FieldByName('BF_AVG_PRC').AsFloat);
-    FieldByName('AFAVGPRC').AsString := FormatFloat(FormatDotCnt(iDigit+3), FieldByName('AF_AVG_PRC').AsFloat);
+//    FieldByName('CNTRPRC' ).AsString := FormatFloat(FormatDotCnt(iDigit  ), FieldByName('CNTR_PRC'  ).AsFloat);
+//    FieldByName('CLRPLF'  ).AsString := FormatFloat(FormatDotCnt(iDigit  ), FieldByName('CLR_PL_F'  ).AsFloat);
+//    FieldByName('CMSNAMTF').AsString := FormatFloat(FormatDotCnt(iDigit  ), FieldByName('CMSN_AMT_F').AsFloat);
+//    FieldByName('ORD_PRC'  ).AsString := FormatFloat(FormatDotCnt(iDigit  ), FieldByName('ORD_PRC'   ).AsFloat);
+//    FieldByName('BFAVGPRC').AsString := FormatFloat(FormatDotCnt(iDigit+3), FieldByName('BF_AVG_PRC').AsFloat);
+//    FieldByName('AFAVGPRC').AsString := FormatFloat(FormatDotCnt(iDigit+3), FieldByName('AF_AVG_PRC').AsFloat);
   end;
 end;
 
@@ -441,7 +452,7 @@ begin
   inherited;
   with DataSet do begin
     iCnt := FieldByName('DOT_CNT').AsInteger;
-    FieldByName('ORDPRC').AsString  := FormatFloat(FormatDotCnt(iCnt), FieldByName('ORD_PRC').AsFloat);
+    FieldByName('ORD_PRC').AsString  := FormatFloat(FormatDotCnt(iCnt), FieldByName('ORD_PRC').AsFloat);
   end;
 end;
 
@@ -474,7 +485,7 @@ end;
 procedure TfmOrdDetail.gdUserDblClick(Sender: TObject);
 begin
   inherited;
-  MainTableOpen;
+  CntrTableOpen;
   dbOrd.Active := False;
   if cbxSearchBS.Checked then OrdTableOpen;
 end;
@@ -482,7 +493,7 @@ end;
 procedure TfmOrdDetail.rgCntrAcntTpClick(Sender: TObject);
 begin
   inherited;
-  MainTableOpen;
+  CntrTableOpen;
   if cbxSearchBS.Checked then OrdTableOpen;
 end;
 
@@ -491,7 +502,7 @@ begin
   inherited;
   tmOpen.Enabled := False;
 
-  MainTableOpen;
+  CntrTableOpen;
   if cbxSearchBS.Checked then OrdTableOpen;
 end;
 

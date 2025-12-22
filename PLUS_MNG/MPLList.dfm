@@ -4,7 +4,6 @@ inherited fmPLList: TfmPLList
   ClientWidth = 1152
   OnShow = FormShow
   ExplicitWidth = 1168
-  ExplicitHeight = 592
   PixelsPerInch = 96
   TextHeight = 12
   inherited pnTop: TRzPanel
@@ -69,7 +68,6 @@ inherited fmPLList: TfmPLList
       BorderShadow = 13290186
       FlatColor = clGray
       FlatColorAdjustment = 0
-      FrameController = MastDB.RzFrameController
     end
     inherited nvMain: TRzDBNavigator
       Left = 1034
@@ -87,7 +85,7 @@ inherited fmPLList: TfmPLList
       DataSource = dsUser
       DataField = 'USER_ID'
       ReadOnly = True
-      FrameController = MastDB.RzFrameController
+      Color = clInfoBk
       ImeMode = imSAlpha
       ImeName = 'Microsoft IME 2010'
       TabOrder = 2
@@ -187,7 +185,6 @@ inherited fmPLList: TfmPLList
       CaptionTodayBtn = #50724#45720#47196
       EditType = etDate
       Anchors = [akLeft]
-      FrameController = MastDB.RzFrameController
       ImeName = 'Microsoft Office IME 2007'
       TabOrder = 6
       EnterToTab = True
@@ -201,7 +198,6 @@ inherited fmPLList: TfmPLList
       CaptionTodayBtn = #50724#45720#47196
       EditType = etDate
       Anchors = [akLeft]
-      FrameController = MastDB.RzFrameController
       ImeName = 'Microsoft Office IME 2007'
       TabOrder = 7
       Visible = False
@@ -215,7 +211,7 @@ inherited fmPLList: TfmPLList
       DataSource = dsClsPL
       DataField = 'ACNT_TP'
       ReadOnly = True
-      FrameController = MastDB.RzFrameController
+      Color = clInfoBk
       ImeMode = imSAlpha
       ImeName = 'Microsoft IME 2010'
       TabOrder = 8
@@ -316,7 +312,6 @@ inherited fmPLList: TfmPLList
       Color = 15790320
       FlatColor = clGray
       FlatColorAdjustment = 0
-      FrameController = MastDB.PanelRzFrameController
       TabOrder = 1
       object btnFind: TbsSkinSpeedButton
         Tag = 500
@@ -362,7 +357,6 @@ inherited fmPLList: TfmPLList
         Top = 45
         Width = 135
         Height = 20
-        FrameController = MastDB.RzFrameController
         ImeName = 'Microsoft IME 2010'
         TabOrder = 0
         Visible = False
@@ -375,7 +369,6 @@ inherited fmPLList: TfmPLList
         Height = 20
         Style = csDropDownList
         Ctl3D = False
-        FrameController = MastDB.RzFrameController
         ImeName = 'Microsoft Office IME 2007'
         ItemHeight = 12
         ParentCtl3D = False
@@ -546,7 +539,6 @@ inherited fmPLList: TfmPLList
             Font.Height = -12
             Font.Name = #44404#47548#52404
             Font.Style = [fsBold]
-            FrameController = MastDB.RzFrameController
             ParentFont = False
             TabOrder = 1
           end
@@ -812,7 +804,6 @@ inherited fmPLList: TfmPLList
             end
             item
               Alignment = taCenter
-              DisplayFormat = '#,##0'
               DynProps = <>
               EditButtons = <>
               FieldName = 'CLR_PL'
@@ -835,7 +826,6 @@ inherited fmPLList: TfmPLList
             end
             item
               Alignment = taCenter
-              DisplayFormat = '#,##0'
               DynProps = <>
               EditButtons = <>
               FieldName = 'CMSN'
@@ -859,7 +849,6 @@ inherited fmPLList: TfmPLList
             item
               Alignment = taCenter
               Color = 16515071
-              DisplayFormat = '#,##0'
               DynProps = <>
               EditButtons = <>
               FieldName = 'NET_PL'
@@ -959,7 +948,6 @@ inherited fmPLList: TfmPLList
         Font.Height = -12
         Font.Name = #44404#47548#52404
         Font.Style = [fsBold]
-        FrameController = MastDB.RzFrameController
         ParentFont = False
         TabOrder = 0
       end
@@ -1047,7 +1035,6 @@ inherited fmPLList: TfmPLList
         CaptionTodayBtn = #50724#45720#47196
         EditType = etDate
         Anchors = [akLeft]
-        FrameController = MastDB.RzFrameController
         ImeName = 'Microsoft Office IME 2007'
         TabOrder = 4
         EnterToTab = True
@@ -1092,7 +1079,6 @@ inherited fmPLList: TfmPLList
         Height = 20
         Style = csDropDownList
         Ctl3D = False
-        FrameController = MastDB.RzFrameController
         ImeName = 'Microsoft Office IME 2007'
         ItemHeight = 12
         ParentCtl3D = False
@@ -1220,7 +1206,6 @@ inherited fmPLList: TfmPLList
         end
         item
           Alignment = taCenter
-          DisplayFormat = '#,##0'
           DynProps = <>
           EditButtons = <>
           FieldName = 'ACNT_AMT_BF'
@@ -1243,7 +1228,6 @@ inherited fmPLList: TfmPLList
         end
         item
           Alignment = taCenter
-          DisplayFormat = '#,##0'
           DynProps = <>
           EditButtons = <>
           FieldName = 'ACNT_AMT_TODAY'
@@ -1267,7 +1251,6 @@ inherited fmPLList: TfmPLList
         item
           Alignment = taCenter
           Color = clWhite
-          DisplayFormat = '#,##0'
           DynProps = <>
           EditButtons = <>
           FieldName = 'RQST_IN_AMT'
@@ -1290,7 +1273,6 @@ inherited fmPLList: TfmPLList
         end
         item
           Alignment = taCenter
-          DisplayFormat = '#,##0'
           DynProps = <>
           EditButtons = <>
           FieldName = 'RSLT_IN_AMT'
@@ -1313,7 +1295,6 @@ inherited fmPLList: TfmPLList
         end
         item
           Alignment = taCenter
-          DisplayFormat = '#,##0'
           DynProps = <>
           EditButtons = <>
           FieldName = 'RQST_OUT_AMT'
@@ -1336,7 +1317,6 @@ inherited fmPLList: TfmPLList
         end
         item
           Alignment = taCenter
-          DisplayFormat = '#,##0'
           DynProps = <>
           EditButtons = <>
           FieldName = 'RSLT_OUT_AMT'
@@ -1360,7 +1340,6 @@ inherited fmPLList: TfmPLList
         item
           Alignment = taCenter
           Color = 16515071
-          DisplayFormat = '#,##0'
           DynProps = <>
           EditButtons = <>
           FieldName = 'NET_PL_SUM'
@@ -1383,7 +1362,6 @@ inherited fmPLList: TfmPLList
         end
         item
           Alignment = taCenter
-          DisplayFormat = '#,##0'
           DynProps = <>
           EditButtons = <>
           FieldName = 'CLR_PL_SUM'
@@ -1406,7 +1384,6 @@ inherited fmPLList: TfmPLList
         end
         item
           Alignment = taCenter
-          DisplayFormat = '#,##0'
           DynProps = <>
           EditButtons = <>
           FieldName = 'CMSN_SUM'
@@ -1429,7 +1406,6 @@ inherited fmPLList: TfmPLList
         end
         item
           Alignment = taCenter
-          DisplayFormat = '#,##0'
           DynProps = <>
           EditButtons = <>
           FieldName = 'KSF_PL'
@@ -1452,7 +1428,6 @@ inherited fmPLList: TfmPLList
         end
         item
           Alignment = taCenter
-          DisplayFormat = '#,##0'
           DynProps = <>
           EditButtons = <>
           FieldName = 'KSF_CMSN'
@@ -1492,7 +1467,6 @@ inherited fmPLList: TfmPLList
         end
         item
           Alignment = taCenter
-          DisplayFormat = '#,##0'
           DynProps = <>
           EditButtons = <>
           FieldName = 'KSO_PL'
@@ -1515,7 +1489,6 @@ inherited fmPLList: TfmPLList
         end
         item
           Alignment = taCenter
-          DisplayFormat = '#,##0'
           DynProps = <>
           EditButtons = <>
           FieldName = 'KSO_CMSN'
@@ -1555,7 +1528,6 @@ inherited fmPLList: TfmPLList
         end
         item
           Alignment = taCenter
-          DisplayFormat = '#,##0'
           DynProps = <>
           EditButtons = <>
           FieldName = 'GF_PL'
@@ -1578,7 +1550,6 @@ inherited fmPLList: TfmPLList
         end
         item
           Alignment = taCenter
-          DisplayFormat = '#,##0'
           DynProps = <>
           EditButtons = <>
           FieldName = 'GF_CMSN'
@@ -2060,7 +2031,6 @@ inherited fmPLList: TfmPLList
     Top = 344
   end
   object dbUser: TADOQuery
-    Connection = MastDB.ADOConn
     Parameters = <>
     SQL.Strings = (
       'SELECT USER_NM, USER_ID'
@@ -2069,7 +2039,6 @@ inherited fmPLList: TfmPLList
     Top = 384
   end
   object dbClsPL: TADOQuery
-    Connection = MastDB.ADOConn
     Parameters = <>
     Left = 784
     Top = 176

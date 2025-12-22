@@ -148,6 +148,8 @@ begin
   PartTableOpen(TComponent(gdMain.Columns[5]), CodeFormat('BS_TP'));
 
   cbLogTp.ItemIndex := 0;
+
+  btnFind.ButtonClick;
 end;
 
 procedure TfmLogList.gdMainDrawColumnCell(Sender: TObject; const Rect: TRect;
@@ -173,6 +175,7 @@ procedure TfmLogList.gdUserDblClick(Sender: TObject);
 begin
   inherited;
   LogTableOpen;
+  gdMain.SetFocus;
 end;
 
 procedure TfmLogList.gdUserTitleBtnClick(Sender: TObject; ACol: Integer;

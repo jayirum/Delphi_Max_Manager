@@ -72,7 +72,6 @@ inherited fmOrdDetail: TfmOrdDetail
       BorderShadow = 13290186
       FlatColor = clGray
       FlatColorAdjustment = 0
-      FrameController = MastDB.RzFrameController
       ExplicitLeft = 3
     end
     inherited nvMain: TRzDBNavigator
@@ -90,7 +89,6 @@ inherited fmOrdDetail: TfmOrdDetail
       CalendarElements = [ceYear, ceMonth, ceArrows, ceDaysOfWeek, ceFillDays, ceTodayButton]
       CaptionTodayBtn = #50724#45720#47196
       EditType = etDate
-      FrameController = MastDB.RzFrameController
       ImeName = 'Microsoft Office IME 2007'
       TabOrder = 2
       EnterToTab = True
@@ -157,7 +155,6 @@ inherited fmOrdDetail: TfmOrdDetail
       FillColor = clWhite
       FocusColor = 15790335
       FrameColor = clGray
-      FrameController = MastDB.RzFrameController
       HotTrack = True
       HotTrackColor = 7838964
       HotTrackStyle = htsFrame
@@ -261,7 +258,6 @@ inherited fmOrdDetail: TfmOrdDetail
       Color = 15790320
       FlatColor = clGray
       FlatColorAdjustment = 0
-      FrameController = MastDB.PanelRzFrameController
       TabOrder = 1
       object btnFind: TbsSkinSpeedButton
         Tag = 500
@@ -306,7 +302,6 @@ inherited fmOrdDetail: TfmOrdDetail
         Top = 13
         Width = 135
         Height = 20
-        FrameController = MastDB.RzFrameController
         ImeName = 'Microsoft IME 2010'
         TabOrder = 0
         OnKeyDown = edFindKeyDown
@@ -632,15 +627,14 @@ inherited fmOrdDetail: TfmOrdDetail
         Color = 15790320
         FlatColor = clGray
         FlatColorAdjustment = 0
-        FrameController = MastDB.PanelRzFrameController
         TabOrder = 1
         DesignSize = (
           785
           31)
         object btnOrdExcel: TbsSkinSpeedButton
           Tag = 600
-          Left = 481
-          Top = 1
+          Left = 480
+          Top = 0
           Width = 75
           Height = 23
           Cursor = crHandPoint
@@ -717,8 +711,8 @@ inherited fmOrdDetail: TfmOrdDetail
           OnClick = bsSkinSpeedButton1Click
         end
         object pnOrdCnt: TRzPanel
-          Left = 658
-          Top = 1
+          Left = 657
+          Top = 0
           Width = 113
           Height = 23
           Anchors = [akRight, akBottom]
@@ -733,13 +727,12 @@ inherited fmOrdDetail: TfmOrdDetail
           Font.Height = -12
           Font.Name = #44404#47548#52404
           Font.Style = [fsBold]
-          FrameController = MastDB.RzFrameController
           ParentFont = False
           TabOrder = 0
         end
         object RzDBNavigator2: TRzDBNavigator
-          Left = 557
-          Top = 1
+          Left = 556
+          Top = 0
           Width = 100
           Height = 23
           DataSource = dsOrd
@@ -795,7 +788,6 @@ inherited fmOrdDetail: TfmOrdDetail
       Color = 15790320
       FlatColor = clGray
       FlatColorAdjustment = 0
-      FrameController = MastDB.PanelRzFrameController
       TabOrder = 1
       DesignSize = (
         785
@@ -907,7 +899,6 @@ inherited fmOrdDetail: TfmOrdDetail
         Font.Height = -12
         Font.Name = #44404#47548#52404
         Font.Style = [fsBold]
-        FrameController = MastDB.RzFrameController
         ParentFont = False
         TabOrder = 1
       end
@@ -980,7 +971,6 @@ inherited fmOrdDetail: TfmOrdDetail
         Height = 20
         Style = csDropDownList
         Ctl3D = False
-        FrameController = MastDB.RzFrameController
         ImeName = 'Microsoft Office IME 2007'
         ItemHeight = 12
         ParentCtl3D = False
@@ -1117,8 +1107,7 @@ inherited fmOrdDetail: TfmOrdDetail
           Width = 70
         end
         item
-          Alignment = taCenter
-          DisplayFormat = '#,##0'
+          Alignment = taRightJustify
           DynProps = <>
           EditButtons = <>
           FieldName = 'CLR_PL'
@@ -1130,7 +1119,6 @@ inherited fmOrdDetail: TfmOrdDetail
         end
         item
           Alignment = taCenter
-          DisplayFormat = '#,##0'
           DynProps = <>
           EditButtons = <>
           FieldName = 'CLRPLF'
@@ -1142,8 +1130,7 @@ inherited fmOrdDetail: TfmOrdDetail
           Width = 90
         end
         item
-          Alignment = taCenter
-          DisplayFormat = '#,##0'
+          Alignment = taRightJustify
           DynProps = <>
           EditButtons = <>
           FieldName = 'CMSN_AMT'
@@ -1155,7 +1142,6 @@ inherited fmOrdDetail: TfmOrdDetail
         end
         item
           Alignment = taCenter
-          DisplayFormat = '#,##0'
           DynProps = <>
           EditButtons = <>
           FieldName = 'CMSNAMTF'
@@ -1405,17 +1391,12 @@ inherited fmOrdDetail: TfmOrdDetail
       Color = 15790320
       FlatColor = clGray
       FlatColorAdjustment = 0
-      FrameController = MastDB.PanelRzFrameController
       TabOrder = 3
-      DesignSize = (
-        785
-        31)
       object pnPL: TRzPanel
-        Left = 85
-        Top = 4
+        Left = 87
+        Top = 6
         Width = 113
-        Height = 23
-        Anchors = [akTop, akRight]
+        Height = 20
         BorderOuter = fsFlat
         BorderHighlight = clWhite
         BorderShadow = 13290186
@@ -1427,7 +1408,6 @@ inherited fmOrdDetail: TfmOrdDetail
         Font.Height = -12
         Font.Name = #44404#47548#52404
         Font.Style = [fsBold]
-        FrameController = MastDB.RzFrameController
         ParentFont = False
         TabOrder = 0
       end
@@ -1497,10 +1477,9 @@ inherited fmOrdDetail: TfmOrdDetail
       end
       object pnCMSN: TRzPanel
         Left = 306
-        Top = 4
+        Top = 6
         Width = 113
-        Height = 23
-        Anchors = [akTop, akRight]
+        Height = 20
         BorderOuter = fsFlat
         BorderHighlight = clWhite
         BorderShadow = 13290186
@@ -1512,7 +1491,6 @@ inherited fmOrdDetail: TfmOrdDetail
         Font.Height = -12
         Font.Name = #44404#47548#52404
         Font.Style = [fsBold]
-        FrameController = MastDB.RzFrameController
         ParentFont = False
         TabOrder = 3
       end
@@ -1520,7 +1498,7 @@ inherited fmOrdDetail: TfmOrdDetail
   end
   inherited imgBtn: TImageList
     Bitmap = {
-      494C01010B003400540110001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C01010B003400580110001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000003000000001002000000000000030
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000

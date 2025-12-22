@@ -90,9 +90,9 @@ begin
       '      ,API_STK_CD   ' +
       '      ,STRIKE_PRC   ' +
       '  FROM STK_MST      ' +
-      ' WHERE ARTC_CD IN (%s,%s) ',
-      [QuotedStr('201'),
-       QuotedStr('301')]);
+      ' WHERE ARTC_CD IN (%s, %s, %s, %s) ',
+      [QuotedStr('201'), QuotedStr('B01'),
+       QuotedStr('301'), QuotedStr('C01') ]);
     fnSqlOpen(dbMain, sSql);
   finally
     Delay_Hide;

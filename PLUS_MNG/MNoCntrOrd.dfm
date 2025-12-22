@@ -14,7 +14,6 @@ inherited fmNoCntrOrd: TfmNoCntrOrd
     Color = 15790320
     FlatColor = clGray
     FlatColorAdjustment = 0
-    FrameController = MastDB.PanelRzFrameController
     ExplicitWidth = 1080
     inherited btnInsert: TbsSkinSpeedButton
       Left = 504
@@ -47,7 +46,7 @@ inherited fmNoCntrOrd: TfmNoCntrOrd
       ExplicitWidth = 77
     end
     inherited btnClose: TbsSkinSpeedButton
-      Left = 994
+      Left = 993
       ExplicitLeft = 994
     end
     inherited bsRibbonDivider4: TbsRibbonDivider
@@ -55,7 +54,7 @@ inherited fmNoCntrOrd: TfmNoCntrOrd
       ExplicitLeft = 193
     end
     inherited btnExcel: TbsSkinSpeedButton
-      Left = 918
+      Left = 917
       Top = 4
       Height = 23
       Anchors = [akTop, akRight]
@@ -145,16 +144,15 @@ inherited fmNoCntrOrd: TfmNoCntrOrd
       BorderShadow = 13290186
       FlatColor = clGray
       FlatColorAdjustment = 0
-      FrameController = MastDB.RzFrameController
     end
     inherited nvMain: TRzDBNavigator
-      Left = 703
+      Left = 702
       Hints.Strings = ()
       Anchors = [akTop, akRight]
-      ExplicitLeft = 560
+      ExplicitLeft = 702
     end
     object pnNoCntrOrd: TRzPanel
-      Left = 804
+      Left = 803
       Top = 4
       Width = 113
       Height = 23
@@ -170,10 +168,8 @@ inherited fmNoCntrOrd: TfmNoCntrOrd
       Font.Height = -12
       Font.Name = #44404#47548#52404
       Font.Style = [fsBold]
-      FrameController = MastDB.RzFrameController
       ParentFont = False
       TabOrder = 2
-      ExplicitLeft = 661
     end
     object chUserTp: TbsSkinCheckRadioBox
       Left = 204
@@ -461,7 +457,7 @@ inherited fmNoCntrOrd: TfmNoCntrOrd
   end
   inherited imgBtn: TImageList
     Bitmap = {
-      494C01010B003400A80010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C01010B003400AC0010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000003000000001002000000000000030
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000

@@ -15,16 +15,11 @@ inherited fmNclr: TfmNclr
     Color = 15790320
     FlatColor = clGray
     FlatColorAdjustment = 0
-    FrameController = MastDB.PanelRzFrameController
     ExplicitWidth = 1154
-    inherited btnFilter: TbsSkinSpeedButton
-      SkinData = fmMain.bsSkinData
-    end
     inherited btnInsert: TbsSkinSpeedButton
       Left = 455
       Top = 6
       Visible = False
-      SkinData = fmMain.bsSkinData
       ExplicitLeft = 455
       ExplicitTop = 6
     end
@@ -32,7 +27,6 @@ inherited fmNclr: TfmNclr
       Left = 455
       Top = 0
       Visible = False
-      SkinData = fmMain.bsSkinData
       ExplicitLeft = 455
       ExplicitTop = 0
     end
@@ -40,7 +34,6 @@ inherited fmNclr: TfmNclr
       Left = 480
       Top = 0
       Visible = False
-      SkinData = fmMain.bsSkinData
       ExplicitLeft = 480
       ExplicitTop = 0
     end
@@ -48,26 +41,22 @@ inherited fmNclr: TfmNclr
       Left = 487
       Top = 0
       Visible = False
-      SkinData = fmMain.bsSkinData
       ExplicitLeft = 487
       ExplicitTop = 0
     end
     inherited btnClose: TbsSkinSpeedButton
-      Left = 1065
-      SkinData = fmMain.bsSkinData
+      Left = 1061
       ExplicitLeft = 1068
     end
     inherited bsRibbonDivider4: TbsRibbonDivider
       Left = 193
-      SkinData = fmMain.bsSkinData
       ExplicitLeft = 193
     end
     inherited btnExcel: TbsSkinSpeedButton
-      Left = 989
+      Left = 985
       Top = 4
       Height = 23
       Anchors = [akTop, akRight]
-      SkinData = fmMain.bsSkinData
       OnClick = btnExcelClick
       ExplicitLeft = 1004
       ExplicitTop = 4
@@ -78,16 +67,15 @@ inherited fmNclr: TfmNclr
       BorderShadow = 13290186
       FlatColor = clGray
       FlatColorAdjustment = 0
-      FrameController = MastDB.RzFrameController
     end
     inherited nvMain: TRzDBNavigator
-      Left = 774
+      Left = 770
       Hints.Strings = ()
       Anchors = [akTop, akRight]
-      ExplicitLeft = 774
+      ExplicitLeft = 770
     end
     object pnNclr: TRzPanel
-      Left = 875
+      Left = 871
       Top = 4
       Width = 113
       Height = 23
@@ -103,7 +91,6 @@ inherited fmNclr: TfmNclr
       Font.Height = -12
       Font.Name = #44404#47548#52404
       Font.Style = [fsBold]
-      FrameController = MastDB.RzFrameController
       ParentFont = False
       TabOrder = 2
     end
@@ -141,185 +128,9 @@ inherited fmNclr: TfmNclr
   end
   inherited pnBottom: TbsSkinPanel
     Width = 1154
-    SkinData = fmMain.bsSkinData
     ExplicitWidth = 1154
   end
-  object gdMain: TDBGridEh [2]
-    Left = 0
-    Top = 31
-    Width = 856
-    Height = 500
-    TabStop = False
-    Align = alClient
-    ColumnDefValues.Layout = tlCenter
-    ColumnDefValues.Title.TitleButton = True
-    Ctl3D = False
-    DataSource = dsMain
-    DynProps = <>
-    FixedColor = 15790320
-    Flat = True
-    ImeName = 'Microsoft IME 2010'
-    IndicatorOptions = [gioShowRowIndicatorEh, gioShowRecNoEh]
-    Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit]
-    OptionsEh = [dghFixed3D, dghHighlightFocus, dghClearSelection, dghAutoSortMarking, dghDialogFind, dghShowRecNo, dghColumnResize, dghColumnMove, dghExtendVertLines]
-    ParentCtl3D = False
-    RowDetailPanel.Color = clBtnFace
-    RowHeight = 21
-    TabOrder = 2
-    TitleParams.Color = clBtnFace
-    TitleParams.RowHeight = 21
-    TitleParams.FillStyle = cfstGradientEh
-    OnDrawColumnCell = gdMainDrawColumnCell
-    OnTitleBtnClick = gdMainTitleBtnClick
-    Columns = <
-      item
-        Alignment = taCenter
-        DynProps = <>
-        EditButtons = <>
-        FieldName = 'USER_ID'
-        Footers = <>
-        Title.Alignment = taCenter
-        Title.Caption = #54924#50896' ID'
-        Width = 80
-      end
-      item
-        Alignment = taCenter
-        DynProps = <>
-        EditButtons = <>
-        FieldName = 'USER_NM'
-        Footers = <>
-        Title.Alignment = taCenter
-        Title.Caption = #54924#50896#47749
-        Title.Color = 16250871
-        Width = 80
-      end
-      item
-        Alignment = taCenter
-        DynProps = <>
-        EditButtons = <>
-        FieldName = 'ACNT_NO'
-        Footers = <>
-        Title.Alignment = taCenter
-        Title.Caption = #44228#51340#48264#54840
-        Title.Color = 16250871
-        Width = 85
-      end
-      item
-        Alignment = taCenter
-        DynProps = <>
-        EditButtons = <>
-        FieldName = 'STK_CD'
-        Footers = <>
-        Title.Alignment = taCenter
-        Title.Caption = #51333#47785#53076#46300
-      end
-      item
-        Alignment = taCenter
-        DynProps = <>
-        EditButtons = <>
-        FieldName = 'BS_TP'
-        Footers = <>
-        Title.Alignment = taCenter
-        Title.Caption = #44396#48516
-        Title.Color = 16250871
-        Width = 60
-      end
-      item
-        Alignment = taCenter
-        DynProps = <>
-        EditButtons = <>
-        FieldName = 'NCLR_POS_QTY'
-        Footers = <>
-        Title.Alignment = taCenter
-        Title.Caption = #49688#47049
-        Title.Color = 16250871
-        Width = 45
-      end
-      item
-        Alignment = taCenter
-        Color = 16515071
-        DynProps = <>
-        EditButtons = <>
-        FieldName = 'AVG_PRC'
-        Footers = <>
-        Title.Alignment = taCenter
-        Title.Caption = #54217#44512#45800#44032
-        Title.Color = 16250871
-        Width = 60
-      end
-      item
-        Alignment = taCenter
-        DynProps = <>
-        EditButtons = <>
-        FieldName = 'API_TP'
-        Footers = <>
-        Title.Alignment = taCenter
-        Title.Caption = #51068#48152'/VVIP'
-        Title.Color = 16250871
-        Width = 70
-      end
-      item
-        Alignment = taCenter
-        DisplayFormat = '#,###'
-        DynProps = <>
-        EditButtons = <>
-        FieldName = 'LOSSCUT_AMT'
-        Footers = <>
-        Title.Alignment = taCenter
-        Title.Caption = #47196#49828#52983#44552#50529
-        Title.Color = 16250871
-        Width = 100
-      end
-      item
-        Alignment = taCenter
-        Color = 15138815
-        DisplayFormat = '#,###'
-        DynProps = <>
-        EditButtons = <>
-        FieldName = 'ACNT_AMT'
-        Footers = <>
-        Title.Alignment = taCenter
-        Title.Caption = #44228#51340#51092#50529
-        Width = 109
-      end
-      item
-        Alignment = taCenter
-        DynProps = <>
-        EditButtons = <>
-        FieldName = 'OVERNGT_TP'
-        Footers = <>
-        Title.Alignment = taCenter
-        Title.Caption = #50724#48260#45208#51079#50668#48512
-        Width = 87
-      end
-      item
-        Alignment = taCenter
-        DynProps = <>
-        EditButtons = <>
-        FieldName = 'OVERNGT_AMT'
-        Footers = <>
-        Title.Alignment = taCenter
-        Title.Caption = #50724#48260#45208#51079#44552#50529
-        Title.Color = 16250871
-        Width = 100
-      end
-      item
-        Alignment = taCenter
-        DisplayFormat = '#,###'
-        DynProps = <>
-        EditButtons = <>
-        FieldName = 'OVERNGT_QTY'
-        Footers = <>
-        Title.Alignment = taCenter
-        Title.Caption = 'OV'#49888#52397#49688#47049
-        Title.Color = 16250871
-        Visible = False
-        Width = 80
-      end>
-    object RowDetailData: TRowDetailPanelControlEh
-    end
-  end
-  object RzPanel4: TRzPanel [3]
+  object RzPanel4: TRzPanel [2]
     Left = 856
     Top = 31
     Width = 298
@@ -331,9 +142,7 @@ inherited fmNclr: TfmNclr
     Color = 15790320
     FlatColor = clGray
     FlatColorAdjustment = 0
-    TabOrder = 3
-    ExplicitLeft = 848
-    ExplicitTop = 34
+    TabOrder = 2
     object bsRibbonDivider1: TbsRibbonDivider
       Left = 9
       Top = 142
@@ -361,7 +170,7 @@ inherited fmNclr: TfmNclr
       AutoSize = False
       Caption = #51648#51221#44032' '#52397#49328#44032#44201
     end
-    object btnOrdCancel: TbsSkinSpeedButton
+    object btnOK: TbsSkinSpeedButton
       Tag = 500
       Left = 28
       Top = 155
@@ -397,7 +206,7 @@ inherited fmNclr: TfmNclr
       ShowCaption = True
       NumGlyphs = 1
       Spacing = 1
-      OnClick = btnOrdCancelClick
+      OnClick = btnOKClick
     end
     object bsSkinLabel2: TbsSkinLabel
       Left = 6
@@ -503,7 +312,7 @@ inherited fmNclr: TfmNclr
       DataSource = dsMain
       DataField = 'USER_ID'
       ReadOnly = True
-      FrameController = MastDB.RzFrameController
+      Color = clInfoBk
       ImeName = 'Microsoft IME 2010'
       TabOrder = 3
       EnterToTab = True
@@ -548,7 +357,7 @@ inherited fmNclr: TfmNclr
       DataSource = dsMain
       DataField = 'USER_NM'
       ReadOnly = True
-      FrameController = MastDB.RzFrameController
+      Color = clInfoBk
       ImeName = 'Microsoft IME 2010'
       TabOrder = 5
       EnterToTab = True
@@ -561,7 +370,7 @@ inherited fmNclr: TfmNclr
       DataSource = dsMain
       DataField = 'BS_TP'
       ReadOnly = True
-      FrameController = MastDB.RzFrameController
+      Color = clInfoBk
       ImeName = 'Microsoft IME 2010'
       TabOrder = 6
       EnterToTab = True
@@ -574,7 +383,7 @@ inherited fmNclr: TfmNclr
       DataSource = dsMain
       DataField = 'STK_NM'
       ReadOnly = True
-      FrameController = MastDB.RzFrameController
+      Color = clInfoBk
       ImeName = 'Microsoft IME 2010'
       TabOrder = 7
       EnterToTab = True
@@ -587,12 +396,12 @@ inherited fmNclr: TfmNclr
       DataSource = dsMain
       DataField = 'STK_CD'
       ReadOnly = True
-      FrameController = MastDB.RzFrameController
+      Color = clInfoBk
       ImeName = 'Microsoft IME 2010'
       TabOrder = 8
       EnterToTab = True
     end
-    object edCnt: TkcRzDBEdit
+    object edQty: TkcRzDBEdit
       Left = 178
       Top = 61
       Width = 54
@@ -600,57 +409,302 @@ inherited fmNclr: TfmNclr
       DataSource = dsMain
       DataField = 'NCLR_POS_QTY'
       ReadOnly = True
-      FrameController = MastDB.RzFrameController
+      Color = clInfoBk
       ImeName = 'Microsoft IME 2010'
       TabOrder = 9
       EnterToTab = True
-    end
-    object rbtPriceTp: TRzRadioGroup
-      Left = 89
-      Top = 90
-      Width = 164
-      Height = 22
-      BorderOuter = fsFlat
-      Color = clWhite
-      Columns = 2
-      FlatColor = clGray
-      FlatColorAdjustment = 0
-      FrameController = MastDB.RzFrameController
-      GroupStyle = gsCustom
-      ItemFrameColor = clGray
-      ItemIndex = 0
-      Items.Strings = (
-        #49884#51109#44032
-        #51648#51221#44032)
-      TabOrder = 10
-      Transparent = True
     end
     object edPrice: TRzEdit
       Left = 184
       Top = 117
       Width = 98
       Height = 20
-      FrameController = MastDB.RzFrameController
       ImeName = 'Microsoft IME 2010'
-      TabOrder = 11
+      TabOrder = 10
     end
-    object Memo1: TMemo
-      Left = 56
-      Top = 308
-      Width = 229
-      Height = 93
-      Lines.Strings = (
-        'Memo1')
+    object edKey: TkcRzDBEdit
+      Left = 32
+      Top = 217
+      Width = 209
+      Height = 20
+      TabStop = False
+      DataSource = dsMain
+      DataField = 'NCLR_KEY'
+      ReadOnly = True
+      Color = clInfoBk
+      Ctl3D = True
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clBtnText
+      Font.Height = -12
+      Font.Name = #44404#47548
+      Font.Style = []
+      ImeMode = imSAlpha
+      ImeName = 'Microsoft IME 2010'
+      ParentCtl3D = False
+      ParentFont = False
+      TabOrder = 11
+      Visible = False
+      OnChange = edKeyChange
+      EnterToTab = True
+    end
+    object rbFix: TRzRadioButton
+      Left = 176
+      Top = 93
+      Width = 71
+      Height = 15
+      AutoSize = False
+      Caption = #51648#51221#44032
       TabOrder = 12
+      WordWrap = True
+    end
+    object rbMkt: TRzRadioButton
+      Left = 92
+      Top = 93
+      Width = 71
+      Height = 15
+      AutoSize = False
+      Caption = #49884#51109#44032
+      Checked = True
+      TabOrder = 13
+      TabStop = True
+      WordWrap = True
+    end
+    object chCancel: TbsSkinCheckRadioBox
+      Left = 126
+      Top = 159
+      Width = 161
+      Height = 25
+      Cursor = crHandPoint
+      HintImageIndex = 0
+      TabOrder = 14
+      Visible = False
+      SkinDataName = 'checkbox'
+      DefaultFont.Charset = DEFAULT_CHARSET
+      DefaultFont.Color = clWindowText
+      DefaultFont.Height = 13
+      DefaultFont.Name = 'Tahoma'
+      DefaultFont.Style = []
+      DefaultWidth = 0
+      DefaultHeight = 0
+      UseSkinFont = False
+      WordWrap = False
+      AllowGrayed = False
+      State = cbChecked
+      ImageIndex = 0
+      Flat = True
+      UseSkinFontColor = False
+      TabStop = True
+      CanFocused = True
+      Radio = False
+      Checked = True
+      GroupIndex = 0
+      Caption = #52397#49328#49884' '#54644#45817#51333#47785#52712#49548#52376#47532
     end
   end
-  inherited bsBusinessSkinForm: TbsBusinessSkinForm
-    SkinData = fmMain.bsSkinData
-    MenusSkinData = fmMain.bsSkinData
+  object gdMain: TDBGridEh [3]
+    Left = 0
+    Top = 31
+    Width = 856
+    Height = 500
+    TabStop = False
+    Align = alClient
+    ColumnDefValues.Layout = tlCenter
+    ColumnDefValues.Title.TitleButton = True
+    Ctl3D = False
+    DataSource = dsMain
+    DynProps = <>
+    FixedColor = 15790320
+    Flat = True
+    ImeName = 'Microsoft IME 2010'
+    IndicatorOptions = [gioShowRowIndicatorEh, gioShowRecNoEh]
+    Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit]
+    OptionsEh = [dghFixed3D, dghHighlightFocus, dghClearSelection, dghAutoSortMarking, dghDialogFind, dghShowRecNo, dghColumnResize, dghColumnMove, dghExtendVertLines]
+    ParentCtl3D = False
+    RowDetailPanel.Color = clBtnFace
+    RowHeight = 21
+    TabOrder = 3
+    TitleParams.Color = clBtnFace
+    TitleParams.RowHeight = 21
+    TitleParams.FillStyle = cfstGradientEh
+    OnDrawColumnCell = gdMainDrawColumnCell
+    OnTitleBtnClick = gdMainTitleBtnClick
+    Columns = <
+      item
+        Alignment = taCenter
+        DynProps = <>
+        EditButtons = <>
+        FieldName = 'USER_ID'
+        Footers = <>
+        Title.Alignment = taCenter
+        Title.Caption = #54924#50896'ID'
+        Title.Color = 16250871
+        Width = 90
+      end
+      item
+        Alignment = taCenter
+        DynProps = <>
+        EditButtons = <>
+        FieldName = 'USER_NM'
+        Footers = <>
+        Title.Alignment = taCenter
+        Title.Caption = #54924#50896#47749
+        Title.Color = 16250871
+        Width = 100
+      end
+      item
+        Alignment = taCenter
+        DynProps = <>
+        EditButtons = <>
+        FieldName = 'ACNT_NO'
+        Footers = <>
+        Title.Alignment = taCenter
+        Title.Caption = #44228#51340#48264#54840
+        Title.Color = 16250871
+        Width = 85
+      end
+      item
+        Alignment = taCenter
+        Color = 16250879
+        DynProps = <>
+        EditButtons = <>
+        FieldName = 'STK_CD'
+        Footers = <>
+        Title.Alignment = taCenter
+        Title.Caption = #51333#47785#53076#46300
+        Title.Color = 16250871
+        Width = 80
+      end
+      item
+        Alignment = taCenter
+        DynProps = <>
+        EditButtons = <>
+        FieldName = 'BS_NM'
+        Footers = <>
+        Title.Alignment = taCenter
+        Title.Caption = #44396#48516
+        Title.Color = 16250871
+        Width = 60
+      end
+      item
+        Alignment = taCenter
+        DynProps = <>
+        EditButtons = <>
+        FieldName = 'NCLR_POS_QTY'
+        Footers = <>
+        Title.Alignment = taCenter
+        Title.Caption = #49688#47049
+        Title.Color = 16250871
+        Width = 45
+      end
+      item
+        Alignment = taCenter
+        Color = 16515071
+        DynProps = <>
+        EditButtons = <>
+        FieldName = 'AVGPRC'
+        Footers = <>
+        Title.Alignment = taCenter
+        Title.Caption = #54217#44512#45800#44032
+        Title.Color = 16250871
+        Width = 80
+      end
+      item
+        Alignment = taCenter
+        DynProps = <>
+        EditButtons = <>
+        FieldName = 'API_TP'
+        Footers = <>
+        Title.Alignment = taCenter
+        Title.Caption = #51068#48152'/VVIP'
+        Title.Color = 16250871
+        Width = 70
+      end
+      item
+        Alignment = taCenter
+        DynProps = <>
+        EditButtons = <>
+        FieldName = 'LOSSCUT_AMT'
+        Footers = <>
+        Title.Alignment = taCenter
+        Title.Caption = #47196#49828#52983#44552#50529
+        Title.Color = 16250871
+        Width = 100
+      end
+      item
+        Alignment = taCenter
+        Color = 15138815
+        DynProps = <>
+        EditButtons = <>
+        FieldName = 'ACNT_AMT'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clRed
+        Font.Height = -12
+        Font.Name = #44404#47548#52404
+        Font.Style = []
+        Footers = <>
+        Title.Alignment = taCenter
+        Title.Caption = #44228#51340#51092#50529
+        Title.Color = 16250871
+        Width = 120
+      end
+      item
+        DynProps = <>
+        EditButtons = <>
+        Footers = <>
+        Title.Color = 16250871
+        Width = 1
+      end
+      item
+        Alignment = taCenter
+        DynProps = <>
+        EditButtons = <>
+        FieldName = 'OVERNGT_YN'
+        Footers = <>
+        Title.Alignment = taCenter
+        Title.Caption = #50724#48260#45208#51079#50668#48512
+        Title.Color = 16250871
+        Width = 100
+      end
+      item
+        Alignment = taCenter
+        DynProps = <>
+        EditButtons = <>
+        FieldName = 'OVERNGT_AMT'
+        Footers = <>
+        Title.Alignment = taCenter
+        Title.Caption = #50724#48260#45208#51079#44552#50529
+        Title.Color = 16250871
+        Width = 100
+      end
+      item
+        Alignment = taCenter
+        DynProps = <>
+        EditButtons = <>
+        FieldName = 'OVERNGT_QTY'
+        Footers = <>
+        Title.Alignment = taCenter
+        Title.Caption = 'OV'#49888#52397#49688#47049
+        Title.Color = 16250871
+        Visible = False
+        Width = 80
+      end
+      item
+        Alignment = taCenter
+        DynProps = <>
+        EditButtons = <>
+        FieldName = 'OVERNGT_TP'
+        Footers = <>
+        Title.Alignment = taCenter
+        Title.Caption = #50724#48260#45208#51079#50976#54805
+        Title.Color = 16250871
+        Width = 100
+      end>
+    object RowDetailData: TRowDetailPanelControlEh
+    end
   end
   inherited imgBtn: TImageList
     Bitmap = {
-      494C01010B003400B40010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C01010B003400C40010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000003000000001002000000000000030
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -1053,31 +1107,69 @@ inherited fmNclr: TfmNclr
       C003807FC003C003FFFFC0FFFFFFFFFF00000000000000000000000000000000
       000000000000}
   end
-  inherited bsSkinMessage: TbsSkinMessage
-    SkinData = fmMain.bsSkinData
-    CtrlSkinData = fmMain.bsSkinData
-  end
   inherited dbMain: TADOQuery
-    Connection = MastDB.ADOConn
     CursorType = ctStatic
     OnCalcFields = dbMainCalcFields
-    SQL.Strings = (
-      
-        'SELECT B.USER_ID            ,B.USER_NM            ,B.ACNT_AMT   ' +
-        '        ,A.ACNT_NO            ,A.STK_CD             ,A.ACNT_TP  ' +
-        '          ,A.ARTC_CD            ,A.BS_TP              ,A.NCLR_PO' +
-        'S_QTY       ,A.AVG_PRC            ,A.NCNTR_QTY          ,A.TRADE' +
-        '_DT           ,A.NCLR_POS_TM        ,A.SYS_DT             ,A.API' +
-        '_TP             ,A.LOSSCUT_AMT        ,A.OVERNGT_QTY        ,ISN' +
-        'ULL(A.OVERNGT_TP, '#39'N'#39') OVERNGT_TP       ,A.OVERNGT_AMT        ,C' +
-        'OUNT(1) OVER()  AS TOTCNT       ,(SELECT TOP(1) DOT_CNT FROM ART' +
-        'C_MST WHERE ARTC_CD = A.ARTC_CD) AS DOT_CNT       ,(SELECT TOP(1' +
-        ') ARTC_NM FROM ARTC_MST WHERE ARTC_CD = A.ARTC_CD) AS STK_NM    ' +
-        'FROM NCLR_POS A,        (SELECT A1.* FROM ACNT_MST A1, USER_MST ' +
-        'B1 WHERE A1.USER_ID = B1.USER_ID  AND B1.USER_GRADE IN ('#39'2'#39','#39'7'#39')' +
-        '  ) B  WHERE A.ACNT_NO = B.ACNT_NO ')
   end
   inherited dbPart: TADOQuery
     Left = 145
+  end
+  object ADOSP: TADOStoredProc
+    Connection = MastDB.ADOConn
+    ProcedureName = 'PT_MANAGER_CLR'
+    Parameters = <
+      item
+        Name = '@RETURN_VALUE'
+        DataType = ftInteger
+        Direction = pdReturnValue
+        Precision = 10
+        Value = Null
+      end
+      item
+        Name = '@I_ACNT_NO'
+        Attributes = [paNullable]
+        DataType = ftString
+        Size = 11
+        Value = Null
+      end
+      item
+        Name = '@I_STK_CD'
+        Attributes = [paNullable]
+        DataType = ftString
+        Size = 10
+        Value = Null
+      end
+      item
+        Name = '@I_CNTR_TP'
+        Attributes = [paNullable]
+        DataType = ftString
+        Size = 1
+        Value = Null
+      end
+      item
+        Name = '@I_CLR_PRC'
+        Attributes = [paNullable]
+        DataType = ftBCD
+        NumericScale = 8
+        Precision = 15
+        Value = Null
+      end>
+    Left = 24
+    Top = 396
+    object ADOSPRESULT_MSG: TStringField
+      FieldName = 'RESULT_MSG'
+      Size = 100
+    end
+    object ADOSPRETURN_VALUE: TStringField
+      FieldName = 'RETURN_VALUE'
+      Size = 4
+    end
+  end
+  object ADOQuery1: TADOQuery
+    CursorType = ctStatic
+    OnCalcFields = dbMainCalcFields
+    Parameters = <>
+    Left = 68
+    Top = 400
   end
 end

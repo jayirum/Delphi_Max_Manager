@@ -183,7 +183,7 @@ inherited fmStkPL: TfmStkPL
       Style = csDropDownList
       Ctl3D = False
       ImeName = 'Microsoft Office IME 2007'
-      ItemHeight = 12
+      ItemHeight = 0
       ParentCtl3D = False
       TabOrder = 5
       EnterToTab = True
@@ -196,7 +196,7 @@ inherited fmStkPL: TfmStkPL
       Style = csDropDownList
       Ctl3D = False
       ImeName = 'Microsoft Office IME 2007'
-      ItemHeight = 12
+      ItemHeight = 0
       ParentCtl3D = False
       TabOrder = 6
       EnterToTab = True
@@ -209,7 +209,7 @@ inherited fmStkPL: TfmStkPL
       Style = csDropDownList
       Ctl3D = False
       ImeName = 'Microsoft Office IME 2007'
-      ItemHeight = 12
+      ItemHeight = 0
       ParentCtl3D = False
       TabOrder = 7
       EnterToTab = True
@@ -1504,7 +1504,7 @@ inherited fmStkPL: TfmStkPL
     Left = 144
     Top = 288
     Bitmap = {
-      494C01010B003400D00010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C01010B003400D40010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000003000000001002000000000000030
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -1920,7 +1920,6 @@ inherited fmStkPL: TfmStkPL
     Top = 336
   end
   inherited dbMain: TADOQuery
-    Connection = MastDB.ADOConn
     CursorType = ctStatic
     SQL.Strings = (
       

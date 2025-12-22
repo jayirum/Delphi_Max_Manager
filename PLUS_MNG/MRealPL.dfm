@@ -9,44 +9,35 @@ inherited fmRealPL: TfmRealPL
   inherited pnTop: TRzPanel
     Width = 1192
     ExplicitWidth = 1192
-    inherited btnFilter: TbsSkinSpeedButton
-      SkinData = fmMain.bsSkinData
-    end
     inherited btnInsert: TbsSkinSpeedButton
       Left = 674
       Top = 4
       Visible = False
-      SkinData = fmMain.bsSkinData
       ExplicitLeft = 674
       ExplicitTop = 4
     end
     inherited btnEdit: TbsSkinSpeedButton
       Left = 752
       Visible = False
-      SkinData = fmMain.bsSkinData
       ExplicitLeft = 752
     end
     inherited btnDelete: TbsSkinSpeedButton
       Left = 828
       Visible = False
-      SkinData = fmMain.bsSkinData
       ExplicitLeft = 828
     end
     inherited btnPost: TbsSkinSpeedButton
       Left = 904
       Visible = False
-      SkinData = fmMain.bsSkinData
       ExplicitLeft = 904
     end
     inherited btnClose: TbsSkinSpeedButton
       Left = 1107
-      SkinData = fmMain.bsSkinData
       ExplicitLeft = 1048
     end
     inherited bsRibbonDivider4: TbsRibbonDivider
       Left = 663
       Visible = False
-      SkinData = fmMain.bsSkinData
       ExplicitLeft = 663
     end
     inherited btnExcel: TbsSkinSpeedButton
@@ -54,7 +45,6 @@ inherited fmRealPL: TfmRealPL
       Top = 4
       Height = 23
       Anchors = [akTop, akRight]
-      SkinData = fmMain.bsSkinData
       OnClick = btnExcelClick
       ExplicitLeft = 773
       ExplicitTop = 4
@@ -65,7 +55,6 @@ inherited fmRealPL: TfmRealPL
       BorderShadow = 13290186
       FlatColor = clGray
       FlatColorAdjustment = 0
-      FrameController = MastDB.RzFrameController
     end
     inherited nvMain: TRzDBNavigator
       Left = 924
@@ -114,7 +103,6 @@ inherited fmRealPL: TfmRealPL
       Height = 20
       Style = csDropDownList
       Ctl3D = False
-      FrameController = MastDB.RzFrameController
       ImeName = 'Microsoft Office IME 2007'
       ItemHeight = 12
       ParentCtl3D = False
@@ -140,7 +128,6 @@ inherited fmRealPL: TfmRealPL
       FillColor = clWhite
       FocusColor = 15790335
       FrameColor = clGray
-      FrameController = MastDB.RzFrameController
       HotTrack = True
       HotTrackColor = 7838964
       HotTrackStyle = htsFrame
@@ -158,7 +145,6 @@ inherited fmRealPL: TfmRealPL
       Height = 20
       Style = csDropDownList
       Ctl3D = False
-      FrameController = MastDB.RzFrameController
       ImeName = 'Microsoft Office IME 2007'
       ItemHeight = 12
       ParentCtl3D = False
@@ -176,7 +162,6 @@ inherited fmRealPL: TfmRealPL
   end
   inherited pnBottom: TbsSkinPanel
     Width = 1192
-    SkinData = fmMain.bsSkinData
     ExplicitWidth = 1192
   end
   object gdMain: TDBGridEh [2]
@@ -265,7 +250,6 @@ inherited fmRealPL: TfmRealPL
       end
       item
         Alignment = taCenter
-        DisplayFormat = '#,##0'
         DynProps = <>
         EditButtons = <>
         FieldName = 'ACNT_AMT'
@@ -277,7 +261,6 @@ inherited fmRealPL: TfmRealPL
       end
       item
         Alignment = taCenter
-        DisplayFormat = '#,##0'
         DynProps = <>
         EditButtons = <>
         FieldName = 'CMSN'
@@ -295,7 +278,6 @@ inherited fmRealPL: TfmRealPL
       end
       item
         Alignment = taCenter
-        DisplayFormat = '#,##0'
         DynProps = <>
         EditButtons = <>
         FieldName = 'REALPL'
@@ -312,7 +294,6 @@ inherited fmRealPL: TfmRealPL
       end
       item
         Alignment = taCenter
-        DisplayFormat = '#,##0'
         DynProps = <>
         EditButtons = <>
         FieldName = 'EVAPL'
@@ -329,7 +310,6 @@ inherited fmRealPL: TfmRealPL
       end
       item
         Alignment = taCenter
-        DisplayFormat = '#,##0'
         DynProps = <>
         EditButtons = <>
         FieldName = 'EVA_AMT'
@@ -371,10 +351,6 @@ inherited fmRealPL: TfmRealPL
       end>
     object RowDetailData: TRowDetailPanelControlEh
     end
-  end
-  inherited bsBusinessSkinForm: TbsBusinessSkinForm
-    SkinData = fmMain.bsSkinData
-    MenusSkinData = fmMain.bsSkinData
   end
   inherited imgBtn: TImageList
     Bitmap = {
@@ -780,10 +756,6 @@ inherited fmRealPL: TfmRealPL
       8001000F800180018001000F800180018001003F800180018001003F80018001
       C003807FC003C003FFFFC0FFFFFFFFFF00000000000000000000000000000000
       000000000000}
-  end
-  inherited bsSkinMessage: TbsSkinMessage
-    SkinData = fmMain.bsSkinData
-    CtrlSkinData = fmMain.bsSkinData
   end
   inherited dbPart: TADOQuery
     Left = 145

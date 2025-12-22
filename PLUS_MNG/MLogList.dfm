@@ -132,7 +132,6 @@ inherited fmLogList: TfmLogList
       Width = 36
       Height = 20
       EditMask = '99:99;0;_'
-      FrameController = MastDB.RzFrameController
       ImeName = 'Microsoft Office IME 2007'
       MaxLength = 5
       TabOrder = 4
@@ -144,7 +143,6 @@ inherited fmLogList: TfmLogList
       Width = 36
       Height = 20
       EditMask = '99:99;0;_'
-      FrameController = MastDB.RzFrameController
       ImeName = 'Microsoft Office IME 2007'
       MaxLength = 5
       TabOrder = 5
@@ -156,7 +154,6 @@ inherited fmLogList: TfmLogList
       Width = 151
       Height = 20
       Ctl3D = False
-      FrameController = MastDB.RzFrameController
       ImeName = 'Microsoft Office IME 2007'
       ItemHeight = 12
       ParentCtl3D = False
@@ -497,7 +494,6 @@ inherited fmLogList: TfmLogList
         Top = 13
         Width = 135
         Height = 20
-        FrameController = MastDB.RzFrameController
         ImeName = 'Microsoft IME 2010'
         TabOrder = 0
         OnKeyDown = edFindKeyDown
@@ -512,7 +508,7 @@ inherited fmLogList: TfmLogList
     DataSource = dsUser
     DataField = 'USER_ID'
     ReadOnly = True
-    FrameController = MastDB.RzFrameController
+    Color = clInfoBk
     ImeMode = imSAlpha
     ImeName = 'Microsoft IME 2010'
     TabOrder = 4
@@ -528,14 +524,13 @@ inherited fmLogList: TfmLogList
     CalendarElements = [ceYear, ceMonth, ceArrows, ceDaysOfWeek, ceFillDays, ceTodayButton]
     CaptionTodayBtn = #50724#45720#47196
     EditType = etDate
-    FrameController = MastDB.RzFrameController
     ImeName = 'Microsoft Office IME 2007'
     TabOrder = 5
     EnterToTab = True
   end
   inherited imgBtn: TImageList
     Bitmap = {
-      494C01010B003400A80010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C01010B003400AC0010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000003000000001002000000000000030
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -1046,7 +1041,6 @@ inherited fmLogList: TfmLogList
     Top = 384
   end
   object dbUser: TADOQuery
-    Connection = MastDB.ADOConn
     Parameters = <>
     SQL.Strings = (
       'SELECT USER_NM, USER_ID'

@@ -274,7 +274,7 @@ begin
       '              ,ISNULL(SUM(A.NCLR_POS_QTY), 0) AS NCLR_POS_QTY '+
       '              ,ISNULL(SUM(C.CNTR_PRC),0) AS CNTR_PRC          '+
       '              ,ISNULL(SUM(A.AVG_PRC),0) AS AVG_PRC            '+
-      '              ,CASE WHEN ((A.ARTC_CD = %s OR A.ARTC_CD = %s) AND (SUM(A.AVG_PRC) < 0)) '+
+      '              ,CASE WHEN ( (A.ARTC_CD IN (%s, %s) OR A.ARTC_CD IN (%s, %s) ) AND (SUM(A.AVG_PRC) < 0)) '+
       '                    THEN SUM(B.TICK_VALUE_LOW / B.TICK_SIZE_LOW)   '+
       '                    ELSE SUM(B.TICK_VALUE / B.TICK_SIZE) END TICK  '+
       '              ,B.DOT_CNT '+
@@ -300,8 +300,8 @@ begin
        QuotedStr('V'),
        QuotedStr('S'),
        QuotedStr('B'),
-       QuotedStr('201'),
-       QuotedStr('301'),
+       QuotedStr('201'), QuotedStr('B01'),
+       QuotedStr('301'), QuotedStr('C01'),
        QuotedStr('A'),
        _sMainWhere]);
 

@@ -3,8 +3,8 @@ inherited fmTodayPL: TfmTodayPL
   Caption = #44552#51068#49552#51061
   ClientWidth = 1192
   OnShow = FormShow
-  ExplicitTop = 8
   ExplicitWidth = 1208
+  ExplicitHeight = 592
   PixelsPerInch = 96
   TextHeight = 12
   inherited pnTop: TRzPanel
@@ -14,7 +14,6 @@ inherited fmTodayPL: TfmTodayPL
       Left = 343
       Top = 4
       Height = 23
-      SkinData = fmMain.bsSkinData
       ExplicitLeft = 343
       ExplicitTop = 4
       ExplicitHeight = 23
@@ -22,14 +21,12 @@ inherited fmTodayPL: TfmTodayPL
     inherited btnInsert: TbsSkinSpeedButton
       Left = 940
       Visible = False
-      SkinData = fmMain.bsSkinData
       ExplicitLeft = 940
     end
     inherited btnEdit: TbsSkinSpeedButton
       Left = 936
       Top = 2
       Visible = False
-      SkinData = fmMain.bsSkinData
       ExplicitLeft = 936
       ExplicitTop = 2
     end
@@ -37,26 +34,22 @@ inherited fmTodayPL: TfmTodayPL
       Left = 924
       Top = 4
       Visible = False
-      SkinData = fmMain.bsSkinData
       ExplicitLeft = 924
       ExplicitTop = 4
     end
     inherited btnPost: TbsSkinSpeedButton
       Left = 936
       Visible = False
-      SkinData = fmMain.bsSkinData
       ExplicitLeft = 936
     end
     inherited btnClose: TbsSkinSpeedButton
       Left = 1107
-      SkinData = fmMain.bsSkinData
       ExplicitLeft = 1048
     end
     inherited bsRibbonDivider4: TbsRibbonDivider
       Left = 907
       Top = 3
       Visible = False
-      SkinData = fmMain.bsSkinData
       ExplicitLeft = 907
       ExplicitTop = 3
     end
@@ -65,7 +58,6 @@ inherited fmTodayPL: TfmTodayPL
       Top = 4
       Height = 23
       Anchors = [akTop, akRight]
-      SkinData = fmMain.bsSkinData
       OnClick = btnExcelClick
       ExplicitLeft = 773
       ExplicitTop = 4
@@ -206,7 +198,7 @@ inherited fmTodayPL: TfmTodayPL
       Style = csDropDownList
       Ctl3D = False
       ImeName = 'Microsoft Office IME 2007'
-      ItemHeight = 12
+      ItemHeight = 0
       ParentCtl3D = False
       TabOrder = 4
       EnterToTab = True
@@ -219,7 +211,7 @@ inherited fmTodayPL: TfmTodayPL
       Style = csDropDownList
       Ctl3D = False
       ImeName = 'Microsoft Office IME 2007'
-      ItemHeight = 12
+      ItemHeight = 0
       ParentCtl3D = False
       TabOrder = 5
       EnterToTab = True
@@ -268,7 +260,6 @@ inherited fmTodayPL: TfmTodayPL
   inherited pnBottom: TbsSkinPanel
     Top = 486
     Width = 1192
-    SkinData = fmMain.bsSkinData
     ExplicitTop = 486
     ExplicitWidth = 1192
     object cbxPosQty: TbsSkinCheckRadioBox
@@ -2691,8 +2682,6 @@ inherited fmTodayPL: TfmTodayPL
     end
   end
   inherited bsBusinessSkinForm: TbsBusinessSkinForm
-    SkinData = fmMain.bsSkinData
-    MenusSkinData = fmMain.bsSkinData
     Left = 64
     Top = 336
   end
@@ -2700,7 +2689,7 @@ inherited fmTodayPL: TfmTodayPL
     Left = 144
     Top = 288
     Bitmap = {
-      494C01010B0034000C0110001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C01010B003400100110001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000003000000001002000000000000030
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -3108,8 +3097,6 @@ inherited fmTodayPL: TfmTodayPL
     Top = 288
   end
   inherited bsSkinMessage: TbsSkinMessage
-    SkinData = fmMain.bsSkinData
-    CtrlSkinData = fmMain.bsSkinData
     Left = 104
     Top = 337
   end
@@ -3118,7 +3105,6 @@ inherited fmTodayPL: TfmTodayPL
     Top = 336
   end
   inherited dbMain: TADOQuery
-    Connection = MastDB.ADOConn
     CursorType = ctStatic
     SQL.Strings = (
       'exec TODAY_CLR_PL2 '#39'2'#39','#39'20251101'#39', '#39'a'#39','#39'1'#39)

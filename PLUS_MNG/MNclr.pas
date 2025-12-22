@@ -15,11 +15,10 @@ uses
   DBGridEhGrouping, ToolCtrlsEh, DBGridEhToolCtrls, DynVarsEh, GridsEh,
   DBAxisGridsEh, DBGridEh,
 // User Unit
-  MBasic, RzRadGrp, Mask;
+  MBasic, RzRadGrp, Mask, RzButton, RzRadChk;
 
 type
   TfmNclr = class(TfmBasic)
-    gdMain: TDBGridEh;
     pnNclr: TRzPanel;
     chUserTp: TbsSkinCheckRadioBox;
     RzPanel4: TRzPanel;
@@ -32,13 +31,20 @@ type
     edBsTp: TkcRzDBEdit;
     edStkNm: TkcRzDBEdit;
     edStkCd: TkcRzDBEdit;
-    edCnt: TkcRzDBEdit;
-    rbtPriceTp: TRzRadioGroup;
+    edQty: TkcRzDBEdit;
     bsRibbonDivider1: TbsRibbonDivider;
     bsSkinStdLabel1: TbsSkinStdLabel;
-    btnOrdCancel: TbsSkinSpeedButton;
+    btnOK: TbsSkinSpeedButton;
     edPrice: TRzEdit;
-    Memo1: TMemo;
+    edKey: TkcRzDBEdit;
+    gdMain: TDBGridEh;
+    rbFix: TRzRadioButton;
+    rbMkt: TRzRadioButton;
+    chCancel: TbsSkinCheckRadioBox;
+    ADOSP: TADOStoredProc;
+    ADOSPRESULT_MSG: TStringField;
+    ADOSPRETURN_VALUE: TStringField;
+    ADOQuery1: TADOQuery;
     procedure FormCreate(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure btnExcelClick(Sender: TObject);
@@ -48,12 +54,14 @@ type
       DataCol: Integer; Column: TColumnEh; State: TGridDrawState);
     procedure gdMainTitleBtnClick(Sender: TObject; ACol: Integer;
       Column: TColumnEh);
-    procedure btnOrdCancelClick(Sender: TObject);
+    procedure btnOKClick(Sender: TObject);
+    procedure edKeyChange(Sender: TObject);
   private
     { Private declarations }
   public
     { Public declarations }
     procedure MainTableOpen; override;
+    procedure HtsRefresh(sUserID: String);
   end;
 
 var
@@ -61,7 +69,7 @@ var
 
 implementation
 
-uses StdUtils, MMastDB, MDelay;
+uses StdUtils, MMastDB, MDelay, PacketStruct;
 
 {$R *.dfm}
 
@@ -90,6 +98,22 @@ begin
   end;
 end;
 
+procedure TfmNclr.edKeyChange(Sender: TObject);
+begin
+  with dbMain do begin
+    if FieldByName('BS_TP').AsString = 'B' then begin
+      edBSTP.Font.Color := clRed;
+      edQty.Font.Color := clRed;
+    end else begin
+      edBSTP.Font.Color := clBlue;
+      edQty.Font.Color := clBlue;
+    end;
+  end;
+
+  rbMkt.Checked := True;
+  edPrice.Text  := '0';
+end;
+
 procedure TfmNclr.FormCreate(Sender: TObject);
 begin
   inherited;
@@ -99,7 +123,7 @@ end;
 procedure TfmNclr.FormShow(Sender: TObject);
 begin
   inherited;
-  PartTableOpen(TComponent(gdMain.Columns[3]), CodeFormat('BS_TP'));
+//  PartTableOpen(TComponent(gdMain.Columns[3]), CodeFormat('BS_TP'));
 //  MainTableOpen;
 end;
 
@@ -111,7 +135,7 @@ begin
     if FieldByName('BS_TP').AsString = 'B' then Canvas.Font.Color := clRed
                                            else Canvas.Font.Color := clBlue;
 
-    if DataCol = 3 then DefaultDrawColumnCell(Rect, DataCol, Column, TGridDrawState(State));
+    if DataCol = 4 then DefaultDrawColumnCell(Rect, DataCol, Column, TGridDrawState(State));
   end;
 end;
 
@@ -124,52 +148,47 @@ end;
 
 procedure TfmNclr.MainTableOpen;
 var
-  sSql, sResult, sUserTp : String;
+  sSql, sUserTp, sResult : String;
 begin
   try
     Delay_Show();
 
-    if _Supervisor then begin
-      if chUserTp.Checked then sUserTp := Format(' AND B1.USER_GRADE IN (%s,%s) ', [QuotedStr('2'),QuotedStr('7')])
-                          else sUserTp := '';
-    end else begin
-      if chUserTp.Checked then sUserTp := ' AND B1.USER_GRADE = 2 '
-                          else sUserTp := ' AND B1.USER_GRADE <> 7 ';
-    end;
-    //if chUserTp.Checked then sUserTp := ' AND B1.USER_GRADE = 2 '
-    //else sUserTp := '';
+    if chUserTp.Checked then sUserTp := 'AND B1.USER_GRADE = 2 '
+    else sUserTp := '';
 
-    sSql := Format(
-      'SELECT B.USER_ID      ' +
-      '      ,B.USER_NM      ' +
-      '      ,B.ACNT_AMT     ' + // 계좌잔액
-      '      ,A.ACNT_NO      ' +
-      '      ,A.STK_CD       ' +
-      '      ,A.ACNT_TP      ' +
-      '      ,A.ARTC_CD      ' +
-      '      ,A.BS_TP        ' +
-      '      ,A.NCLR_POS_QTY ' +
-      '      ,A.AVG_PRC      ' +
-      '      ,A.NCNTR_QTY    ' +
-      '      ,A.TRADE_DT     ' +
-      //'      ,A.NCLR_POS_TM  ' +
-      '      ,A.SYS_DT       ' +
-      '      ,A.API_TP       ' +
-      '      ,A.LOSSCUT_AMT  ' +
-      '      ,A.OVERNGT_QTY  ' +
-      '      ,ISNULL(A.OVERNGT_TP, ''N'') OVERNGT_TP ' +
-      '      ,A.OVERNGT_AMT  ' +
-      '      ,COUNT(1) OVER()  AS TOTCNT ' +
-      '      ,(SELECT TOP(1) DOT_CNT FROM ARTC_MST WHERE ARTC_CD = A.ARTC_CD) AS DOT_CNT ' +
-      '      ,(SELECT TOP(1) ARTC_NM FROM ARTC_MST WHERE ARTC_CD = A.ARTC_CD) AS STK_NM  ' +
-      '  FROM NCLR_POS A, ' +
-      '       (SELECT A1.* FROM ACNT_MST A1, USER_MST B1 WHERE A1.USER_ID = B1.USER_ID %s ) B ' +
-      ' WHERE A.ACNT_NO = B.ACNT_NO ',
-      [sUserTp]);
+    sSql := Format('SELECT A.ACNT_NO+A.STK_CD AS NCLR_KEY, ' +
+                          'B.USER_NM, '     +
+                          'B.USER_ID, '     +
+                          'A.ACNT_NO, '     +
+                          'B.ACNT_PWD, '    +
+                          'A.STK_CD, '      +
+                          '(SELECT STK_NM FROM STK_MST WHERE STK_CD = A.STK_CD) STK_NM, ' +
+                          'A.ACNT_TP, '     +
+                          'A.ARTC_CD, '     +
+                          'A.BS_TP, '       +
+                          'CASE WHEN A.BS_TP = %s THEN %s ELSE %s END AS BS_NM, '   +
+                          'A.NCLR_POS_QTY, '+
+                          'A.AVG_PRC, '     +
+                          'A.NCNTR_QTY, '   +
+                          'A.TRADE_DT, '    +
+                          'A.NCLR_POS_TM, ' +
+                          'A.SYS_DT, '      +
+                          'A.API_TP, '      +
+                          'A.LOSSCUT_AMT, ' +
+                          'A.OVERNGT_QTY, ' +
+                          'A.OVERNGT_TP, '  +
+                          'A.OVERNGT_AMT, ' +
+                          '(B.ACNT_AMT + B.CLR_PL - B.CMSN) AS ACNT_AMT, ' +
+                          'ISNULL((SELECT OVERNGT_YN FROM OVERNGT WHERE ACNT_NO = A.ACNT_NO AND ARTC_CD = A.ARTC_CD), %s) AS OVERNGT_YN, ' +
+                          'COUNT(1) OVER() AS TOTCNT, '+
+                          '(SELECT TOP(1) ARTC_NM FROM ARTC_MST WHERE ARTC_CD = A.ARTC_CD) AS ARTC_NM, '+
+                          '(SELECT TOP(1) DOT_CNT FROM ARTC_MST WHERE ARTC_CD = A.ARTC_CD) AS DOT_CNT '+
+                     'FROM NCLR_POS A, '+
+                          '(SELECT A1.* FROM ACNT_MST A1, USER_MST B1 WHERE A1.USER_ID = B1.USER_ID %s ) B '+
+                    'WHERE A.ACNT_NO = B.ACNT_NO ', [QuotedStr('S'), QuotedStr('매도'), QuotedStr('매수'),  QuotedStr('N'), sUserTp]);
 
-
+//    Uni_Open(dbMain, sSql);
     sResult := fnSqlOpen(dbMain, sSql);
-
 
     if sResult = '' then pnNclr.Caption := dbMain.FieldByName('TOTCNT').AsString + ' 건'
                     else pnNclr.Caption := '0 건';
@@ -178,42 +197,79 @@ begin
   end;
 end;
 
-procedure TfmNclr.btnOrdCancelClick(Sender: TObject);
+procedure TfmNclr.btnOKClick(Sender: TObject);
 var
-  sSql, sUserId, sStkId, sPrice : String;
+  sStkCD, sUserID, sUserNM, sAcntNo, sMsg, sTp, sOrdTp, sResult, sSQL: String;
 begin
-  inherited;
+  with dbMain do begin
+    sUserID := FieldByName('USER_ID').AsString;
+    sUserNM := FieldByName('USER_NM').AsString;
+    sStkCD  := FieldByName('STK_CD').AsString;
+    sAcntNo := FieldByName('ACNT_NO').AsString;
 
-  sUserId := dbMain.FieldByName('USER_ID').AsString;
-  sStkId  := dbMain.FieldByName('STK_CD').AsString;
-
-  if sUserId = '' then begin
-    bsMsgError('선택한 회원이 없습니다.');
-    Exit;
-  end;
-
-  if rbtPriceTp.ItemIndex = 0 then begin
-    sPrice := Format('(SELECT A1.NOW_PRC FROM CURR_PRC A1 WHERE A1.STK_CD = %s)', [sStkId]);
-  end else begin
-    sPrice := Trim(edPrice.Text);
-    if sPrice = '' then begin
-      bsMsgError('지정가 청산가격을 입력하세요.');
-      edPrice.SetFocus;
+    if (sAcntNo = '') or (sUserID = '') then begin
+      bsMsgError('청산할 포지션이 없습니다. 확인후 다시 실행하세요. ');
       Exit;
     end;
+
+    sTp := '';
+    sOrdTp := '0';
+    if rbMkt.Checked then sTp := '시장가';
+    if rbFix.Checked then begin
+      sTp := Format('지정가 ( %s )', [edPrice.Text]);
+      sOrdTp := '1';
+    end;
+
+    sMsg := Format('%s ( %s ) - 종목 ( %s ) %s로 청산하시겠습니까?  ', [sUserNM, sUserID, sStkCD, sTp]);
+
+    if Not bsMsgYesNo(sMsg) then Exit;
+
+    sSQL := Format('PT_MANAGER_CLR %s, %s, %s, %s ', [QuotedStr(sAcntNo), QuotedStr(sStkCD), QuotedStr(sOrdTp), QuotedStr(edPrice.Text)]);
+
+    with ADOQuery1 do begin
+      if Active then Active := False;
+      ADOQuery1.SQL.Text := sSQL;
+          Prepared := True;
+
+      try
+        Active := True;
+      Except
+        on E:Exception do begin
+          Active := False;
+          Prepared := False;
+          Exit;
+        end;
+      end;
+
+      sResult := FieldByName('RESULT_CODE').Value;
+
+      if sResult = '0000' then begin
+        HtsRefresh(sUserID);
+        MainTableOpen;
+      end;
+      bsMsgError(FieldByName('RESULT_MSG').AsString);
+    end;
   end;
+end;
 
-  sSql := Format(
-    'UPDATE NCLR_POS A ' +
-    '   SET A.PRICE = %s ' + // TODO : A.PRICE 수정할것, 청산할 필드로 
-    '  FROM ACNT_MST B ' +
-    ' WHERE A.ACNT_NO = B.ACNT_NO AND B.USER_ID = %s AND A.STK_CD = %s; ',
-    [sPrice,
-     QuotedStr(sUserId),
-     QuotedStr(sStkId) ]);
+procedure TfmNclr.HtsRefresh(sUserID: String);
+var
+  sValue : String;
+  NR001  : TNR001;
+begin
+  with dbMain do begin
+    FillChar(NR001, SizeOf(NR001), ' ');
 
-  memo1.Text := ssql;
-  fnSqlOpen(MastDB.dbExec, sSql);
+    StrToArr(NumToStr(SizeOf(NR001)),           NR001.GT_HEADER.LENGTH);
+    StrToArr('NR001',                           NR001.GT_HEADER.PACKET_CD);
+    StrToArr(sUserID,                           NR001.GT_HEADER.USER_ID);
+    StrToArr('0',                               NR001.GT_HEADER.ACNT_TP);
+    StrToArr('0000',                            NR001.GT_HEADER.ERR_CODE);
+    StrToArr(NowMSecTime,                       NR001.GT_HEADER.TM);
+
+    sValue := RecordToStr(NR001, SizeOf(NR001));
+    MastDB.iwNotiClient.DataToSend := sValue + _EOL;
+  end;
 end;
 
 end.

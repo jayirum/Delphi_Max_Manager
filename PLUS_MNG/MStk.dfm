@@ -5,43 +5,29 @@ inherited fmStk: TfmStk
   PixelsPerInch = 96
   TextHeight = 12
   inherited pnTop: TRzPanel
-    inherited btnFilter: TbsSkinSpeedButton
-      SkinData = fmMain.bsSkinData
-    end
     inherited btnInsert: TbsSkinSpeedButton
       Left = 432
       Visible = False
-      SkinData = fmMain.bsSkinData
       ExplicitLeft = 432
     end
     inherited btnEdit: TbsSkinSpeedButton
       Left = 204
-      SkinData = fmMain.bsSkinData
       ExplicitLeft = 204
     end
     inherited btnDelete: TbsSkinSpeedButton
       Left = 356
       Visible = False
-      SkinData = fmMain.bsSkinData
       ExplicitLeft = 356
     end
     inherited btnPost: TbsSkinSpeedButton
       Left = 280
-      SkinData = fmMain.bsSkinData
       ExplicitLeft = 280
-    end
-    inherited btnClose: TbsSkinSpeedButton
-      SkinData = fmMain.bsSkinData
-    end
-    inherited bsRibbonDivider4: TbsRibbonDivider
-      SkinData = fmMain.bsSkinData
     end
     inherited btnExcel: TbsSkinSpeedButton
       Left = 776
       Top = 4
       Height = 23
       Anchors = [akTop, akRight]
-      SkinData = fmMain.bsSkinData
       OnClick = btnExcelClick
       ExplicitLeft = 776
       ExplicitTop = 4
@@ -52,7 +38,6 @@ inherited fmStk: TfmStk
       BorderShadow = 13290186
       FlatColor = clGray
       FlatColorAdjustment = 0
-      FrameController = MastDB.RzFrameController
     end
     inherited nvMain: TRzDBNavigator
       Left = 675
@@ -60,9 +45,6 @@ inherited fmStk: TfmStk
       Anchors = [akTop, akRight]
       ExplicitLeft = 675
     end
-  end
-  inherited pnBottom: TbsSkinPanel
-    SkinData = fmMain.bsSkinData
   end
   object gdMain: TDBGridEh [2]
     Left = 0
@@ -169,13 +151,9 @@ inherited fmStk: TfmStk
     object RowDetailData: TRowDetailPanelControlEh
     end
   end
-  inherited bsBusinessSkinForm: TbsBusinessSkinForm
-    SkinData = fmMain.bsSkinData
-    MenusSkinData = fmMain.bsSkinData
-  end
   inherited imgBtn: TImageList
     Bitmap = {
-      494C01010B003400980010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C01010B0034009C0010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000003000000001002000000000000030
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -577,10 +555,6 @@ inherited fmStk: TfmStk
       8001000F800180018001000F800180018001003F800180018001003F80018001
       C003807FC003C003FFFFC0FFFFFFFFFF00000000000000000000000000000000
       000000000000}
-  end
-  inherited bsSkinMessage: TbsSkinMessage
-    SkinData = fmMain.bsSkinData
-    CtrlSkinData = fmMain.bsSkinData
   end
   inherited dbMain: TADOQuery
     SQL.Strings = (

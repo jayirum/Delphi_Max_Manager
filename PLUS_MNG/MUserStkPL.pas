@@ -444,12 +444,12 @@ begin
       '           ,SUM(CLR_PL    ) CLR_PL ' +
       '           ,SUM(CMSN      ) CMSN   ' +
       '           ,SUM(NET_PL    ) NET_PL ' +
-      '           ,SUM(CASE WHEN ARTC_CD = ''101'' THEN CLR_PL END) KSF_PL       ' +
-      '           ,SUM(CASE WHEN ARTC_CD = ''101'' THEN CMSN   END) KSF_CMSN     ' +
-      '           ,SUM(CASE WHEN ARTC_CD = ''201'' THEN CLR_PL END) KSO_PL_DAY   ' +
-      '           ,SUM(CASE WHEN ARTC_CD = ''201'' THEN CMSN   END) KSO_CMSN_DAY ' +
-      '           ,SUM(CASE WHEN ARTC_CD = ''301'' THEN CLR_PL END) KSO_PL_NGT   ' +
-      '           ,SUM(CASE WHEN ARTC_CD = ''301'' THEN CMSN   END) KSO_CMSN_NGT ' +
+      '           ,SUM(CASE WHEN ARTC_CD IN (''101'', ''A01'') THEN CLR_PL END) KSF_PL       ' +
+      '           ,SUM(CASE WHEN ARTC_CD IN (''101'', ''A01'') THEN CMSN   END) KSF_CMSN     ' +
+      '           ,SUM(CASE WHEN ARTC_CD IN (''201'', ''B01'') THEN CLR_PL END) KSO_PL_DAY   ' +
+      '           ,SUM(CASE WHEN ARTC_CD IN (''201'', ''B01'') THEN CMSN   END) KSO_CMSN_DAY ' +
+      '           ,SUM(CASE WHEN ARTC_CD IN (''301'', ''C01'') THEN CLR_PL END) KSO_PL_NGT   ' +
+      '           ,SUM(CASE WHEN ARTC_CD IN (''301'', ''C01'') THEN CMSN   END) KSO_CMSN_NGT ' +
       '           ,SUM(CASE WHEN ARTC_CD = ''URO'' THEN CLR_PL END) URO_CLR_PL   ' +
       '           ,SUM(CASE WHEN ARTC_CD = ''URO'' THEN CMSN   END) URO_CMSN     ' +
       '           ,SUM(CASE WHEN ARTC_CD = ''CL'' THEN CLR_PL END) CL_CLR_PL    ' +

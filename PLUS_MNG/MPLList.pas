@@ -259,7 +259,7 @@ begin
       '              ,ISNULL((SUM(B.F101_PL)   + SUM(B.F201_PL)   + SUM(B.GF_PL)),0)   AS CLR_PL_SUM  ' +
       '              ,ISNULL((SUM(B.F101_CMSN) + SUM(B.F201_CMSN) + SUM(B.GF_CMSN)),0) AS CMSN_SUM    ' +
       '              ,ISNULL(((SUM(B.F101_PL)  + SUM(B.F201_PL)   + SUM(B.GF_PL)) - (SUM(B.F101_CMSN) + SUM(B.F201_CMSN) + SUM(B.GF_CMSN))),0) AS NET_PL_SUM ' +
-      '        FROM (SELECT A1.* FROM ACNT_MST A1, USER_MST B1 WHERE A1.USER_ID = B1.USER_ID %s ) A ' +
+      '        FROM (SELECT A1.* FROM ACNT_MST A1, USER_MST B1 WHERE A1.USER_ID = B1.USER_ID ' + sUserTp + ' ) A ' +
       '             LEFT OUTER JOIN       ' +
       '             (SELECT ACNT_NO  ' +
       '                    ,ACNT_TP  ' +
@@ -273,10 +273,10 @@ begin
       '              FROM (SELECT ACNT_NO  ' +
       '                          ,ACNT_TP  ' +
       '                          ,TRADE_DT ' +
-      '                          ,CASE WHEN ARTC_CD = %s        THEN ISNULL(SUM(CLR_PL  ),0) END F101_PL   ' +
-      '                          ,CASE WHEN ARTC_CD = %s        THEN ISNULL(SUM(CMSN_AMT),0) END F101_CMSN ' +
-      '                          ,CASE WHEN ARTC_CD IN (%s, %s) THEN ISNULL(SUM(CLR_PL  ),0) END F201_PL   ' +
-      '                          ,CASE WHEN ARTC_CD IN (%s, %s) THEN ISNULL(SUM(CMSN_AMT),0) END F201_CMSN ' +
+      '                          ,CASE WHEN ARTC_CD IN (%s, %s)         THEN ISNULL(SUM(CLR_PL  ),0) END F101_PL   ' +
+      '                          ,CASE WHEN ARTC_CD IN (%s, %s)         THEN ISNULL(SUM(CMSN_AMT),0) END F101_CMSN ' +
+      '                          ,CASE WHEN ARTC_CD IN (%s, %s, %s, %s) THEN ISNULL(SUM(CLR_PL  ),0) END F201_PL   ' +
+      '                          ,CASE WHEN ARTC_CD IN (%s, %s, %s, %s) THEN ISNULL(SUM(CMSN_AMT),0) END F201_CMSN ' +
       '                          ,CASE WHEN ACNT_TP = %s        THEN ISNULL(SUM(CLR_PL  ),0) END GF_PL     ' +
       '                          ,CASE WHEN ACNT_TP = %s        THEN ISNULL(SUM(CMSN_AMT),0) END GF_CMSN   ' +
       '                    FROM CNTR ' +
@@ -290,8 +290,8 @@ begin
       '               ,ISNULL(SUM(F201*SS),0) F201 ' +
       '               ,ISNULL(SUM(GF*SS  ),0) GF   ' +
       '         FROM (SELECT CASE WHEN BS_TP   = %s        THEN -1    ELSE 1 END SS   ' +
-      '                     ,CASE WHEN ARTC_CD = %s        THEN NCLR_POS_QTY END F101 ' +
-      '                     ,CASE WHEN ARTC_CD IN (%s, %s) THEN NCLR_POS_QTY END F201 ' +
+      '                     ,CASE WHEN ARTC_CD IN (%s, %s) THEN NCLR_POS_QTY END F101 ' +
+      '                     ,CASE WHEN ARTC_CD IN (%s, %s, %s, %s) THEN NCLR_POS_QTY END F201 ' +
       '                     ,CASE WHEN ACNT_TP = %s        THEN NCLR_POS_QTY END GF   ' +
       '                     ,ACNT_NO    ' +
       '               FROM NCLR_POS) Z  ' +
@@ -308,32 +308,21 @@ begin
 //      ' ORDER BY ACNT_TP, USER_NM ',
       [QuotedStr(_Trade_DT),
        QuotedStr('ACNT_TP'),
-       QuotedStr('1'),
-       QuotedStr(_Trade_DT),
-       QuotedStr('1'),
-       QuotedStr('2'),
-       QuotedStr(_Trade_DT),
-       QuotedStr('1'),
-       QuotedStr('1'),
-       QuotedStr(_Trade_DT),
-       QuotedStr('1'),
-       QuotedStr('2'),
-       QuotedStr(_Trade_DT),
-       QuotedStr('1'),
-       sUserTp,
-       QuotedStr('101'),
-       QuotedStr('101'),
-       QuotedStr('201'),
-       QuotedStr('301'),
-       QuotedStr('201'),
-       QuotedStr('301'),
+       QuotedStr('1'),       QuotedStr(_Trade_DT),       QuotedStr('1'),
+       QuotedStr('2'),       QuotedStr(_Trade_DT),       QuotedStr('1'),
+       QuotedStr('1'),       QuotedStr(_Trade_DT),       QuotedStr('1'),
+       QuotedStr('2'),       QuotedStr(_Trade_DT),       QuotedStr('1'),
+       //sUserTp,
+       QuotedStr('101'), QuotedStr('A01'),
+       QuotedStr('101'), QuotedStr('A01'),
+       QuotedStr('201'), QuotedStr('B01'), QuotedStr('301'), QuotedStr('C01'),
+       QuotedStr('201'), QuotedStr('B01'), QuotedStr('301'), QuotedStr('C01'),
        QuotedStr('2'),
        QuotedStr('2'),
        QuotedStr(_Trade_DT),
        QuotedStr('S'),
-       QuotedStr('101'),
-       QuotedStr('201'),
-       QuotedStr('301'),
+       QuotedStr('101'), QuotedStr('A01'),
+       QuotedStr('201'), QuotedStr('B01'), QuotedStr('301'), QuotedStr('C01'),
        QuotedStr('2'),
        QuotedStr('ALL'),
        QuotedStr(sID),

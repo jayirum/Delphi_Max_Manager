@@ -14,14 +14,12 @@ inherited fmBatchScl: TfmBatchScl
       31)
     inherited btnFilter: TbsSkinSpeedButton
       Left = 214
-      SkinData = fmMain.bsSkinData
       ExplicitLeft = 214
     end
     inherited btnInsert: TbsSkinSpeedButton
       Left = 579
       Top = 0
       Visible = False
-      SkinData = fmMain.bsSkinData
       ExplicitLeft = 579
       ExplicitTop = 0
     end
@@ -29,7 +27,6 @@ inherited fmBatchScl: TfmBatchScl
       Left = 584
       Top = 0
       Visible = False
-      SkinData = fmMain.bsSkinData
       ExplicitLeft = 584
       ExplicitTop = 0
     end
@@ -37,7 +34,6 @@ inherited fmBatchScl: TfmBatchScl
       Left = 584
       Top = 0
       Visible = False
-      SkinData = fmMain.bsSkinData
       ExplicitLeft = 584
       ExplicitTop = 0
     end
@@ -45,19 +41,16 @@ inherited fmBatchScl: TfmBatchScl
       Left = 442
       Top = 0
       Visible = False
-      SkinData = fmMain.bsSkinData
       ExplicitLeft = 442
       ExplicitTop = 0
     end
     inherited btnClose: TbsSkinSpeedButton
       Left = 635
-      SkinData = fmMain.bsSkinData
       ExplicitLeft = 784
     end
     inherited bsRibbonDivider4: TbsRibbonDivider
       Left = 198
       Top = 3
-      SkinData = fmMain.bsSkinData
       ExplicitLeft = 198
       ExplicitTop = 3
     end
@@ -67,7 +60,6 @@ inherited fmBatchScl: TfmBatchScl
       Height = 23
       Anchors = [akTop, akRight]
       Visible = False
-      SkinData = fmMain.bsSkinData
       OnClick = btnExcelClick
       ExplicitLeft = 498
       ExplicitTop = 2
@@ -78,7 +70,6 @@ inherited fmBatchScl: TfmBatchScl
       BorderShadow = 13290186
       FlatColor = clGray
       FlatColorAdjustment = 0
-      FrameController = MastDB.RzFrameController
     end
     inherited nvMain: TRzDBNavigator
       Left = 529
@@ -125,7 +116,6 @@ inherited fmBatchScl: TfmBatchScl
   end
   inherited pnBottom: TbsSkinPanel
     Width = 720
-    SkinData = fmMain.bsSkinData
     ExplicitWidth = 720
   end
   object gdMain: TNextGrid [2]
@@ -327,15 +317,13 @@ inherited fmBatchScl: TfmBatchScl
     end
   end
   inherited bsBusinessSkinForm: TbsBusinessSkinForm
-    SkinData = fmMain.bsSkinData
-    MenusSkinData = fmMain.bsSkinData
     Left = 16
     Top = 376
   end
   inherited imgBtn: TImageList
     Top = 328
     Bitmap = {
-      494C01010B003400800010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C01010B003400840010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000003000000001002000000000000030
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -743,8 +731,6 @@ inherited fmBatchScl: TfmBatchScl
     Top = 328
   end
   inherited bsSkinMessage: TbsSkinMessage
-    SkinData = fmMain.bsSkinData
-    CtrlSkinData = fmMain.bsSkinData
     Left = 56
     Top = 377
   end

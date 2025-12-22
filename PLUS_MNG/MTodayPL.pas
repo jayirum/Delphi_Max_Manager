@@ -522,12 +522,12 @@ begin
         if CompareValue(FieldByName('HSI_CLR_PL').AsFloat, 0) < 0 then Canvas.Font.Color := clBlue;
         DefaultDrawColumnCell(Rect, DataCol, Column, TGridDrawState(State));
       end;
-      99 : begin
+{      99 : begin
         if CompareValue(FieldByName('SSI_CLR_PL').AsFloat, 0) > 0 then Canvas.Font.Color := clRed else
         if CompareValue(FieldByName('SSI_CLR_PL').AsFloat, 0) < 0 then Canvas.Font.Color := clBlue;
         DefaultDrawColumnCell(Rect, DataCol, Column, TGridDrawState(State));
       end;
-      104 : begin
+ }     104 : begin
         if CompareValue(FieldByName('DAX_CLR_PL').AsFloat, 0) > 0 then Canvas.Font.Color := clRed else
         if CompareValue(FieldByName('DAX_CLR_PL').AsFloat, 0) < 0 then Canvas.Font.Color := clBlue;
         DefaultDrawColumnCell(Rect, DataCol, Column, TGridDrawState(State));
@@ -602,25 +602,25 @@ begin
       '      ,ISNULL(F.IN_AMT,0) IN_AMT     ' +            // 입금액
       '      ,ISNULL(F.OUT_AMT,0) OUT_AMT   ' +            // 출금액
       // 국내선물 (주간)
-      '      ,ISNULL(SUM(CASE WHEN B.ARTC_CD = ''101'' THEN B.CNTR_QTY END),0) KSF_CNTR_QTY ' + // 수량
-      '      ,ISNULL(SUM(CASE WHEN B.ARTC_CD = ''101'' THEN C.AVG_PRC  END),0) KSF_AVG_PRC  ' + // 평균단가
-      '      ,ISNULL(SUM(CASE WHEN B.ARTC_CD = ''101'' THEN B.CLR_PL   END),0) KSF_CLR_PL   ' + // 실현손익
-      '      ,ISNULL(SUM(CASE WHEN B.ARTC_CD = ''101'' THEN B.CMSN_AMT END),0) KSF_CMSN_AMT ' + // 수수료
-      '      ,ISNULL(SUM(CASE WHEN B.ARTC_CD = ''101'' THEN ' +
+      '      ,ISNULL(SUM(CASE WHEN B.ARTC_CD IN (''101'', ''A01'') THEN B.CNTR_QTY END),0) KSF_CNTR_QTY ' + // 수량
+      '      ,ISNULL(SUM(CASE WHEN B.ARTC_CD IN (''101'', ''A01'') THEN C.AVG_PRC  END),0) KSF_AVG_PRC  ' + // 평균단가
+      '      ,ISNULL(SUM(CASE WHEN B.ARTC_CD IN (''101'', ''A01'') THEN B.CLR_PL   END),0) KSF_CLR_PL   ' + // 실현손익
+      '      ,ISNULL(SUM(CASE WHEN B.ARTC_CD IN (''101'', ''A01'') THEN B.CMSN_AMT END),0) KSF_CMSN_AMT ' + // 수수료
+      '      ,ISNULL(SUM(CASE WHEN B.ARTC_CD IN (''101'', ''A01'') THEN ' +
       '          (C.AVG_PRC - E.CNTR_PRC) * C.NCLR_POS_QTY / D.TICK_SIZE * D.TICK_VALUE / A.LEVERAGE END),0) KSF_EVL_PL ' + // 평가손익
       // 국내선물 (야간)
-      '      ,ISNULL(SUM(CASE WHEN B.ARTC_CD = ''201'' THEN B.CNTR_QTY END),0) KSO_DAY_CNTR_QTY ' +
-      '      ,ISNULL(SUM(CASE WHEN B.ARTC_CD = ''201'' THEN C.AVG_PRC  END),0) KSO_DAY_AVG_PRC  ' +
-      '      ,ISNULL(SUM(CASE WHEN B.ARTC_CD = ''201'' THEN B.CLR_PL   END),0) KSO_DAY_CLR_PL   ' +
-      '      ,ISNULL(SUM(CASE WHEN B.ARTC_CD = ''201'' THEN B.CMSN_AMT END),0) KSO_DAY_CMSN_AMT ' +
-      '      ,ISNULL(SUM(CASE WHEN B.ARTC_CD = ''201'' THEN ' +
+      '      ,ISNULL(SUM(CASE WHEN B.ARTC_CD IN (''201'', ''B01'') THEN B.CNTR_QTY END),0) KSO_DAY_CNTR_QTY ' +
+      '      ,ISNULL(SUM(CASE WHEN B.ARTC_CD IN (''201'', ''B01'') THEN C.AVG_PRC  END),0) KSO_DAY_AVG_PRC  ' +
+      '      ,ISNULL(SUM(CASE WHEN B.ARTC_CD IN (''201'', ''B01'') THEN B.CLR_PL   END),0) KSO_DAY_CLR_PL   ' +
+      '      ,ISNULL(SUM(CASE WHEN B.ARTC_CD IN (''201'', ''B01'') THEN B.CMSN_AMT END),0) KSO_DAY_CMSN_AMT ' +
+      '      ,ISNULL(SUM(CASE WHEN B.ARTC_CD IN (''201'', ''B01'') THEN ' +
       '          (C.AVG_PRC - E.CNTR_PRC) * C.NCLR_POS_QTY / D.TICK_SIZE * D.TICK_VALUE / A.LEVERAGE END),0) KSO_DAY_EVL_PL ' +
       // 국내옵션 (주간)
-      '      ,ISNULL(SUM(CASE WHEN B.ARTC_CD = ''301'' THEN B.CNTR_QTY END),0) KSO_NGT_CNTR_QTY ' +
-      '      ,ISNULL(SUM(CASE WHEN B.ARTC_CD = ''301'' THEN C.AVG_PRC  END),0) KSO_NGT_AVG_PRC  ' +
-      '      ,ISNULL(SUM(CASE WHEN B.ARTC_CD = ''301'' THEN B.CLR_PL   END),0) KSO_NGT_CLR_PL   ' +
-      '      ,ISNULL(SUM(CASE WHEN B.ARTC_CD = ''301'' THEN B.CMSN_AMT END),0) KSO_NGT_CMSN_AMT ' +
-      '      ,ISNULL(SUM(CASE WHEN B.ARTC_CD = ''301'' THEN ' +
+      '      ,ISNULL(SUM(CASE WHEN B.ARTC_CD IN (''301'', ''C01'') THEN B.CNTR_QTY END),0) KSO_NGT_CNTR_QTY ' +
+      '      ,ISNULL(SUM(CASE WHEN B.ARTC_CD IN (''301'', ''C01'') THEN C.AVG_PRC  END),0) KSO_NGT_AVG_PRC  ' +
+      '      ,ISNULL(SUM(CASE WHEN B.ARTC_CD IN (''301'', ''C01'') THEN B.CLR_PL   END),0) KSO_NGT_CLR_PL   ' +
+      '      ,ISNULL(SUM(CASE WHEN B.ARTC_CD IN (''301'', ''C01'') THEN B.CMSN_AMT END),0) KSO_NGT_CMSN_AMT ' +
+      '      ,ISNULL(SUM(CASE WHEN B.ARTC_CD IN (''301'', ''C01'') THEN ' +
       '          (C.AVG_PRC - E.CNTR_PRC) * C.NCLR_POS_QTY / D.TICK_SIZE * D.TICK_VALUE / A.LEVERAGE END),0) KSO_NGT_EVL_PL ' +
       // 유로FX
       '      ,ISNULL(SUM(CASE WHEN B.ARTC_CD = ''URO'' THEN B.CNTR_QTY END),0) URO_CNTR_QTY ' +
@@ -764,8 +764,8 @@ begin
 
 //exec [TODAY_CLR_PL2] '2','20251101', 'a','1'
     sSql :=
-      Format('EXEC TODAY_CLR_PL2 %s, %s, %s, %s ', [QuotedStr('2'), QuotedStr('20251101'), QuotedStr('a'), QuotedStr('1')]);
-      //[QuotedStr(sUserTp), QuotedStr(_Trade_DT), QuotedStr(cbUserPart.Value), QuotedStr(_Trade_YN)]);
+      Format('EXEC TODAY_CLR_PL2 %s, %s, %s, %s ', //[QuotedStr('2'), QuotedStr('20251101'), QuotedStr('a'), QuotedStr('1')]);
+      [QuotedStr(sUserTp), QuotedStr(_Trade_DT), QuotedStr(cbUserPart.Value), QuotedStr(_Trade_YN)]);
 //    fnSqlOpen(dbMain, sSql);
     dbMain.SQL.Text := sSql;
 

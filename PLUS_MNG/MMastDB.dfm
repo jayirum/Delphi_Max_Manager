@@ -71,7 +71,44 @@ object MastDB: TMastDB
   end
   object ADOSP: TADOStoredProc
     Connection = ADOConn
-    Parameters = <>
+    ProcedureName = 'PT_MANAGER_CLR'
+    Parameters = <
+      item
+        Name = 'RETURN_VALUE'
+        DataType = ftInteger
+        Direction = pdReturnValue
+        Precision = 10
+        Value = Null
+      end
+      item
+        Name = 'I_ACNT_NO'
+        Attributes = [paNullable]
+        DataType = ftString
+        Size = 11
+        Value = Null
+      end
+      item
+        Name = 'I_STK_CD'
+        Attributes = [paNullable]
+        DataType = ftString
+        Size = 10
+        Value = Null
+      end
+      item
+        Name = 'I_CNTR_TP'
+        Attributes = [paNullable]
+        DataType = ftString
+        Size = 1
+        Value = Null
+      end
+      item
+        Name = 'I_CLR_PRC'
+        Attributes = [paNullable]
+        DataType = ftBCD
+        NumericScale = 8
+        Precision = 15
+        Value = Null
+      end>
     Left = 224
     Top = 152
   end
