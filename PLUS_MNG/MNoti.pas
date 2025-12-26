@@ -114,7 +114,7 @@ begin
     _sMainWhere := Format(' AND USER_ID = %s', [QuotedStr(sUid)]);
   end;
 
-  if not dtStart.Visible then dtStart.Date := StrToDate('2020-01-01'); // TODO : 일정기간 이전 날짜로 지정해야 할듯
+  if not dtStart.Visible then dtStart.Date := StrToDate('2000-01-01'); // TODO : 일정기간 이전 날짜로 지정해야 할듯
   if not dtEnd.Visible   then dtEnd.Date   := Now;
 
   _sMainWhere := Format(' WHERE NOTICE_DT BETWEEN %s AND %s ' + _sMainWhere , [QuotedStr(StrReplace(dtStart.Text,'-','')), QuotedStr(StrReplace(dtEnd.Text,'-',''))]);

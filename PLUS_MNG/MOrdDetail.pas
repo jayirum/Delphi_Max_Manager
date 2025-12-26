@@ -214,6 +214,11 @@ procedure TfmOrdDetail.UserTableOpen;
 var
   sSql, sWhere, sUserTp : String;
 begin
+  if length(trim(edFind.Text))=0 then
+  begin
+     exit;
+  end;
+
   if _Supervisor then begin
     if cbUserGrade.ItemIndex > 0 then sUserTp := Format(' USER_GRADE = %s AND ', [IntToStr(cbUserGrade.ItemIndex)]) else
     if chUserTp.Checked          then sUserTp := Format(' USER_GRADE IN (%s,%s) AND ', [QuotedStr('2'),QuotedStr('7')])

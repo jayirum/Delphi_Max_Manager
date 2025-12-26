@@ -633,8 +633,8 @@ inherited fmOrdDetail: TfmOrdDetail
           31)
         object btnOrdExcel: TbsSkinSpeedButton
           Tag = 600
-          Left = 480
-          Top = 0
+          Left = 479
+          Top = -1
           Width = 75
           Height = 23
           Cursor = crHandPoint
@@ -711,8 +711,8 @@ inherited fmOrdDetail: TfmOrdDetail
           OnClick = bsSkinSpeedButton1Click
         end
         object pnOrdCnt: TRzPanel
-          Left = 657
-          Top = 0
+          Left = 656
+          Top = -1
           Width = 113
           Height = 23
           Anchors = [akRight, akBottom]
@@ -731,8 +731,8 @@ inherited fmOrdDetail: TfmOrdDetail
           TabOrder = 0
         end
         object RzDBNavigator2: TRzDBNavigator
-          Left = 556
-          Top = 0
+          Left = 555
+          Top = -1
           Width = 100
           Height = 23
           DataSource = dsOrd
@@ -1498,7 +1498,7 @@ inherited fmOrdDetail: TfmOrdDetail
   end
   inherited imgBtn: TImageList
     Bitmap = {
-      494C01010B003400580110001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C01010B0034005C0110001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000003000000001002000000000000030
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000

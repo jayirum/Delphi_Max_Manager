@@ -198,7 +198,7 @@ inherited fmTodayPL: TfmTodayPL
       Style = csDropDownList
       Ctl3D = False
       ImeName = 'Microsoft Office IME 2007'
-      ItemHeight = 0
+      ItemHeight = 12
       ParentCtl3D = False
       TabOrder = 4
       EnterToTab = True
@@ -211,7 +211,7 @@ inherited fmTodayPL: TfmTodayPL
       Style = csDropDownList
       Ctl3D = False
       ImeName = 'Microsoft Office IME 2007'
-      ItemHeight = 0
+      ItemHeight = 12
       ParentCtl3D = False
       TabOrder = 5
       EnterToTab = True
@@ -2689,7 +2689,7 @@ inherited fmTodayPL: TfmTodayPL
     Left = 144
     Top = 288
     Bitmap = {
-      494C01010B003400100110001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C01010B003400140110001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000003000000001002000000000000030
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
